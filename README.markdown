@@ -4,23 +4,14 @@ Context sensitive notifications for Android
 
 ## Overview
 
-**Crouton**, is a class that can be used by Android developers that feel the need for an alternative to the Context insensitive [Toast](http://developer.android.com/reference/android/widget/Toast.html).
+**Crouton**, is a class that can be used by Android developers that feel the need for an **alternative to the Context insensitive [Toast](http://developer.android.com/reference/android/widget/Toast.html)**.
 
-The name and the idea of [Crouton](https://github.com/neofoniemobile/Crouton/blob/master/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyrill Mottier.
+The name and the idea of [Crouton](https://github.com/neofoniemobile/Crouton/blob/master/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
 
 A Crouton will be displayed at the top of an application window.
 You can line up multiple Croutons for display, that will be shown one after another.
 
 The current implementation requires the Holo theme to be present on the device.
-
-### Examples
-Currently you can use the three different Style attributes displayed below:
-
-![Alert](https://github.com/neofoniemobile/Crouton/raw/master/res/Alert.png "Example of Style.ALERT")
-
-![Confirm](https://github.com/neofoniemobile/Crouton/raw/master/res/Confirm.png "Example of Style.CONFIRM")
-
-![Info](https://github.com/neofoniemobile/Crouton/raw/master/res/Info.png "Example of Style.INFO")
 
 ### Usage
 
@@ -37,6 +28,15 @@ Create a Crouton with a String from your application's resources:
 You can also cancel scheduled Croutons by calling:
 
     Crouton.cancelAllCroutons();
+
+### Examples
+Currently you can use the three different Style attributes displayed below:
+
+![Alert](https://github.com/neofoniemobile/Crouton/raw/master/res/Alert.png "Example of Style.ALERT")
+
+![Confirm](https://github.com/neofoniemobile/Crouton/raw/master/res/Confirm.png "Example of Style.CONFIRM")
+
+![Info](https://github.com/neofoniemobile/Crouton/raw/master/res/Info.png "Example of Style.INFO")
 
 ### Extension and Modification
 
