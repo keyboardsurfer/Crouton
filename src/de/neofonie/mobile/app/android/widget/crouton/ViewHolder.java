@@ -31,7 +31,7 @@ import android.widget.TextView;
  */
 final class ViewHolder {
   private static final int          PADDING = 10;
-  private static final LayoutParams PARAMS  = new LayoutParams(LayoutParams.MATCH_PARENT,
+  private static final LayoutParams PARAMS  = new LayoutParams(LayoutParams.FILL_PARENT,
                                                                LayoutParams.WRAP_CONTENT);
   private TextView                  view;
 
