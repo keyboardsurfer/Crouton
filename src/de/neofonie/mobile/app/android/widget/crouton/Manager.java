@@ -1,17 +1,14 @@
 /*
- * Copyright 2012 Neofonie Mobile GmbH
- *	
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ * (c) Neofonie Mobile GmbH
+ * 
+ * This computer program is the sole property of Neofonie Mobile GmbH (http://mobile.neofonie.de)
+ * and is protected under the German Copyright Act (paragraph 69a UrhG).
+ * 
+ * All rights are reserved. Making copies, duplicating, modifying, using or distributing
+ * this computer program in any form, without prior written consent of Neofonie Mobile GmbH, is prohibited.
+ * Violation of copyright is punishable under the German Copyright Act (paragraph 106 UrhG).
+ * 
+ * Removing this copyright statement is also a violation.
  */
 package de.neofonie.mobile.app.android.widget.crouton;
 
@@ -20,27 +17,26 @@ import java.util.Queue;
 
 import android.os.Handler;
 import android.os.Message;
-import android.view.Menu;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 /**
- * Manager <br>
+ * APPLibrary / Manager <br>
  * <br>
  * 
- * Manages the lifecycle of a {@link Crouton}.
+ * Manages the lifecycle of {@link Crouton}s.
  * 
  * @author weiss@neofonie.de
  * 
  */
 final class Manager extends Handler {
 
-  private static final int MESSAGE_DISPLAY_CROUTON     = Menu.FIRST;
-  private static final int MESSAGE_ADD_CROUTON_TO_VIEW = Menu.FIRST + 1;
-  private static final int MESSAGE_REMOVE_CROUTON      = Menu.FIRST + 2;
+  private static final int MESSAGE_DISPLAY_CROUTON     = 0xc2007;
+  private static final int MESSAGE_ADD_CROUTON_TO_VIEW = 0xc20074dd;
+  private static final int MESSAGE_REMOVE_CROUTON      = 0xc2007de1;
+  private static Manager   INSTANCE;
 
-  private static Manager   manager;
   private Queue<Crouton>   croutonQueue;
   private Animation        inAnimation, outAnimation;
 
@@ -52,10 +48,10 @@ final class Manager extends Handler {
    * @return The currently used instance of the {@link CroutonManager}.
    */
   static synchronized Manager getInstance() {
-    if (manager == null) {
-      manager = new Manager();
+    if (INSTANCE == null) {
+      INSTANCE = new Manager();
     }
-    return manager;
+    return INSTANCE;
   }
 
   /**
@@ -99,11 +95,14 @@ final class Manager extends Handler {
     if (currentCrouton.getActivity() == null) {
       croutonQueue.poll();
     }
+    final Message msg;
     if (!currentCrouton.isShowing()) {
       //Display the Crouton
-      sendMessage(obtainMessage(MESSAGE_ADD_CROUTON_TO_VIEW));
+      msg = obtainMessage(MESSAGE_ADD_CROUTON_TO_VIEW);
+      msg.obj = currentCrouton;
+      sendMessage(msg);
     } else {
-      Message msg = manager.obtainMessage(MESSAGE_DISPLAY_CROUTON);
+      msg = obtainMessage(MESSAGE_DISPLAY_CROUTON);
       sendMessageDelayed(msg,
                          currentCrouton.getStyle().duration + inAnimation.getDuration()
                              + outAnimation.getDuration());
@@ -124,6 +123,8 @@ final class Manager extends Handler {
       croutonQueue.poll();
       //Remove the crouton from the view's parent.
       parent.removeView(crouton.getView());
+      Message msg = obtainMessage(MESSAGE_DISPLAY_CROUTON);
+      sendMessage(msg);
     }
   }
 
@@ -134,7 +135,8 @@ final class Manager extends Handler {
                                                   currentCrouton.getView().getLayoutParams());
     }
     currentCrouton.getView().startAnimation(inAnimation);
-    Message msg = manager.obtainMessage(MESSAGE_REMOVE_CROUTON);
+    final Message msg = obtainMessage(MESSAGE_REMOVE_CROUTON);
+    msg.obj = currentCrouton;
     sendMessageDelayed(msg, currentCrouton.getStyle().duration);
   }
 
@@ -143,15 +145,18 @@ final class Manager extends Handler {
    */
   @Override
   public void handleMessage(Message msg) {
+    final Crouton crouton;
     switch (msg.what) {
       case MESSAGE_DISPLAY_CROUTON:
         displayCrouton();
         break;
       case MESSAGE_ADD_CROUTON_TO_VIEW:
-        addCroutonToView(croutonQueue.peek());
+        crouton = (Crouton) msg.obj;
+        addCroutonToView(crouton);
         break;
       case MESSAGE_REMOVE_CROUTON:
-        removeCrouton(croutonQueue.peek());
+        crouton = (Crouton) msg.obj;
+        removeCrouton(crouton);
         break;
       default:
         super.handleMessage(msg);
@@ -159,3 +164,4 @@ final class Manager extends Handler {
     }
   }
 }
+
