@@ -26,17 +26,20 @@ package de.neofonie.mobile.app.android.widget.crouton;
  */
 
 public enum Style {
-  ALERT(5000, android.R.color.holo_red_light),
-  CONFIRM(3000, android.R.color.holo_green_light),
-  INFO(3000, android.R.color.holo_blue_bright);
-  /**
-   * The duration the {@link Crouton} will be displayed in milliseconds.
-   */
-  final int duration;
-  final int color;
+	ALERT(5000, android.R.color.holo_red_light), CONFIRM(3000,
+			android.R.color.holo_green_light), INFO(3000,
+			android.R.color.holo_blue_bright);
+	/**
+	 * The duration the {@link Crouton} will be displayed in milliseconds.
+	 */
+	final int duration;
+	/**
+	 * The color's resource id.
+	 */
+	final int color;
 
-  Style(int duration, int color) {
-    this.duration = duration;
-    this.color = color;
-  }
+	Style(int duration, int color) {
+		this.duration = duration;
+		this.color = color;
+	}
 }
