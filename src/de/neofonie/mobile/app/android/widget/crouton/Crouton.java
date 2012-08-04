@@ -16,7 +16,7 @@
 package de.neofonie.mobile.app.android.widget.crouton;
 
 import android.app.Activity;
-import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 
 /*
@@ -27,133 +27,152 @@ import android.widget.Toast;
  * Crouton <br>
  * <br>
  * 
- * Displays information in a non-invasive context related manner. Like {@link Toast}, but better.
+ * Displays information in a non-invasive context related manner. Like
+ * {@link Toast}, but better.
  * 
  * @author weiss@neofonie.de
  * 
  */
 public final class Crouton {
-  private Activity     activity;
-  private TextView     view;
-  private CharSequence text;
-  private Style        style;
+	private Activity activity;
+	private View view;
+	private CharSequence text;
+	private Style style;
 
-  /**
-   * Creates the {@link Crouton}.
-   * 
-   * @param activity
-   *          The {@link Activity} that the {@link Crouton} should be attached to.
-   * @param text
-   *          The text you want to display.
-   * @param style
-   *          The style that this {@link Crouton} should be created with.
-   */
-  private Crouton(Activity activity, CharSequence text, Style style) {
-    if (activity == null || text == null || style == null) {
-      throw new IllegalArgumentException("Null parameters are NOT accepted");
-    }
-    this.activity = activity;
-    this.text = text;
-    this.style = style;
-  }
+	/**
+	 * Creates the {@link Crouton}.
+	 * 
+	 * @param activity
+	 *            The {@link Activity} that the {@link Crouton} should be
+	 *            attached to.
+	 * @param text
+	 *            The text you want to display.
+	 * @param style
+	 *            The style that this {@link Crouton} should be created with.
+	 */
+	private Crouton(Activity activity, CharSequence text, Style style) {
+		if (activity == null || text == null || style == null) {
+			throw new IllegalArgumentException(
+					"Null parameters are NOT accepted");
+		}
+		this.activity = activity;
+		this.text = text;
+		this.style = style;
+	}
 
-  ///////////////////////////////////////////////////////////////////////////
-  // Public methods
-  ///////////////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////////////
+	// Public methods
+	// /////////////////////////////////////////////////////////////////////////
 
-  /**
-   * Creates a {@link Crouton} with provided text and style for a given activity.
-   * 
-   * @param activity
-   *          The {@link Activity} that the {@link Crouton} should be attached to.
-   * @param text
-   *          The text you want to display.
-   * @param style
-   *          The style that this {@link Crouton} should be created with.
-   * @return The created {@link Crouton}.
-   */
+	/**
+	 * Creates a {@link Crouton} with provided text and style for a given
+	 * activity.
+	 * 
+	 * @param activity
+	 *            The {@link Activity} that the {@link Crouton} should be
+	 *            attached to.
+	 * @param text
+	 *            The text you want to display.
+	 * @param style
+	 *            The style that this {@link Crouton} should be created with.
+	 * @return The created {@link Crouton}.
+	 */
 
-  public static Crouton makeText(Activity activity, CharSequence text, Style style) {
-    return new Crouton(activity, text, style);
-  }
+	public static Crouton makeText(Activity activity, CharSequence text,
+			Style style) {
+		return new Crouton(activity, text, style);
+	}
 
-  /**
-   * Creates a {@link Crouton} with provided text-resource and style for a given activity.
-   * 
-   * @param activity
-   *          The {@link Activity} that the {@link Crouton} should be attached to.
-   * @param resId
-   *          The resource id of the text you want to display.
-   * @param style
-   *          The style that this {@link Crouton} should be created with.
-   * @return The created {@link Crouton}.
-   */
-  public static Crouton makeText(Activity activity, int resId, Style style) {
-    return makeText(activity, activity.getString(resId), style);
-  }
+	/**
+	 * Creates a {@link Crouton} with provided text-resource and style for a
+	 * given activity.
+	 * 
+	 * @param activity
+	 *            The {@link Activity} that the {@link Crouton} should be
+	 *            attached to.
+	 * @param resId
+	 *            The resource id of the text you want to display.
+	 * @param style
+	 *            The style that this {@link Crouton} should be created with.
+	 * @return The created {@link Crouton}.
+	 */
+	public static Crouton makeText(Activity activity, int resId, Style style) {
+		return makeText(activity, activity.getString(resId), style);
+	}
 
-  /**
-   * Cancels all queued {@link Crouton}s. If there is a {@link Crouton} displayed currently, it will be the
-   * last one displayed.
-   */
-  public static void cancelAllCroutons() {
-    Manager.getInstance().clearCroutonQueue();
-  }
+	/**
+	 * Cancels all queued {@link Crouton}s. If there is a {@link Crouton}
+	 * displayed currently, it will be the last one displayed.
+	 */
+	public static void cancelAllCroutons() {
+		Manager.getInstance().clearCroutonQueue();
+	}
 
-  /**
-   * Displays the {@link Crouton}. If there's another {@link Crouton} visible at the time, this
-   * {@link Crouton} will be displayed afterwards.
-   */
-  public void show() {
-    Manager manager = Manager.getInstance();
-    manager.add(this);
-  }
+	/**
+	 * Displays the {@link Crouton}. If there's another {@link Crouton} visible
+	 * at the time, this {@link Crouton} will be displayed afterwards.
+	 */
+	public void show() {
+		Manager manager = Manager.getInstance();
+		manager.add(this);
+	}
 
-  ///////////////////////////////////////////////////////////////////////////
-  // Package private methods
-  ///////////////////////////////////////////////////////////////////////////
+	/**
+	 * Cancels a {@link Crouton} immediately.
+	 */
+	private void cancel() {
+		// TODO think about exporting after Manager#removeCroutonImmediately has
+		// been implemented.
+		Manager manager = Manager.getInstance();
+		manager.removeCroutonImmediately(this);
+	}
 
-  /**
-   * @return <code>true</code> if the {@link Crouton} is being displayed, else <code>false</code>.
-   */
-  boolean isShowing() {
-    return view != null && view.getParent() != null;
-  }
+	// /////////////////////////////////////////////////////////////////////////
+	// Package private methods
+	// /////////////////////////////////////////////////////////////////////////
 
-  /**
-   * @return the activity
-   */
-  Activity getActivity() {
-    return activity;
-  }
+	/**
+	 * @return <code>true</code> if the {@link Crouton} is being displayed, else
+	 *         <code>false</code>.
+	 */
+	boolean isShowing() {
+		return view != null && view.getParent() != null;
+	}
 
-  /**
-   * @return the style
-   */
-  Style getStyle() {
-    return style;
-  }
+	/**
+	 * @return the activity
+	 */
+	Activity getActivity() {
+		return activity;
+	}
 
-  /**
-   * @return the text
-   */
-  CharSequence getText() {
-    return text;
-  }
+	/**
+	 * @return the style
+	 */
+	Style getStyle() {
+		return style;
+	}
 
-  /**
-   * @return the view
-   */
-  TextView getView() {
-    return view;
-  }
+	/**
+	 * @return the text
+	 */
+	CharSequence getText() {
+		return text;
+	}
 
-  /**
-   * @param view
-   *          the view to set
-   */
-  void setView(TextView view) {
-    this.view = view;
-  }
+	/**
+	 * @return the view
+	 */
+	View getView() {
+		return view;
+	}
+
+	/**
+	 * @param view
+	 *            the view to set
+	 */
+	void setView(View view) {
+		this.view = view;
+	}
 
 }
