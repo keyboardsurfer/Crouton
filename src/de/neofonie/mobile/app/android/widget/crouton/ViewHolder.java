@@ -17,6 +17,7 @@ package de.neofonie.mobile.app.android.widget.crouton;
 
 import android.graphics.Typeface;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
@@ -24,39 +25,48 @@ import android.widget.TextView;
  * ViewHolder <br>
  * <br>
  * <br>
- * The {@link ViewHolder} contains a view that can be used to display a {@link Crouton}.
+ * The {@link ViewHolder} contains a view that can be used to display a
+ * {@link Crouton}.
  * 
  * @author weiss@neofonie.de
  * 
  */
 final class ViewHolder {
-  private static final int          PADDING = 10;
-  private static final LayoutParams PARAMS  = new LayoutParams(LayoutParams.MATCH_PARENT,
-                                                               LayoutParams.WRAP_CONTENT);
-  private TextView                  view;
+	private static final int PADDING = 10;
+	private static final LayoutParams PARAMS = new LayoutParams(
+			LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+	private TextView view;
 
-  private static ViewHolder         holder;
+	private static ViewHolder holder;
 
-  private ViewHolder(Crouton crouton) {
-    initView(crouton);
-  }
+	private ViewHolder(Crouton crouton) {
+		initView(crouton);
+	}
 
-  public static TextView viewForCrouton(Crouton crouton) {
-    if (holder == null) {
-      holder = new ViewHolder(crouton);
-    } else {
-      holder.view.setText(crouton.getText());
-    }
-    holder.view.setBackgroundColor(crouton.getActivity().getResources().getColor(crouton.getStyle().color));
-    return holder.view;
-  }
+	/**
+	 * Creates a view for a {@link Crouton}.
+	 * 
+	 * @param crouton
+	 *            The {@link Crouton} that the view should be attached to.
+	 * @return The view for this {@link Crouton};
+	 */
+	public static View viewForCrouton(Crouton crouton) {
+		if (holder == null) {
+			holder = new ViewHolder(crouton);
+		} else {
+			holder.view.setText(crouton.getText());
+		}
+		holder.view.setBackgroundColor(crouton.getActivity().getResources()
+				.getColor(crouton.getStyle().color));
+		return holder.view;
+	}
 
-  private void initView(Crouton crouton) {
-    view = new TextView(crouton.getActivity());
-    view.setText(crouton.getText());
-    view.setLayoutParams(PARAMS);
-    view.setTypeface(Typeface.DEFAULT_BOLD);
-    view.setPadding(PADDING, PADDING, PADDING, PADDING);
-    view.setGravity(Gravity.CENTER);
-  }
+	private void initView(Crouton crouton) {
+		view = new TextView(crouton.getActivity());
+		view.setText(crouton.getText());
+		view.setLayoutParams(PARAMS);
+		view.setTypeface(Typeface.DEFAULT_BOLD);
+		view.setPadding(PADDING, PADDING, PADDING, PADDING);
+		view.setGravity(Gravity.CENTER);
+	}
 }
