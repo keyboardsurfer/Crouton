@@ -45,6 +45,23 @@ You can easily create your own Styles by adding them to the existing enum.
 
 If you want to modify the general appearance you might want to have a look at the [ViewHolder](https://github.com/neofoniemobile/Crouton/blob/master/src/de/neofonie/mobile/app/android/widget/crouton/ViewHolder.java).
 
+### Building
+
+The build requires Maven. Operations are very simple:
+
+* `mvn clean package` will build `jar` library;
+* `mvn clean install` will put Crouton in your local Maven repository.
+
+After putting Crouton in the repository you can add it as a dependency.
+
+```xml
+<dependency>
+  <artifactId>crouton</artifactId>
+  <version>1.1</version>
+  <groupId>de.neofonie</groupId>
+</dependency>
+```
+
 ### License
 
 ######Croutons are licensed under the **[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)**.
