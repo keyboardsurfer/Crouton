@@ -6,7 +6,7 @@ Context sensitive notifications for Android
 
 **Crouton**, is a class that can be used by Android developers that feel the need for an **alternative to the Context insensitive [Toast](http://developer.android.com/reference/android/widget/Toast.html)**.
 
-The name and the idea of [Crouton](https://github.com/neofoniemobile/Crouton/blob/master/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
+The name and the idea of [Crouton](https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
 
 A Crouton will be displayed at the top of an application window.
 You can line up multiple Croutons for display, that will be shown one after another.
@@ -40,10 +40,10 @@ Currently you can use the three different Style attributes displayed below:
 
 ### Extension and Modification
 
-The whole design of a Crouton is defined by [Style](https://github.com/neofoniemobile/Crouton/blob/master/src/de/neofonie/mobile/app/android/widget/crouton/Style.java).
+The whole design of a Crouton is defined by [Style](https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Style.java).
 You can easily create your own Styles by calling one of the constructors of the Style class or use one of the already provided styles: Style.ALERT, Style.CONFIRM and Style.INFO.
 
-If you want to modify the general appearance you might want to have a look at the [ViewHolder](https://github.com/neofoniemobile/Crouton/blob/master/src/de/neofonie/mobile/app/android/widget/crouton/ViewHolder.java).
+If you want to modify the general appearance you might want to have a look at the [ViewHolder](https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/ViewHolder.java).
 
 ### Building
 
@@ -80,4 +80,4 @@ Copyright 2012 Neofonie Mobile GmbH
    See the License for the specific language governing permissions and
    limitations under the License.
 
-####The initial version was written by Benjamin Weiss at Neofonie Mobile GmbH.
+####The initial version was written by [Benjamin Weiss](https://plus.google.com/117509657298845443204) at Neofonie Mobile GmbH.
