@@ -40,8 +40,8 @@ Currently you can use the three different Style attributes displayed below:
 
 ### Extension and Modification
 
-Color and display duration of a Crouton is defined by [Style](https://github.com/neofoniemobile/Crouton/blob/master/src/de/neofonie/mobile/app/android/widget/crouton/Style.java).
-You can easily create your own Styles by adding them to the existing enum.
+The whole design of a Crouton is defined by [Style](https://github.com/neofoniemobile/Crouton/blob/master/src/de/neofonie/mobile/app/android/widget/crouton/Style.java).
+You can easily create your own Styles by calling one of the constructors of the Style class or use one of the already provided styles: Style.ALERT, Style.CONFIRM and Style.INFO.
 
 If you want to modify the general appearance you might want to have a look at the [ViewHolder](https://github.com/neofoniemobile/Crouton/blob/master/src/de/neofonie/mobile/app/android/widget/crouton/ViewHolder.java).
 
