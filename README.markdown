@@ -58,7 +58,7 @@ After putting Crouton in the repository you can add it as a dependency.
 <dependency>
   <artifactId>crouton</artifactId>
   <version>1.1</version>
-  <groupId>de.neofonie</groupId>
+  <groupId>de.neofonie.mobile</groupId>
 </dependency>
 ```
 
