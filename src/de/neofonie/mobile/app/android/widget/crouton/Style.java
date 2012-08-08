@@ -15,6 +15,8 @@
  */
 package de.neofonie.mobile.app.android.widget.crouton;
 
+import android.view.ViewGroup.LayoutParams;
+
 /**
  * Style <br>
  * <br>
@@ -25,10 +27,10 @@ package de.neofonie.mobile.app.android.widget.crouton;
  * 
  */
 
-public enum Style {
-	ALERT(5000, android.R.color.holo_red_light), CONFIRM(3000,
-			android.R.color.holo_green_light), INFO(3000,
-			android.R.color.holo_blue_bright);
+public class Style {
+	public static final Style ALERT = new Style(5000, android.R.color.holo_red_light, LayoutParams.WRAP_CONTENT);
+	public static final Style CONFIRM = new Style(3000, android.R.color.holo_green_light, LayoutParams.WRAP_CONTENT);
+	public static final Style INFO = new Style(3000, android.R.color.holo_blue_bright, LayoutParams.WRAP_CONTENT);
 	/**
 	 * The duration the {@link Crouton} will be displayed in milliseconds.
 	 */
@@ -37,9 +39,41 @@ public enum Style {
 	 * The color's resource id.
 	 */
 	final int color;
+	/**
+	 * The height of the {@link Crouton} in pixels.
+	 */
+	final int height;
+	/**
+	 * The resource id of the background.
+	 * 
+	 * 0 for no background.
+	 */
+	final int background;
+	/**
+	 * Whether we should tile the background or not.
+	 */
+	final boolean tile;
+	/**
+	 * The text color's resource id.
+	 * 
+	 * 0 sets the text color to the system theme default.
+	 */
+	final int textColor;
+	
+	public Style(int duration, int color, int height) {
+		this(duration, color, height, 0, false, 0);
+	}
+	
+	public Style(int duration, int color, int height, int textColor) {
+		this(duration, color, height, 0, false, textColor);
+	}
 
-	Style(int duration, int color) {
+	public Style(int duration, int color, int height, int background, boolean tile, int textColor) {
 		this.duration = duration;
 		this.color = color;
+		this.height = height;
+		this.background = background;
+		this.tile = tile;
+		this.textColor = textColor;
 	}
 }
