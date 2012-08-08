@@ -49,8 +49,9 @@ If you want to modify the general appearance you might want to have a look at th
 
 The build requires Maven. Operations are very simple:
 
-* `mvn clean package` will build `jar` library;
-* `mvn clean install` will put Crouton in your local Maven repository.
+* `mvn -f library/pom.xml clean package` will build `jar` library;
+* `mvn clean package` will build `jar` library and sample application `apk` package;
+* `mvn -f library/pom.xml clean install` will put Crouton in your local Maven repository.
 
 After putting Crouton in the repository you can add it as a dependency.
 
