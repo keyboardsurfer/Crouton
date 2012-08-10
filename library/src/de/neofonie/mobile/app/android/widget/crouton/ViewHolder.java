@@ -73,8 +73,7 @@ final class ViewHolder {
 		} else {
 			holder.text.setText(crouton.getText());
 		}
-		holder.view.setBackgroundColor(crouton.getActivity().getResources()
-				.getColor(crouton.getStyle().color));
+		holder.view.setBackgroundColor(crouton.getStyle().color);
 		
 		if (crouton.getStyle().textColor != 0) {
 			holder.text.setTextColor(crouton.getActivity().getResources()

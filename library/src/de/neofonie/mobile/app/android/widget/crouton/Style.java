@@ -28,21 +28,20 @@ import android.view.ViewGroup.LayoutParams;
  */
 
 public class Style {
-  public static final Style ALERT   = new Style(5000,
-                                                android.R.color.holo_red_light,
-                                                LayoutParams.WRAP_CONTENT);
-  public static final Style CONFIRM = new Style(3000,
-                                                android.R.color.holo_green_light,
-                                                LayoutParams.WRAP_CONTENT);
-  public static final Style INFO    = new Style(3000,
-                                                android.R.color.holo_blue_bright,
-                                                LayoutParams.WRAP_CONTENT);
+	public static final Style ALERT = new Style(5000, 0xFFFF4444,
+			LayoutParams.WRAP_CONTENT);
+	
+	public static final Style CONFIRM = new Style(3000, 0xFF99CC00,
+			LayoutParams.WRAP_CONTENT);
+	
+	public static final Style INFO = new Style(3000, 0xFF00DDFF,
+			LayoutParams.WRAP_CONTENT);
   /**
    * The duration the {@link Crouton} will be displayed in milliseconds.
    */
   final int                 duration;
   /**
-   * The color's resource id.
+   * The color's int value
    */
   final int                 color;
   /**
