@@ -15,6 +15,7 @@
  */
 package de.neofonie.mobile.app.android.widget.crouton;
 
+import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -86,6 +87,11 @@ public class Style {
      */
     final int                 gravity;
 
+    /**
+     * An additional image to display in the {@link Crouton}.
+     */
+    final Drawable            image;
+
     public Style(final Builder builder) {
         this.duration = builder.duration;
         this.color = builder.color;
@@ -94,6 +100,7 @@ public class Style {
         this.tile = builder.tile;
         this.textColor = builder.textColor;
         this.gravity = builder.gravity;
+        this.image = builder.image;
     }
 
     /**
@@ -108,6 +115,7 @@ public class Style {
         private boolean tile;
         private int textColor;
         private int gravity;
+        private Drawable image;
 
         public Builder() {
             initDefaults();
@@ -124,6 +132,7 @@ public class Style {
             tile = false;
             textColor = android.R.color.white;
             gravity = Gravity.CENTER;
+            image = null;
         }
 
         /**
@@ -208,6 +217,18 @@ public class Style {
          */
         public Builder setGravity(int gravity) {
             this.gravity = gravity;
+            return this;
+        }
+
+        /**
+         * Set the image option for the {@link Crouton}.
+         *
+         * @param image
+         *              An additional image to display in the {@link Crouton}.
+         * @return the {@link Builder}.
+         */
+        public Builder setImage(Drawable image) {
+            this.image = image;
             return this;
         }
 

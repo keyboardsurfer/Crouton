@@ -16,7 +16,6 @@
 package de.neofonie.mobile.app.android.widget.crouton;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.Toast;
 
@@ -39,7 +38,6 @@ public final class Crouton {
 	private View view;
 	private CharSequence text;
 	private Style style;
-    private Drawable image;
 
 	/**
 	 * Creates the {@link Crouton}.
@@ -51,10 +49,8 @@ public final class Crouton {
 	 *            The text you want to display.
 	 * @param style
 	 *            The style that this {@link Crouton} should be created with.
-     * @param image
-     *            An additional image you want to display in the {@link Crouton}.
 	 */
-	private Crouton(Activity activity, CharSequence text, Style style, Drawable image) {
+	private Crouton(Activity activity, CharSequence text, Style style) {
 		if (activity == null || text == null || style == null) {
 			throw new IllegalArgumentException(
 					"Null parameters are NOT accepted");
@@ -62,7 +58,6 @@ public final class Crouton {
 		this.activity = activity;
 		this.text = text;
 		this.style = style;
-        this.image = image;
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -84,7 +79,7 @@ public final class Crouton {
 	 */
 	public static Crouton makeText(Activity activity, CharSequence text,
 			Style style) {
-		return new Crouton(activity, text, style, null);
+		return new Crouton(activity, text, style);
 	}
 
 	/**
@@ -103,44 +98,6 @@ public final class Crouton {
 	public static Crouton makeText(Activity activity, int resId, Style style) {
 		return makeText(activity, activity.getString(resId), style);
 	}
-
-    /**
-     * Creates a {@link Crouton} with provided text and style for a given
-     * activity. Additionally a provided image is shown in the {@link Crouton}.
-     *
-     * @param activity
-     *            The {@link Activity} that the {@link Crouton} should be
-     *            attached to.
-     * @param text
-     *            The text you want to display.
-     * @param style
-     *            The style that this {@link Crouton} should be created with.
-     * @param image
-     *            An additional image you want to display in the {@link Crouton}.
-     * @return The created {@link Crouton}.
-     */
-    public static Crouton makeTextWithImage(Activity activity, CharSequence text, Style style, Drawable image) {
-        return new Crouton(activity, text, style, image);
-    }
-
-    /**
-     * Creates a {@link Crouton} with provided text-resource and style for a
-     * given activity. Additionally a provided image is shown in the {@link Crouton}.
-     *
-     * @param activity
-     *            The {@link Activity} that the {@link Crouton} should be
-     *            attached to.
-     * @param resId
-     *            The resource id of the text you want to display.
-     * @param style
-     *            The style that this {@link Crouton} should be created with.
-     * @param image
-     *            An additional image you want to display in the {@link Crouton}.
-     * @return The created {@link Crouton}.
-     */
-    public static Crouton makeTextWithImage(Activity activity, int resId, Style style, Drawable image) {
-        return makeTextWithImage(activity, activity.getString(resId), style, image);
-    }
 
 	/**
 	 * Cancels all queued {@link Crouton}s. If there is a {@link Crouton}
@@ -201,13 +158,6 @@ public final class Crouton {
 	CharSequence getText() {
 		return text;
 	}
-
-    /**
-     * @return the image
-     */
-    Drawable getImage() {
-        return image;
-    }
 
 	/**
 	 * @return the view

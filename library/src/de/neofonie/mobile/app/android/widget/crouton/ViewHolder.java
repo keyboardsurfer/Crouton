@@ -17,7 +17,6 @@ package de.neofonie.mobile.app.android.widget.crouton;
 
 import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
@@ -93,8 +92,8 @@ final class ViewHolder {
 			holder.background.setBackgroundDrawable(null);
 		}
 
-        if (crouton.getImage() != null) {
-            holder.image.setImageDrawable(crouton.getImage());
+        if (crouton.getStyle().image != null) {
+            holder.image.setImageDrawable(crouton.getStyle().image);
         }
 			
 		return holder.view;
