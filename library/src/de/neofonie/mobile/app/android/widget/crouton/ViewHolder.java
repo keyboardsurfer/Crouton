@@ -37,7 +37,7 @@ import android.widget.TextView;
 final class ViewHolder {
 	private static final int PADDING = 10;
 	private static int sDefaultTextColor;
-	private static LayoutParams sParams;
+	private static RelativeLayout.LayoutParams sParams;
 	private RelativeLayout view;
 	private TextView text;
 	private ImageView background;
@@ -47,7 +47,7 @@ final class ViewHolder {
 
 	private ViewHolder(Crouton crouton) {
         if (sParams == null) {
-			sParams = new LayoutParams(
+			sParams = new RelativeLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, crouton.getStyle().height);
 		}
 		
@@ -105,15 +105,21 @@ final class ViewHolder {
 		text = new TextView(crouton.getActivity());
         image = new ImageView(crouton.getActivity());
 		background = new ImageView(crouton.getActivity());
-		
-		view.setLayoutParams(new RelativeLayout.LayoutParams(
+
+        view.setLayoutParams(new RelativeLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT, crouton.getStyle().height));
 
-		text.setText(crouton.getText());
-		text.setLayoutParams(sParams);
-		text.setTypeface(Typeface.DEFAULT_BOLD);
+        background.setLayoutParams(sParams);
+
+        RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(sParams);
+        if (crouton.getStyle().height > 0) {
+            textParams.setMargins(crouton.getStyle().height, 0, 0, 0);
+        }
+		text.setLayoutParams(textParams);
+        text.setText(crouton.getText());
+        text.setTypeface(Typeface.DEFAULT_BOLD);
 		text.setPadding(PADDING, PADDING, PADDING, PADDING);
-		text.setGravity(Gravity.CENTER);
+		text.setGravity(crouton.getStyle().gravity);
 
         image.setPadding(PADDING, PADDING, PADDING, PADDING);
         image.setAdjustViewBounds(true);
@@ -123,8 +129,6 @@ final class ViewHolder {
                 crouton.getStyle().height,
                 crouton.getStyle().height);
         lp.addRule(RelativeLayout.LEFT_OF, text.getId());
-
-		background.setLayoutParams(sParams);
 
 		view.addView(background);
 		view.addView(text);
