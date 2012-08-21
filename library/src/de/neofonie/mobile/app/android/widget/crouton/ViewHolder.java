@@ -140,7 +140,7 @@ final class ViewHolder {
 		text.setTypeface(Typeface.DEFAULT_BOLD);
 		text.setPadding(PADDING, PADDING, PADDING, PADDING);
 		text.setGravity(Gravity.CENTER);
-		
+
 		view.addView(text);
 	}
 }
