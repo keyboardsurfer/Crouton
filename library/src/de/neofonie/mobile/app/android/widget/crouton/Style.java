@@ -40,45 +40,84 @@ public class Style {
   /**
    * The duration the {@link Crouton} will be displayed in milliseconds.
    */
-  final int                 duration;
+  int                 duration;
   /**
-   * The color's resource id.
+   * The background color's resource id
+   *
+   * 0 for transparent background
    */
-  final int                 color;
+  int                 backgroundColorResId;
   /**
    * The height of the {@link Crouton} in pixels.
    */
-  final int                 height;
+  int                 height;
   /**
    * The resource id of the background.
    * 
    * 0 for no background.
    */
-  final int                 background;
+  int                 backgroundResId;
   /**
    * Whether we should tile the background or not.
    */
-  final boolean             tile;
+  boolean             tile;
   /**
    * The text color's resource id.
    * 
    * 0 sets the text color to the system theme default.
    */
-  final int                 textColor;
+  int                 textColorResId;
+  /**
+   * The text size in sp
+   *
+   * 0 sets the text size to the system theme default
+   */
+  int                 textSize;
+  /**
+   * The text shadow color's resource id
+   */
+  int                 textShadowColorResId;
+  /**
+   * The text shadow radius
+   */
+  float               textShadowRadius;
+  /**
+   * The text shadow vertical offset
+   */
+  float               textShadowDy;
+  /**
+   * The text shadow horizontal offset
+   */
+  float               textShadowDx;
+  /**
+   * The text appearance resource id for the text.
+   */
+  int                 textAppearanceResId;
+  /**
+   * The resource id for the in animation
+   */
+  int                 inAnimationResId;
+  /**
+   * The resource id for the out animation
+   */
+  int                 outAnimationResId;
+
+  // Constructor for builder
+  private Style() {}
 
   /**
    * Creates a new {@link Crouton} with the provided parameters.
    * 
    * @param duration
    *          The duration the crouton will be displayed {@link Crouton} in milliseconds.
-   * @param color
-   *          The color's resource id.
+   * @param backgroundColorResId
+   *          The background color's resource id.
    * @param height
    *          The height of the {@link Crouton}. Either {@link LayoutParams#MATCH_PARENT} or
    *          {@link LayoutParams#WRAP_CONTENT}.
    */
-  public Style(int duration, int color, int height) {
-    this(duration, color, height, 0, false, 0);
+  public Style(int duration, int backgroundColorResId, int height) {
+    this(duration, backgroundColorResId, height, 0, false, 0);
   }
 
   /**
@@ -86,16 +125,16 @@ public class Style {
    * 
    * @param duration
    *          The duration the crouton will be displayed {@link Crouton} in milliseconds.
-   * @param color
-   *          The color's resource id.
+   * @param backgroundColorResId
+   *          The backgroundcolor's resource id.
    * @param height
    *          The height of the {@link Crouton}. Either {@link LayoutParams#MATCH_PARENT} or
    *          {@link LayoutParams#WRAP_CONTENT}.
-   * @param textColor
+   * @param textColorResId
    *          The resource id of the text's color.
    */
-  public Style(int duration, int color, int height, int textColor) {
-    this(duration, color, height, 0, false, textColor);
+  public Style(int duration, int backgroundColorResId, int height, int textColorResId) {
+    this(duration, backgroundColorResId, height, 0, false, textColorResId);
   }
 
   /**
@@ -103,25 +142,176 @@ public class Style {
    * 
    * @param duration
    *          The duration the crouton will be displayed {@link Crouton} in milliseconds.
-   * @param color
-   *          The color's resource id.
+   * @param backgroundColorResId
+   *          The background color's resource id.
    * @param height
    *          The height of the {@link Crouton}. Either {@link LayoutParams#MATCH_PARENT} or
    *          {@link LayoutParams#WRAP_CONTENT}.
-   * @param background
+   * @param backgroundResId
    *          A background image drawable's resource id.
    * @param tile
    *          <code>true</code> if you want the background to be tiled, else <code>false</code>.
-   * @param textColor
+   * @param textColorResId
    *          The resource id of the text's color.
    */
-  public Style(int duration, int color, int height, int background, boolean tile, int textColor) {
+  public Style(int duration, int backgroundColorResId, int height, int backgroundResId, boolean tile, int textColorResId) {
     this.duration = duration;
-    this.color = color;
+    this.backgroundColorResId = backgroundColorResId;
     this.height = height;
-    this.background = background;
+    this.backgroundResId = backgroundResId;
     this.tile = tile;
-    this.textColor = textColor;
+    this.textColorResId = textColorResId;
+  }
+
+  public static class Builder {
+
+      int mDuration;
+      int mBackgroundColorResId;
+      int mHeight;
+      int mBackgroundResId;
+      boolean mTile;
+      int mTextColorResId;
+      int mTextSize;
+      int mTextShadowColorResId;
+      float mTextShadowRadius;
+      float mTextShadowDx;
+      float mTextShadowDy;
+      int mTextAppearanceResId;
+      int mInAnimationResId;
+      int mOutAnimationResId;
+
+      public Builder() {/* no-op */}
+
+      /**
+       * The duration the {@link Crouton} will be displayed in milliseconds.
+       */
+      public Builder setDuration(int duration) {
+          mDuration = duration;
+          return this;
+      }
+
+      /**
+       * The background color's resource id
+       */
+      public Builder setBackgroundColor(int backgroundColorResId) {
+          mBackgroundColorResId = backgroundColorResId;
+          return this;
+      }
+
+      /**
+       * The resource id of the background.
+       */
+      public Builder setBackgroundResource(int backgroundResId) {
+          mBackgroundResId = backgroundResId;
+          return this;
+      }
+
+      /**
+       * The height of the {@link Crouton} in pixels.
+       */
+      public Builder setHeight(int height) {
+          mHeight = height;
+          return this;
+      }
+
+      /**
+       * Whether we should tile the background or not.
+       */
+      public Builder setTile(boolean tile) {
+          mTile = tile;
+          return this;
+      }
+
+      /**
+       * The text color's resource id.
+       */
+      public Builder setTextColor(int textColorResId) {
+          mTextColorResId = textColorResId;
+          return this;
+      }
+
+      /**
+       * The text size in sp
+       */
+      public Builder setTextSize(int textSize) {
+          mTextSize = textSize;
+          return this;
+      }
+
+      /**
+       * The text shadow color's resource id
+       */
+      public Builder setTextShadowColor(int textShadowColorResId) {
+          mTextShadowColorResId = textShadowColorResId;
+          return this;
+      }
+
+      /**
+       * The text shadow radius
+       */
+      public Builder setTextShadowRadius(float textShadowRadius) {
+          mTextShadowRadius = textShadowRadius;
+          return this;
+      }
+
+      /**
+       * The text shadow horizontal offset
+       */
+      public Builder setTextShadowDx(float textShadowDx) {
+          mTextShadowDx = textShadowDx;
+          return this;
+      }
+
+      /**
+       * The text shadow vertical offset
+       */
+      public Builder setTextShadowDy(float textShadowDy) {
+          mTextShadowDy = textShadowDy;
+          return this;
+      }
+
+      /**
+       * The text appearance resource id for the text.
+       */
+      public Builder setTextAppearance(int textAppearanceResId) {
+          mTextAppearanceResId = textAppearanceResId;
+          return this;
+      }
+
+      /**
+       * The resource id for the in animation
+       */
+      public Builder setInAnimation(int inAnimationResId) {
+          mInAnimationResId = inAnimationResId;
+          return this;
+      }
+
+      /**
+       * The resource id for the out animation
+       */
+      public Builder setOutAnimation(int outAnimationResId) {
+          mOutAnimationResId = outAnimationResId;
+          return this;
+      }
+
+      public Style build() {
+          Style style = new Style();
+          style.duration = mDuration;
+          style.height = mHeight;
+          style.backgroundColorResId = mBackgroundColorResId;
+          style.backgroundResId = mBackgroundResId;
+          style.tile = mTile;
+          style.textColorResId = mTextColorResId;
+          style.textSize = mTextSize;
+          style.textShadowColorResId = mTextShadowColorResId;
+          style.textShadowRadius = mTextShadowRadius;
+          style.textShadowDx = mTextShadowDx;
+          style.textShadowDy = mTextShadowDy;
+          style.textAppearanceResId = mTextAppearanceResId;
+          style.inAnimationResId = mInAnimationResId;
+          style.outAnimationResId = mOutAnimationResId;
+          return style;
+      }
   }
 }
 

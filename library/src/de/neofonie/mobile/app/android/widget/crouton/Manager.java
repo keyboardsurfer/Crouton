@@ -50,7 +50,7 @@ final class Manager extends Handler {
 	}
 
 	/**
-	 * @return The currently used instance of the {@link CroutonManager}.
+	 * @return The currently used instance of the {@link Manager}.
 	 */
 	static synchronized Manager getInstance() {
 		if (INSTANCE == null) {
@@ -67,12 +67,14 @@ final class Manager extends Handler {
 	void add(Crouton crouton) {
 		croutonQueue.add(crouton);
 		if (inAnimation == null) {
-			inAnimation = AnimationUtils.loadAnimation(crouton.getActivity(),
-					android.R.anim.fade_in);
+			inAnimation = crouton.getStyle().inAnimationResId != 0
+                    ? AnimationUtils.loadAnimation(crouton.getActivity(), crouton.getStyle().inAnimationResId)
+                    : AnimationUtils.loadAnimation(crouton.getActivity(), android.R.anim.fade_in);
 		}
 		if (outAnimation == null) {
-			outAnimation = AnimationUtils.loadAnimation(crouton.getActivity(),
-					android.R.anim.fade_out);
+            outAnimation = crouton.getStyle().outAnimationResId != 0
+                    ? AnimationUtils.loadAnimation(crouton.getActivity(), crouton.getStyle().outAnimationResId)
+                    : AnimationUtils.loadAnimation(crouton.getActivity(), android.R.anim.fade_out);
 		}
 		displayCrouton();
 	}
