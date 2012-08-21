@@ -20,11 +20,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.TextView;
 
 /**
@@ -43,14 +43,14 @@ final class ViewHolder {
 	private static LayoutParams sParams;
 	private FrameLayout view;
 	private TextView text;
-	private ImageView background;
 
 	private static ViewHolder holder;
 
 	private ViewHolder(Crouton crouton) {
 		if (sParams == null) {
 			sParams = new LayoutParams(
-					LayoutParams.MATCH_PARENT, LayoutParams.FILL_PARENT);
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            sParams.gravity = Gravity.CENTER;
 		}
 		
 		if (sDefaultTextColor == 0) {
@@ -73,27 +73,56 @@ final class ViewHolder {
 		} else {
 			holder.text.setText(crouton.getText());
 		}
-		holder.view.setBackgroundColor(crouton.getActivity().getResources()
-				.getColor(crouton.getStyle().color));
-		
-		if (crouton.getStyle().textColor != 0) {
-			holder.text.setTextColor(crouton.getActivity().getResources()
-					.getColor(crouton.getStyle().textColor));
-		} else {
-			holder.text.setTextColor(sDefaultTextColor);
-		}
-		
-		if (crouton.getStyle().background != 0) {
+
+        // Set the text color. If the user has set a text color and text appearance, the color in the text appearance
+        // will override this.
+        if (crouton.getStyle().textColorResId != 0) {
+            holder.text.setTextColor(crouton.getActivity().getResources()
+                    .getColor(crouton.getStyle().textColorResId));
+        } else {
+            holder.text.setTextColor(sDefaultTextColor);
+        }
+
+        // Set the text size. If the user has set a text size and text appearance, the text size in the text appearance
+        // will override this.
+        if (crouton.getStyle().textSize != 0) {
+            holder.text.setTextSize(TypedValue.COMPLEX_UNIT_SP, crouton.getStyle().textSize);
+        }
+
+        // Setup the shadow if requested
+        if (crouton.getStyle().textShadowColorResId != 0) {
+            int textShadowColor = crouton.getActivity().getResources().getColor(crouton.getStyle().textShadowColorResId);
+            float textShadowRadius = crouton.getStyle().textShadowRadius;
+            float textShadowDx = crouton.getStyle().textShadowDx;
+            float textShadowDy = crouton.getStyle().textShadowDy;
+            holder.text.setShadowLayer(textShadowRadius, textShadowDx, textShadowDy, textShadowColor);
+        }
+
+        // Set the text appearance
+        if (crouton.getStyle().textAppearanceResId != 0) {
+            holder.text.setTextAppearance(crouton.getActivity(), crouton.getStyle().textAppearanceResId);
+        }
+
+        // Set the background color. If the user hasn't set this just set it to be transparent
+        if (crouton.getStyle().backgroundColorResId != 0) {
+            holder.view.setBackgroundColor(crouton.getActivity().getResources()
+                    .getColor(crouton.getStyle().backgroundColorResId));
+        } else {
+            holder.view.setBackgroundColor(0x00000000);
+        }
+
+        // Set the background resource. This will override any background color previously set
+		if (crouton.getStyle().backgroundResId != 0) {
 			Bitmap bm = BitmapFactory.decodeResource(crouton.getActivity().getResources(),
-					crouton.getStyle().background);
+					crouton.getStyle().backgroundResId);
 			BitmapDrawable bd = new BitmapDrawable(crouton.getActivity().getResources(), bm);
 			
 			if (crouton.getStyle().tile)
 				bd.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 			
-			holder.background.setBackgroundDrawable(bd);
+			holder.view.setBackgroundDrawable(bd);
 		} else {
-			holder.background.setBackgroundDrawable(null);
+			holder.view.setBackgroundDrawable(null);
 		}
 			
 		return holder.view;
@@ -102,8 +131,7 @@ final class ViewHolder {
 	private void initView(Crouton crouton) {
 		view = new FrameLayout(crouton.getActivity());
 		text = new TextView(crouton.getActivity());
-		background = new ImageView(crouton.getActivity());
-		
+
 		view.setLayoutParams(new LayoutParams(
 				LayoutParams.MATCH_PARENT, crouton.getStyle().height));
 		
@@ -113,9 +141,6 @@ final class ViewHolder {
 		text.setPadding(PADDING, PADDING, PADDING, PADDING);
 		text.setGravity(Gravity.CENTER);
 		
-		background.setLayoutParams(sParams);
-		
-		view.addView(background);
 		view.addView(text);
 	}
 }
