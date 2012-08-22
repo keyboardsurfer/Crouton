@@ -50,7 +50,7 @@ final class Manager extends Handler {
 	}
 
 	/**
-	 * @return The currently used instance of the {@link CroutonManager}.
+	 * @return The currently used instance of the {@link Manager}.
 	 */
 	static synchronized Manager getInstance() {
 		if (INSTANCE == null) {

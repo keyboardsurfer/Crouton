@@ -15,16 +15,12 @@
  */
 package de.neofonie.mobile.app.android.widget.crouton;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Shader;
-import android.graphics.Typeface;
+import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -40,25 +36,26 @@ import android.widget.TextView;
 final class ViewHolder {
 	private static final int PADDING = 10;
 	private static int sDefaultTextColor;
-	private static LayoutParams sParams;
-	private FrameLayout view;
+	private static RelativeLayout.LayoutParams sParams;
+	private RelativeLayout view;
 	private TextView text;
 	private ImageView background;
+    private ImageView image;
 
 	private static ViewHolder holder;
 
 	private ViewHolder(Crouton crouton) {
-		if (sParams == null) {
-			sParams = new LayoutParams(
-					LayoutParams.MATCH_PARENT, LayoutParams.FILL_PARENT);
+        if (sParams == null) {
+			sParams = new RelativeLayout.LayoutParams(
+					LayoutParams.MATCH_PARENT, crouton.getStyle().height);
 		}
 		
 		if (sDefaultTextColor == 0) {
 			sDefaultTextColor = new TextView(crouton.getActivity()).getTextColors().getDefaultColor();
 		}
-		
-		initView(crouton);
-	}
+
+        initView(crouton);
+    }
 
 	/**
 	 * Creates a view for a {@link Crouton}.
@@ -73,8 +70,7 @@ final class ViewHolder {
 		} else {
 			holder.text.setText(crouton.getText());
 		}
-		holder.view.setBackgroundColor(crouton.getActivity().getResources()
-				.getColor(crouton.getStyle().color));
+		holder.view.setBackgroundColor(crouton.getActivity().getResources().getColor(crouton.getStyle().color));
 		
 		if (crouton.getStyle().textColor != 0) {
 			holder.text.setTextColor(crouton.getActivity().getResources()
@@ -95,27 +91,47 @@ final class ViewHolder {
 		} else {
 			holder.background.setBackgroundDrawable(null);
 		}
+
+        if (crouton.getStyle().image != null) {
+            holder.image.setImageDrawable(crouton.getStyle().image);
+        }
 			
 		return holder.view;
 	}
 
 	private void initView(Crouton crouton) {
-		view = new FrameLayout(crouton.getActivity());
+		view = new RelativeLayout(crouton.getActivity());
 		text = new TextView(crouton.getActivity());
+        image = new ImageView(crouton.getActivity());
 		background = new ImageView(crouton.getActivity());
-		
-		view.setLayoutParams(new LayoutParams(
-				LayoutParams.MATCH_PARENT, crouton.getStyle().height));
-		
-		text.setText(crouton.getText());
-		text.setLayoutParams(sParams);
-		text.setTypeface(Typeface.DEFAULT_BOLD);
+
+        view.setLayoutParams(new RelativeLayout.LayoutParams(
+                LayoutParams.MATCH_PARENT, crouton.getStyle().height));
+
+        background.setLayoutParams(sParams);
+
+        RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(sParams);
+        if (crouton.getStyle().height > 0) {
+            textParams.setMargins(crouton.getStyle().height, 0, 0, 0);
+        }
+		text.setLayoutParams(textParams);
+        text.setText(crouton.getText());
+        text.setTypeface(Typeface.DEFAULT_BOLD);
 		text.setPadding(PADDING, PADDING, PADDING, PADDING);
-		text.setGravity(Gravity.CENTER);
-		
-		background.setLayoutParams(sParams);
-		
+		text.setGravity(crouton.getStyle().gravity);
+
+        image.setPadding(PADDING, PADDING, PADDING, PADDING);
+        image.setAdjustViewBounds(true);
+        image.setScaleType(ImageView.ScaleType.FIT_XY);
+
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                crouton.getStyle().height,
+                crouton.getStyle().height);
+        lp.addRule(RelativeLayout.LEFT_OF, text.getId());
+
 		view.addView(background);
 		view.addView(text);
-	}
+        view.addView(image, lp);
+
+    }
 }

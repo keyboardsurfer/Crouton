@@ -77,7 +77,6 @@ public final class Crouton {
 	 *            The style that this {@link Crouton} should be created with.
 	 * @return The created {@link Crouton}.
 	 */
-
 	public static Crouton makeText(Activity activity, CharSequence text,
 			Style style) {
 		return new Crouton(activity, text, style);
