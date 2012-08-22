@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<name>Crouton</name>
+	<artifactId>crouton</artifactId>
+	<version>1.1</version>
+	<groupId>de.neofonie.mobile</groupId>
+	<packaging>jar</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<android.version>4.0.1.2</android.version>
+		<android.version.platform>15</android.version.platform>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<artifactId>android</artifactId>
+			<version>${android.version}</version>
+			<groupId>com.google.android</groupId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<sourceDirectory>${project.basedir}/src</sourceDirectory>
+
+		<plugins>
+			<plugin>
+				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+				<version>3.3.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<sdk>
+						<platform>${android.version.platform}</platform>
+					</sdk>
+					<undeployBeforeDeploy>true</undeployBeforeDeploy>
+					<lazyLibraryUnpack>true</lazyLibraryUnpack>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
