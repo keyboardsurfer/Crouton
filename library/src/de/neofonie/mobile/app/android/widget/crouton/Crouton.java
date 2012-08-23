@@ -109,6 +109,14 @@ public final class Crouton {
 		Manager.getInstance().clearCroutonQueue();
 	}
 
+    /**
+     * Clears (and removes from {@link Activity}'s content view, if necessary) all croutons for the provided activity
+     * @param activity - The {@link} Activity to clear the croutons for
+     */
+    public static void clearCroutonsForActivity(Activity activity) {
+        Manager.getInstance().clearCroutonsForActivity(activity);
+    }
+
 	/**
 	 * Displays the {@link Crouton}. If there's another {@link Crouton} visible
 	 * at the time, this {@link Crouton} will be displayed afterwards.
@@ -121,9 +129,7 @@ public final class Crouton {
 	/**
 	 * Cancels a {@link Crouton} immediately.
 	 */
-	private void cancel() {
-		// TODO think about exporting after Manager#removeCroutonImmediately has
-		// been implemented.
+	public void cancel() {
 		Manager manager = Manager.getInstance();
 		manager.removeCroutonImmediately(this);
 	}
@@ -137,7 +143,7 @@ public final class Crouton {
 	 *         <code>false</code>.
 	 */
 	boolean isShowing() {
-		return view != null && view.getParent() != null;
+		return activity != null && view != null && view.getParent() != null;
 	}
 
 	/**
@@ -146,6 +152,13 @@ public final class Crouton {
 	Activity getActivity() {
 		return activity;
 	}
+
+    /**
+     * Removes the activity reference this {@link Crouton} is holding
+     */
+    void detachActivity() {
+        activity = null;
+    }
 
 	/**
 	 * @return the style
