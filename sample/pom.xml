@@ -3,11 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>Crouton</name>
-	<artifactId>crouton</artifactId>
-	<version>1.2</version>
-	<groupId>de.neofonie.mobile.app.android.widget</groupId>
-	<packaging>jar</packaging>
+	<name>Crouton Demo</name>
+	<artifactId>de.keyboardsurfer.app.demo.crouton</artifactId>
+	<packaging>apk</packaging>
 
 	<parent>
 		<artifactId>crouton-parent</artifactId>
@@ -21,6 +19,12 @@
 			<version>${android.version}</version>
 			<groupId>com.google.android</groupId>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<artifactId>crouton</artifactId>
+			<version>${project.version}</version>
+			<groupId>de.neofonie.mobile</groupId>
 		</dependency>
 	</dependencies>
 
