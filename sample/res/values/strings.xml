@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CroutonDemo</string>
+    <string name="show">Show</string>
+    <string name="hint_duration">Display duration in milliseconds.</string>
+    <string name="hint_text">The text you want to display.</string>
+
+</resources>
