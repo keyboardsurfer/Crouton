@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="style">
+        <item>ALERT</item>
+        <item>CONFIRM</item>
+        <item>INFO</item>
+        <item>Custom</item>
+    </string-array>
+
+</resources>

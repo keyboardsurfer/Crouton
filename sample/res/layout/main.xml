@@ -10,14 +10,12 @@
         android:layout_centerInParent="true"
         android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/edit_text_duration"
+        <Spinner
+            android:id="@+id/spinner_style"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_standard"
-            android:hint="@string/hint_duration"
-            android:inputType="number"
-            android:singleLine="true" />
+            android:entries="@array/style" />
 
         <EditText
             android:id="@+id/edit_text_text"
@@ -26,6 +24,22 @@
             android:layout_margin="@dimen/margin_standard"
             android:hint="@string/hint_text"
             android:singleLine="true" />
+
+        <LinearLayout
+            android:id="@+id/container_custom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/edit_text_duration"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_standard"
+                android:hint="@string/hint_duration"
+                android:inputType="number"
+                android:singleLine="true" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/button_show"

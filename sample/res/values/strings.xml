@@ -5,5 +5,7 @@
     <string name="show">Show</string>
     <string name="hint_duration">Display duration in milliseconds.</string>
     <string name="hint_text">The text you want to display.</string>
+    <string name="demo_text">This is a demo text, enter text below to display.</string>
+    <string name="missing_duration">You\'ll need to set the duration!</string>
 
 </resources>
