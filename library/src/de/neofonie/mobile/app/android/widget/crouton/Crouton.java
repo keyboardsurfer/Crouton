@@ -13,7 +13,9 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
+
 package de.neofonie.mobile.app.android.widget.crouton;
+
 
 import android.app.Activity;
 import android.view.View;
@@ -26,7 +28,7 @@ import android.widget.Toast;
 /**
  * Crouton <br>
  * <br>
- *
+ * <p/>
  * Displays information in a non-invasive context related manner. Like
  * {@link Toast}, but better.
  */
@@ -39,18 +41,14 @@ public final class Crouton {
 	/**
 	 * Creates the {@link Crouton}.
 	 *
-	 * @param activity
-	 *            The {@link Activity} that the {@link Crouton} should be
-	 *            attached to.
-	 * @param text
-	 *            The text you want to display.
-	 * @param style
-	 *            The style that this {@link Crouton} should be created with.
+	 * @param activity The {@link Activity} that the {@link Crouton} should be
+	 * attached to.
+	 * @param text The text you want to display.
+	 * @param style The style that this {@link Crouton} should be created with.
 	 */
 	private Crouton(Activity activity, CharSequence text, Style style) {
 		if (activity == null || text == null || style == null) {
-			throw new IllegalArgumentException(
-					"Null parameters are NOT accepted");
+			throw new IllegalArgumentException("Null parameters are NOT accepted");
 		}
 		this.activity = activity;
 		this.text = text;
@@ -61,17 +59,14 @@ public final class Crouton {
 	 * Creates a {@link Crouton} with provided text and style for a given
 	 * activity.
 	 *
-	 * @param activity
-	 *            The {@link Activity} that the {@link Crouton} should be
-	 *            attached to.
-	 * @param text
-	 *            The text you want to display.
-	 * @param style
-	 *            The style that this {@link Crouton} should be created with.
+	 * @param activity The {@link Activity} that the {@link Crouton} should be
+	 * attached to.
+	 * @param text The text you want to display.
+	 * @param style The style that this {@link Crouton} should be created with.
 	 * @return The created {@link Crouton}.
 	 */
 	public static Crouton makeText(Activity activity, CharSequence text,
-			Style style) {
+	                               Style style) {
 		return new Crouton(activity, text, style);
 	}
 
@@ -79,16 +74,14 @@ public final class Crouton {
 	 * Creates a {@link Crouton} with provided text-resource and style for a
 	 * given activity.
 	 *
-	 * @param activity
-	 *            The {@link Activity} that the {@link Crouton} should be
-	 *            attached to.
-	 * @param textResourceId
-	 *            The resource id of the text you want to display.
-	 * @param style
-	 *            The style that this {@link Crouton} should be created with.
+	 * @param activity The {@link Activity} that the {@link Crouton} should be
+	 * attached to.
+	 * @param textResourceId The resource id of the text you want to display.
+	 * @param style The style that this {@link Crouton} should be created with.
 	 * @return The created {@link Crouton}.
 	 */
-	public static Crouton makeText(Activity activity, int textResourceId, Style style) {
+	public static Crouton makeText(Activity activity, int textResourceId,
+	                               Style style) {
 		return makeText(activity, activity.getString(textResourceId), style);
 	}
 
@@ -156,11 +149,9 @@ public final class Crouton {
 	}
 
 	/**
-	 * @param view
-	 *            the view to set
+	 * @param view the view to set
 	 */
 	void setView(View view) {
 		this.view = view;
 	}
-
 }

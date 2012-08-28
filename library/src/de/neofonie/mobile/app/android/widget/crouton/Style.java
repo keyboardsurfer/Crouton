@@ -15,30 +15,32 @@
  */
 package de.neofonie.mobile.app.android.widget.crouton;
 
+
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 
+
 /**
  * Style <br>
  * <br>
- *
+ * <p/>
  * The style for a {@link Crouton}.
  */
 
 public class Style {
-	public static final Style ALERT = new Builder().setDuration(5000)
-			.setTextColor(android.R.color.holo_red_light)
-			.setHeight(LayoutParams.WRAP_CONTENT).build();
+	public static final Style ALERT = new Builder().setDuration(
+		5000).setTextColor(android.R.color.holo_red_light).setHeight(
+		LayoutParams.WRAP_CONTENT).build();
 
-	public static final Style CONFIRM = new Builder().setDuration(3000)
-			.setTextColor(android.R.color.holo_green_light)
-			.setHeight(LayoutParams.WRAP_CONTENT).build();
+	public static final Style CONFIRM = new Builder().setDuration(
+		3000).setTextColor(android.R.color.holo_green_light).setHeight(
+		LayoutParams.WRAP_CONTENT).build();
 
-	public static final Style INFO = new Builder().setDuration(3000)
-			.setTextColor(android.R.color.holo_blue_bright)
-			.setHeight(LayoutParams.WRAP_CONTENT).build();
+	public static final Style INFO = new Builder().setDuration(3000).setTextColor(
+		android.R.color.holo_blue_bright).setHeight(
+		LayoutParams.WRAP_CONTENT).build();
 	/**
 	 * The duration the {@link Crouton} will be displayed in milliseconds.
 	 */
@@ -56,7 +58,7 @@ public class Style {
 
 	/**
 	 * The resource id of the background.
-	 *
+	 * <p/>
 	 * 0 for no background.
 	 */
 	final int background;
@@ -68,7 +70,7 @@ public class Style {
 
 	/**
 	 * The text colorResourceId's resource id.
-	 *
+	 * <p/>
 	 * 0 sets the text colorResourceId to the system theme default.
 	 */
 	final int textColor;
@@ -129,9 +131,8 @@ public class Style {
 		/**
 		 * Set the duration option of the {@link Crouton}.
 		 *
-		 * @param duration
-		 *            The duration the crouton will be displayed {@link Crouton}
-		 *            in milliseconds.
+		 * @param duration The duration the crouton will be displayed {@link Crouton}
+		 * in milliseconds.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setDuration(int duration) {
@@ -142,8 +143,7 @@ public class Style {
 		/**
 		 * Set the colorResourceId option of the {@link Crouton}.
 		 *
-		 * @param colorResourceId
-		 *            The colorResourceId's resource id.
+		 * @param colorResourceId The colorResourceId's resource id.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setColor(int colorResourceId) {
@@ -154,10 +154,9 @@ public class Style {
 		/**
 		 * Set the height option for the {@link Crouton}.
 		 *
-		 * @param height
-		 *            The height of the {@link Crouton} in pixel. Can also be
-		 *            {@link LayoutParams#MATCH_PARENT} or
-		 *            {@link LayoutParams#WRAP_CONTENT}.
+		 * @param height The height of the {@link Crouton} in pixel. Can also be
+		 * {@link LayoutParams#MATCH_PARENT} or
+		 * {@link LayoutParams#WRAP_CONTENT}.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setHeight(int height) {
@@ -168,8 +167,7 @@ public class Style {
 		/**
 		 * Set the background option for the {@link Crouton}.
 		 *
-		 * @param background
-		 *            Resource ID of a background image drawable.
+		 * @param background Resource ID of a background image drawable.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setBackground(int background) {
@@ -180,9 +178,8 @@ public class Style {
 		/**
 		 * Set the isTileEnabled option for the {@link Crouton}.
 		 *
-		 * @param isTileEnabled
-		 *            <code>true</code> if you want the background to be tiled,
-		 *            else <code>false</code>.
+		 * @param isTileEnabled <code>true</code> if you want the background to be tiled,
+		 * else <code>false</code>.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setTileEnabled(boolean isTileEnabled) {
@@ -193,8 +190,7 @@ public class Style {
 		/**
 		 * Set the textColor option for the {@link Crouton}.
 		 *
-		 * @param textColor
-		 *            The resource id of the text colorResourceId.
+		 * @param textColor The resource id of the text colorResourceId.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setTextColor(int textColor) {
@@ -205,8 +201,7 @@ public class Style {
 		/**
 		 * Set the gravity option for the {@link Crouton}.
 		 *
-		 * @param gravity
-		 *            The text's gravity as provided by {@link Gravity}.
+		 * @param gravity The text's gravity as provided by {@link Gravity}.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setGravity(int gravity) {
@@ -217,8 +212,7 @@ public class Style {
 		/**
 		 * Set the image option for the {@link Crouton}.
 		 *
-		 * @param image
-		 *            An additional image to display in the {@link Crouton}.
+		 * @param image An additional image to display in the {@link Crouton}.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setImage(Drawable image) {
