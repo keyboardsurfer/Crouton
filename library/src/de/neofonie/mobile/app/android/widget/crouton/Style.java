@@ -1,6 +1,6 @@
 /*
  * Copyright 2012 Neofonie Mobile GmbH
- *	
+ *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
  *   You may obtain a copy of the License at
@@ -23,11 +23,11 @@ import android.view.ViewGroup.LayoutParams;
 /**
  * Style <br>
  * <br>
- * 
+ *
  * The style for a {@link Crouton}.
- * 
+ *
  * @author weiss@neofonie.de
- * 
+ *
  */
 
 public class Style {
@@ -48,7 +48,7 @@ public class Style {
 	final int duration;
 
 	/**
-	 * The color's resource id.
+	 * The colorResourceId's resource id.
 	 */
 	final int color;
 
@@ -59,20 +59,20 @@ public class Style {
 
 	/**
 	 * The resource id of the background.
-	 * 
+	 *
 	 * 0 for no background.
 	 */
 	final int background;
 
 	/**
-	 * Whether we should tile the background or not.
+	 * Whether we should isTileEnabled the background or not.
 	 */
 	final boolean tile;
 
 	/**
-	 * The text color's resource id.
-	 * 
-	 * 0 sets the text color to the system theme default.
+	 * The text colorResourceId's resource id.
+	 *
+	 * 0 sets the text colorResourceId to the system theme default.
 	 */
 	final int textColor;
 
@@ -88,10 +88,10 @@ public class Style {
 
 	private Style(final Builder builder) {
 		this.duration = builder.duration;
-		this.color = builder.color;
+		this.color = builder.colorResourceId;
 		this.height = builder.height;
 		this.background = builder.background;
-		this.tile = builder.tile;
+		this.tile = builder.isTileEnabled;
 		this.textColor = builder.textColor;
 		this.gravity = builder.gravity;
 		this.image = builder.image;
@@ -103,10 +103,10 @@ public class Style {
 	public static class Builder {
 
 		private int duration;
-		private int color;
+		private int colorResourceId;
 		private int height;
 		private int background;
-		private boolean tile;
+		private boolean isTileEnabled;
 		private int textColor;
 		private int gravity;
 		private Drawable image;
@@ -120,10 +120,10 @@ public class Style {
 		 */
 		private void initDefaults() {
 			duration = 3000;
-			color = android.R.color.holo_blue_bright;
+			colorResourceId = android.R.color.holo_blue_bright;
 			height = ViewGroup.LayoutParams.WRAP_CONTENT;
 			background = 0;
-			tile = false;
+			isTileEnabled = false;
 			textColor = android.R.color.white;
 			gravity = Gravity.CENTER;
 			image = null;
@@ -131,7 +131,7 @@ public class Style {
 
 		/**
 		 * Set the duration option of the {@link Crouton}.
-		 * 
+		 *
 		 * @param duration
 		 *            The duration the crouton will be displayed {@link Crouton}
 		 *            in milliseconds.
@@ -143,20 +143,20 @@ public class Style {
 		}
 
 		/**
-		 * Set the color option of the {@link Crouton}.
-		 * 
-		 * @param color
-		 *            The color's resource id.
+		 * Set the colorResourceId option of the {@link Crouton}.
+		 *
+		 * @param colorResourceId
+		 *            The colorResourceId's resource id.
 		 * @return the {@link Builder}.
 		 */
-		public Builder setColor(int color) {
-			this.color = color;
+		public Builder setColor(int colorResourceId) {
+			this.colorResourceId = colorResourceId;
 			return this;
 		}
 
 		/**
 		 * Set the height option for the {@link Crouton}.
-		 * 
+		 *
 		 * @param height
 		 *            The height of the {@link Crouton} in pixel. Can also be
 		 *            {@link LayoutParams#MATCH_PARENT} or
@@ -170,7 +170,7 @@ public class Style {
 
 		/**
 		 * Set the background option for the {@link Crouton}.
-		 * 
+		 *
 		 * @param background
 		 *            Resource ID of a background image drawable.
 		 * @return the {@link Builder}.
@@ -181,23 +181,23 @@ public class Style {
 		}
 
 		/**
-		 * Set the tile option for the {@link Crouton}.
-		 * 
-		 * @param tile
+		 * Set the isTileEnabled option for the {@link Crouton}.
+		 *
+		 * @param isTileEnabled
 		 *            <code>true</code> if you want the background to be tiled,
 		 *            else <code>false</code>.
 		 * @return the {@link Builder}.
 		 */
-		public Builder setTile(boolean tile) {
-			this.tile = tile;
+		public Builder setTileEnabled(boolean isTileEnabled) {
+			this.isTileEnabled = isTileEnabled;
 			return this;
 		}
 
 		/**
 		 * Set the textColor option for the {@link Crouton}.
-		 * 
+		 *
 		 * @param textColor
-		 *            The resource id of the text color.
+		 *            The resource id of the text colorResourceId.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setTextColor(int textColor) {
@@ -207,7 +207,7 @@ public class Style {
 
 		/**
 		 * Set the gravity option for the {@link Crouton}.
-		 * 
+		 *
 		 * @param gravity
 		 *            The text's gravity as provided by {@link Gravity}.
 		 * @return the {@link Builder}.
@@ -219,7 +219,7 @@ public class Style {
 
 		/**
 		 * Set the image option for the {@link Crouton}.
-		 * 
+		 *
 		 * @param image
 		 *            An additional image to display in the {@link Crouton}.
 		 * @return the {@link Builder}.

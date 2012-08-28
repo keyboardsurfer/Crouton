@@ -1,6 +1,6 @@
 /*
  * Copyright 2012 Neofonie Mobile GmbH
- *	
+ *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
  *   You may obtain a copy of the License at
@@ -29,29 +29,29 @@ import android.widget.TextView;
  * <br>
  * The {@link ViewHolder} contains a view that can be used to display a
  * {@link Crouton}.
- * 
+ *
  * @author weiss@neofonie.de
- * 
+ *
  */
 final class ViewHolder {
 	private static final int PADDING = 10;
-	private static int sDefaultTextColor;
-	private static RelativeLayout.LayoutParams sParams;
+	private static int defaultTextColor;
+	private static RelativeLayout.LayoutParams layoutParams;
 	private RelativeLayout view;
 	private TextView text;
 	private ImageView background;
     private ImageView image;
 
-	private static ViewHolder holder;
+	private static ViewHolder viewHolder;
 
 	private ViewHolder(Crouton crouton) {
-        if (sParams == null) {
-			sParams = new RelativeLayout.LayoutParams(
+        if (layoutParams == null) {
+			layoutParams = new RelativeLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, crouton.getStyle().height);
 		}
-		
-		if (sDefaultTextColor == 0) {
-			sDefaultTextColor = new TextView(crouton.getActivity()).getTextColors().getDefaultColor();
+
+		if (defaultTextColor == 0) {
+			defaultTextColor = new TextView(crouton.getActivity()).getTextColors().getDefaultColor();
 		}
 
         initView(crouton);
@@ -59,44 +59,44 @@ final class ViewHolder {
 
 	/**
 	 * Creates a view for a {@link Crouton}.
-	 * 
+	 *
 	 * @param crouton
 	 *            The {@link Crouton} that the view should be attached to.
 	 * @return The view for this {@link Crouton};
 	 */
 	public static View viewForCrouton(Crouton crouton) {
-		if (holder == null) {
-			holder = new ViewHolder(crouton);
+		if (viewHolder == null) {
+			viewHolder = new ViewHolder(crouton);
 		} else {
-			holder.text.setText(crouton.getText());
+			viewHolder.text.setText(crouton.getText());
 		}
-		holder.view.setBackgroundColor(crouton.getActivity().getResources().getColor(crouton.getStyle().color));
-		
+		viewHolder.view.setBackgroundColor(crouton.getActivity().getResources().getColor(crouton.getStyle().color));
+
 		if (crouton.getStyle().textColor != 0) {
-			holder.text.setTextColor(crouton.getActivity().getResources()
+			viewHolder.text.setTextColor(crouton.getActivity().getResources()
 					.getColor(crouton.getStyle().textColor));
 		} else {
-			holder.text.setTextColor(sDefaultTextColor);
+			viewHolder.text.setTextColor(defaultTextColor);
 		}
-		
+
 		if (crouton.getStyle().background != 0) {
 			Bitmap bm = BitmapFactory.decodeResource(crouton.getActivity().getResources(),
 					crouton.getStyle().background);
 			BitmapDrawable bd = new BitmapDrawable(crouton.getActivity().getResources(), bm);
-			
+
 			if (crouton.getStyle().tile)
 				bd.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
-			
-			holder.background.setBackgroundDrawable(bd);
+
+			viewHolder.background.setBackgroundDrawable(bd);
 		} else {
-			holder.background.setBackgroundDrawable(null);
+			viewHolder.background.setBackgroundDrawable(null);
 		}
 
         if (crouton.getStyle().image != null) {
-            holder.image.setImageDrawable(crouton.getStyle().image);
+            viewHolder.image.setImageDrawable(crouton.getStyle().image);
         }
-			
-		return holder.view;
+
+		return viewHolder.view;
 	}
 
 	private void initView(Crouton crouton) {
@@ -108,9 +108,10 @@ final class ViewHolder {
         view.setLayoutParams(new RelativeLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT, crouton.getStyle().height));
 
-        background.setLayoutParams(sParams);
+        background.setLayoutParams(layoutParams);
 
-        RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(sParams);
+        RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(
+          layoutParams);
         if (crouton.getStyle().height > 0) {
             textParams.setMargins(crouton.getStyle().height, 0, 0, 0);
         }

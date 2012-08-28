@@ -1,6 +1,6 @@
 /*
  * Copyright 2012 Neofonie Mobile GmbH
- *	
+ *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
  *   You may obtain a copy of the License at
@@ -26,12 +26,12 @@ import android.widget.Toast;
 /**
  * Crouton <br>
  * <br>
- * 
+ *
  * Displays information in a non-invasive context related manner. Like
  * {@link Toast}, but better.
- * 
+ *
  * @author weiss@neofonie.de
- * 
+ *
  */
 public final class Crouton {
 	private Activity activity;
@@ -41,7 +41,7 @@ public final class Crouton {
 
 	/**
 	 * Creates the {@link Crouton}.
-	 * 
+	 *
 	 * @param activity
 	 *            The {@link Activity} that the {@link Crouton} should be
 	 *            attached to.
@@ -67,7 +67,7 @@ public final class Crouton {
 	/**
 	 * Creates a {@link Crouton} with provided text and style for a given
 	 * activity.
-	 * 
+	 *
 	 * @param activity
 	 *            The {@link Activity} that the {@link Crouton} should be
 	 *            attached to.
@@ -85,18 +85,18 @@ public final class Crouton {
 	/**
 	 * Creates a {@link Crouton} with provided text-resource and style for a
 	 * given activity.
-	 * 
+	 *
 	 * @param activity
 	 *            The {@link Activity} that the {@link Crouton} should be
 	 *            attached to.
-	 * @param resId
+	 * @param textResourceId
 	 *            The resource id of the text you want to display.
 	 * @param style
 	 *            The style that this {@link Crouton} should be created with.
 	 * @return The created {@link Crouton}.
 	 */
-	public static Crouton makeText(Activity activity, int resId, Style style) {
-		return makeText(activity, activity.getString(resId), style);
+	public static Crouton makeText(Activity activity, int textResourceId, Style style) {
+		return makeText(activity, activity.getString(textResourceId), style);
 	}
 
 	/**
