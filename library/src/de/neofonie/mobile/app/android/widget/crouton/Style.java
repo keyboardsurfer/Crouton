@@ -32,15 +32,15 @@ import android.view.ViewGroup.LayoutParams;
 
 public class Style {
 	public static final Style ALERT = new Builder().setDuration(5000)
-			.setTextColor(android.R.color.holo_red_light)
+			.setColor(android.R.color.holo_red_light)
 			.setHeight(LayoutParams.WRAP_CONTENT).build();
 
 	public static final Style CONFIRM = new Builder().setDuration(3000)
-			.setTextColor(android.R.color.holo_green_light)
+			.setColor(android.R.color.holo_green_light)
 			.setHeight(LayoutParams.WRAP_CONTENT).build();
 
 	public static final Style INFO = new Builder().setDuration(3000)
-			.setTextColor(android.R.color.holo_blue_bright)
+			.setColor(android.R.color.holo_blue_bright)
 			.setHeight(LayoutParams.WRAP_CONTENT).build();
 	/**
 	 * The duration the {@link Crouton} will be displayed in milliseconds.
