@@ -33,10 +33,11 @@ import android.widget.Toast;
  * {@link Toast}, but better.
  */
 public final class Crouton {
-	private Activity activity;
+	private final Activity activity;
+	private final CharSequence text;
+	private final Style style;
+
 	private View view;
-	private CharSequence text;
-	private Style style;
 
 	/**
 	 * Creates the {@link Crouton}.
@@ -48,8 +49,9 @@ public final class Crouton {
 	 */
 	private Crouton(Activity activity, CharSequence text, Style style) {
 		if (activity == null || text == null || style == null) {
-			throw new IllegalArgumentException("Null parameters are NOT accepted");
+			throw new IllegalArgumentException("Null parameters are not accepted");
 		}
+
 		this.activity = activity;
 		this.text = text;
 		this.style = style;
@@ -99,6 +101,7 @@ public final class Crouton {
 	 */
 	public void show() {
 		Manager manager = Manager.getInstance();
+
 		manager.add(this);
 	}
 
@@ -108,6 +111,7 @@ public final class Crouton {
 	private void cancel() {
 		// TODO think about exporting after Manager#removeCroutonImmediately has
 		// been implemented.
+
 		Manager manager = Manager.getInstance();
 		manager.removeCroutonImmediately(this);
 	}

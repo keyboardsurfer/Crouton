@@ -49,7 +49,7 @@ public class Style {
 	/**
 	 * The colorResourceId's resource id.
 	 */
-	final int color;
+	final int colorResourceId;
 
 	/**
 	 * The height of the {@link Crouton} in pixels.
@@ -87,7 +87,7 @@ public class Style {
 
 	private Style(final Builder builder) {
 		this.duration = builder.duration;
-		this.color = builder.colorResourceId;
+		this.colorResourceId = builder.colorResourceId;
 		this.height = builder.height;
 		this.background = builder.background;
 		this.tile = builder.isTileEnabled;
@@ -100,7 +100,6 @@ public class Style {
 	 * Builder for the {@link Style} object.
 	 */
 	public static class Builder {
-
 		private int duration;
 		private int colorResourceId;
 		private int height;
@@ -137,6 +136,7 @@ public class Style {
 		 */
 		public Builder setDuration(int duration) {
 			this.duration = duration;
+
 			return this;
 		}
 
@@ -148,6 +148,7 @@ public class Style {
 		 */
 		public Builder setColor(int colorResourceId) {
 			this.colorResourceId = colorResourceId;
+
 			return this;
 		}
 
@@ -161,6 +162,7 @@ public class Style {
 		 */
 		public Builder setHeight(int height) {
 			this.height = height;
+
 			return this;
 		}
 
@@ -172,6 +174,7 @@ public class Style {
 		 */
 		public Builder setBackground(int background) {
 			this.background = background;
+
 			return this;
 		}
 
@@ -184,6 +187,7 @@ public class Style {
 		 */
 		public Builder setTileEnabled(boolean isTileEnabled) {
 			this.isTileEnabled = isTileEnabled;
+
 			return this;
 		}
 
@@ -195,6 +199,7 @@ public class Style {
 		 */
 		public Builder setTextColor(int textColor) {
 			this.textColor = textColor;
+
 			return this;
 		}
 
@@ -206,6 +211,7 @@ public class Style {
 		 */
 		public Builder setGravity(int gravity) {
 			this.gravity = gravity;
+
 			return this;
 		}
 
@@ -217,6 +223,7 @@ public class Style {
 		 */
 		public Builder setImage(Drawable image) {
 			this.image = image;
+
 			return this;
 		}
 

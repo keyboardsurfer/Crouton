@@ -35,14 +35,16 @@ import android.view.animation.AnimationUtils;
  * Manages the lifecycle of {@link Crouton}s.
  */
 final class Manager extends Handler {
-
 	private static final int MESSAGE_DISPLAY_CROUTON = 0xc2007;
 	private static final int MESSAGE_ADD_CROUTON_TO_VIEW = 0xc20074dd;
 	private static final int MESSAGE_REMOVE_CROUTON = 0xc2007de1;
+
 	private static Manager INSTANCE;
 
 	private Queue<Crouton> croutonQueue;
-	private Animation inAnimation, outAnimation;
+
+	private Animation inAnimation;
+	private Animation outAnimation;
 
 	private Manager() {
 		croutonQueue = new LinkedList<Crouton>();
@@ -55,6 +57,7 @@ final class Manager extends Handler {
 		if (INSTANCE == null) {
 			INSTANCE = new Manager();
 		}
+
 		return INSTANCE;
 	}
 
@@ -73,7 +76,126 @@ final class Manager extends Handler {
 			outAnimation = AnimationUtils.loadAnimation(crouton.getActivity(),
 				android.R.anim.fade_out);
 		}
+
 		displayCrouton();
+	}
+
+	/**
+	 * Displays the next {@link Crouton} within the queue.
+	 */
+	private void displayCrouton() {
+		if (croutonQueue.isEmpty()) {
+			return;
+		}
+
+		// First peek whether the Crouton has an activity.
+		final Crouton currentCrouton = croutonQueue.peek();
+		// If the activity is null we poll the Crouton off the queue.
+		if (currentCrouton.getActivity() == null) {
+			croutonQueue.poll();
+		}
+
+		if (!currentCrouton.isShowing()) {
+			// Display the Crouton
+			sendMessage(currentCrouton, MESSAGE_ADD_CROUTON_TO_VIEW);
+		}
+		else {
+			sendMessageDelayed(currentCrouton, MESSAGE_DISPLAY_CROUTON,
+				currentCrouton.getStyle().duration + inAnimation.getDuration() + outAnimation.getDuration());
+		}
+	}
+
+	/**
+	 * Sends a {@link Crouton} within a {@link Message}.
+	 *
+	 * @param crouton The {@link Crouton} that should be sent.
+	 * @param messageId The {@link Message} id.
+	 */
+	private void sendMessage(Crouton crouton, final int messageId) {
+		final Message message = obtainMessage(messageId);
+		message.obj = crouton;
+		sendMessage(message);
+	}
+
+	/**
+	 * Sends a {@link Crouton} within a delayed {@link Message}.
+	 *
+	 * @param crouton The {@link Crouton} that should be sent.
+	 * @param messageId The {@link Message} id.
+	 * @param delay The delay in milliseconds.
+	 */
+	private void sendMessageDelayed(Crouton crouton, final int messageId,
+	                                final long delay) {
+		Message message = obtainMessage(messageId);
+		message.obj = crouton;
+		sendMessageDelayed(message, delay);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see android.os.Handler#handleMessage(android.os.Message)
+	 */
+	@Override
+	public void handleMessage(Message message) {
+		final Crouton crouton;
+		switch (message.what) {
+			case MESSAGE_DISPLAY_CROUTON:
+				displayCrouton();
+				break;
+
+			case MESSAGE_ADD_CROUTON_TO_VIEW:
+				crouton = (Crouton) message.obj;
+				addCroutonToView(crouton);
+				break;
+
+			case MESSAGE_REMOVE_CROUTON:
+				crouton = (Crouton) message.obj;
+				removeCrouton(crouton);
+				break;
+
+			default:
+				super.handleMessage(message);
+				break;
+		}
+	}
+
+	/**
+	 * Adds a {@link Crouton} to the {@link ViewParent} of it's {@link Activity}.
+	 *
+	 * @param crouton The {@link Crouton} that should be added.
+	 */
+	private void addCroutonToView(Crouton crouton) {
+		crouton.setView(ViewHolder.viewForCrouton(crouton));
+
+		if (crouton.getView().getParent() == null) {
+			crouton.getActivity().addContentView(crouton.getView(),
+				crouton.getView().getLayoutParams());
+		}
+
+		crouton.getView().startAnimation(inAnimation);
+
+		sendMessageDelayed(crouton, MESSAGE_REMOVE_CROUTON,
+			crouton.getStyle().duration);
+	}
+
+	/**
+	 * Removes the {@link Crouton}'s view after it's display duration.
+	 *
+	 * @param crouton The {@link Crouton} added to a {@link ViewGroup} and should be
+	 * removed.
+	 */
+	private void removeCrouton(Crouton crouton) {
+		ViewGroup croutonParentView = ((ViewGroup) crouton.getView().getParent());
+
+		if (croutonParentView != null) {
+			crouton.getView().startAnimation(outAnimation);
+			// Remove the Crouton from the queue.
+			croutonQueue.poll();
+			// Remove the crouton from the view's parent.
+			croutonParentView.removeView(crouton.getView());
+			sendMessage(crouton, MESSAGE_DISPLAY_CROUTON);
+		}
 	}
 
 	/**
@@ -93,118 +215,9 @@ final class Manager extends Handler {
 		removeMessages(MESSAGE_DISPLAY_CROUTON);
 		removeMessages(MESSAGE_ADD_CROUTON_TO_VIEW);
 		removeMessages(MESSAGE_REMOVE_CROUTON);
+
 		if (croutonQueue != null) {
 			croutonQueue.clear();
-		}
-	}
-
-	/**
-	 * Displays the next {@link Crouton} within the queue.
-	 */
-	private void displayCrouton() {
-		if (croutonQueue.isEmpty()) {
-			return;
-		}
-		// First peek whether the Crouton has an activity.
-		final Crouton currentCrouton = croutonQueue.peek();
-		// If the activity is null we poll the Crouton off the queue.
-		if (currentCrouton.getActivity() == null) {
-			croutonQueue.poll();
-		}
-		if (!currentCrouton.isShowing()) {
-			// Display the Crouton
-			sendMessage(currentCrouton, MESSAGE_ADD_CROUTON_TO_VIEW);
-		}
-		else {
-			sendMessageDelayed(currentCrouton, MESSAGE_DISPLAY_CROUTON,
-				currentCrouton.getStyle().duration + inAnimation.getDuration() + outAnimation.getDuration());
-		}
-	}
-
-	/**
-	 * Removes the {@link Crouton}'s view after it's display duration.
-	 *
-	 * @param crouton The {@link Crouton} added to a {@link ViewGroup} and should be
-	 * removed.
-	 */
-	private void removeCrouton(Crouton crouton) {
-		ViewGroup croutonParentView = ((ViewGroup) crouton.getView().getParent());
-		if (croutonParentView != null) {
-			crouton.getView().startAnimation(outAnimation);
-			// Remove the Crouton from the queue.
-			croutonQueue.poll();
-			// Remove the crouton from the view's parent.
-			croutonParentView.removeView(crouton.getView());
-			sendMessage(crouton, MESSAGE_DISPLAY_CROUTON);
-		}
-	}
-
-	/**
-	 * Adds a {@link Crouton} to the {@link ViewParent} of it's {@link Activity}
-	 * .
-	 *
-	 * @param crouton The {@link Crouton} that should be added.
-	 */
-	private void addCroutonToView(Crouton crouton) {
-		crouton.setView(ViewHolder.viewForCrouton(crouton));
-		if (crouton.getView().getParent() == null) {
-			crouton.getActivity().addContentView(crouton.getView(),
-				crouton.getView().getLayoutParams());
-		}
-		crouton.getView().startAnimation(inAnimation);
-		sendMessageDelayed(crouton, MESSAGE_REMOVE_CROUTON,
-			crouton.getStyle().duration);
-	}
-
-	/**
-	 * Sends a {@link Crouton} within a delayed {@link Message}.
-	 *
-	 * @param crouton The {@link Crouton} that should be sent.
-	 * @param messageId The {@link Message} id.
-	 * @param delay The delay in milliseconds.
-	 */
-	private void sendMessageDelayed(Crouton crouton, final int messageId,
-	                                final long delay) {
-		Message message = obtainMessage(messageId);
-		message.obj = crouton;
-		sendMessageDelayed(message, delay);
-	}
-
-	/**
-	 * Sends a {@link Crouton} within a {@link Message}.
-	 *
-	 * @param crouton The {@link Crouton} that should be sent.
-	 * @param messageId The {@link Message} id.
-	 */
-	private void sendMessage(Crouton crouton, final int messageId) {
-		final Message message = obtainMessage(messageId);
-		message.obj = crouton;
-		sendMessage(message);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see android.os.Handler#handleMessage(android.os.Message)
-	 */
-	@Override
-	public void handleMessage(Message message) {
-		final Crouton crouton;
-		switch (message.what) {
-			case MESSAGE_DISPLAY_CROUTON:
-				displayCrouton();
-				break;
-			case MESSAGE_ADD_CROUTON_TO_VIEW:
-				crouton = (Crouton) message.obj;
-				addCroutonToView(crouton);
-				break;
-			case MESSAGE_REMOVE_CROUTON:
-				crouton = (Crouton) message.obj;
-				removeCrouton(crouton);
-				break;
-			default:
-				super.handleMessage(message);
-				break;
 		}
 	}
 }
