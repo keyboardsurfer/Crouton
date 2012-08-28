@@ -35,9 +35,14 @@ import android.view.animation.AnimationUtils;
  * Manages the lifecycle of {@link Crouton}s.
  */
 final class Manager extends Handler {
-	private static final int MESSAGE_DISPLAY_CROUTON = 0xc2007;
-	private static final int MESSAGE_ADD_CROUTON_TO_VIEW = 0xc20074dd;
-	private static final int MESSAGE_REMOVE_CROUTON = 0xc2007de1;
+	private static final class Messages {
+		private Messages() {
+		}
+
+		public static final int DISPLAY_CROUTON = 0xc2007;
+		public static final int ADD_CROUTON_TO_VIEW = 0xc20074dd;
+		public static final int REMOVE_CROUTON = 0xc2007de1;
+	}
 
 	private static Manager INSTANCE;
 
@@ -97,10 +102,10 @@ final class Manager extends Handler {
 
 		if (!currentCrouton.isShowing()) {
 			// Display the Crouton
-			sendMessage(currentCrouton, MESSAGE_ADD_CROUTON_TO_VIEW);
+			sendMessage(currentCrouton, Messages.ADD_CROUTON_TO_VIEW);
 		}
 		else {
-			sendMessageDelayed(currentCrouton, MESSAGE_DISPLAY_CROUTON,
+			sendMessageDelayed(currentCrouton, Messages.DISPLAY_CROUTON,
 				currentCrouton.getStyle().duration + inAnimation.getDuration() + outAnimation.getDuration());
 		}
 	}
@@ -140,16 +145,16 @@ final class Manager extends Handler {
 	public void handleMessage(Message message) {
 		final Crouton crouton;
 		switch (message.what) {
-			case MESSAGE_DISPLAY_CROUTON:
+			case Messages.DISPLAY_CROUTON:
 				displayCrouton();
 				break;
 
-			case MESSAGE_ADD_CROUTON_TO_VIEW:
+			case Messages.ADD_CROUTON_TO_VIEW:
 				crouton = (Crouton) message.obj;
 				addCroutonToView(crouton);
 				break;
 
-			case MESSAGE_REMOVE_CROUTON:
+			case Messages.REMOVE_CROUTON:
 				crouton = (Crouton) message.obj;
 				removeCrouton(crouton);
 				break;
@@ -175,7 +180,7 @@ final class Manager extends Handler {
 
 		crouton.getView().startAnimation(inAnimation);
 
-		sendMessageDelayed(crouton, MESSAGE_REMOVE_CROUTON,
+		sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
 			crouton.getStyle().duration);
 	}
 
@@ -194,7 +199,7 @@ final class Manager extends Handler {
 			croutonQueue.poll();
 			// Remove the crouton from the view's parent.
 			croutonParentView.removeView(crouton.getView());
-			sendMessage(crouton, MESSAGE_DISPLAY_CROUTON);
+			sendMessage(crouton, Messages.DISPLAY_CROUTON);
 		}
 	}
 
@@ -212,9 +217,9 @@ final class Manager extends Handler {
 	 * Removes all {@link Crouton}s from the queue.
 	 */
 	void clearCroutonQueue() {
-		removeMessages(MESSAGE_DISPLAY_CROUTON);
-		removeMessages(MESSAGE_ADD_CROUTON_TO_VIEW);
-		removeMessages(MESSAGE_REMOVE_CROUTON);
+		removeMessages(Messages.DISPLAY_CROUTON);
+		removeMessages(Messages.ADD_CROUTON_TO_VIEW);
+		removeMessages(Messages.REMOVE_CROUTON);
 
 		if (croutonQueue != null) {
 			croutonQueue.clear();
