@@ -3,6 +3,9 @@
 *.ap_
 *.jar
 
+#keystore
+*.keystore
+
 # files for the dex VM
 *.dex
 
