@@ -41,7 +41,7 @@
 		<dependency>
 			<artifactId>crouton</artifactId>
 			<version>${project.version}</version>
-			<groupId>de.neofonie.mobile</groupId>
+			<groupId>de.neofonie.mobile.app.android.widget</groupId>
 		</dependency>
 	</dependencies>
 
