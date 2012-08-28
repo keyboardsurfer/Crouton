@@ -25,9 +25,6 @@ import android.view.ViewGroup.LayoutParams;
  * <br>
  *
  * The style for a {@link Crouton}.
- *
- * @author weiss@neofonie.de
- *
  */
 
 public class Style {

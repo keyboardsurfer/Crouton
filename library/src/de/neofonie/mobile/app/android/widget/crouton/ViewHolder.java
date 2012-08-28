@@ -29,9 +29,6 @@ import android.widget.TextView;
  * <br>
  * The {@link ViewHolder} contains a view that can be used to display a
  * {@link Crouton}.
- *
- * @author weiss@neofonie.de
- *
  */
 final class ViewHolder {
 	private static final int PADDING = 10;

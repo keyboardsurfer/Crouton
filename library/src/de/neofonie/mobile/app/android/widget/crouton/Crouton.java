@@ -29,9 +29,6 @@ import android.widget.Toast;
  *
  * Displays information in a non-invasive context related manner. Like
  * {@link Toast}, but better.
- *
- * @author weiss@neofonie.de
- *
  */
 public final class Crouton {
 	private Activity activity;

@@ -31,9 +31,6 @@ import android.view.animation.AnimationUtils;
  * <br>
  *
  * Manages the lifecycle of {@link Crouton}s.
- *
- * @author weiss@neofonie.de
- *
  */
 final class Manager extends Handler {
 
