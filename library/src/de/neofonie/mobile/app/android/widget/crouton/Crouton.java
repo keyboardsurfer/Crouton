@@ -57,10 +57,6 @@ public final class Crouton {
 		this.style = style;
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
-	// Public methods
-	// /////////////////////////////////////////////////////////////////////////
-
 	/**
 	 * Creates a {@link Crouton} with provided text and style for a given
 	 * activity.
@@ -122,10 +118,6 @@ public final class Crouton {
 		Manager manager = Manager.getInstance();
 		manager.removeCroutonImmediately(this);
 	}
-
-	// /////////////////////////////////////////////////////////////////////////
-	// Package private methods
-	// /////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * @return <code>true</code> if the {@link Crouton} is being displayed, else
