@@ -16,6 +16,7 @@
 package de.neofonie.mobile.app.android.widget.crouton;
 
 
+import android.R;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -30,21 +31,23 @@ import android.view.ViewGroup.LayoutParams;
  */
 
 public class Style {
-	public static final Style ALERT = new Builder().setDuration(
-		5000).setTextColor(android.R.color.holo_red_light).setHeight(
-		LayoutParams.WRAP_CONTENT).build();
+	public static final Style ALERT;
+	public static final Style CONFIRM;
+	public static final Style INFO;
 
-	public static final Style CONFIRM = new Builder().setDuration(
-		3000).setTextColor(android.R.color.holo_green_light).setHeight(
-		LayoutParams.WRAP_CONTENT).build();
+	static {
+		ALERT = new Builder().setDuration(5000).setColor(
+			R.color.holo_red_light).setHeight(LayoutParams.WRAP_CONTENT).build();
+		CONFIRM = new Builder().setDuration(3000).setColor(
+			R.color.holo_green_light).setHeight(LayoutParams.WRAP_CONTENT).build();
+		INFO = new Builder().setDuration(3000).setColor(
+			R.color.holo_blue_light).setHeight(LayoutParams.WRAP_CONTENT).build();
+	}
 
-	public static final Style INFO = new Builder().setDuration(3000).setTextColor(
-		android.R.color.holo_blue_bright).setHeight(
-		LayoutParams.WRAP_CONTENT).build();
 	/**
-	 * The duration the {@link Crouton} will be displayed in milliseconds.
+	 * The durationInMilliseconds the {@link Crouton} will be displayed in milliseconds.
 	 */
-	final int duration;
+	final int durationInMilliseconds;
 
 	/**
 	 * The colorResourceId's resource id.
@@ -52,28 +55,28 @@ public class Style {
 	final int colorResourceId;
 
 	/**
-	 * The height of the {@link Crouton} in pixels.
+	 * The heightInPixels of the {@link Crouton} in pixels.
 	 */
-	final int height;
+	final int heightInPixels;
 
 	/**
-	 * The resource id of the background.
+	 * The resource id of the backgroundResourceId.
 	 * <p/>
-	 * 0 for no background.
+	 * 0 for no backgroundResourceId.
 	 */
-	final int background;
+	final int backgroundResourceId;
 
 	/**
-	 * Whether we should isTileEnabled the background or not.
+	 * Whether we should isTileEnabled the backgroundResourceId or not.
 	 */
-	final boolean tile;
+	final boolean isTileEnabled;
 
 	/**
 	 * The text colorResourceId's resource id.
 	 * <p/>
 	 * 0 sets the text colorResourceId to the system theme default.
 	 */
-	final int textColor;
+	final int textColorResourceId;
 
 	/**
 	 * The text's gravity as provided by {@link Gravity}.
@@ -86,12 +89,12 @@ public class Style {
 	final Drawable image;
 
 	private Style(final Builder builder) {
-		this.duration = builder.duration;
+		this.durationInMilliseconds = builder.durationInMilliseconds;
 		this.colorResourceId = builder.colorResourceId;
-		this.height = builder.height;
-		this.background = builder.background;
-		this.tile = builder.isTileEnabled;
-		this.textColor = builder.textColor;
+		this.heightInPixels = builder.heightInPixels;
+		this.backgroundResourceId = builder.backgroundResourceId;
+		this.isTileEnabled = builder.isTileEnabled;
+		this.textColorResourceId = builder.textColorResourceId;
 		this.gravity = builder.gravity;
 		this.image = builder.image;
 	}
@@ -100,42 +103,35 @@ public class Style {
 	 * Builder for the {@link Style} object.
 	 */
 	public static class Builder {
-		private int duration;
+		private int durationInMilliseconds;
 		private int colorResourceId;
-		private int height;
-		private int background;
+		private int heightInPixels;
+		private int backgroundResourceId;
 		private boolean isTileEnabled;
-		private int textColor;
+		private int textColorResourceId;
 		private int gravity;
 		private Drawable image;
 
 		public Builder() {
-			initDefaults();
-		}
-
-		/**
-		 * Init the {@link Builder} with default options.
-		 */
-		private void initDefaults() {
-			duration = 3000;
-			colorResourceId = android.R.color.holo_blue_bright;
-			height = ViewGroup.LayoutParams.WRAP_CONTENT;
-			background = 0;
+			durationInMilliseconds = 3000;
+			colorResourceId = R.color.holo_blue_light;
+			heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
+			backgroundResourceId = 0;
 			isTileEnabled = false;
-			textColor = android.R.color.white;
+			textColorResourceId = android.R.color.white;
 			gravity = Gravity.CENTER;
 			image = null;
 		}
 
 		/**
-		 * Set the duration option of the {@link Crouton}.
+		 * Set the durationInMilliseconds option of the {@link Crouton}.
 		 *
-		 * @param duration The duration the crouton will be displayed {@link Crouton}
+		 * @param duration The durationInMilliseconds the crouton will be displayed {@link Crouton}
 		 * in milliseconds.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setDuration(int duration) {
-			this.duration = duration;
+			this.durationInMilliseconds = duration;
 
 			return this;
 		}
@@ -153,27 +149,27 @@ public class Style {
 		}
 
 		/**
-		 * Set the height option for the {@link Crouton}.
+		 * Set the heightInPixels option for the {@link Crouton}.
 		 *
-		 * @param height The height of the {@link Crouton} in pixel. Can also be
+		 * @param height The heightInPixels of the {@link Crouton} in pixel. Can also be
 		 * {@link LayoutParams#MATCH_PARENT} or
 		 * {@link LayoutParams#WRAP_CONTENT}.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setHeight(int height) {
-			this.height = height;
+			this.heightInPixels = height;
 
 			return this;
 		}
 
 		/**
-		 * Set the background option for the {@link Crouton}.
+		 * Set the backgroundResourceId option for the {@link Crouton}.
 		 *
-		 * @param background Resource ID of a background image drawable.
+		 * @param backgroundResourceId Resource ID of a backgroundResourceId image drawable.
 		 * @return the {@link Builder}.
 		 */
-		public Builder setBackground(int background) {
-			this.background = background;
+		public Builder setBackground(int backgroundResourceId) {
+			this.backgroundResourceId = backgroundResourceId;
 
 			return this;
 		}
@@ -181,7 +177,7 @@ public class Style {
 		/**
 		 * Set the isTileEnabled option for the {@link Crouton}.
 		 *
-		 * @param isTileEnabled <code>true</code> if you want the background to be tiled,
+		 * @param isTileEnabled <code>true</code> if you want the backgroundResourceId to be tiled,
 		 * else <code>false</code>.
 		 * @return the {@link Builder}.
 		 */
@@ -192,13 +188,13 @@ public class Style {
 		}
 
 		/**
-		 * Set the textColor option for the {@link Crouton}.
+		 * Set the textColorResourceId option for the {@link Crouton}.
 		 *
 		 * @param textColor The resource id of the text colorResourceId.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setTextColor(int textColor) {
-			this.textColor = textColor;
+			this.textColorResourceId = textColor;
 
 			return this;
 		}
