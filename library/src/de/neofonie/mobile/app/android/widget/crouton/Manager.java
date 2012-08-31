@@ -62,7 +62,7 @@ final class Manager extends Handler {
 	/**
 	 * Inserts a {@link Crouton} to be displayed.
 	 * 
-	 * @param crouton
+	 * @param crouton The {@link Crouton} to be displayed.
 	 */
 	void add(Crouton crouton) {
 		croutonQueue.add(crouton);
