@@ -84,7 +84,8 @@ public final class Crouton {
 	 */
 	public static Crouton makeText(Activity activity, int textResourceId,
 	                               Style style) {
-		return makeText(activity, activity.getString(textResourceId), style);
+		String text = activity.getString(textResourceId);
+		return makeText(activity, text, style);
 	}
 
 	/**
@@ -100,9 +101,7 @@ public final class Crouton {
 	 * at the time, this {@link Crouton} will be displayed afterwards.
 	 */
 	public void show() {
-		Manager manager = Manager.getInstance();
-
-		manager.add(this);
+		Manager.getInstance().add(this);
 	}
 
 	/**
@@ -112,8 +111,7 @@ public final class Crouton {
 		// TODO think about exporting after Manager#removeCroutonImmediately has
 		// been implemented.
 
-		Manager manager = Manager.getInstance();
-		manager.removeCroutonImmediately(this);
+		Manager.getInstance().removeCroutonImmediately(this);
 	}
 
 	/**
