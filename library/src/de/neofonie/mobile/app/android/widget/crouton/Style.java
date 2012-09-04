@@ -191,11 +191,11 @@ public class Style {
 		/**
 		 * Set the textColorResourceId option for the {@link Crouton}.
 		 *
-		 * @param textColor The resource id of the text colorResourceId.
+		 * @param textColorResourceId The resource id of the text colorResourceId.
 		 * @return the {@link Builder}.
 		 */
-		public Builder setTextColor(int textColor) {
-			this.textColorResourceId = textColor;
+		public Builder setTextColor(int textColorResourceId) {
+			this.textColorResourceId = textColorResourceId;
 
 			return this;
 		}
