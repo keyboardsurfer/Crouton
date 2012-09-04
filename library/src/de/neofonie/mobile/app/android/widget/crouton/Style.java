@@ -37,11 +37,11 @@ public class Style {
 	public static final Style INFO;
 
 	static {
-		ALERT = new Builder().setDuration(5000).setColor(
+		ALERT = new Builder().setDuration(5000).setBackgroundColor(
 			R.color.holo_red_light).setHeight(LayoutParams.WRAP_CONTENT).build();
-		CONFIRM = new Builder().setDuration(3000).setColor(
+		CONFIRM = new Builder().setDuration(3000).setBackgroundColor(
 			R.color.holo_green_light).setHeight(LayoutParams.WRAP_CONTENT).build();
-		INFO = new Builder().setDuration(3000).setColor(
+		INFO = new Builder().setDuration(3000).setBackgroundColor(
 			R.color.holo_blue_light).setHeight(LayoutParams.WRAP_CONTENT).build();
 	}
 
@@ -51,33 +51,33 @@ public class Style {
 	final int durationInMilliseconds;
 
 	/**
-	 * The colorResourceId's resource id.
+	 * The backgroundColorResourceId's resource id.
 	 */
-	final int colorResourceId;
+	final int backgroundColorResourceId;
+
+	/**
+	 * The resource id of the backgroundDrawableResourceId.
+	 * <p/>
+	 * 0 for no backgroundDrawableResourceId.
+	 */
+	final int backgroundDrawableResourceId;
+
+	/**
+	 * Whether we should isTileEnabled the backgroundDrawableResourceId or not.
+	 */
+	final boolean isTileEnabled;
+
+	/**
+	 * The text backgroundColorResourceId's resource id.
+	 * <p/>
+	 * 0 sets the text backgroundColorResourceId to the system theme default.
+	 */
+	final int textColorResourceId;
 
 	/**
 	 * The heightInPixels of the {@link Crouton} in pixels.
 	 */
 	final int heightInPixels;
-
-	/**
-	 * The resource id of the backgroundResourceId.
-	 * <p/>
-	 * 0 for no backgroundResourceId.
-	 */
-	final int backgroundResourceId;
-
-	/**
-	 * Whether we should isTileEnabled the backgroundResourceId or not.
-	 */
-	final boolean isTileEnabled;
-
-	/**
-	 * The text colorResourceId's resource id.
-	 * <p/>
-	 * 0 sets the text colorResourceId to the system theme default.
-	 */
-	final int textColorResourceId;
 
 	/**
 	 * The text's gravity as provided by {@link Gravity}.
@@ -91,11 +91,11 @@ public class Style {
 
 	private Style(final Builder builder) {
 		this.durationInMilliseconds = builder.durationInMilliseconds;
-		this.colorResourceId = builder.colorResourceId;
-		this.heightInPixels = builder.heightInPixels;
-		this.backgroundResourceId = builder.backgroundResourceId;
+		this.backgroundColorResourceId = builder.backgroundColorResourceId;
+		this.backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
 		this.isTileEnabled = builder.isTileEnabled;
 		this.textColorResourceId = builder.textColorResourceId;
+		this.heightInPixels = builder.heightInPixels;
 		this.gravity = builder.gravity;
 		this.image = builder.image;
 	}
@@ -105,21 +105,21 @@ public class Style {
 	 */
 	public static class Builder {
 		private int durationInMilliseconds;
-		private int colorResourceId;
-		private int heightInPixels;
-		private int backgroundResourceId;
+		private int backgroundColorResourceId;
+		private int backgroundDrawableResourceId;
 		private boolean isTileEnabled;
 		private int textColorResourceId;
+		private int heightInPixels;
 		private int gravity;
 		private Drawable image;
 
 		public Builder() {
 			durationInMilliseconds = 3000;
-			colorResourceId = R.color.holo_blue_light;
-			heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
-			backgroundResourceId = 0;
+			backgroundColorResourceId = R.color.holo_blue_light;
+			backgroundDrawableResourceId = 0;
 			isTileEnabled = false;
 			textColorResourceId = android.R.color.white;
+			heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
 			gravity = Gravity.CENTER;
 			image = null;
 		}
@@ -127,50 +127,36 @@ public class Style {
 		/**
 		 * Set the durationInMilliseconds option of the {@link Crouton}.
 		 *
-		 * @param duration The durationInMilliseconds the crouton will be displayed {@link Crouton}
+		 * @param durationInMilliseconds The durationInMilliseconds the crouton will be displayed {@link Crouton}
 		 * in milliseconds.
 		 * @return the {@link Builder}.
 		 */
-		public Builder setDuration(int duration) {
-			this.durationInMilliseconds = duration;
+		public Builder setDuration(int durationInMilliseconds) {
+			this.durationInMilliseconds = durationInMilliseconds;
 
 			return this;
 		}
 
 		/**
-		 * Set the colorResourceId option of the {@link Crouton}.
+		 * Set the backgroundColorResourceId option of the {@link Crouton}.
 		 *
-		 * @param colorResourceId The colorResourceId's resource id.
+		 * @param backgroundColorResourceId The backgroundColorResourceId's resource id.
 		 * @return the {@link Builder}.
 		 */
-		public Builder setColor(int colorResourceId) {
-			this.colorResourceId = colorResourceId;
+		public Builder setBackgroundColor(int backgroundColorResourceId) {
+			this.backgroundColorResourceId = backgroundColorResourceId;
 
 			return this;
 		}
 
 		/**
-		 * Set the heightInPixels option for the {@link Crouton}.
+		 * Set the backgroundDrawableResourceId option for the {@link Crouton}.
 		 *
-		 * @param height The heightInPixels of the {@link Crouton} in pixel. Can also be
-		 * {@link LayoutParams#MATCH_PARENT} or
-		 * {@link LayoutParams#WRAP_CONTENT}.
+		 * @param backgroundDrawableResourceId Resource ID of a backgroundDrawableResourceId image drawable.
 		 * @return the {@link Builder}.
 		 */
-		public Builder setHeight(int height) {
-			this.heightInPixels = height;
-
-			return this;
-		}
-
-		/**
-		 * Set the backgroundResourceId option for the {@link Crouton}.
-		 *
-		 * @param backgroundResourceId Resource ID of a backgroundResourceId image drawable.
-		 * @return the {@link Builder}.
-		 */
-		public Builder setBackground(int backgroundResourceId) {
-			this.backgroundResourceId = backgroundResourceId;
+		public Builder setBackgroundDrawable(int backgroundDrawableResourceId) {
+			this.backgroundDrawableResourceId = backgroundDrawableResourceId;
 
 			return this;
 		}
@@ -178,7 +164,7 @@ public class Style {
 		/**
 		 * Set the isTileEnabled option for the {@link Crouton}.
 		 *
-		 * @param isTileEnabled <code>true</code> if you want the backgroundResourceId to be tiled,
+		 * @param isTileEnabled <code>true</code> if you want the backgroundDrawableResourceId to be tiled,
 		 * else <code>false</code>.
 		 * @return the {@link Builder}.
 		 */
@@ -191,11 +177,25 @@ public class Style {
 		/**
 		 * Set the textColorResourceId option for the {@link Crouton}.
 		 *
-		 * @param textColorResourceId The resource id of the text colorResourceId.
+		 * @param textColorResourceId The resource id of the text backgroundColorResourceId.
 		 * @return the {@link Builder}.
 		 */
 		public Builder setTextColor(int textColorResourceId) {
 			this.textColorResourceId = textColorResourceId;
+
+			return this;
+		}
+
+		/**
+		 * Set the heightInPixels option for the {@link Crouton}.
+		 *
+		 * @param heightInPixels The heightInPixels of the {@link Crouton} in pixel. Can also be
+		 * {@link LayoutParams#MATCH_PARENT} or
+		 * {@link LayoutParams#WRAP_CONTENT}.
+		 * @return the {@link Builder}.
+		 */
+		public Builder setHeight(int heightInPixels) {
+			this.heightInPixels = heightInPixels;
 
 			return this;
 		}

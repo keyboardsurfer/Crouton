@@ -166,7 +166,8 @@ final class ViewHolder {
 
 		viewHolder.view.setBackgroundColor(getCroutonBackgroundColor(crouton));
 		viewHolder.text.setTextColor(getCroutonTextColor(crouton));
-		viewHolder.background.setBackgroundDrawable(getCroutonBackground(crouton));
+		viewHolder.background.setBackgroundDrawable(
+			getCroutonBackgroundDrawable(crouton));
 		if (crouton.getStyle().image != null) {
 			viewHolder.image.setImageDrawable(crouton.getStyle().image);
 		}
@@ -187,7 +188,7 @@ final class ViewHolder {
 		Resources croutonActivityResources = crouton.getActivity().getResources();
 
 		return croutonActivityResources.getColor(
-			crouton.getStyle().colorResourceId);
+			crouton.getStyle().backgroundColorResourceId);
 	}
 
 	private static int getCroutonTextColor(Crouton crouton) {
@@ -201,15 +202,15 @@ final class ViewHolder {
 		return croutonActivity.getResources().getColor(croutonTextColorResourceId);
 	}
 
-	private static Drawable getCroutonBackground(Crouton crouton) {
-		if (crouton.getStyle().backgroundResourceId == 0) {
+	private static Drawable getCroutonBackgroundDrawable(Crouton crouton) {
+		if (crouton.getStyle().backgroundDrawableResourceId == 0) {
 			return null;
 		}
 
 		Resources croutonActivityResources = crouton.getActivity().getResources();
 
 		Bitmap backgroundBitmap = BitmapFactory.decodeResource(
-			croutonActivityResources, crouton.getStyle().backgroundResourceId);
+			croutonActivityResources, crouton.getStyle().backgroundDrawableResourceId);
 		BitmapDrawable backgroundDrawable = new BitmapDrawable(
 			croutonActivityResources, backgroundBitmap);
 
