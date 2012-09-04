@@ -164,7 +164,7 @@ final class ViewHolder {
 	public static View buildViewForCrouton(Crouton crouton) {
 		setUpViewHolder(crouton);
 
-		viewHolder.view.setBackgroundColor(crouton.getStyle().colorResourceId);
+		viewHolder.view.setBackgroundColor(getCroutonBackgroundColor(crouton));
 		viewHolder.text.setTextColor(getCroutonTextColor(crouton));
 		viewHolder.background.setBackgroundDrawable(getCroutonBackground(crouton));
 		if (crouton.getStyle().image != null) {
@@ -181,6 +181,13 @@ final class ViewHolder {
 		else {
 			viewHolder.text.setText(crouton.getText());
 		}
+	}
+
+	private static int getCroutonBackgroundColor(Crouton crouton) {
+		Resources croutonActivityResources = crouton.getActivity().getResources();
+
+		return croutonActivityResources.getColor(
+			crouton.getStyle().colorResourceId);
 	}
 
 	private static int getCroutonTextColor(Crouton crouton) {
