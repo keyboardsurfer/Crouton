@@ -17,8 +17,8 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.neofonie.mobile.app.android.widget.crouton"
-    android:versionCode="1"
-    android:versionName="1.2" >
+          package="de.neofonie.mobile.app.android.widget.crouton"
+          android:versionCode="1"
+          android:versionName="1.2">
 
 </manifest>
