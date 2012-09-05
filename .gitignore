@@ -31,3 +31,6 @@ local.properties
 
 # OSX files
 .DS_Store
+
+#vi swap files
+*.swp
