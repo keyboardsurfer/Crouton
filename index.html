@@ -28,11 +28,15 @@
 
     <div class="container">
       <section id="main_content">
-        <h2>Overview</h2>
+        <h1>Crouton</h1>
+
+<p>Context sensitive notifications for Android</p>
+
+<h2>Overview</h2>
 
 <p><strong>Crouton</strong>, is a class that can be used by Android developers that feel the need for an <strong>alternative to the Context insensitive <a href="http://developer.android.com/reference/android/widget/Toast.html">Toast</a></strong>.</p>
 
-<p>The name and the idea of <a href="https://github.com/neofoniemobile/Crouton/blob/master/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java">Crouton</a> originates in a <a href="http://android.cyrilmottier.com/?p=773">blog article</a> by Cyril Mottier.</p>
+<p>The name and the idea of <a href="https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java">Crouton</a> originates in a <a href="http://android.cyrilmottier.com/?p=773">blog article</a> by Cyril Mottier.</p>
 
 <p>A Crouton will be displayed at the top of an application window.
 You can line up multiple Croutons for display, that will be shown one after another.</p>
@@ -70,31 +74,36 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 <h3>Extension and Modification</h3>
 
-<p>Color and display duration of a Crouton is defined by <a href="https://github.com/neofoniemobile/Crouton/blob/master/src/de/neofonie/mobile/app/android/widget/crouton/Style.java">Style</a>.
-You can easily create your own Styles by adding them to the existing enum.</p>
+<p>The whole design of a Crouton is defined by <a href="https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Style.java">Style</a>.
+You can easily create your own Styles by calling one of the constructors of the Style class or use one of the already provided styles: Style.ALERT, Style.CONFIRM and Style.INFO.</p>
 
-<p>If you want to modify the general appearance you might want to have a look at the <a href="https://github.com/neofoniemobile/Crouton/blob/master/src/de/neofonie/mobile/app/android/widget/crouton/ViewHolder.java">ViewHolder</a>.</p>
+<p>If you want to modify the general appearance you might want to have a look at the <a href="https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/ViewHolder.java">ViewHolder</a>.</p>
+
+<h3>Building</h3>
+
+<p>The build requires Maven. Operations are very simple:</p>
+
+<ul>
+<li>
+<code>mvn -f library/pom.xml clean package</code> will build <code>jar</code> library;</li>
+<li>
+<code>mvn clean package</code> will build <code>jar</code> library and sample application <code>apk</code> package;</li>
+<li>
+<code>mvn -f library/pom.xml clean install</code> will put Crouton in your local Maven repository.</li>
+</ul><p>After putting Crouton in the repository you can add it as a dependency.</p>
+
+<div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>crouton<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.1<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>de.neofonie.mobile<span class="nt">&lt;/groupId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
 
 <h3>License</h3>
 
-<h6>Croutons are licensed under the <strong><a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a></strong>.</h6>
-
-<p>Copyright 2012 Neofonie Mobile GmbH</p>
-
-<p>Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at</p>
-
-<pre><code>   http://www.apache.org/licenses/LICENSE-2.0
-</code></pre>
-
-<p>Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.</p>
-
-<h4>The initial version was written by Benjamin Weiss at Neofonie Mobile GmbH.</h4>
+<ul>
+<li><a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Version 2.0</a></li>
+</ul><h4>The initial version was written by <a href="https://plus.google.com/117509657298845443204">Benjamin Weiss</a> at Neofonie Mobile GmbH.</h4>
       </section>
     </div>
 
