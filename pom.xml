@@ -22,7 +22,7 @@
 
     <name>Crouton Parent</name>
     <artifactId>crouton-parent</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
     <groupId>de.neofonie.mobile.app.android.widget</groupId>
     <packaging>pom</packaging>
 
