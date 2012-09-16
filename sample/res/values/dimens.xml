@@ -18,7 +18,6 @@
 
 <resources>
 
-    <dimen name="margin_standard">4dp</dimen>
-    <dimen name="margin_double">8dp</dimen>
+    <dimen name="padding_form">20dp</dimen>
 
 </resources>
