@@ -107,7 +107,7 @@ public class CroutonDemo extends Activity implements OnClickListener, OnItemSele
 		String croutonText = croutonTextEdit.getText().toString().trim();
 
 		if (TextUtils.isEmpty(croutonText)) {
-			croutonText = getString(R.string.demo_text);
+			croutonText = getString(R.string.text_demo);
 		}
 
 		return croutonText;
@@ -117,7 +117,7 @@ public class CroutonDemo extends Activity implements OnClickListener, OnItemSele
 		String croutonDurationString = getCroutonDurationString();
 
 		if (TextUtils.isEmpty(croutonDurationString)) {
-			Crouton.makeText(this, R.string.missing_duration, Style.ALERT).show();
+			Crouton.makeText(this, R.string.warning_duration, Style.ALERT).show();
 			return;
 		}
 
