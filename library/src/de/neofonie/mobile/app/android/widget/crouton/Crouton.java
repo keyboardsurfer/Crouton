@@ -85,6 +85,37 @@ public final class Crouton {
   }
 
   /**
+   * Creates a {@link Crouton} with provided text and style for a given activity and displays it directly.
+   *
+   * @param activity
+   *          The {@link android.app.Activity} that the {@link Crouton} should be attached to.
+   * @param text
+   *          The text you want to display.
+   * @param style
+   *          The style that this {@link Crouton} should be created with.
+   *
+   */
+  public static void showText(Activity activity, CharSequence text, Style style) {
+    makeText(activity, text, style).show();
+  }
+
+  /**
+   * Creates a {@link Crouton} with provided text-resource and style for a given activity and displays it
+   * directly.
+   *
+   * @param activity
+   *          The {@link Activity} that the {@link Crouton} should be attached to.
+   * @param textResourceId
+   *          The resource id of the text you want to display.
+   * @param style
+   *          The style that this {@link Crouton} should be created with.
+   *
+   */
+  public static void showText(Activity activity, int textResourceId, Style style) {
+    showText(activity, activity.getString(textResourceId), style);
+  }
+
+  /**
    * Cancels all queued {@link Crouton}s. If there is a {@link Crouton} displayed currently, it will be the
    * last one displayed.
    */

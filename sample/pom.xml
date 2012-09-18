@@ -26,7 +26,7 @@
 
     <parent>
         <artifactId>crouton-parent</artifactId>
-        <version>1.3</version>
+        <version>1.4</version>
         <groupId>de.neofonie.mobile.app.android.widget</groupId>
     </parent>
 
