@@ -16,41 +16,35 @@
 
 package de.neofonie.mobile.app.android.widget.crouton;
 
-
-import android.app.Activity;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Shader;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import android.widget.RelativeLayout;
+import android.widget.ImageView;
+import android.view.ViewGroup.LayoutParams;
+import android.view.View;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Typeface;
+import android.graphics.Shader;
+import android.graphics.BitmapFactory;
+import android.graphics.Bitmap;
+import android.content.res.Resources;
+import android.app.Activity;
 
 /**
- * ViewHolder <br>
- * <br>
- * <br>
- * The {@link ViewHolder} contains a view that can be used to display a
- * {@link Crouton}.
+ * The {@link ViewHolder} contains a view that can be used to display a {@link Crouton}.
  */
 final class ViewHolder {
-  private static final int IMAGE_PADDING = 10;
+  private static final int                   IMAGE_PADDING = 10;
 
-  private static int defaultTextColor;
+  private static int                         defaultTextColor;
   private static RelativeLayout.LayoutParams layoutParams;
 
-  private RelativeLayout view;
-  private TextView text;
-  private ImageView background;
-  private ImageView image;
+  private RelativeLayout                     view;
+  private TextView                           text;
+  private ImageView                          background;
+  private ImageView                          image;
 
-  private static ViewHolder viewHolder;
+  private static ViewHolder                  viewHolder;
 
   private ViewHolder(Crouton crouton) {
     setUpLayoutParams(crouton);
@@ -65,8 +59,7 @@ final class ViewHolder {
     }
 
     int croutonHeightInPixels = crouton.getStyle().heightInPixels;
-    layoutParams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-        croutonHeightInPixels);
+    layoutParams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, croutonHeightInPixels);
   }
 
   private void setUpDefaultTextColor(Crouton crouton) {
@@ -98,8 +91,7 @@ final class ViewHolder {
   }
 
   private RelativeLayout.LayoutParams buildViewLayoutParams(Crouton crouton) {
-    return new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-        crouton.getStyle().heightInPixels);
+    return new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, crouton.getStyle().heightInPixels);
   }
 
   private TextView buildText(Crouton crouton) {
@@ -115,8 +107,7 @@ final class ViewHolder {
   }
 
   private RelativeLayout.LayoutParams buildTextLayoutParams(Crouton crouton) {
-    RelativeLayout.LayoutParams textLayoutParams = new RelativeLayout.LayoutParams(
-        layoutParams);
+    RelativeLayout.LayoutParams textLayoutParams = new RelativeLayout.LayoutParams(layoutParams);
 
     if (crouton.getStyle().heightInPixels > 0) {
       textLayoutParams.setMargins(crouton.getStyle().heightInPixels, 0, 0, 0);
@@ -128,8 +119,7 @@ final class ViewHolder {
   private ImageView buildImage(Crouton crouton) {
     ImageView image = new ImageView(crouton.getActivity());
 
-    image.setPadding(IMAGE_PADDING, IMAGE_PADDING, IMAGE_PADDING,
-        IMAGE_PADDING);
+    image.setPadding(IMAGE_PADDING, IMAGE_PADDING, IMAGE_PADDING, IMAGE_PADDING);
     image.setAdjustViewBounds(true);
     image.setScaleType(ImageView.ScaleType.FIT_XY);
 
@@ -147,8 +137,8 @@ final class ViewHolder {
   private RelativeLayout.LayoutParams buildImageLayoutParams(Crouton crouton) {
     int croutonHeightInPixels = crouton.getStyle().heightInPixels;
 
-    RelativeLayout.LayoutParams imageLayoutParams = new RelativeLayout.LayoutParams(
-        croutonHeightInPixels, croutonHeightInPixels);
+    RelativeLayout.LayoutParams imageLayoutParams = new RelativeLayout.LayoutParams(croutonHeightInPixels,
+                                                                                    croutonHeightInPixels);
 
     imageLayoutParams.addRule(RelativeLayout.LEFT_OF, text.getId());
 
@@ -157,8 +147,9 @@ final class ViewHolder {
 
   /**
    * Creates a view for a {@link Crouton}.
-   *
-   * @param crouton The {@link Crouton} that the view should be attached to.
+   * 
+   * @param crouton
+   *          The {@link Crouton} that the view should be attached to.
    * @return The view for this {@link Crouton};
    */
   public static View buildViewForCrouton(Crouton crouton) {
@@ -166,8 +157,7 @@ final class ViewHolder {
 
     viewHolder.view.setBackgroundColor(getCroutonBackgroundColor(crouton));
     viewHolder.text.setTextColor(getCroutonTextColor(crouton));
-    viewHolder.background.setBackgroundDrawable(
-        getCroutonBackgroundDrawable(crouton));
+    viewHolder.background.setBackgroundDrawable(getCroutonBackgroundDrawable(crouton));
     if (crouton.getStyle().image != null) {
       viewHolder.image.setImageDrawable(crouton.getStyle().image);
     }
@@ -178,8 +168,7 @@ final class ViewHolder {
   private static void setUpViewHolder(Crouton crouton) {
     if (viewHolder == null) {
       viewHolder = new ViewHolder(crouton);
-    }
-    else {
+    } else {
       viewHolder.text.setText(crouton.getText());
     }
   }
@@ -187,8 +176,7 @@ final class ViewHolder {
   private static int getCroutonBackgroundColor(Crouton crouton) {
     Resources croutonActivityResources = crouton.getActivity().getResources();
 
-    return croutonActivityResources.getColor(
-        crouton.getStyle().backgroundColorResourceId);
+    return croutonActivityResources.getColor(crouton.getStyle().backgroundColorResourceId);
   }
 
   private static int getCroutonTextColor(Crouton crouton) {
@@ -209,14 +197,12 @@ final class ViewHolder {
 
     Resources croutonActivityResources = crouton.getActivity().getResources();
 
-    Bitmap backgroundBitmap = BitmapFactory.decodeResource(
-        croutonActivityResources, crouton.getStyle().backgroundDrawableResourceId);
-    BitmapDrawable backgroundDrawable = new BitmapDrawable(
-        croutonActivityResources, backgroundBitmap);
+    Bitmap backgroundBitmap = BitmapFactory.decodeResource(croutonActivityResources,
+                                                           crouton.getStyle().backgroundDrawableResourceId);
+    BitmapDrawable backgroundDrawable = new BitmapDrawable(croutonActivityResources, backgroundBitmap);
 
     if (crouton.getStyle().isTileEnabled) {
-      backgroundDrawable.setTileModeXY(Shader.TileMode.REPEAT,
-          Shader.TileMode.REPEAT);
+      backgroundDrawable.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
     }
 
     return backgroundDrawable;

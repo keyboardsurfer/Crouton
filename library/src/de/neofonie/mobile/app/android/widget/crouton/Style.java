@@ -22,9 +22,6 @@ import android.view.Gravity;
 import android.graphics.drawable.Drawable;
 
 /**
- * Style <br>
- * <br>
- * <p/>
  * The style for a {@link Crouton}.
  */
 

@@ -16,20 +16,16 @@
 
 package de.neofonie.mobile.app.android.widget.crouton;
 
-import android.app.Activity;
-import android.view.View;
 import android.widget.Toast;
+import android.view.View;
+import android.app.Activity;
 
 /*
  * Based on an article by Cyril Mottier (http://android.cyrilmottier.com/?p=773) <br>
  */
 
 /**
- * Crouton <br>
- * <br>
- * <p/>
- * Displays information in a non-invasive context related manner. Like
- * {@link Toast}, but better.
+ * Displays information in a non-invasive context related manner. Like {@link Toast}, but better.
  */
 public final class Crouton {
   private final Activity     activity;
@@ -96,13 +92,13 @@ public final class Crouton {
     Manager.getInstance().clearCroutonQueue();
   }
 
-	/**
-	 * Displays the {@link Crouton}. If there's another {@link Crouton} visible
-	 * at the time, this {@link Crouton} will be displayed afterwards.
-	 */
-	public void show() {
-		Manager.getInstance().add(this);
-	}
+  /**
+   * Displays the {@link Crouton}. If there's another {@link Crouton} visible at the time, this
+   * {@link Crouton} will be displayed afterwards.
+   */
+  public void show() {
+    Manager.getInstance().add(this);
+  }
 
   /**
    * Cancels a {@link Crouton} immediately.
@@ -111,7 +107,7 @@ public final class Crouton {
     // TODO think about exporting after Manager#removeCroutonImmediately has
     // been implemented.
 
-		Manager.getInstance().removeCroutonImmediately(this);
+    Manager.getInstance().removeCroutonImmediately(this);
   }
 
   /**

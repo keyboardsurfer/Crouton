@@ -28,9 +28,6 @@ import android.os.Handler;
 import android.app.Activity;
 
 /**
- * Manager <br>
- * <br>
- * <p/>
  * Manages the lifecycle of {@link Crouton}s.
  */
 final class Manager extends Handler {
