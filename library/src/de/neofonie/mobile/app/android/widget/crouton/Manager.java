@@ -18,10 +18,12 @@ package de.neofonie.mobile.app.android.widget.crouton;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.animation.Animation;
@@ -44,10 +46,9 @@ final class Manager extends Handler {
 	private static Manager INSTANCE;
 
 	private Queue<Crouton> croutonQueue;
-	private Animation inAnimation, outAnimation;
 
 	private Manager() {
-		croutonQueue = new LinkedList<Crouton>();
+		croutonQueue = new LinkedBlockingQueue<Crouton>();
 	}
 
 	/**
@@ -172,8 +173,8 @@ final class Manager extends Handler {
 					currentCrouton,
 					MESSAGE_DISPLAY_CROUTON,
 					currentCrouton.getStyle().duration
-							+ inAnimation.getDuration()
-							+ outAnimation.getDuration());
+							+ currentCrouton.getInAnimation().getDuration()
+							+ currentCrouton.getOutAnimation().getDuration());
 		}
 	}
 
@@ -187,12 +188,8 @@ final class Manager extends Handler {
 	private void removeCrouton(Crouton crouton) {
 		ViewGroup parent = ((ViewGroup) crouton.getView().getParent());
 		if (parent != null) {
-            if (crouton.getStyle().outAnimationResId == 0) {
-                outAnimation = AnimationUtils.loadAnimation(crouton.getActivity(), android.R.anim.fade_out);
-            } else {
-                outAnimation = AnimationUtils.loadAnimation(crouton.getActivity(), crouton.getStyle().outAnimationResId);
-            }
-			crouton.getView().startAnimation(outAnimation);
+
+			crouton.getView().startAnimation(crouton.getOutAnimation());
 			// Remove the Crouton from the queue.
 			Crouton removed = croutonQueue.poll();
 			// Remove the crouton from the view's parent.
@@ -202,7 +199,7 @@ final class Manager extends Handler {
                 removed.detachActivity();
             }
             // Send a message to display the next crouton but delay it by the out animation duration to make sure it finishes
-            sendMessageDelayed(crouton, MESSAGE_DISPLAY_CROUTON, outAnimation.getDuration());
+            sendMessageDelayed(crouton, MESSAGE_DISPLAY_CROUTON, crouton.getOutAnimation().getDuration());
 		}
 	}
 
@@ -214,7 +211,6 @@ final class Manager extends Handler {
 	 *            The {@link Crouton} that should be added.
 	 */
 	private void addCroutonToView(Crouton crouton) {
-
         // don't add if it is already showing
         if (crouton.isShowing()) {
             return;
@@ -226,13 +222,9 @@ final class Manager extends Handler {
 			crouton.getActivity().addContentView(crouton.getView(),
                     crouton.getView().getLayoutParams());
 		}
-        if (crouton.getStyle().inAnimationResId == 0) {
-            inAnimation = AnimationUtils.loadAnimation(crouton.getActivity(), android.R.anim.fade_in);
-        } else {
-            inAnimation = AnimationUtils.loadAnimation(crouton.getActivity(), crouton.getStyle().inAnimationResId);
-        }
-		crouton.getView().startAnimation(inAnimation);
-		sendMessageDelayed(crouton, MESSAGE_REMOVE_CROUTON, crouton.getStyle().duration + inAnimation.getDuration());
+
+		crouton.getView().startAnimation(crouton.getInAnimation());
+		sendMessageDelayed(crouton, MESSAGE_REMOVE_CROUTON, crouton.getStyle().duration + crouton.getInAnimation().getDuration());
 	}
 
 	/**
