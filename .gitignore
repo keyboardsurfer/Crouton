@@ -3,6 +3,9 @@
 *.ap_
 *.jar
 
+# keystore
+*.keystore
+
 # files for the dex VM
 *.dex
 
@@ -22,5 +25,12 @@ local.properties
 .metadata
 .settings
 
-#OSX files
+# IntelliJ files
+.idea
+*.iml
+
+# OSX files
 .DS_Store
+
+#vi swap files
+*.swp

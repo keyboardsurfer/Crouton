@@ -1,289 +1,405 @@
+/*
+ * Copyright 2012 Neofonie Mobile GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package de.neofonie.mobile.app.android.widget.crouton;
 
+import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup;
+import android.view.Gravity;
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
 
 /**
-     * Style <br>
-     * <br>
-     *
-     * The style for a {@link Crouton}.
-     *
-     * @author weiss@neofonie.de
-     *
-     */
+ * The style for a {@link Crouton}.
+ */
 
-    public class Style {
-        public static final Style ALERT = new Style(5000,
-                android.R.color.holo_red_light,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        public static final Style CONFIRM = new Style(3000,
-                android.R.color.holo_green_light,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        public static final Style INFO = new Style(3000,
-                android.R.color.holo_blue_bright,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        /**
-         * The duration the {@link Crouton} will be displayed in milliseconds.
-         */
-        int duration;
-        /**
-         * The background color's resource id
-         * <p/>
-         * 0 for transparent background
-         */
-        int backgroundColorResId;
-        /**
-         * The height of the {@link Crouton} in pixels.
-         */
-        int height;
-        /**
-         * The resource id of the background.
-         * <p/>
-         * 0 for no background.
-         */
-        int backgroundResId;
-        /**
-         * Whether we should tile the background or not.
-         */
-        boolean tile;
-        /**
-         * The text color's resource id.
-         * <p/>
-         * 0 sets the text color to the system theme default.
-         */
-        int textColorResId;
-        /**
-         * The text size in sp
-         * <p/>
-         * 0 sets the text size to the system theme default
-         */
-        int textSize;
-        /**
-         * The text shadow color's resource id
-         */
-        int textShadowColorResId;
-        /**
-         * The text shadow radius
-         */
-        float textShadowRadius;
-        /**
-         * The text shadow vertical offset
-         */
-        float textShadowDy;
-        /**
-         * The text shadow horizontal offset
-         */
-        float textShadowDx;
-        /**
-         * The text appearance resource id for the text.
-         */
-        int textAppearanceResId;
-        /**
-         * The resource id for the in animation
-         */
-        int inAnimationResId = android.R.anim.fade_in;
-        /**
-         * The resource id for the out animation
-         */
-        int outAnimationResId = android.R.anim.fade_out;
+public class Style {
+  public static final Style ALERT;
+  public static final Style CONFIRM;
+  public static final Style INFO;
 
-        // Constructor for builder
-        private Style() {
-        }
+  static {
+    ALERT = new Builder().setDuration(5000)
+                         .setBackgroundColor(android.R.color.holo_red_light)
+                         .setHeight(LayoutParams.WRAP_CONTENT)
+                         .build();
+    CONFIRM = new Builder().setDuration(3000)
+                           .setBackgroundColor(android.R.color.holo_green_light)
+                           .setHeight(LayoutParams.WRAP_CONTENT)
+                           .build();
+    INFO = new Builder().setDuration(3000)
+                        .setBackgroundColor(android.R.color.holo_blue_light)
+                        .setHeight(LayoutParams.WRAP_CONTENT)
+                        .build();
+  }
 
-        /**
-         * Creates a new {@link Crouton} with the provided parameters.
-         *
-         * @param duration             The duration the crouton will be displayed {@link Crouton} in milliseconds.
-         * @param backgroundColorResId The background color's resource id.
-         * @param height               The height of the {@link Crouton}. Either {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT} or
-         *                             {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}.
-         */
-        public Style(int duration, int backgroundColorResId, int height) {
-            this(duration, backgroundColorResId, height, 0, false, 0);
-        }
+  /**
+   * The durationInMilliseconds the {@link Crouton} will be displayed in milliseconds.
+   */
+  final int                 durationInMilliseconds;
 
-        /**
-         * Creates a new {@link Crouton} with the provided parameters
-         *
-         * @param duration             The duration the crouton will be displayed {@link Crouton} in milliseconds.
-         * @param backgroundColorResId The backgroundcolor's resource id.
-         * @param height               The height of the {@link Crouton}. Either {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT} or
-         *                             {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}.
-         * @param textColorResId       The resource id of the text's color.
-         */
-        public Style(int duration, int backgroundColorResId, int height, int textColorResId) {
-            this(duration, backgroundColorResId, height, 0, false, textColorResId);
-        }
+  /**
+   * The colorResourceId's resource id.
+   */
+  final int                 colorResourceId;
 
-        /**
-         * Creates a new {@link Crouton} with the provided parameters.
-         *
-         * @param duration             The duration the crouton will be displayed {@link Crouton} in milliseconds.
-         * @param backgroundColorResId The background color's resource id.
-         * @param height               The height of the {@link Crouton}. Either {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT} or
-         *                             {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}.
-         * @param backgroundResId      A background image drawable's resource id.
-         * @param tile                 <code>true</code> if you want the background to be tiled, else <code>false</code>.
-         * @param textColorResId       The resource id of the text's color.
-         */
-        public Style(int duration, int backgroundColorResId, int height, int backgroundResId, boolean tile, int textColorResId) {
-            this.duration = duration;
-            this.backgroundColorResId = backgroundColorResId;
-            this.height = height;
-            this.backgroundResId = backgroundResId;
-            this.tile = tile;
-            this.textColorResId = textColorResId;
-        }
+  /**
+   * The resource id of the backgroundResourceId.
+   * <p/>
+   * 0 for no backgroundResourceId.
+   */
+  final int                 backgroundColorResourceId;
 
-        public static class Builder {
+  /**
+   * The resource id of the backgroundDrawableResourceId.
+   * <p/>
+   * 0 for no backgroundDrawableResourceId.
+   */
+  final int                 backgroundDrawableResourceId;
 
-            int mDuration;
-            int mBackgroundColorResId;
-            int mHeight;
-            int mBackgroundResId;
-            boolean mTile;
-            int mTextColorResId;
-            int mTextSize;
-            int mTextShadowColorResId;
-            float mTextShadowRadius;
-            float mTextShadowDx;
-            float mTextShadowDy;
-            int mTextAppearanceResId;
-            int mInAnimationResId;
-            int mOutAnimationResId;
+  /**
+   * Whether we should isTileEnabled the backgroundResourceId or not.
+   */
+  final boolean             isTileEnabled;
 
-            public Builder() {/* no-op */}
+  /**
+   * The text colorResourceId's resource id.
+   * <p/>
+   * 0 sets the text colorResourceId to the system theme default.
+   */
+  final int                 textColorResourceId;
 
-            /**
-             * The duration the {@link Crouton} will be displayed in milliseconds.
-             */
-            public Builder setDuration(int duration) {
-                mDuration = duration;
-                return this;
-            }
+  /**
+   * The heightInPixels of the {@link Crouton} in pixels.
+   */
+  final int                 heightInPixels;
 
-            /**
-             * The background color's resource id
-             */
-            public Builder setBackgroundColor(int backgroundColorResId) {
-                mBackgroundColorResId = backgroundColorResId;
-                return this;
-            }
+  /**
+   * The text's gravity as provided by {@link Gravity}.
+   */
+  final int                 gravity;
 
-            /**
-             * The resource id of the background.
-             */
-            public Builder setBackgroundResource(int backgroundResId) {
-                mBackgroundResId = backgroundResId;
-                return this;
-            }
+  /**
+   * An additional image to display in the {@link Crouton}.
+   */
+  final Drawable            imageDrawable;
 
-            /**
-             * The height of the {@link Crouton} in pixels.
-             */
-            public Builder setHeight(int height) {
-                mHeight = height;
-                return this;
-            }
+  /**
+   * An additional image to display in the {@link Crouton}.
+   */
+  final int                 imageResId;
 
-            /**
-             * Whether we should tile the background or not.
-             */
-            public Builder setTile(boolean tile) {
-                mTile = tile;
-                return this;
-            }
+  /**
+   * The {@link ImageView.ScaleType} for the image to display in the {@link Crouton}.
+   */
+  final ImageView.ScaleType imageScaleType;
 
-            /**
-             * The text color's resource id.
-             */
-            public Builder setTextColor(int textColorResId) {
-                mTextColorResId = textColorResId;
-                return this;
-            }
+  /**
+   * The text size in sp
+   * <p/>
+   * 0 sets the text size to the system theme default
+   */
+  final int                 textSize;
+  /**
+   * The text shadow color's resource id
+   */
+  final int                 textShadowColorResId;
+  /**
+   * The text shadow radius
+   */
+  final float               textShadowRadius;
+  /**
+   * The text shadow vertical offset
+   */
+  final float               textShadowDy;
+  /**
+   * The text shadow horizontal offset
+   */
+  final float               textShadowDx;
+  /**
+   * The text appearance resource id for the text.
+   */
+  final int                 textAppearanceResId;
+  /**
+   * The resource id for the in animation
+   */
+  final int                 inAnimationResId;
+  /**
+   * The resource id for the out animation
+   */
+  final int                 outAnimationResId;
 
-            /**
-             * The text size in sp
-             */
-            public Builder setTextSize(int textSize) {
-                mTextSize = textSize;
-                return this;
-            }
+  private Style(final Builder builder) {
+    this.durationInMilliseconds = builder.durationInMilliseconds;
+    this.colorResourceId = builder.colorResourceId;
+    this.backgroundColorResourceId = builder.backgroundColorResourceId;
+    this.backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
+    this.isTileEnabled = builder.isTileEnabled;
+    this.textColorResourceId = builder.textColorResourceId;
+    this.heightInPixels = builder.heightInPixels;
+    this.gravity = builder.gravity;
+    this.imageDrawable = builder.imageDrawable;
+    this.textSize = builder.textSize;
+    this.textShadowColorResId = builder.textShadowColorResId;
+    this.textShadowRadius = builder.textShadowRadius;
+    this.textShadowDx = builder.textShadowDx;
+    this.textShadowDy = builder.textShadowDy;
+    this.textAppearanceResId = builder.textAppearanceResId;
+    this.inAnimationResId = builder.inAnimationResId;
+    this.outAnimationResId = builder.outAnimationResId;
+    this.imageResId = builder.imageResId;
+    this.imageScaleType = builder.imageScaleType;
+  }
 
-            /**
-             * The text shadow color's resource id
-             */
-            public Builder setTextShadowColor(int textShadowColorResId) {
-                mTextShadowColorResId = textShadowColorResId;
-                return this;
-            }
+  /**
+   * Builder for the {@link Style} object.
+   */
+  public static class Builder {
+    private int                 durationInMilliseconds;
+    private int                 colorResourceId;
+    private int                 backgroundColorResourceId;
+    private int                 backgroundDrawableResourceId;
+    private boolean             isTileEnabled;
+    private int                 textColorResourceId;
+    private int                 heightInPixels;
+    private int                 gravity;
+    private Drawable            imageDrawable;
+    private int                 textSize;
+    private int                 textShadowColorResId;
+    private float               textShadowRadius;
+    private float               textShadowDx;
+    private float               textShadowDy;
+    private int                 textAppearanceResId;
+    private int                 inAnimationResId;
+    private int                 outAnimationResId;
+    private int                 imageResId;
+    private ImageView.ScaleType imageScaleType;
 
-            /**
-             * The text shadow radius
-             */
-            public Builder setTextShadowRadius(float textShadowRadius) {
-                mTextShadowRadius = textShadowRadius;
-                return this;
-            }
-
-            /**
-             * The text shadow horizontal offset
-             */
-            public Builder setTextShadowDx(float textShadowDx) {
-                mTextShadowDx = textShadowDx;
-                return this;
-            }
-
-            /**
-             * The text shadow vertical offset
-             */
-            public Builder setTextShadowDy(float textShadowDy) {
-                mTextShadowDy = textShadowDy;
-                return this;
-            }
-
-            /**
-             * The text appearance resource id for the text.
-             */
-            public Builder setTextAppearance(int textAppearanceResId) {
-                mTextAppearanceResId = textAppearanceResId;
-                return this;
-            }
-
-            /**
-             * The resource id for the in animation
-             */
-            public Builder setInAnimation(int inAnimationResId) {
-                mInAnimationResId = inAnimationResId;
-                return this;
-            }
-
-            /**
-             * The resource id for the out animation
-             */
-            public Builder setOutAnimation(int outAnimationResId) {
-                mOutAnimationResId = outAnimationResId;
-                return this;
-            }
-
-            public Style build() {
-                Style style = new Style();
-                style.duration = mDuration;
-                style.height = mHeight;
-                style.backgroundColorResId = mBackgroundColorResId;
-                style.backgroundResId = mBackgroundResId;
-                style.tile = mTile;
-                style.textColorResId = mTextColorResId;
-                style.textSize = mTextSize;
-                style.textShadowColorResId = mTextShadowColorResId;
-                style.textShadowRadius = mTextShadowRadius;
-                style.textShadowDx = mTextShadowDx;
-                style.textShadowDy = mTextShadowDy;
-                style.textAppearanceResId = mTextAppearanceResId;
-                style.inAnimationResId = mInAnimationResId;
-                style.outAnimationResId = mOutAnimationResId;
-                return style;
-            }
-        }
+    public Builder() {
+      durationInMilliseconds = 3000;
+      colorResourceId = android.R.color.holo_blue_light;
+      heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
+      backgroundColorResourceId = android.R.color.holo_blue_light;
+      backgroundDrawableResourceId = 0;
+      isTileEnabled = false;
+      textColorResourceId = android.R.color.white;
+      heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
+      gravity = Gravity.CENTER;
+      imageDrawable = null;
+      inAnimationResId = android.R.anim.fade_in;
+      outAnimationResId = android.R.anim.fade_out;
+      imageResId = 0;
+      imageScaleType = ImageView.ScaleType.FIT_XY;
     }
+
+    /**
+     * Set the durationInMilliseconds option of the {@link Crouton}.
+     *
+     * @param duration
+     *          The durationInMilliseconds the crouton will be displayed {@link Crouton} in milliseconds.
+     * @return the {@link Builder}.
+     */
+    public Builder setDuration(int duration) {
+      this.durationInMilliseconds = duration;
+
+      return this;
+    }
+
+    /**
+     * Set the backgroundColorResourceId option of the {@link Crouton}.
+     *
+     * @param backgroundColorResourceId
+     *          The backgroundColorResourceId's resource id.
+     * @return the {@link Builder}.
+     */
+    public Builder setBackgroundColor(int backgroundColorResourceId) {
+      this.backgroundColorResourceId = backgroundColorResourceId;
+
+      return this;
+    }
+
+    /**
+     * Set the backgroundDrawableResourceId option for the {@link Crouton}.
+     *
+     * @param backgroundDrawableResourceId
+     *          Resource ID of a backgroundDrawableResourceId image drawable.
+     * @return the {@link Builder}.
+     */
+    public Builder setBackgroundDrawable(int backgroundDrawableResourceId) {
+      this.backgroundDrawableResourceId = backgroundDrawableResourceId;
+
+      return this;
+    }
+
+    /**
+     * Set the heightInPixels option for the {@link Crouton}.
+     *
+     * @param height
+     *          The heightInPixels of the {@link Crouton} in pixel. Can also be
+     *          {@link LayoutParams#MATCH_PARENT} or {@link LayoutParams#WRAP_CONTENT}.
+     * @return the {@link Builder}.
+     */
+    public Builder setHeight(int height) {
+      this.heightInPixels = height;
+
+      return this;
+    }
+
+    /**
+     * Set the isTileEnabled option for the {@link Crouton}.
+     *
+     * @param isTileEnabled
+     *          <code>true</code> if you want the backgroundResourceId to be tiled, else <code>false</code>.
+     * @return the {@link Builder}.
+     */
+    public Builder setTileEnabled(boolean isTileEnabled) {
+      this.isTileEnabled = isTileEnabled;
+
+      return this;
+    }
+
+    /**
+     * Set the textColorResourceId option for the {@link Crouton}.
+     *
+     * @param textColor
+     *          The resource id of the text colorResourceId.
+     * @return the {@link Builder}.
+     */
+    public Builder setTextColor(int textColor) {
+      this.textColorResourceId = textColor;
+
+      return this;
+    }
+
+    /**
+     * Set the gravity option for the {@link Crouton}.
+     *
+     * @param gravity
+     *          The text's gravity as provided by {@link Gravity}.
+     * @return the {@link Builder}.
+     */
+    public Builder setGravity(int gravity) {
+      this.gravity = gravity;
+
+      return this;
+    }
+
+    /**
+     * Set the image option for the {@link Crouton}.
+     *
+     * @param image
+     *          An additional image to display in the {@link Crouton}.
+     * @return the {@link Builder}.
+     */
+    public Builder setImageDrawable(Drawable imageDrawable) {
+      this.imageDrawable = imageDrawable;
+
+      return this;
+    }
+
+    /**
+     * Set the image resource option for the {@link Crouton}.
+     *
+     * @param imageResId
+     *          An additional image to display in the {@link Crouton}.
+     * @return the {@link Builder}.
+     */
+    public Builder setImageResource(int imageResId) {
+      this.imageResId = imageResId;
+
+      return this;
+    }
+
+    /**
+     * The text size in sp
+     */
+    public Builder setTextSize(int textSize) {
+      this.textSize = textSize;
+      return this;
+    }
+
+    /**
+     * The text shadow color's resource id
+     */
+    public Builder setTextShadowColor(int textShadowColorResId) {
+      this.textShadowColorResId = textShadowColorResId;
+      return this;
+    }
+
+    /**
+     * The text shadow radius
+     */
+    public Builder setTextShadowRadius(float textShadowRadius) {
+      this.textShadowRadius = textShadowRadius;
+      return this;
+    }
+
+    /**
+     * The text shadow horizontal offset
+     */
+    public Builder setTextShadowDx(float textShadowDx) {
+      this.textShadowDx = textShadowDx;
+      return this;
+    }
+
+    /**
+     * The text shadow vertical offset
+     */
+    public Builder setTextShadowDy(float textShadowDy) {
+      this.textShadowDy = textShadowDy;
+      return this;
+    }
+
+    /**
+     * The text appearance resource id for the text.
+     */
+    public Builder setTextAppearance(int textAppearanceResId) {
+      this.textAppearanceResId = textAppearanceResId;
+      return this;
+    }
+
+    /**
+     * The resource id for the in animation
+     */
+    public Builder setInAnimation(int inAnimationResId) {
+      this.inAnimationResId = inAnimationResId;
+      return this;
+    }
+
+    /**
+     * The resource id for the out animation
+     */
+    public Builder setOutAnimation(int outAnimationResId) {
+      this.outAnimationResId = outAnimationResId;
+      return this;
+    }
+
+    /**
+     * The {@link ImageView.ScaleType} for the image
+     */
+    public Builder setImageScaleType(ImageView.ScaleType imageScaleType) {
+      this.imageScaleType = imageScaleType;
+      return this;
+    }
+
+    /**
+     * @return a configured {@link Style} object.
+     */
+    public Style build() {
+      return new Style(this);
+    }
+  }
+}
