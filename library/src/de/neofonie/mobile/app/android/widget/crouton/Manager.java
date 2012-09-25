@@ -18,11 +18,8 @@ package de.neofonie.mobile.app.android.widget.crouton;
 
 import java.util.Iterator;
 import java.util.Queue;
-import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import android.view.animation.AnimationUtils;
-import android.view.animation.Animation;
 import android.view.ViewParent;
 import android.view.ViewGroup;
 import android.view.View;
@@ -174,12 +171,15 @@ final class Manager extends Handler {
     if (crouton.isShowing()) {
         return;
     }
-    View croutonView = ViewHolder.buildViewForCrouton(crouton);
+    View croutonView = crouton.getView();
     if (croutonView.getParent() == null) {
-      crouton.getActivity().addContentView(croutonView, croutonView.getLayoutParams());
+      ViewGroup.LayoutParams params = croutonView.getLayoutParams();
+      if (params == null) {
+        params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+      }
+      crouton.getActivity().addContentView(croutonView, params);
     }
     croutonView.startAnimation(crouton.getInAnimation());
-    crouton.setView(croutonView);
     sendMessageDelayed(crouton, Messages.REMOVE_CROUTON, crouton.getStyle().durationInMilliseconds + + crouton.getInAnimation().getDuration());
   }
 

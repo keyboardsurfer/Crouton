@@ -83,9 +83,14 @@ public class Style {
   final int                 textColorResourceId;
 
   /**
-   * The heightInPixels of the {@link Crouton} in pixels.
+   * The height of the {@link Crouton} in pixels.
    */
   final int                 heightInPixels;
+
+  /**
+   * Resource ID for the height of the {@link Crouton}.
+   */
+  final int                 heightDimensionResId;
 
   /**
    * The text's gravity as provided by {@link Gravity}.
@@ -142,6 +147,16 @@ public class Style {
    */
   final int                 outAnimationResId;
 
+  /**
+   * The padding for the crouton view content in pixels
+   */
+  final int                 paddingInPixels;
+
+  /**
+   * The resource id for the padding for the view content
+   */
+  final int                 paddingDimensionResId;
+
   private Style(final Builder builder) {
     this.durationInMilliseconds = builder.durationInMilliseconds;
     this.colorResourceId = builder.colorResourceId;
@@ -150,6 +165,7 @@ public class Style {
     this.isTileEnabled = builder.isTileEnabled;
     this.textColorResourceId = builder.textColorResourceId;
     this.heightInPixels = builder.heightInPixels;
+    this.heightDimensionResId = builder.heightDimensionResId;
     this.gravity = builder.gravity;
     this.imageDrawable = builder.imageDrawable;
     this.textSize = builder.textSize;
@@ -162,6 +178,8 @@ public class Style {
     this.outAnimationResId = builder.outAnimationResId;
     this.imageResId = builder.imageResId;
     this.imageScaleType = builder.imageScaleType;
+    this.paddingInPixels = builder.paddingInPixels;
+    this.paddingDimensionResId = builder.paddingDimensionResId;
   }
 
   /**
@@ -175,6 +193,7 @@ public class Style {
     private boolean             isTileEnabled;
     private int                 textColorResourceId;
     private int                 heightInPixels;
+    private int                 heightDimensionResId;
     private int                 gravity;
     private Drawable            imageDrawable;
     private int                 textSize;
@@ -187,11 +206,14 @@ public class Style {
     private int                 outAnimationResId;
     private int                 imageResId;
     private ImageView.ScaleType imageScaleType;
+    private int                 paddingInPixels;
+    private int                 paddingDimensionResId;
 
     public Builder() {
       durationInMilliseconds = 3000;
       colorResourceId = android.R.color.holo_blue_light;
       heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
+      paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
       isTileEnabled = false;
@@ -248,12 +270,25 @@ public class Style {
      * Set the heightInPixels option for the {@link Crouton}.
      *
      * @param height
-     *          The heightInPixels of the {@link Crouton} in pixel. Can also be
+     *          The height of the {@link Crouton} in pixel. Can also be
      *          {@link LayoutParams#MATCH_PARENT} or {@link LayoutParams#WRAP_CONTENT}.
      * @return the {@link Builder}.
      */
     public Builder setHeight(int height) {
       this.heightInPixels = height;
+
+      return this;
+    }
+
+    /**
+     * Set the resource id for the height option for the {@link Crouton}.
+     *
+     * @param heightDimensionResId
+     *          Resource ID of a dimension for the height of the {@link Crouton}.
+     * @return the {@link Builder}.
+     */
+    public Builder setHeightDimensionResId(int heightDimensionResId) {
+      this.heightDimensionResId = heightDimensionResId;
 
       return this;
     }
@@ -300,7 +335,7 @@ public class Style {
     /**
      * Set the image option for the {@link Crouton}.
      *
-     * @param image
+     * @param imageDrawable
      *          An additional image to display in the {@link Crouton}.
      * @return the {@link Builder}.
      */
@@ -392,6 +427,22 @@ public class Style {
      */
     public Builder setImageScaleType(ImageView.ScaleType imageScaleType) {
       this.imageScaleType = imageScaleType;
+      return this;
+    }
+
+    /**
+     * The padding for the crouton view's content in pixels
+     */
+    public Builder setPaddingInPixels(int padding) {
+      this.paddingInPixels = padding;
+      return this;
+    }
+
+    /**
+     * The resource id for the padding for the crouton view's content
+     */
+    public Builder setPaddingDimensionResId(int paddingResId) {
+      this.paddingDimensionResId = paddingResId;
       return this;
     }
 
