@@ -58,8 +58,8 @@ After putting Crouton in the repository you can add it as a dependency.
 ```xml
 <dependency>
   <artifactId>crouton</artifactId>
-  <version>1.1</version>
-  <groupId>de.neofonie.mobile</groupId>
+  <version>1.4</version>
+  <groupId>de.neofonie.mobile.app.android.widget</groupId>
 </dependency>
 ```
 
