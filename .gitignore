@@ -34,3 +34,6 @@ local.properties
 
 #vi swap files
 *.swp
+
+# maven target
+target
