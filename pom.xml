@@ -26,6 +26,12 @@
     <groupId>de.neofonie.mobile.app.android.widget</groupId>
     <packaging>pom</packaging>
 
+		<developers>
+			<developer>
+				<id>keyboardsurfer</id>
+				<name>Benjamin Weiss</name>
+			</developer>
+		</developers>
     <modules>
         <module>library</module>
         <module>sample</module>
