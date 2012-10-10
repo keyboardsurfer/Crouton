@@ -16,7 +16,6 @@
 
 package de.keyboardsurfer.app.demo.crouton;
 
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,124 +30,130 @@ import de.neofonie.mobile.app.android.widget.crouton.Crouton;
 import de.neofonie.mobile.app.android.widget.crouton.Style;
 
 
-public class CroutonDemo extends Activity implements OnClickListener, OnItemSelectedListener
-{
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+public class CroutonDemo extends Activity implements OnClickListener, OnItemSelectedListener {
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.main);
 
-		setUpShowButtonListener();
-		setUpSpinnerListener();
-	}
+    setUpShowButtonListener();
+    setUpSpinnerListener();
+  }
 
-	private void setUpShowButtonListener() {
-		Button showButton = (Button) findViewById(R.id.button_show);
+  private void setUpShowButtonListener() {
+    Button showButton = (Button) findViewById(R.id.button_show);
 
-		showButton.setOnClickListener(this);
-	}
+    showButton.setOnClickListener(this);
+  }
 
-	private void setUpSpinnerListener() {
-		Spinner styleSpinner = (Spinner) findViewById(R.id.spinner_style);
+  private void setUpSpinnerListener() {
+    Spinner styleSpinner = (Spinner) findViewById(R.id.spinner_style);
 
-		styleSpinner.setOnItemSelectedListener(this);
-	}
+    styleSpinner.setOnItemSelectedListener(this);
+  }
 
-	public void onClick(View view) {
-		switch (view.getId()) {
-			case R.id.button_show:
-				showCrouton();
-				break;
+  public void onClick(View view) {
+    switch (view.getId()) {
+      case R.id.button_show: {
+        showCrouton();
+        break;
+      }
 
-			default:
-				break;
-		}
-	}
+      default: {
+        break;
+      }
+    }
+  }
 
-	private void showCrouton() {
-		Style croutonStyle = getSelectedStyleFromSpinner();
+  private void showCrouton() {
+    Style croutonStyle = getSelectedStyleFromSpinner();
 
-		if (croutonStyle != null) {
-			showNonCustomCrouton();
-		}
-		else {
-			showCustomCrouton();
-		}
-	}
+    if (croutonStyle != null) {
+      showNonCustomCrouton();
+    } else {
+      showCustomCrouton();
+    }
+  }
 
-	private Style getSelectedStyleFromSpinner() {
-		Spinner styleSpinner = (Spinner) findViewById(R.id.spinner_style);
+  private Style getSelectedStyleFromSpinner() {
+    Spinner styleSpinner = (Spinner) findViewById(R.id.spinner_style);
 
-		switch ((int) styleSpinner.getSelectedItemId()) {
-			case 0:
-				return Style.ALERT;
+    switch ((int) styleSpinner.getSelectedItemId()) {
+      case 0: {
+        return Style.ALERT;
+      }
 
-			case 1:
-				return Style.CONFIRM;
+      case 1: {
+        return Style.CONFIRM;
+      }
 
-			case 2:
-				return Style.INFO;
+      case 2: {
+        return Style.INFO;
+      }
 
-			default:
-				return null;
-		}
-	}
+      default: {
+        return null;
+      }
+    }
+  }
 
-	private void showNonCustomCrouton() {
-		Style croutonStyle = getSelectedStyleFromSpinner();
-		String croutonText = getCroutonText();
+  private void showNonCustomCrouton() {
+    Style croutonStyle = getSelectedStyleFromSpinner();
+    String croutonText = getCroutonText();
 
-		Crouton.makeText(this, croutonText, croutonStyle).show();
-	}
+    Crouton.makeText(this, croutonText, croutonStyle).show();
+  }
 
-	private String getCroutonText() {
-		EditText croutonTextEdit = (EditText) findViewById(R.id.edit_text_text);
+  private String getCroutonText() {
+    EditText croutonTextEdit = (EditText) findViewById(R.id.edit_text_text);
 
-		String croutonText = croutonTextEdit.getText().toString().trim();
+    String croutonText = croutonTextEdit.getText().toString().trim();
 
-		if (TextUtils.isEmpty(croutonText)) {
-			croutonText = getString(R.string.text_demo);
-		}
+    if (TextUtils.isEmpty(croutonText)) {
+      croutonText = getString(R.string.text_demo);
+    }
 
-		return croutonText;
-	}
+    return croutonText;
+  }
 
-	private void showCustomCrouton() {
-		String croutonDurationString = getCroutonDurationString();
+  private void showCustomCrouton() {
+    String croutonDurationString = getCroutonDurationString();
 
-		if (TextUtils.isEmpty(croutonDurationString)) {
-			Crouton.makeText(this, R.string.warning_duration, Style.ALERT).show();
-			return;
-		}
+    if (TextUtils.isEmpty(croutonDurationString)) {
+      Crouton.makeText(this, R.string.warning_duration, Style.ALERT).show();
+      return;
+    }
 
-		int croutonDuration = Integer.parseInt(croutonDurationString);
-		Style croutonStyle = new Style.Builder().setDuration(croutonDuration).build();
+    int croutonDuration = Integer.parseInt(croutonDurationString);
+    Style croutonStyle = new Style.Builder().setDuration(croutonDuration).build();
 
-		String croutonText = getCroutonText();
+    String croutonText = getCroutonText();
 
-		Crouton.makeText(this, croutonText, croutonStyle).show();
-	}
+    Crouton.makeText(this, croutonText, croutonStyle).show();
+  }
 
-	private String getCroutonDurationString() {
-		EditText croutonDurationEdit = (EditText) findViewById(R.id.edit_text_duration);
+  private String getCroutonDurationString() {
+    EditText croutonDurationEdit = (EditText) findViewById(R.id.edit_text_duration);
 
-		return croutonDurationEdit.getText().toString().trim();
-	}
+    return croutonDurationEdit.getText().toString().trim();
+  }
 
-	public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-		EditText croutonDurationEdit = (EditText) findViewById(R.id.edit_text_duration);
+  public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+    EditText croutonDurationEdit = (EditText) findViewById(R.id.edit_text_duration);
 
-		switch ((int) id) {
-			case 3:
-				croutonDurationEdit.setVisibility(View.VISIBLE);
-				break;
+    switch ((int) id) {
+      case 3: {
+        croutonDurationEdit.setVisibility(View.VISIBLE);
+        break;
+      }
 
-			default:
-				croutonDurationEdit.setVisibility(View.GONE);
-				break;
-		}
-	}
+      default: {
+        croutonDurationEdit.setVisibility(View.GONE);
+        break;
+      }
+    }
+  }
 
-	public void onNothingSelected(AdapterView<?> adapterView) {
-	}
+  public void onNothingSelected(AdapterView<?> adapterView) {
+  }
 }
