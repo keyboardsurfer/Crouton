@@ -323,7 +323,7 @@ public final class Crouton {
     RelativeLayout contentView = new RelativeLayout(this.activity);
     contentView.setLayoutParams(new RelativeLayout.LayoutParams(
         RelativeLayout.LayoutParams.MATCH_PARENT,
-        RelativeLayout.LayoutParams.MATCH_PARENT));
+        RelativeLayout.LayoutParams.WRAP_CONTENT));
 
     // set padding
     int padding = this.style.paddingInPixels;
@@ -400,7 +400,7 @@ public final class Crouton {
 
     RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(
       RelativeLayout.LayoutParams.MATCH_PARENT,
-      RelativeLayout.LayoutParams.MATCH_PARENT);
+      RelativeLayout.LayoutParams.WRAP_CONTENT);
     if (image != null) {
       textParams.addRule(RelativeLayout.RIGHT_OF, image.getId());
     }
