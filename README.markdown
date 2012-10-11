@@ -33,11 +33,11 @@ You can also cancel scheduled Croutons by calling:
 ### Examples
 Currently you can use the three different Style attributes displayed below out of the box:
 
-![Alert](https://github.com/neofoniemobile/Crouton/raw/master/res/Alert.png "Example of Style.ALERT")
+![Alert](https://github.com/keyboardsurfer/Crouton/raw/master/res/Alert.png "Example of Style.ALERT")
 
-![Confirm](https://github.com/neofoniemobile/Crouton/raw/master/res/Confirm.png "Example of Style.CONFIRM")
+![Confirm](https://github.com/keyboardsurfer/Crouton/raw/master/res/Confirm.png "Example of Style.CONFIRM")
 
-![Info](https://github.com/neofoniemobile/Crouton/raw/master/res/Info.png "Example of Style.INFO")
+![Info](https://github.com/keyboardsurfer/Crouton/raw/master/res/Info.png "Example of Style.INFO")
 
 ### Extension and Modification
 
