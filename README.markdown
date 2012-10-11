@@ -1,4 +1,4 @@
-# Crouton
+# ![Crouton](https://raw.github.com/keyboardsurfer/Crouton/master/sample/res/drawable-xhdpi/ic_launcher.png "Crouton logo") Crouton
 
 Context sensitive notifications for Android
 
