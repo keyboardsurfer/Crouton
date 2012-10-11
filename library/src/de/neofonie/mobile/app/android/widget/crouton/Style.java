@@ -29,6 +29,7 @@ public class Style {
   public static final Style ALERT;
   public static final Style CONFIRM;
   public static final Style INFO;
+  public static final Style GANGNAM;
 
   static {
     ALERT = new Builder().setDuration(5000)
@@ -43,6 +44,10 @@ public class Style {
                         .setBackgroundColor(android.R.color.holo_blue_light)
                         .setHeight(LayoutParams.WRAP_CONTENT)
                         .build();
+    GANGNAM = new Builder().setDuration(3000)
+                        .setBackgroundColor(android.R.color.holo_purple)
+                        .setHeight(LayoutParams.WRAP_CONTENT)
+                        .build();                        
   }
 
   /**
