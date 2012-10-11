@@ -31,7 +31,7 @@ You can also cancel scheduled Croutons by calling:
     Crouton.cancelAllCroutons();
 
 ### Examples
-Currently you can use the three different Style attributes displayed below:
+Currently you can use the three different Style attributes displayed below out of the box:
 
 ![Alert](https://github.com/neofoniemobile/Crouton/raw/master/res/Alert.png "Example of Style.ALERT")
 
