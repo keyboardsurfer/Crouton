@@ -12,6 +12,13 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 The current implementation requires the Holo theme to be present on the device.
 
+A demo application is available on Google Play
+
+<a href="http://play.google.com/store/apps/details?id=de.keyboardsurfer.app.demo.crouton">
+  <img alt="Crouton Demo on Google Play"
+         src="http://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
+</a>
+
 The name and the idea of [Crouton](https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
 
 ### Usage
