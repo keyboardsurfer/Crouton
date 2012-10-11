@@ -5,14 +5,14 @@ Context sensitive notifications for Android
 
 ## Overview
 
-**Crouton**, is a class that can be used by Android developers that feel the need for an **alternative to the Context insensitive [Toast](http://developer.android.com/reference/android/widget/Toast.html)**.
-
-The name and the idea of [Crouton](https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
+**Crouton** is a class that can be used by Android developers that feel the need for an **alternative to the Context insensitive [Toast](http://developer.android.com/reference/android/widget/Toast.html)**.
 
 A Crouton will be displayed at the top of an application window.
 You can line up multiple Croutons for display, that will be shown one after another.
 
 The current implementation requires the Holo theme to be present on the device.
+
+The name and the idea of [Crouton](https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
 
 ### Usage
 
