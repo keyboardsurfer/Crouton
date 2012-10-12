@@ -19,7 +19,7 @@ A demo application is available on Google Play
          src="http://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
 </a>
 
-The name and the idea of [Crouton](https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
+The name and the idea of [Crouton](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
 
 ### Usage
 
@@ -48,10 +48,10 @@ Currently you can use the three different Style attributes displayed below out o
 
 ### Extension and Modification
 
-The whole design of a Crouton is defined by [Style](https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Style.java).
+The whole design of a Crouton is defined by [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Style.java).
 You can easily create your own Styles by calling one of the constructors of the Style class or use one of the already provided styles: Style.ALERT, Style.CONFIRM and Style.INFO.
 
-If you want to modify the general appearance you might want to have a look at the [ViewHolder](https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/ViewHolder.java).
+If you want to modify the general appearance you might want to have a look at the [ViewHolder](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/ViewHolder.java).
 
 ### Building
 
