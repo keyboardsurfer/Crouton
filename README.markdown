@@ -19,8 +19,6 @@ A demo application is available on Google Play
          src="http://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
 </a>
 
-The name and the idea of [Crouton](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
-
 ### Usage
 
 The API is kept as simple as the Toast API:
@@ -75,4 +73,10 @@ After putting Crouton in the repository you can add it as a dependency.
 
 * [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-####The initial version was written by [Benjamin Weiss](https://plus.google.com/117509657298845443204) at Neofonie Mobile GmbH.
+### Attributions
+
+The name and the idea of [Crouton](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
+
+The Crouton logo has been created by [Marie Schweiz](http://marie-schweiz.de).
+
+The initial version was written by [Benjamin Weiss](https://plus.google.com/117509657298845443204) at [Neofonie Mobile GmbH](http://mobile.neofonie.de).
