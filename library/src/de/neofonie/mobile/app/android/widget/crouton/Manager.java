@@ -283,7 +283,7 @@ final class Manager extends Handler {
           if (crouton.isShowing()) {
             ((ViewGroup) crouton.getView().getParent()).removeView(crouton.getView());
           }
-          
+
           removeAllMessagesForCrouton(crouton);
 
           // remove the crouton from the queue

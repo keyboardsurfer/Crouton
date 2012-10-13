@@ -39,6 +39,14 @@ public class CroutonDemo extends Activity implements OnClickListener, OnItemSele
     setUpSpinnerListener();
   }
 
+  @Override
+  protected void onDestroy() {
+    // Workaround until there's a way to detach the Activity from Crouton while
+    // there are still some in the Queue.
+    Crouton.clearCroutonsForActivity(this);
+    super.onDestroy();
+  }
+
   private void setUpShowButtonListener() {
     Button showButton = (Button) findViewById(R.id.button_show);
 
