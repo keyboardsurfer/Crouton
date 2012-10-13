@@ -34,11 +34,11 @@ public class Style {
   public static final Style INFO;
 
   static {
-    ALERT = new Builder().setDuration(5000).setBackgroundColor(android.R.color.holo_red_light).setHeight(
+    ALERT = new Builder().setDuration(5000).setBackgroundColor(R.color.holo_red_light).setHeight(
       LayoutParams.WRAP_CONTENT).build();
-    CONFIRM = new Builder().setDuration(3000).setBackgroundColor(android.R.color.holo_green_light).setHeight(
+    CONFIRM = new Builder().setDuration(3000).setBackgroundColor(R.color.holo_green_light).setHeight(
       LayoutParams.WRAP_CONTENT).build();
-    INFO = new Builder().setDuration(3000).setBackgroundColor(android.R.color.holo_blue_light).setHeight(
+    INFO = new Builder().setDuration(3000).setBackgroundColor(R.color.holo_blue_light).setHeight(
       LayoutParams.WRAP_CONTENT).build();
   }
 
