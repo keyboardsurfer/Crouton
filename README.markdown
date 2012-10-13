@@ -69,6 +69,13 @@ After putting Crouton in the repository you can add it as a dependency.
 </dependency>
 ```
 
+### Contribution
+
+This section is subject to changes.
+
+For contributors using Eclipse there's a formatter available at the [download section](https://github.com/downloads/keyboardsurfer/Crouton/Crouton_Eclipseformatter.xml).
+If you want to contribute and create pull requests, make sure to use this formatter or format your commit in a way similar to it's example.
+
 ### License
 
 * [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
