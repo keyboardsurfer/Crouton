@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
 	~ Copyright 2012 Benjamin Weiss
 	~
@@ -14,45 +13,40 @@
 	~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	~ See the License for the specific language governing permissions and
 	~ limitations under the License.
-	-->
+-->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_form" >
 
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_centerInParent="true"
-		android:orientation="vertical"
-		android:padding="@dimen/padding_form">
+    <Spinner
+        android:id="@+id/spinner_style"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/style" />
 
-		<Spinner
-			android:id="@+id/spinner_style"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:entries="@array/style" />
+    <EditText
+        android:id="@+id/edit_text_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_text"
+        android:singleLine="true" />
 
-		<EditText
-			android:id="@+id/edit_text_text"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:hint="@string/hint_text"
-			android:singleLine="true" />
+    <EditText
+        android:id="@+id/edit_text_duration"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_duration"
+        android:inputType="number"
+        android:singleLine="true" />
 
-		<EditText
-			android:id="@+id/edit_text_duration"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:hint="@string/hint_duration"
-			android:inputType="number"
-			android:singleLine="true" />
+    <Button
+        android:id="@+id/button_show"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_show" />
 
-		<Button
-			android:id="@+id/button_show"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:text="@string/button_show" />
-	</LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
