@@ -32,6 +32,7 @@ import android.view.ViewParent;
  * Manages the lifecycle of {@link Crouton}s.
  */
 final class Manager extends Handler {
+
   private static final class Messages {
     private Messages() { /* noop */
     }
@@ -238,9 +239,7 @@ final class Manager extends Handler {
           }
 
           // remove any messages pending for the crouton
-          removeMessages(Messages.ADD_CROUTON_TO_VIEW, c);
-          removeMessages(Messages.DISPLAY_CROUTON, c);
-          removeMessages(Messages.REMOVE_CROUTON, c);
+          removeAllMessagesForCrouton(c);
 
           // remove the crouton from the queue
           croutonIterator.remove();
@@ -284,10 +283,8 @@ final class Manager extends Handler {
           if (crouton.isShowing()) {
             ((ViewGroup) crouton.getView().getParent()).removeView(crouton.getView());
           }
-
-          removeMessages(Messages.DISPLAY_CROUTON, crouton);
-          removeMessages(Messages.ADD_CROUTON_TO_VIEW, crouton);
-          removeMessages(Messages.REMOVE_CROUTON, crouton);
+          
+          removeAllMessagesForCrouton(crouton);
 
           // remove the crouton from the queue
           croutonIterator.remove();
@@ -300,5 +297,12 @@ final class Manager extends Handler {
     removeMessages(Messages.ADD_CROUTON_TO_VIEW);
     removeMessages(Messages.DISPLAY_CROUTON);
     removeMessages(Messages.REMOVE_CROUTON);
+  }
+
+  private void removeAllMessagesForCrouton(Crouton crouton) {
+    removeMessages(Messages.ADD_CROUTON_TO_VIEW, crouton);
+    removeMessages(Messages.DISPLAY_CROUTON, crouton);
+    removeMessages(Messages.REMOVE_CROUTON, crouton);
+
   }
 }
