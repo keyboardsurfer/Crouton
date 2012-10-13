@@ -39,17 +39,17 @@ public class Style {
 
   static {
     ALERT = new Builder().setDuration(5000)
-                        .setBackgroundColorId(holoRedLight) 
+                        .setBackgroundColor(holoRedLight) 
                         .setHeight(LayoutParams.WRAP_CONTENT)
                         .build();
       
     CONFIRM = new Builder().setDuration(3000)
-                        .setBackgroundColorId(holoGreenLight)
+                        .setBackgroundColor(holoGreenLight)
                         .setHeight(LayoutParams.WRAP_CONTENT)
                         .build();
       
     INFO = new Builder().setDuration(3000)
-                        .setBackgroundColorId(holoBlueLight)
+                        .setBackgroundColor(holoBlueLight)
                         .setHeight(LayoutParams.WRAP_CONTENT)
                         .build();
   }
@@ -256,6 +256,20 @@ public class Style {
     }
 
     /**
+     * Set the backgroundColorInt option of the {@link Crouton}.
+     *
+     * @param backgroundColorResourceId
+     *          The backgroundColorInt's resource id.
+     * @return the {@link Builder}.
+     */
+    public Builder setBackgroundColor(int backgroundColorInt) {
+      this.backgroundColorResourceId = backgroundColorInt;
+
+      return this;
+    }
+
+
+    /**
      * Set the backgroundColorResourceId option of the {@link Crouton}.
      *
      * @param backgroundColorResourceId
@@ -263,9 +277,10 @@ public class Style {
      * @return the {@link Builder}.
      */
     public Builder setBackgroundColorId(int backgroundColorResourceId) {
-      this.backgroundColorResourceId = backgroundColorResourceId;
-
-      return this;
+      int backgroundColor = getResources().getColor(backgroundColorResourceId);
+      this.backgroundColor = backgroundColor;
+    
+    return this;
     }
 
     /**
