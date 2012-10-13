@@ -33,13 +33,25 @@ public class Style {
   public static final Style CONFIRM;
   public static final Style INFO;
 
+  public static final int holoRedLight = 0xffff4444;
+  public static final int holoGreenLight = 0xff99cc00;
+  public static final int holoBlueLight = 0xff33b5e5;
+
   static {
-    ALERT = new Builder().setDuration(5000).setBackgroundColor(R.color.holo_red_light).setHeight(
-      LayoutParams.WRAP_CONTENT).build();
-    CONFIRM = new Builder().setDuration(3000).setBackgroundColor(R.color.holo_green_light).setHeight(
-      LayoutParams.WRAP_CONTENT).build();
-    INFO = new Builder().setDuration(3000).setBackgroundColor(R.color.holo_blue_light).setHeight(
-      LayoutParams.WRAP_CONTENT).build();
+    ALERT = new Builder().setDuration(5000)
+                        .setBackgroundColorId(holoRedLight) 
+                        .setHeight(LayoutParams.WRAP_CONTENT)
+                        .build();
+      
+    CONFIRM = new Builder().setDuration(3000)
+                        .setBackgroundColorId(holoGreenLight)
+                        .setHeight(LayoutParams.WRAP_CONTENT)
+                        .build();
+      
+    INFO = new Builder().setDuration(3000)
+                        .setBackgroundColorId(holoBlueLight)
+                        .setHeight(LayoutParams.WRAP_CONTENT)
+                        .build();
   }
 
   /**
@@ -250,7 +262,7 @@ public class Style {
      *          The backgroundColorResourceId's resource id.
      * @return the {@link Builder}.
      */
-    public Builder setBackgroundColor(int backgroundColorResourceId) {
+    public Builder setBackgroundColorId(int backgroundColorResourceId) {
       this.backgroundColorResourceId = backgroundColorResourceId;
 
       return this;
