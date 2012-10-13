@@ -17,12 +17,11 @@
 
 package de.neofonie.mobile.app.android.widget.crouton;
 
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewGroup;
-import android.view.Gravity;
 import android.graphics.drawable.Drawable;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
-
 
 /**
  * The style for a {@link Crouton}.
@@ -34,16 +33,14 @@ public class Style {
   public static final Style INFO;
 
   static {
-    ALERT = new Builder().setDuration(5000).setBackgroundColor(android.R.color.holo_red_light).setHeight(
-      LayoutParams.WRAP_CONTENT).build();
-    CONFIRM = new Builder().setDuration(3000).setBackgroundColor(android.R.color.holo_green_light).setHeight(
-      LayoutParams.WRAP_CONTENT).build();
-    INFO = new Builder().setDuration(3000).setBackgroundColor(android.R.color.holo_blue_light).setHeight(
-      LayoutParams.WRAP_CONTENT).build();
+    ALERT = new Builder().setDuration(5000).setBackgroundColor(android.R.color.holo_red_light).setHeight(LayoutParams.WRAP_CONTENT).build();
+    CONFIRM = new Builder().setDuration(3000).setBackgroundColor(android.R.color.holo_green_light).setHeight(LayoutParams.WRAP_CONTENT).build();
+    INFO = new Builder().setDuration(3000).setBackgroundColor(android.R.color.holo_blue_light).setHeight(LayoutParams.WRAP_CONTENT).build();
   }
 
   /**
-   * The durationInMilliseconds the {@link Crouton} will be displayed in milliseconds.
+   * The durationInMilliseconds the {@link Crouton} will be displayed in
+   * milliseconds.
    */
   final int durationInMilliseconds;
 
@@ -104,7 +101,8 @@ public class Style {
   final int imageResId;
 
   /**
-   * The {@link ImageView.ScaleType} for the image to display in the {@link Crouton}.
+   * The {@link ImageView.ScaleType} for the image to display in the
+   * {@link Crouton}.
    */
   final ImageView.ScaleType imageScaleType;
 
@@ -232,9 +230,10 @@ public class Style {
 
     /**
      * Set the durationInMilliseconds option of the {@link Crouton}.
-     *
+     * 
      * @param duration
-     *          The durationInMilliseconds the crouton will be displayed {@link Crouton} in milliseconds.
+     *          The durationInMilliseconds the crouton will be displayed
+     *          {@link Crouton} in milliseconds.
      * @return the {@link Builder}.
      */
     public Builder setDuration(int duration) {
@@ -245,7 +244,7 @@ public class Style {
 
     /**
      * Set the backgroundColorResourceId option of the {@link Crouton}.
-     *
+     * 
      * @param backgroundColorResourceId
      *          The backgroundColorResourceId's resource id.
      * @return the {@link Builder}.
@@ -258,7 +257,7 @@ public class Style {
 
     /**
      * Set the backgroundDrawableResourceId option for the {@link Crouton}.
-     *
+     * 
      * @param backgroundDrawableResourceId
      *          Resource ID of a backgroundDrawableResourceId image drawable.
      * @return the {@link Builder}.
@@ -271,10 +270,11 @@ public class Style {
 
     /**
      * Set the heightInPixels option for the {@link Crouton}.
-     *
+     * 
      * @param height
      *          The height of the {@link Crouton} in pixel. Can also be
-     *          {@link LayoutParams#MATCH_PARENT} or {@link LayoutParams#WRAP_CONTENT}.
+     *          {@link LayoutParams#MATCH_PARENT} or
+     *          {@link LayoutParams#WRAP_CONTENT}.
      * @return the {@link Builder}.
      */
     public Builder setHeight(int height) {
@@ -285,9 +285,10 @@ public class Style {
 
     /**
      * Set the resource id for the height option for the {@link Crouton}.
-     *
+     * 
      * @param heightDimensionResId
-     *          Resource ID of a dimension for the height of the {@link Crouton}.
+     *          Resource ID of a dimension for the height of the {@link Crouton}
+     *          .
      * @return the {@link Builder}.
      */
     public Builder setHeightDimensionResId(int heightDimensionResId) {
@@ -298,9 +299,10 @@ public class Style {
 
     /**
      * Set the isTileEnabled option for the {@link Crouton}.
-     *
+     * 
      * @param isTileEnabled
-     *          <code>true</code> if you want the backgroundResourceId to be tiled, else <code>false</code>.
+     *          <code>true</code> if you want the backgroundResourceId to be
+     *          tiled, else <code>false</code>.
      * @return the {@link Builder}.
      */
     public Builder setTileEnabled(boolean isTileEnabled) {
@@ -311,7 +313,7 @@ public class Style {
 
     /**
      * Set the textColorResourceId option for the {@link Crouton}.
-     *
+     * 
      * @param textColor
      *          The resource id of the text colorResourceId.
      * @return the {@link Builder}.
@@ -324,7 +326,7 @@ public class Style {
 
     /**
      * Set the gravity option for the {@link Crouton}.
-     *
+     * 
      * @param gravity
      *          The text's gravity as provided by {@link Gravity}.
      * @return the {@link Builder}.
@@ -337,7 +339,7 @@ public class Style {
 
     /**
      * Set the image option for the {@link Crouton}.
-     *
+     * 
      * @param imageDrawable
      *          An additional image to display in the {@link Crouton}.
      * @return the {@link Builder}.
@@ -350,7 +352,7 @@ public class Style {
 
     /**
      * Set the image resource option for the {@link Crouton}.
-     *
+     * 
      * @param imageResId
      *          An additional image to display in the {@link Crouton}.
      * @return the {@link Builder}.
