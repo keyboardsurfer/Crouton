@@ -1,4 +1,5 @@
 /*
+ * Copyright 2012 Benjamin Weiss
  * Copyright 2012 Neofonie Mobile GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +23,7 @@ import android.view.Gravity;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+
 /**
  * The style for a {@link Crouton}.
  */
@@ -32,80 +34,74 @@ public class Style {
   public static final Style INFO;
 
   static {
-    ALERT = new Builder().setDuration(5000)
-                         .setBackgroundColor(android.R.color.holo_red_light)
-                         .setHeight(LayoutParams.WRAP_CONTENT)
-                         .build();
-    CONFIRM = new Builder().setDuration(3000)
-                           .setBackgroundColor(android.R.color.holo_green_light)
-                           .setHeight(LayoutParams.WRAP_CONTENT)
-                           .build();
-    INFO = new Builder().setDuration(3000)
-                        .setBackgroundColor(android.R.color.holo_blue_light)
-                        .setHeight(LayoutParams.WRAP_CONTENT)
-                        .build();
+    ALERT = new Builder().setDuration(5000).setBackgroundColor(android.R.color.holo_red_light).setHeight(
+      LayoutParams.WRAP_CONTENT).build();
+    CONFIRM = new Builder().setDuration(3000).setBackgroundColor(android.R.color.holo_green_light).setHeight(
+      LayoutParams.WRAP_CONTENT).build();
+    INFO = new Builder().setDuration(3000).setBackgroundColor(android.R.color.holo_blue_light).setHeight(
+      LayoutParams.WRAP_CONTENT).build();
   }
 
   /**
    * The durationInMilliseconds the {@link Crouton} will be displayed in milliseconds.
    */
-  final int                 durationInMilliseconds;
+  final int durationInMilliseconds;
 
   /**
    * The colorResourceId's resource id.
    */
-  final int                 colorResourceId;
+  final int colorResourceId;
 
   /**
    * The resource id of the backgroundResourceId.
    * <p/>
    * 0 for no backgroundResourceId.
    */
-  final int                 backgroundColorResourceId;
+  final int backgroundColorResourceId;
 
   /**
    * The resource id of the backgroundDrawableResourceId.
    * <p/>
    * 0 for no backgroundDrawableResourceId.
    */
-  final int                 backgroundDrawableResourceId;
+  final int backgroundDrawableResourceId;
 
   /**
    * Whether we should isTileEnabled the backgroundResourceId or not.
    */
-  final boolean             isTileEnabled;
+  final boolean isTileEnabled;
 
   /**
    * The text colorResourceId's resource id.
    * <p/>
    * 0 sets the text colorResourceId to the system theme default.
    */
-  final int                 textColorResourceId;
+  final int textColorResourceId;
 
   /**
    * The height of the {@link Crouton} in pixels.
    */
-  final int                 heightInPixels;
+  final int heightInPixels;
 
   /**
    * Resource ID for the height of the {@link Crouton}.
    */
-  final int                 heightDimensionResId;
+  final int heightDimensionResId;
 
   /**
    * The text's gravity as provided by {@link Gravity}.
    */
-  final int                 gravity;
+  final int gravity;
 
   /**
    * An additional image to display in the {@link Crouton}.
    */
-  final Drawable            imageDrawable;
+  final Drawable imageDrawable;
 
   /**
    * An additional image to display in the {@link Crouton}.
    */
-  final int                 imageResId;
+  final int imageResId;
 
   /**
    * The {@link ImageView.ScaleType} for the image to display in the {@link Crouton}.
@@ -117,45 +113,52 @@ public class Style {
    * <p/>
    * 0 sets the text size to the system theme default
    */
-  final int                 textSize;
+  final int textSize;
+
   /**
    * The text shadow color's resource id
    */
-  final int                 textShadowColorResId;
+  final int textShadowColorResId;
+
   /**
    * The text shadow radius
    */
-  final float               textShadowRadius;
+  final float textShadowRadius;
+
   /**
    * The text shadow vertical offset
    */
-  final float               textShadowDy;
+  final float textShadowDy;
+
   /**
    * The text shadow horizontal offset
    */
-  final float               textShadowDx;
+  final float textShadowDx;
+
   /**
    * The text appearance resource id for the text.
    */
-  final int                 textAppearanceResId;
+  final int textAppearanceResId;
+
   /**
    * The resource id for the in animation
    */
-  final int                 inAnimationResId;
+  final int inAnimationResId;
+
   /**
    * The resource id for the out animation
    */
-  final int                 outAnimationResId;
+  final int outAnimationResId;
 
   /**
    * The padding for the crouton view content in pixels
    */
-  final int                 paddingInPixels;
+  final int paddingInPixels;
 
   /**
    * The resource id for the padding for the view content
    */
-  final int                 paddingDimensionResId;
+  final int paddingDimensionResId;
 
   private Style(final Builder builder) {
     this.durationInMilliseconds = builder.durationInMilliseconds;
@@ -186,28 +189,28 @@ public class Style {
    * Builder for the {@link Style} object.
    */
   public static class Builder {
-    private int                 durationInMilliseconds;
-    private int                 colorResourceId;
-    private int                 backgroundColorResourceId;
-    private int                 backgroundDrawableResourceId;
-    private boolean             isTileEnabled;
-    private int                 textColorResourceId;
-    private int                 heightInPixels;
-    private int                 heightDimensionResId;
-    private int                 gravity;
-    private Drawable            imageDrawable;
-    private int                 textSize;
-    private int                 textShadowColorResId;
-    private float               textShadowRadius;
-    private float               textShadowDx;
-    private float               textShadowDy;
-    private int                 textAppearanceResId;
-    private int                 inAnimationResId;
-    private int                 outAnimationResId;
-    private int                 imageResId;
+    private int durationInMilliseconds;
+    private int colorResourceId;
+    private int backgroundColorResourceId;
+    private int backgroundDrawableResourceId;
+    private boolean isTileEnabled;
+    private int textColorResourceId;
+    private int heightInPixels;
+    private int heightDimensionResId;
+    private int gravity;
+    private Drawable imageDrawable;
+    private int textSize;
+    private int textShadowColorResId;
+    private float textShadowRadius;
+    private float textShadowDx;
+    private float textShadowDy;
+    private int textAppearanceResId;
+    private int inAnimationResId;
+    private int outAnimationResId;
+    private int imageResId;
     private ImageView.ScaleType imageScaleType;
-    private int                 paddingInPixels;
-    private int                 paddingDimensionResId;
+    private int paddingInPixels;
+    private int paddingDimensionResId;
 
     public Builder() {
       durationInMilliseconds = 3000;
