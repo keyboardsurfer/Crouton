@@ -228,8 +228,8 @@ public class Style {
       heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
       gravity = Gravity.CENTER;
       imageDrawable = null;
-      inAnimationResId = android.R.anim.fade_in;
-      outAnimationResId = android.R.anim.fade_out;
+      inAnimationResId = 0;
+      outAnimationResId = 0;
       imageResId = 0;
       imageScaleType = ImageView.ScaleType.FIT_XY;
     }
