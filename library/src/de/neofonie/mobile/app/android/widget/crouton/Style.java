@@ -45,11 +45,6 @@ public class Style {
   final int durationInMilliseconds;
 
   /**
-   * The colorResourceId's resource id.
-   */
-  final int colorResourceId;
-
-  /**
    * The resource id of the backgroundResourceId.
    * <p/>
    * 0 for no backgroundResourceId.
@@ -160,7 +155,6 @@ public class Style {
 
   private Style(final Builder builder) {
     this.durationInMilliseconds = builder.durationInMilliseconds;
-    this.colorResourceId = builder.colorResourceId;
     this.backgroundColorResourceId = builder.backgroundColorResourceId;
     this.backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
     this.isTileEnabled = builder.isTileEnabled;
@@ -188,7 +182,6 @@ public class Style {
    */
   public static class Builder {
     private int durationInMilliseconds;
-    private int colorResourceId;
     private int backgroundColorResourceId;
     private int backgroundDrawableResourceId;
     private boolean isTileEnabled;
@@ -212,7 +205,6 @@ public class Style {
 
     public Builder() {
       durationInMilliseconds = 3000;
-      colorResourceId = android.R.color.holo_blue_light;
       heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
       paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
