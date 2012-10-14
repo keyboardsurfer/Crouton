@@ -20,22 +20,19 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import de.neofonie.mobile.app.android.widget.crouton.Crouton;
 import de.neofonie.mobile.app.android.widget.crouton.Style;
 
-public class CroutonDemo extends Activity implements OnClickListener, OnItemSelectedListener {
+public class CroutonDemo extends Activity implements OnItemSelectedListener {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
 
-    setUpShowButtonListener();
     setUpSpinnerListener();
   }
 
@@ -47,15 +44,8 @@ public class CroutonDemo extends Activity implements OnClickListener, OnItemSele
     super.onDestroy();
   }
 
-  private void setUpShowButtonListener() {
-    Button showButton = (Button) findViewById(R.id.button_show);
-
-    showButton.setOnClickListener(this);
-  }
-
   private void setUpSpinnerListener() {
     Spinner styleSpinner = (Spinner) findViewById(R.id.spinner_style);
-
     styleSpinner.setOnItemSelectedListener(this);
   }
 

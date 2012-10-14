@@ -19,6 +19,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
+    android:layout_gravity="center"
     android:orientation="vertical"
     android:padding="@dimen/padding_form" >
 
@@ -47,6 +48,7 @@
         android:id="@+id/button_show"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:onClick="onClick"
         android:text="@string/button_show" />
 
 </LinearLayout>

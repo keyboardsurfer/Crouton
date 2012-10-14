@@ -17,11 +17,11 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.keyboardsurfer.app.demo.crouton"
-    android:versionCode="3"
-    android:versionName="1.1" >
+    android:versionCode="4"
+    android:versionName="1.2" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="4"
         android:targetSdkVersion="16" />
     
     <uses-feature
