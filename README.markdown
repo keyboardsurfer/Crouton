@@ -10,7 +10,7 @@ Context sensitive notifications for Android
 A Crouton will be displayed at the top of an application window.
 You can line up multiple Croutons for display, that will be shown one after another.
 
-The current implementation requires the Holo theme to be present on the device.
+**As of version 1.5 Crouton can be used on any Android device without API level limitations.**
 
 A demo application is available on Google Play
 
