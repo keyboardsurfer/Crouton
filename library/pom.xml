@@ -23,13 +23,13 @@
 
     <name>Crouton</name>
     <artifactId>crouton</artifactId>
-    <version>1.4</version>
+    <version>1.4.1</version>
     <groupId>de.keyboardsurfer.android.widget</groupId>
     <packaging>jar</packaging>
 
     <parent>
         <artifactId>crouton-parent</artifactId>
-        <version>1.4</version>
+        <version>1.4.1</version>
         <groupId>de.keyboardsurfer.android.widget</groupId>
     </parent>
 
