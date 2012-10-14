@@ -296,7 +296,11 @@ public final class Crouton {
     this.croutonView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height));
 
     // set background
-    this.croutonView.setBackgroundColor(resources.getColor(this.style.backgroundColorResourceId));
+    if (this.style.backgroundColorValue != -1) {
+      this.croutonView.setBackgroundColor(this.style.backgroundColorValue);
+    } else {
+      this.croutonView.setBackgroundColor(resources.getColor(this.style.backgroundColorResourceId));
+    }
 
     // set the background drawable if set. This will override the background
     // color.

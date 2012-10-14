@@ -32,10 +32,14 @@ public class Style {
   public static final Style CONFIRM;
   public static final Style INFO;
 
+  public static final int holoRedLight = 0xffff4444;
+  public static final int holoGreenLight = 0xff99cc00;
+  public static final int holoBlueLight = 0xff33b5e5;
+
   static {
-    ALERT = new Builder().setDuration(5000).setBackgroundColor(android.R.color.holo_red_light).setHeight(LayoutParams.WRAP_CONTENT).build();
-    CONFIRM = new Builder().setDuration(3000).setBackgroundColor(android.R.color.holo_green_light).setHeight(LayoutParams.WRAP_CONTENT).build();
-    INFO = new Builder().setDuration(3000).setBackgroundColor(android.R.color.holo_blue_light).setHeight(LayoutParams.WRAP_CONTENT).build();
+    ALERT = new Builder().setDuration(5000).setBackgroundColorValue(holoRedLight).setHeight(LayoutParams.WRAP_CONTENT).build();
+    CONFIRM = new Builder().setDuration(3000).setBackgroundColorValue(holoGreenLight).setHeight(LayoutParams.WRAP_CONTENT).build();
+    INFO = new Builder().setDuration(3000).setBackgroundColorValue(holoBlueLight).setHeight(LayoutParams.WRAP_CONTENT).build();
   }
 
   /**
@@ -57,6 +61,13 @@ public class Style {
    * 0 for no backgroundDrawableResourceId.
    */
   final int backgroundDrawableResourceId;
+
+  /**
+   * The backgroundColorResourceValue's e.g. 0xffff4444;
+   * <p/>
+   * -1 for no value.
+   */
+  final int backgroundColorValue;
 
   /**
    * Whether we should isTileEnabled the backgroundResourceId or not.
@@ -175,6 +186,7 @@ public class Style {
     this.imageScaleType = builder.imageScaleType;
     this.paddingInPixels = builder.paddingInPixels;
     this.paddingDimensionResId = builder.paddingDimensionResId;
+    this.backgroundColorValue = builder.backgroundColorValue;
   }
 
   /**
@@ -182,6 +194,7 @@ public class Style {
    */
   public static class Builder {
     private int durationInMilliseconds;
+    private int backgroundColorValue;
     private int backgroundColorResourceId;
     private int backgroundDrawableResourceId;
     private boolean isTileEnabled;
@@ -209,6 +222,7 @@ public class Style {
       paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
+      backgroundColorValue = -1;
       isTileEnabled = false;
       textColorResourceId = android.R.color.white;
       heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -244,6 +258,18 @@ public class Style {
     public Builder setBackgroundColor(int backgroundColorResourceId) {
       this.backgroundColorResourceId = backgroundColorResourceId;
 
+      return this;
+    }
+
+    /**
+     * Set the backgroundColorResourceValue option of the {@link Crouton}.
+     * 
+     * @param backgroundColorResourceValue
+     *          The backgroundColorResourceValue's e.g. 0xffff4444;
+     * @return the {@link Builder}.
+     */
+    public Builder setBackgroundColorValue(int backgroundColorValue) {
+      this.backgroundColorValue = backgroundColorValue;
       return this;
     }
 
