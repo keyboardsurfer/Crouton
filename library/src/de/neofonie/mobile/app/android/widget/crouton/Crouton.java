@@ -18,6 +18,7 @@
 package de.neofonie.mobile.app.android.widget.crouton;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -41,6 +42,10 @@ import android.widget.Toast;
 /**
  * Displays information in a non-invasive context related manner. Like
  * {@link Toast}, but better.
+ * <p/>
+ * Call {@link Manager#clearCroutonsForActivity(Activity)} within your
+ * Activitie's onDestroy method to avoid {@link Context} leaks.
+ * 
  */
 public final class Crouton {
   private static final int IMAGE_ID = 0x100;
