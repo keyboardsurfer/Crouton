@@ -24,7 +24,7 @@
     <name>Crouton Parent</name>
     <artifactId>crouton-parent</artifactId>
     <version>1.4</version>
-    <groupId>de.neofonie.mobile.app.android.widget</groupId>
+    <groupId>de.keyboardsurfer.android.widget</groupId>
     <packaging>pom</packaging>
 
 		<developers>

@@ -24,13 +24,13 @@
     <name>Crouton</name>
     <artifactId>crouton</artifactId>
     <version>1.4</version>
-    <groupId>de.neofonie.mobile.app.android.widget</groupId>
+    <groupId>de.keyboardsurfer.android.widget</groupId>
     <packaging>jar</packaging>
 
     <parent>
         <artifactId>crouton-parent</artifactId>
         <version>1.4</version>
-        <groupId>de.neofonie.mobile.app.android.widget</groupId>
+        <groupId>de.keyboardsurfer.android.widget</groupId>
     </parent>
 
     <dependencies>
