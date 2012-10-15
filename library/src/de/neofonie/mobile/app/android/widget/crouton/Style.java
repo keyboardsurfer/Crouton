@@ -37,16 +37,16 @@ public class Style {
   public static final int holoBlueLight = 0xff33b5e5;
 
   static {
-    ALERT = new Builder().setDuration(5000).setBackgroundColorValue(holoRedLight).setHeight(LayoutParams.WRAP_CONTENT).build();
-    CONFIRM = new Builder().setDuration(3000).setBackgroundColorValue(holoGreenLight).setHeight(LayoutParams.WRAP_CONTENT).build();
-    INFO = new Builder().setDuration(3000).setBackgroundColorValue(holoBlueLight).setHeight(LayoutParams.WRAP_CONTENT).build();
+    ALERT = new Builder().setBackgroundColorValue(holoRedLight).setHeight(LayoutParams.WRAP_CONTENT).build();
+    CONFIRM = new Builder().setBackgroundColorValue(holoGreenLight).setHeight(LayoutParams.WRAP_CONTENT).build();
+    INFO = new Builder().setBackgroundColorValue(holoBlueLight).setHeight(LayoutParams.WRAP_CONTENT).build();
   }
 
   /**
    * The durationInMilliseconds the {@link Crouton} will be displayed in
    * milliseconds.
    */
-  final int durationInMilliseconds;
+  int durationInMilliseconds;
 
   /**
    * The resource id of the backgroundResourceId.
