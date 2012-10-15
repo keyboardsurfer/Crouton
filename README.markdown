@@ -31,6 +31,20 @@ Create a Crouton with a String from your application's resources:
 
     Crouton.makeText(Activity, int, Style).show();
 
+Create a Crouton using the Builer class:
+
+    Style style = new Style.Builder()
+          .setBackgroundColor(R.color.awesome_pink)
+          .setDuration(1337)
+          .setGravity(Gravity.CENTER)
+          .setTextColor(android.R.color.black)
+          .build();
+    Crouton.makeText(
+           this, 
+           getString(R.string.crouton_message), 
+           style)
+         .show();
+
 You can also cancel scheduled Croutons by calling:
 
     Crouton.cancelAllCroutons();
