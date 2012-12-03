@@ -17,14 +17,9 @@
 
 package de.neofonie.mobile.app.android.widget.crouton;
 
-import java.lang.reflect.Field;
-import java.util.Iterator;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
-
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.accessibility.AccessibilityEventCompat;
@@ -33,12 +28,15 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
+import java.util.Iterator;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 
 /**
  * Manages the lifecycle of {@link Crouton}s.
  */
 final class Manager extends Handler {
-
   private static final class Messages {
     private Messages() { /* noop */
     }
@@ -69,7 +67,7 @@ final class Manager extends Handler {
 
   /**
    * Inserts a {@link Crouton} to be displayed.
-   * 
+   *
    * @param crouton
    *          The {@link Crouton} to be displayed.
    */
@@ -112,7 +110,7 @@ final class Manager extends Handler {
 
   /**
    * Sends a {@link Crouton} within a {@link Message}.
-   * 
+   *
    * @param crouton
    *          The {@link Crouton} that should be sent.
    * @param messageId
@@ -126,7 +124,7 @@ final class Manager extends Handler {
 
   /**
    * Sends a {@link Crouton} within a delayed {@link Message}.
-   * 
+   *
    * @param crouton
    *          The {@link Crouton} that should be sent.
    * @param messageId
@@ -142,7 +140,7 @@ final class Manager extends Handler {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see android.os.Handler#handleMessage(android.os.Message)
    */
   @Override
@@ -150,22 +148,22 @@ final class Manager extends Handler {
     final Crouton crouton = (Crouton) message.obj;
 
     switch (message.what) {
-      case Messages.DISPLAY_CROUTON : {
+      case Messages.DISPLAY_CROUTON: {
         displayCrouton();
         break;
       }
 
-      case Messages.ADD_CROUTON_TO_VIEW : {
+      case Messages.ADD_CROUTON_TO_VIEW: {
         addCroutonToView(crouton);
         break;
       }
 
-      case Messages.REMOVE_CROUTON : {
+      case Messages.REMOVE_CROUTON: {
         removeCrouton(crouton);
         break;
       }
 
-      default : {
+      default: {
         super.handleMessage(message);
         break;
       }
@@ -174,7 +172,7 @@ final class Manager extends Handler {
 
   /**
    * Adds a {@link Crouton} to the {@link ViewParent} of it's {@link Activity}.
-   * 
+   *
    * @param crouton
    *          The {@link Crouton} that should be added.
    */
@@ -183,7 +181,7 @@ final class Manager extends Handler {
     if (crouton.isShowing()) {
       return;
     }
-    
+
     View croutonView = crouton.getView();
     if (croutonView.getParent() == null) {
       ViewGroup.LayoutParams params = croutonView.getLayoutParams();
@@ -194,13 +192,14 @@ final class Manager extends Handler {
     }
     croutonView.startAnimation(crouton.getInAnimation());
     announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
-    sendMessageDelayed(crouton, Messages.REMOVE_CROUTON, crouton.getStyle().durationInMilliseconds + +crouton.getInAnimation().getDuration());
+    sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
+      crouton.getStyle().durationInMilliseconds + +crouton.getInAnimation().getDuration());
   }
 
   /**
    * Removes the {@link Crouton}'s view after it's display
    * durationInMilliseconds.
-   * 
+   *
    * @param crouton
    *          The {@link Crouton} added to a {@link ViewGroup} and should be
    *          removed.
@@ -230,7 +229,7 @@ final class Manager extends Handler {
   /**
    * Removes a {@link Crouton} immediately, even when it's currently being
    * displayed.
-   * 
+   *
    * @param crouton
    *          The {@link Crouton} that should be removed.
    */
@@ -312,29 +311,7 @@ final class Manager extends Handler {
     removeMessages(Messages.REMOVE_CROUTON, crouton);
 
   }
-  
-  /**
-   * Method that determines API level for 1.5 and up, using reflection.
-   * 
-   * @return API level, or -1 if level could not be determined for some strange reason.
-   */
-  
-  public static int getPlatformVersion() {
-	    try {
-	        Field verField = Class.forName("android.os.Build$VERSION").getField("SDK_INT");
-	        int ver = verField.getInt(verField);
-	        return ver;
-	    } catch (Exception e) {
-	        try {
-	            Field verField = Class.forName("android.os.Build$VERSION").getField("SDK");
-	            String verString = (String) verField.get(verField);
-	            return Integer.parseInt(verString);
-	        } catch(Exception e2) {
-	            return -1;
-	        }
-	    }
-	}
-  
+
   /**
    * Generates and dispatches an SDK-specific spoken announcement.
    * <p>
@@ -342,45 +319,44 @@ final class Manager extends Handler {
    * using the appropriate event type. If your application only targets SDK
    * 16+, you can just call View.announceForAccessibility(CharSequence).
    * </p>
-   * 
+   *
    * note: AccessibilityManager is only available from API lvl 4.
-   * 
+   *
    * Adapted from https://http://eyes-free.googlecode.com/files/accessibility_codelab_demos_v2_src.zip
    * via https://github.com/coreform/android-formidable-validation
    *
    * @param context, used to get AccesibilityManager
    * @param text The text to announce.
    */
-  
-  @TargetApi(4)
   public static void announceForAccessibilityCompat(Context context, CharSequence text) {
-	  if(getPlatformVersion() >= 4) {
-		  AccessibilityManager accessibilityManager = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
-	      if (!accessibilityManager.isEnabled()) {
-	          return;
-	      }
-	
-	      // Prior to SDK 16, announcements could only be made through FOCUSED
-	      // events. Jelly Bean (SDK 16) added support for speaking text verbatim
-	      // using the ANNOUNCEMENT event type.
-	      final int eventType;
-	      if (getPlatformVersion() < 16) {
-	          eventType = AccessibilityEvent.TYPE_VIEW_FOCUSED;
-	      } else {
-	          eventType = AccessibilityEventCompat.TYPE_ANNOUNCEMENT;
-	      }
-	
-	      // Construct an accessibility event with the minimum recommended
-	      // attributes. An event without a class name or package may be dropped.
-	      final AccessibilityEvent event = AccessibilityEvent.obtain(eventType);
-	      event.getText().add(text);
-	      event.setClassName(Manager.class.getName());
-	      event.setPackageName(context.getPackageName());
-	
-	      // Sends the event directly through the accessibility manager. If your
-	      // application only targets SDK 14+, you should just call
-	      // getParent().requestSendAccessibilityEvent(this, event);
-	      accessibilityManager.sendAccessibilityEvent(event);
-	  }
+    if (Build.VERSION.SDK_INT >= 4) {
+      AccessibilityManager accessibilityManager = (AccessibilityManager) context.getSystemService(
+        Context.ACCESSIBILITY_SERVICE);
+      if (!accessibilityManager.isEnabled()) {
+        return;
+      }
+
+      // Prior to SDK 16, announcements could only be made through FOCUSED
+      // events. Jelly Bean (SDK 16) added support for speaking text verbatim
+      // using the ANNOUNCEMENT event type.
+      final int eventType;
+      if (Build.VERSION.SDK_INT < 16) {
+        eventType = AccessibilityEvent.TYPE_VIEW_FOCUSED;
+      } else {
+        eventType = AccessibilityEventCompat.TYPE_ANNOUNCEMENT;
+      }
+
+      // Construct an accessibility event with the minimum recommended
+      // attributes. An event without a class name or package may be dropped.
+      final AccessibilityEvent event = AccessibilityEvent.obtain(eventType);
+      event.getText().add(text);
+      event.setClassName(Manager.class.getName());
+      event.setPackageName(context.getPackageName());
+
+      // Sends the event directly through the accessibility manager. If your
+      // application only targets SDK 14+, you should just call
+      // getParent().requestSendAccessibilityEvent(this, event);
+      accessibilityManager.sendAccessibilityEvent(event);
+    }
   }
 }

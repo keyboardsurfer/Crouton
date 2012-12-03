@@ -28,7 +28,7 @@
 
     <parent>
         <artifactId>crouton-parent</artifactId>
-				<version>1.5</version>
+				<version>1.6</version>
         <groupId>de.keyboardsurfer.android.widget</groupId>
     </parent>
 
