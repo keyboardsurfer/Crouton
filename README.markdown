@@ -10,9 +10,13 @@ Context sensitive notifications for Android
 A Crouton will be displayed at the top of an application window.
 You can line up multiple Croutons for display, that will be shown one after another.
 
-**As of version 1.5 Crouton can be used on any Android device without API level limitations.**
+### Important changes of upcoming version 1.6
 
-A demo application is available on Google Play
+Version 1.6 Crouton can be used on any Android device with API level 4+.
+
+Also 1.6 will change the package name to `de.keyboardsurfer.android.widget`
+
+### A demo application is available on Google Play
 
 <a href="http://play.google.com/store/apps/details?id=de.keyboardsurfer.app.demo.crouton">
   <img alt="Crouton Demo on Google Play"
