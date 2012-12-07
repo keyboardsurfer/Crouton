@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package de.neofonie.mobile.app.android.widget.crouton;
+package de.keyboardsurfer.android.widget.crouton;
 
 import android.app.Activity;
 import android.content.Context;

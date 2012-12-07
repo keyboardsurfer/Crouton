@@ -15,13 +15,14 @@
  * limitations under the License.
  */
 
-package de.neofonie.mobile.app.android.widget.crouton;
+package de.keyboardsurfer.android.widget.crouton;
 
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+
 
 /**
  * The style for a {@link Crouton}.
@@ -37,9 +38,12 @@ public class Style {
   public static final int holoBlueLight = 0xff33b5e5;
 
   static {
-    ALERT = new Builder().setDuration(5000).setBackgroundColorValue(holoRedLight).setHeight(LayoutParams.WRAP_CONTENT).build();
-    CONFIRM = new Builder().setDuration(3000).setBackgroundColorValue(holoGreenLight).setHeight(LayoutParams.WRAP_CONTENT).build();
-    INFO = new Builder().setDuration(3000).setBackgroundColorValue(holoBlueLight).setHeight(LayoutParams.WRAP_CONTENT).build();
+    ALERT = new Builder().setDuration(5000).setBackgroundColorValue(holoRedLight).setHeight(LayoutParams.WRAP_CONTENT)
+      .build();
+    CONFIRM = new Builder().setDuration(3000).setBackgroundColorValue(holoGreenLight).setHeight(
+      LayoutParams.WRAP_CONTENT).build();
+    INFO = new Builder().setDuration(3000).setBackgroundColorValue(holoBlueLight).setHeight(LayoutParams.WRAP_CONTENT)
+      .build();
   }
 
   /**
@@ -236,7 +240,7 @@ public class Style {
 
     /**
      * Set the durationInMilliseconds option of the {@link Crouton}.
-     * 
+     *
      * @param duration
      *          The durationInMilliseconds the crouton will be displayed
      *          {@link Crouton} in milliseconds.
@@ -250,7 +254,7 @@ public class Style {
 
     /**
      * Set the backgroundColorResourceId option of the {@link Crouton}.
-     * 
+     *
      * @param backgroundColorResourceId
      *          The backgroundColorResourceId's resource id.
      * @return the {@link Builder}.
@@ -263,7 +267,7 @@ public class Style {
 
     /**
      * Set the backgroundColorResourceValue option of the {@link Crouton}.
-     * 
+     *
      * @param backgroundColorResourceValue
      *          The backgroundColorResourceValue's e.g. 0xffff4444;
      * @return the {@link Builder}.
@@ -275,7 +279,7 @@ public class Style {
 
     /**
      * Set the backgroundDrawableResourceId option for the {@link Crouton}.
-     * 
+     *
      * @param backgroundDrawableResourceId
      *          Resource ID of a backgroundDrawableResourceId image drawable.
      * @return the {@link Builder}.
@@ -288,7 +292,7 @@ public class Style {
 
     /**
      * Set the heightInPixels option for the {@link Crouton}.
-     * 
+     *
      * @param height
      *          The height of the {@link Crouton} in pixel. Can also be
      *          {@link LayoutParams#MATCH_PARENT} or
@@ -303,7 +307,7 @@ public class Style {
 
     /**
      * Set the resource id for the height option for the {@link Crouton}.
-     * 
+     *
      * @param heightDimensionResId
      *          Resource ID of a dimension for the height of the {@link Crouton}
      *          .
@@ -317,7 +321,7 @@ public class Style {
 
     /**
      * Set the isTileEnabled option for the {@link Crouton}.
-     * 
+     *
      * @param isTileEnabled
      *          <code>true</code> if you want the backgroundResourceId to be
      *          tiled, else <code>false</code>.
@@ -331,7 +335,7 @@ public class Style {
 
     /**
      * Set the textColorResourceId option for the {@link Crouton}.
-     * 
+     *
      * @param textColor
      *          The resource id of the text colorResourceId.
      * @return the {@link Builder}.
@@ -344,7 +348,7 @@ public class Style {
 
     /**
      * Set the gravity option for the {@link Crouton}.
-     * 
+     *
      * @param gravity
      *          The text's gravity as provided by {@link Gravity}.
      * @return the {@link Builder}.
@@ -357,7 +361,7 @@ public class Style {
 
     /**
      * Set the image option for the {@link Crouton}.
-     * 
+     *
      * @param imageDrawable
      *          An additional image to display in the {@link Crouton}.
      * @return the {@link Builder}.
@@ -370,7 +374,7 @@ public class Style {
 
     /**
      * Set the image resource option for the {@link Crouton}.
-     * 
+     *
      * @param imageResId
      *          An additional image to display in the {@link Crouton}.
      * @return the {@link Builder}.

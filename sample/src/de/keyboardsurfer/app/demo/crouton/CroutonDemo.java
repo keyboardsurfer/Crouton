@@ -24,8 +24,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.Spinner;
-import de.neofonie.mobile.app.android.widget.crouton.Crouton;
-import de.neofonie.mobile.app.android.widget.crouton.Style;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+
 
 public class CroutonDemo extends Activity implements OnItemSelectedListener {
   @Override
@@ -51,12 +52,12 @@ public class CroutonDemo extends Activity implements OnItemSelectedListener {
 
   public void onClick(View view) {
     switch (view.getId()) {
-      case R.id.button_show : {
+      case R.id.button_show: {
         showCrouton();
         break;
       }
 
-      default : {
+      default: {
         break;
       }
     }
@@ -76,19 +77,19 @@ public class CroutonDemo extends Activity implements OnItemSelectedListener {
     Spinner styleSpinner = (Spinner) findViewById(R.id.spinner_style);
 
     switch ((int) styleSpinner.getSelectedItemId()) {
-      case 0 : {
+      case 0: {
         return Style.ALERT;
       }
 
-      case 1 : {
+      case 1: {
         return Style.CONFIRM;
       }
 
-      case 2 : {
+      case 2: {
         return Style.INFO;
       }
 
-      default : {
+      default: {
         return null;
       }
     }
@@ -139,12 +140,12 @@ public class CroutonDemo extends Activity implements OnItemSelectedListener {
     EditText croutonDurationEdit = (EditText) findViewById(R.id.edit_text_duration);
 
     switch ((int) id) {
-      case 3 : {
+      case 3: {
         croutonDurationEdit.setVisibility(View.VISIBLE);
         break;
       }
 
-      default : {
+      default: {
         croutonDurationEdit.setVisibility(View.GONE);
         break;
       }

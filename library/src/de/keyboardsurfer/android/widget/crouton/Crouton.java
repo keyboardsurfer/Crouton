@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package de.neofonie.mobile.app.android.widget.crouton;
+package de.keyboardsurfer.android.widget.crouton;
 
 import android.app.Activity;
 import android.content.Context;
@@ -39,13 +39,14 @@ import android.widget.Toast;
  * Based on an article by Cyril Mottier (http://android.cyrilmottier.com/?p=773) <br>
  */
 
+
 /**
  * Displays information in a non-invasive context related manner. Like
  * {@link Toast}, but better.
  * <p/>
  * Call {@link Manager#clearCroutonsForActivity(Activity)} within your
  * Activitie's onDestroy method to avoid {@link Context} leaks.
- * 
+ *
  */
 public final class Crouton {
   private static final int IMAGE_ID = 0x100;
@@ -59,7 +60,7 @@ public final class Crouton {
 
   /**
    * Creates the {@link Crouton}.
-   * 
+   *
    * @param activity
    *          The {@link Activity} that the {@link Crouton} should be attached
    *          to.
@@ -81,7 +82,7 @@ public final class Crouton {
 
   /**
    * Creates the {@link Crouton}.
-   * 
+   *
    * @param activity
    *          The {@link Activity} that the {@link Crouton} should be attached
    *          to.
@@ -102,7 +103,7 @@ public final class Crouton {
   /**
    * Creates a {@link Crouton} with provided text and style for a given
    * activity.
-   * 
+   *
    * @param activity
    *          The {@link Activity} that the {@link Crouton} should be attached
    *          to.
@@ -119,7 +120,7 @@ public final class Crouton {
   /**
    * Creates a {@link Crouton} with provided text-resource and style for a given
    * activity.
-   * 
+   *
    * @param activity
    *          The {@link Activity} that the {@link Crouton} should be attached
    *          to.
@@ -136,7 +137,7 @@ public final class Crouton {
   /**
    * Creates a {@link Crouton} with provided text-resource and style for a given
    * activity.
-   * 
+   *
    * @param activity
    *          The {@link Activity} that the {@link Crouton} should be attached
    *          to.
@@ -151,7 +152,7 @@ public final class Crouton {
   /**
    * Creates a {@link Crouton} with provided text and style for a given activity
    * and displays it directly.
-   * 
+   *
    * @param activity
    *          The {@link android.app.Activity} that the {@link Crouton} should
    *          be attached to.
@@ -159,7 +160,7 @@ public final class Crouton {
    *          The text you want to display.
    * @param style
    *          The style that this {@link Crouton} should be created with.
-   * 
+   *
    */
   public static void showText(Activity activity, CharSequence text, Style style) {
     makeText(activity, text, style).show();
@@ -168,13 +169,13 @@ public final class Crouton {
   /**
    * Creates a {@link Crouton} with provided text and style for a given activity
    * and displays it directly.
-   * 
+   *
    * @param activity
    *          The {@link android.app.Activity} that the {@link Crouton} should
    *          be attached to.
    * @param customView
    *          The custom {@link View} to display
-   * 
+   *
    */
   public static void show(Activity activity, View customView) {
     make(activity, customView).show();
@@ -183,7 +184,7 @@ public final class Crouton {
   /**
    * Creates a {@link Crouton} with provided text-resource and style for a given
    * activity and displays it directly.
-   * 
+   *
    * @param activity
    *          The {@link Activity} that the {@link Crouton} should be attached
    *          to.
@@ -191,7 +192,7 @@ public final class Crouton {
    *          The resource id of the text you want to display.
    * @param style
    *          The style that this {@link Crouton} should be created with.
-   * 
+   *
    */
   public static void showText(Activity activity, int textResourceId, Style style) {
     showText(activity, activity.getString(textResourceId), style);
@@ -208,7 +209,7 @@ public final class Crouton {
   /**
    * Clears (and removes from {@link Activity}'s content view, if necessary) all
    * croutons for the provided activity
-   * 
+   *
    * @param activity
    *          - The {@link} Activity to clear the croutons for
    */
@@ -320,7 +321,8 @@ public final class Crouton {
 
     // create content view
     RelativeLayout contentView = new RelativeLayout(this.activity);
-    contentView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+    contentView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+        RelativeLayout.LayoutParams.WRAP_CONTENT));
 
     // set padding
     int padding = this.style.paddingInPixels;
@@ -351,8 +353,9 @@ public final class Crouton {
         image.setImageResource(this.style.imageResId);
       }
 
-      RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-          RelativeLayout.LayoutParams.WRAP_CONTENT);
+      RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(
+        RelativeLayout.LayoutParams.WRAP_CONTENT,
+        RelativeLayout.LayoutParams.WRAP_CONTENT);
       imageParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
       imageParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
       contentView.addView(image, imageParams);
@@ -390,7 +393,8 @@ public final class Crouton {
       text.setTextAppearance(this.activity, this.style.textAppearanceResId);
     }
 
-    RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+    RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+      RelativeLayout.LayoutParams.WRAP_CONTENT);
     if (image != null) {
       textParams.addRule(RelativeLayout.RIGHT_OF, image.getId());
     }
