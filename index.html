@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <title>Crouton by neofoniemobile</title>
+    <title>Crouton by keyboardsurfer</title>
   </head>
 
   <body>
@@ -19,9 +19,9 @@
         <h2>Context sensitive notifications for Android  </h2>
 
         <section id="downloads">
-          <a href="https://github.com/neofoniemobile/Crouton/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/neofoniemobile/Crouton/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/neofoniemobile/Crouton" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+          <a href="https://github.com/keyboardsurfer/Crouton/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/keyboardsurfer/Crouton/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/keyboardsurfer/Crouton" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
         </section>
       </div>
     </header>
@@ -30,18 +30,27 @@
       <section id="main_content">
         <h1>Crouton</h1>
 
+<p><img src="https://raw.github.com/keyboardsurfer/Crouton/master/sample/res/drawable-xhdpi/ic_launcher.png" alt="Crouton" title="Crouton logo"></p>
+
 <p>Context sensitive notifications for Android</p>
 
 <h2>Overview</h2>
 
-<p><strong>Crouton</strong>, is a class that can be used by Android developers that feel the need for an <strong>alternative to the Context insensitive <a href="http://developer.android.com/reference/android/widget/Toast.html">Toast</a></strong>.</p>
-
-<p>The name and the idea of <a href="https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java">Crouton</a> originates in a <a href="http://android.cyrilmottier.com/?p=773">blog article</a> by Cyril Mottier.</p>
+<p><strong>Crouton</strong> is a class that can be used by Android developers that feel the need for an <strong>alternative to the Context insensitive <a href="http://developer.android.com/reference/android/widget/Toast.html">Toast</a></strong>.</p>
 
 <p>A Crouton will be displayed at the top of an application window.
 You can line up multiple Croutons for display, that will be shown one after another.</p>
 
-<p>The current implementation requires the Holo theme to be present on the device.</p>
+<h3>Important changes of upcoming version 1.6</h3>
+
+<p>Version 1.6 Crouton can be used on any Android device with API level 4+.</p>
+
+<p>Also 1.6 will change the package name to <code>de.keyboardsurfer.android.widget</code></p>
+
+<h3>A demo application is available on Google Play</h3>
+
+<p><a href="http://play.google.com/store/apps/details?id=de.keyboardsurfer.app.demo.crouton">
+  <img alt="Crouton Demo on Google Play" src="http://developer.android.com/images/brand/en_generic_rgb_wo_60.png"></a></p>
 
 <h3>Usage</h3>
 
@@ -64,20 +73,20 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 <h3>Examples</h3>
 
-<p>Currently you can use the three different Style attributes displayed below:</p>
+<p>Currently you can use the three different Style attributes displayed below out of the box:</p>
 
-<p><img src="https://github.com/neofoniemobile/Crouton/raw/master/res/Alert.png" alt="Alert" title="Example of Style.ALERT"></p>
+<p><img src="https://github.com/keyboardsurfer/Crouton/raw/master/res/Alert.png" alt="Alert" title="Example of Style.ALERT"></p>
 
-<p><img src="https://github.com/neofoniemobile/Crouton/raw/master/res/Confirm.png" alt="Confirm" title="Example of Style.CONFIRM"></p>
+<p><img src="https://github.com/keyboardsurfer/Crouton/raw/master/res/Confirm.png" alt="Confirm" title="Example of Style.CONFIRM"></p>
 
-<p><img src="https://github.com/neofoniemobile/Crouton/raw/master/res/Info.png" alt="Info" title="Example of Style.INFO"></p>
+<p><img src="https://github.com/keyboardsurfer/Crouton/raw/master/res/Info.png" alt="Info" title="Example of Style.INFO"></p>
 
 <h3>Extension and Modification</h3>
 
-<p>The whole design of a Crouton is defined by <a href="https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Style.java">Style</a>.
+<p>The whole design of a Crouton is defined by <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Style.java">Style</a>.
 You can easily create your own Styles by calling one of the constructors of the Style class or use one of the already provided styles: Style.ALERT, Style.CONFIRM and Style.INFO.</p>
 
-<p>If you want to modify the general appearance you might want to have a look at the <a href="https://github.com/neofoniemobile/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/ViewHolder.java">ViewHolder</a>.</p>
+<p>If you want to modify the general appearance you might want to have a look at the <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/ViewHolder.java">ViewHolder</a>.</p>
 
 <h3>Building</h3>
 
@@ -94,16 +103,29 @@ You can easily create your own Styles by calling one of the constructors of the 
 
 <div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
   <span class="nt">&lt;artifactId&gt;</span>crouton<span class="nt">&lt;/artifactId&gt;</span>
-  <span class="nt">&lt;version&gt;</span>1.1<span class="nt">&lt;/version&gt;</span>
-  <span class="nt">&lt;groupId&gt;</span>de.neofonie.mobile<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.5<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>de.keyboardsurfer.android.widget<span class="nt">&lt;/groupId&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
+
+<h3>Contribution</h3>
+
+<p>This section is subject to changes.</p>
+
+<p>For contributors using Eclipse there's a formatter available at the <a href="https://github.com/downloads/keyboardsurfer/Crouton/Crouton_Eclipseformatter.xml">download section</a>.
+If you want to contribute and create pull requests, make sure to use this formatter or format your commit in a way similar to it's example.</p>
 
 <h3>License</h3>
 
 <ul>
 <li><a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Version 2.0</a></li>
-</ul><h4>The initial version was written by <a href="https://plus.google.com/117509657298845443204">Benjamin Weiss</a> at Neofonie Mobile GmbH.</h4>
+</ul><h3>Attributions</h3>
+
+<p>The name and the idea of <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java">Crouton</a> originates in a <a href="http://android.cyrilmottier.com/?p=773">blog article</a> by Cyril Mottier.</p>
+
+<p>The Crouton logo has been created by <a href="http://marie-schweiz.de">Marie Schweiz</a>.</p>
+
+<p>The initial version was written by <a href="https://plus.google.com/117509657298845443204">Benjamin Weiss</a> at <a href="http://mobile.neofonie.de">Neofonie Mobile GmbH</a>.</p>
       </section>
     </div>
 
