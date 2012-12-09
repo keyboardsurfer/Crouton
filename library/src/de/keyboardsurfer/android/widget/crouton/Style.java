@@ -268,7 +268,7 @@ public class Style {
     /**
      * Set the backgroundColorResourceValue option of the {@link Crouton}.
      *
-     * @param backgroundColorResourceValue
+     * @param backgroundColorValue
      *          The backgroundColorResourceValue's e.g. 0xffff4444;
      * @return the {@link Builder}.
      */

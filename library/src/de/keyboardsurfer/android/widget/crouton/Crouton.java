@@ -44,8 +44,8 @@ import android.widget.Toast;
  * Displays information in a non-invasive context related manner. Like
  * {@link Toast}, but better.
  * <p/>
- * Call {@link Manager#clearCroutonsForActivity(Activity)} within your
- * Activitie's onDestroy method to avoid {@link Context} leaks.
+ * <b>Important: </b> Call {@link Manager#clearCroutonsForActivity(Activity)} within your
+ * {@link android.app.Activity#onDestroy()} to avoid {@link Context} leaks.
  *
  */
 public final class Crouton {
