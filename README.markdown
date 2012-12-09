@@ -35,9 +35,12 @@ Create a Crouton with a String from your application's resources:
 
     Crouton.makeText(Activity, int, Style).show();
 
-You can also cancel scheduled Croutons by calling:
+####Important! In your Activity.onDestroy() make sure to call
 
     Crouton.cancelAllCroutons();
+    
+####to cancel cancel all scheduled Croutons.
+This is a workaround and described in #24.
 
 ### Examples
 Currently you can use the three different Style attributes displayed below out of the box:

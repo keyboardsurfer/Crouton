@@ -38,7 +38,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 final class Manager extends Handler {
   private static final class Messages {
-    private Messages() { /* noop */
+    private Messages() { /* no-op */
     }
 
     public static final int DISPLAY_CROUTON = 0xc2007;
