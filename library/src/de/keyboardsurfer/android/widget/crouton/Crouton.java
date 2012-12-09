@@ -44,7 +44,7 @@ import android.widget.Toast;
  * Displays information in a non-invasive context related manner. Like
  * {@link Toast}, but better.
  * <p/>
- * <b>Important: </b> Call {@link Manager#clearCroutonsForActivity(Activity)} within your
+ * <b>Important: </b> Call {@link Crouton#clearCroutonsForActivity(Activity)} within your
  * {@link android.app.Activity#onDestroy()} to avoid {@link Context} leaks.
  *
  */
