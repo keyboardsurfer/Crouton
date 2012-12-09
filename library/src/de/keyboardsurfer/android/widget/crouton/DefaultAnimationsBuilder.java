@@ -21,7 +21,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
 
-final class AnimationsBuilder {
+final class DefaultAnimationsBuilder {
   private static Animation slideInDownAnimation, slideOutUpAnimation;
 
   private static final class SlideInDownAnimationParameters {
@@ -48,10 +48,10 @@ final class AnimationsBuilder {
     public static final long DURATION = 400;
   }
 
-  private AnimationsBuilder() {
+  private DefaultAnimationsBuilder() {
   }
 
-  public static Animation buildSlideInDownAnimation() {
+  public static Animation buildDefaultSlideInDownAnimation() {
     if (slideInDownAnimation == null) {
       slideInDownAnimation = new TranslateAnimation(SlideInDownAnimationParameters.FROM_X_DELTA,
         SlideInDownAnimationParameters.TO_X_DELTA,
@@ -62,7 +62,7 @@ final class AnimationsBuilder {
     return slideInDownAnimation;
   }
 
-  public static Animation buildSlideOutUpAnimation() {
+  public static Animation buildDefaultSlideOutUpAnimation() {
     if (slideOutUpAnimation == null) {
       slideOutUpAnimation = new TranslateAnimation(SlideOutUpAnimationParameters.FROM_X_DELTA,
         SlideOutUpAnimationParameters.TO_X_DELTA,

@@ -410,7 +410,7 @@ public final class Crouton {
       if (getStyle().inAnimationResId > 0) {
         this.inAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().inAnimationResId);
       } else {
-        this.inAnimation = AnimationsBuilder.buildSlideInDownAnimation();
+        this.inAnimation = DefaultAnimationsBuilder.buildDefaultSlideInDownAnimation();
       }
     }
 
@@ -422,7 +422,7 @@ public final class Crouton {
       if (getStyle().outAnimationResId > 0) {
         this.outAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().outAnimationResId);
       } else {
-        this.outAnimation = AnimationsBuilder.buildSlideOutUpAnimation();
+        this.outAnimation = DefaultAnimationsBuilder.buildDefaultSlideOutUpAnimation();
       }
     }
 
