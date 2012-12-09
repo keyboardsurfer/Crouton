@@ -57,6 +57,34 @@ public final class Crouton {
   private Activity activity;
   private FrameLayout croutonView;
 
+  public static final int SHORT = 1000;
+  public static final int LONG = 3000;
+
+  /**
+   * Creates the {@link Crouton}.
+   * 
+   * @param activity
+   *          The {@link Activity} that the {@link Crouton} should be attached
+   *          to.
+   * @param text
+   *          The text you want to display.
+   * @param style
+   *          The style that this {@link Crouton} should be created with.
+   * @param durationInMilliseconds
+   *          The duration how long the {@link Crouton} will be displayed    
+   */
+  private Crouton(Activity activity, CharSequence text, Style style, int durationInMilliseconds) {
+    if ((activity == null) || (text == null) || (style == null)) {
+      throw new IllegalArgumentException("Null parameters are not accepted");
+    }
+
+    this.activity = activity;
+    this.text = text;
+    this.style = style;
+    this.style.durationInMilliseconds = durationInMilliseconds;
+    this.customView = null;
+  }
+
   /**
    * Creates the {@link Crouton}.
    * 
@@ -110,10 +138,48 @@ public final class Crouton {
    *          The text you want to display.
    * @param style
    *          The style that this {@link Crouton} should be created with.
+   * @param durationInMilliseconds
+   *          The duration how long the {@link Crouton} will be displayed    
+   * @return The created {@link Crouton}.
+   */
+  public static Crouton makeText(Activity activity, CharSequence text, Style style, int durationInMilliseconds) {
+    return new Crouton(activity, text, style, durationInMilliseconds);
+  }
+
+  /**
+   * Creates a {@link Crouton} with provided text and style for a given
+   * activity.
+   * 
+   * @param activity
+   *          The {@link Activity} that the {@link Crouton} should be attached
+   *          to.
+   * @param text
+   *          The text you want to display.
+   * @param style
+   *          The style that this {@link Crouton} should be created with.
    * @return The created {@link Crouton}.
    */
   public static Crouton makeText(Activity activity, CharSequence text, Style style) {
     return new Crouton(activity, text, style);
+  }
+
+  /**
+   * Creates a {@link Crouton} with provided text-resource and style for a given
+   * activity.
+   * 
+   * @param activity
+   *          The {@link Activity} that the {@link Crouton} should be attached
+   *          to.
+   * @param textResourceId
+   *          The resource id of the text you want to display.
+   * @param style
+   *          The style that this {@link Crouton} should be created with.
+   * @param durationInMilliseconds
+   *          The duration how long the {@link Crouton} will be displayed    
+   * @return The created {@link Crouton}.
+   */
+  public static Crouton makeText(Activity activity, int textResourceId, Style style, int durationInMilliseconds) {
+    return makeText(activity, activity.getString(textResourceId), style, durationInMilliseconds);
   }
 
   /**
@@ -159,6 +225,25 @@ public final class Crouton {
    *          The text you want to display.
    * @param style
    *          The style that this {@link Crouton} should be created with.
+   * @param durationInMilliseconds
+   *          The duration how long the {@link Crouton} will be displayed    
+   * 
+   */
+  public static void showText(Activity activity, CharSequence text, Style style, int durationInMilliseconds) {
+    makeText(activity, text, style, durationInMilliseconds).show();
+  }
+
+  /**
+   * Creates a {@link Crouton} with provided text and style for a given activity
+   * and displays it directly.
+   * 
+   * @param activity
+   *          The {@link android.app.Activity} that the {@link Crouton} should
+   *          be attached to.
+   * @param text
+   *          The text you want to display.
+   * @param style
+   *          The style that this {@link Crouton} should be created with.
    * 
    */
   public static void showText(Activity activity, CharSequence text, Style style) {
@@ -178,6 +263,25 @@ public final class Crouton {
    */
   public static void show(Activity activity, View customView) {
     make(activity, customView).show();
+  }
+
+  /**
+   * Creates a {@link Crouton} with provided text-resource and style for a given
+   * activity and displays it directly.
+   * 
+   * @param activity
+   *          The {@link Activity} that the {@link Crouton} should be attached
+   *          to.
+   * @param textResourceId
+   *          The resource id of the text you want to display.
+   * @param style
+   *          The style that this {@link Crouton} should be created with.
+   * @param durationInMilliseconds
+   *          The duration how long the {@link Crouton} will be displayed         
+   * 
+   */
+  public static void showText(Activity activity, int textResourceId, Style style, int durationInMilliseconds) {
+    showText(activity, activity.getString(textResourceId), style, durationInMilliseconds);
   }
 
   /**
