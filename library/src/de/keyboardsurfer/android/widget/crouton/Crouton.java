@@ -309,6 +309,7 @@ public final class Crouton {
   }
 
   private void initializeCroutonView() {
+    //TODO refactor in a seperate View class!
     Resources resources = this.activity.getResources();
 
     // create outer frame
