@@ -29,11 +29,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 /*
  * Based on an article by Cyril Mottier (http://android.cyrilmottier.com/?p=773) <br>
@@ -57,6 +53,8 @@ public final class Crouton {
 
   private Activity activity;
   private FrameLayout croutonView;
+  private Animation inAnimation;
+  private Animation outAnimation;
 
   /**
    * Creates the {@link Crouton}.
@@ -233,6 +231,30 @@ public final class Crouton {
     Manager.getInstance().add(this);
   }
 
+  public Animation getInAnimation() {
+    if ((this.inAnimation == null) && (this.activity != null)) {
+      if (getStyle().inAnimationResId > 0) {
+        this.inAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().inAnimationResId);
+      } else {
+        this.inAnimation = DefaultAnimationsBuilder.buildDefaultSlideInDownAnimation();
+      }
+    }
+
+    return inAnimation;
+  }
+
+  public Animation getOutAnimation() {
+    if ((this.outAnimation == null) && (this.activity != null)) {
+      if (getStyle().outAnimationResId > 0) {
+        this.outAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().outAnimationResId);
+      } else {
+        this.outAnimation = DefaultAnimationsBuilder.buildDefaultSlideOutUpAnimation();
+      }
+    }
+
+    return outAnimation;
+  }
+
   /**
    * @return <code>true</code> if the {@link Crouton} is being displayed, else
    *         <code>false</code>.
@@ -400,32 +422,5 @@ public final class Crouton {
     }
     contentView.addView(text, textParams);
     this.croutonView.addView(contentView);
-  }
-
-  private Animation inAnimation;
-  private Animation outAnimation;
-
-  public Animation getInAnimation() {
-    if ((this.inAnimation == null) && (this.activity != null)) {
-      if (getStyle().inAnimationResId > 0) {
-        this.inAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().inAnimationResId);
-      } else {
-        this.inAnimation = DefaultAnimationsBuilder.buildDefaultSlideInDownAnimation();
-      }
-    }
-
-    return inAnimation;
-  }
-
-  public Animation getOutAnimation() {
-    if ((this.outAnimation == null) && (this.activity != null)) {
-      if (getStyle().outAnimationResId > 0) {
-        this.outAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().outAnimationResId);
-      } else {
-        this.outAnimation = DefaultAnimationsBuilder.buildDefaultSlideOutUpAnimation();
-      }
-    }
-
-    return outAnimation;
   }
 }
