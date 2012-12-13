@@ -188,7 +188,13 @@ final class Manager extends Handler {
       if (params == null) {
         params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
       }
-      crouton.getActivity().addContentView(croutonView, params);
+      // display Crouton in ViewGroup is it has been supplied
+      if((ViewGroup)crouton.getViewGroup() != null) {
+    	  // TODO implement add to last position feature (need to align with how this will be requested for activity)
+    	  ((ViewGroup)crouton.getViewGroup()).addView(croutonView, 0, params);	
+      } else {
+    	  crouton.getActivity().addContentView(croutonView, params);
+      }
     }
     croutonView.startAnimation(crouton.getInAnimation());
     announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
@@ -218,6 +224,7 @@ final class Manager extends Handler {
       croutonParentView.removeView(croutonView);
       if (removed != null) {
         removed.detachActivity();
+        removed.detachViewGroup();
       }
 
       // Send a message to display the next crouton but delay it by the out
