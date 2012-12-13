@@ -57,6 +57,7 @@ public final class Crouton {
   private FrameLayout croutonView;
   private Animation inAnimation;
   private Animation outAnimation;
+  private LifecycleCallback lifecycleCallback = null;
 
   /**
    * Creates the {@link Crouton}.
@@ -429,6 +430,29 @@ public final class Crouton {
    */
   void detachViewGroup() {
     viewGroup = null;
+  }
+  
+  /**
+   * Removes the lifecycleCallback reference this {@link Crouton} is holding
+   */
+  void detachLifecycleCallback() {
+    lifecycleCallback = null;
+  }
+  
+  /**
+   * @param lifecycleCallback
+   *          Callback object for notable events in the life of a Crouton.
+   */
+  public Crouton setLifecycleCallback(LifecycleCallback lifecycleCallback) {
+	  this.lifecycleCallback = lifecycleCallback;
+	  return this;
+  }
+  
+  /**
+   * @return the lifecycleCallback
+   */
+  LifecycleCallback getLifecycleCallback() {
+	  return lifecycleCallback;
   }
 
   /**

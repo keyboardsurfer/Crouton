@@ -95,6 +95,9 @@ final class Manager extends Handler {
     if (!currentCrouton.isShowing()) {
       // Display the Crouton
       sendMessage(currentCrouton, Messages.ADD_CROUTON_TO_VIEW);
+      if(currentCrouton.getLifecycleCallback() != null) {
+    	  currentCrouton.getLifecycleCallback().onDisplayed();
+      }
     } else {
       sendMessageDelayed(currentCrouton, Messages.DISPLAY_CROUTON, calculateCroutonDuration(currentCrouton));
     }
@@ -160,6 +163,9 @@ final class Manager extends Handler {
 
       case Messages.REMOVE_CROUTON: {
         removeCrouton(crouton);
+        if(crouton.getLifecycleCallback() != null) {
+        	crouton.getLifecycleCallback().onRemoved();
+        }
         break;
       }
 
@@ -225,6 +231,10 @@ final class Manager extends Handler {
       if (removed != null) {
         removed.detachActivity();
         removed.detachViewGroup();
+        if(removed.getLifecycleCallback() != null) {
+        	removed.getLifecycleCallback().onRemoved();
+        }
+        removed.detachLifecycleCallback();
       }
 
       // Send a message to display the next crouton but delay it by the out
