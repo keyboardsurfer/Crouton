@@ -27,6 +27,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
@@ -52,9 +53,11 @@ public final class Crouton {
   private final View customView;
 
   private Activity activity;
+  private ViewGroup viewGroup;
   private FrameLayout croutonView;
   private Animation inAnimation;
   private Animation outAnimation;
+  private LifecycleCallback lifecycleCallback = null;
 
   /**
    * Creates the {@link Crouton}.
@@ -73,11 +76,36 @@ public final class Crouton {
     }
 
     this.activity = activity;
+    this.viewGroup = null;
     this.text = text;
     this.style = style;
     this.customView = null;
   }
 
+  /**
+   * Creates the {@link Crouton}.
+   *
+   * @param activity
+   *          The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param viewGroup
+   *          The {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param text
+   *          The text you want to display.
+   * @param style
+   *          The style that this {@link Crouton} should be created with.
+   */
+  private Crouton(Activity activity, ViewGroup viewGroup, CharSequence text, Style style) {
+    if ((activity == null) || (text == null) || (style == null)) {
+      throw new IllegalArgumentException("Null parameters are not accepted");
+    }
+
+    this.activity = activity;
+    this.viewGroup = viewGroup;
+    this.text = text;
+    this.style = style;
+    this.customView = null;
+  }
+  
   /**
    * Creates the {@link Crouton}.
    *
@@ -93,6 +121,29 @@ public final class Crouton {
     }
 
     this.activity = activity;
+    this.viewGroup = null;
+    this.customView = customView;
+    this.style = new Style.Builder().build();
+    this.text = null;
+  }
+  
+  /**
+   * Creates the {@link Crouton}.
+   *
+   * @param activity
+   *          The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param viewGroup
+   *          The {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param customView
+   *          The custom {@link View} to display
+   */
+  private Crouton(Activity activity, ViewGroup viewGroup, View customView) {
+    if ((activity == null) || (customView == null)) {
+      throw new IllegalArgumentException("Null parameters are not accepted");
+    }
+
+    this.activity = activity;
+    this.viewGroup = viewGroup;
     this.customView = customView;
     this.style = new Style.Builder().build();
     this.text = null;
@@ -114,6 +165,24 @@ public final class Crouton {
   public static Crouton makeText(Activity activity, CharSequence text, Style style) {
     return new Crouton(activity, text, style);
   }
+  
+  /**
+   * Creates a {@link Crouton} with provided text and style for a given
+   * activity.
+   *
+   * @param activity
+   *          The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param viewGroup
+   *          The {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param text
+   *          The text you want to display.
+   * @param style
+   *          The style that this {@link Crouton} should be created with.
+   * @return The created {@link Crouton}.
+   */
+  public static Crouton makeText(Activity activity, ViewGroup viewGroup, CharSequence text, Style style) {
+    return new Crouton(activity, viewGroup, text, style);
+  }
 
   /**
    * Creates a {@link Crouton} with provided text-resource and style for a given
@@ -131,6 +200,24 @@ public final class Crouton {
   public static Crouton makeText(Activity activity, int textResourceId, Style style) {
     return makeText(activity, activity.getString(textResourceId), style);
   }
+  
+  /**
+   * Creates a {@link Crouton} with provided text-resource and style for a given
+   * activity.
+   *
+   * @param activity
+   *          The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param viewGroup
+   *          The {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param textResourceId
+   *          The resource id of the text you want to display.
+   * @param style
+   *          The style that this {@link Crouton} should be created with.
+   * @return The created {@link Crouton}.
+   */
+  public static Crouton makeText(Activity activity, ViewGroup viewGroup, int textResourceId, Style style) {
+    return makeText(activity, viewGroup, activity.getString(textResourceId), style);
+  }
 
   /**
    * Creates a {@link Crouton} with provided text-resource and style for a given
@@ -145,6 +232,22 @@ public final class Crouton {
    */
   public static Crouton make(Activity activity, View customView) {
     return new Crouton(activity, customView);
+  }
+  
+  /**
+   * Creates a {@link Crouton} with provided text-resource and style for a given
+   * activity.
+   *
+   * @param activity
+   *          The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param viewGroup
+   *          The {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param customView
+   *          The custom {@link View} to display
+   * @return The created {@link Crouton}.
+   */
+  public static Crouton make(Activity activity, ViewGroup viewGroup, View customView) {
+    return new Crouton(activity, viewGroup, customView);
   }
 
   /**
@@ -163,6 +266,24 @@ public final class Crouton {
   public static void showText(Activity activity, CharSequence text, Style style) {
     makeText(activity, text, style).show();
   }
+  
+  /**
+   * Creates a {@link Crouton} with provided text and style for a given activity
+   * and displays it directly.
+   *
+   * @param activity
+   *          The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param viewGroup
+   *          The {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param text
+   *          The text you want to display.
+   * @param style
+   *          The style that this {@link Crouton} should be created with.
+   *
+   */
+  public static void showText(Activity activity, ViewGroup viewGroup, CharSequence text, Style style) {
+    makeText(activity, viewGroup, text, style).show();
+  }
 
   /**
    * Creates a {@link Crouton} with provided text and style for a given activity
@@ -177,6 +298,22 @@ public final class Crouton {
    */
   public static void show(Activity activity, View customView) {
     make(activity, customView).show();
+  }
+  
+  /**
+   * Creates a {@link Crouton} with provided text and style for a given activity
+   * and displays it directly.
+   *
+   * @param activity
+   *          The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param viewGroup
+   *          The {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param customView
+   *          The custom {@link View} to display
+   *
+   */
+  public static void show(Activity activity, ViewGroup viewGroup, View customView) {
+    make(activity, viewGroup, customView).show();
   }
 
   /**
@@ -194,6 +331,24 @@ public final class Crouton {
    */
   public static void showText(Activity activity, int textResourceId, Style style) {
     showText(activity, activity.getString(textResourceId), style);
+  }
+  
+  /**
+   * Creates a {@link Crouton} with provided text-resource and style for a given
+   * activity and displays it directly.
+   *
+   * @param activity
+   *          The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param viewGroup
+   *          The {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param textResourceId
+   *          The resource id of the text you want to display.
+   * @param style
+   *          The style that this {@link Crouton} should be created with.
+   *
+   */
+  public static void showText(Activity activity, ViewGroup viewGroup, int textResourceId, Style style) {
+    showText(activity, viewGroup, activity.getString(textResourceId), style);
   }
 
   /**
@@ -269,6 +424,36 @@ public final class Crouton {
   void detachActivity() {
     activity = null;
   }
+  
+  /**
+   * Removes the viewGroup reference this {@link Crouton} is holding
+   */
+  void detachViewGroup() {
+    viewGroup = null;
+  }
+  
+  /**
+   * Removes the lifecycleCallback reference this {@link Crouton} is holding
+   */
+  void detachLifecycleCallback() {
+    lifecycleCallback = null;
+  }
+  
+  /**
+   * @param lifecycleCallback
+   *          Callback object for notable events in the life of a Crouton.
+   */
+  public Crouton setLifecycleCallback(LifecycleCallback lifecycleCallback) {
+	  this.lifecycleCallback = lifecycleCallback;
+	  return this;
+  }
+  
+  /**
+   * @return the lifecycleCallback
+   */
+  LifecycleCallback getLifecycleCallback() {
+	  return lifecycleCallback;
+  }
 
   /**
    * @return the style
@@ -282,6 +467,13 @@ public final class Crouton {
    */
   Activity getActivity() {
     return activity;
+  }
+  
+  /**
+   * @return the viewGroup
+   */
+  ViewGroup getViewGroup() {
+    return viewGroup;
   }
 
   /**
