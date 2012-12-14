@@ -16,44 +16,60 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <name>Crouton Demo</name>
-    <artifactId>de.keyboardsurfer.app.demo.crouton</artifactId>
-    <packaging>apk</packaging>
+  <name>Crouton Demo</name>
+  <artifactId>de.keyboardsurfer.app.demo.crouton</artifactId>
+  <packaging>apk</packaging>
 
-    <parent>
-        <artifactId>crouton-parent</artifactId>
-				<version>1.6</version>
-        <groupId>de.keyboardsurfer.android.widget</groupId>
-    </parent>
+  <parent>
+    <artifactId>crouton-parent</artifactId>
+    <version>1.6</version>
+    <groupId>de.keyboardsurfer.android.widget</groupId>
+  </parent>
 
-    <dependencies>
-        <dependency>
-            <artifactId>android</artifactId>
-            <version>${android.version}</version>
-            <groupId>com.google.android</groupId>
-            <scope>provided</scope>
-        </dependency>
+  <dependencies>
+    <dependency>
+      <artifactId>android</artifactId>
+      <version>${android.version}</version>
+      <groupId>com.google.android</groupId>
+      <scope>provided</scope>
+    </dependency>
 
-        <dependency>
-            <artifactId>crouton</artifactId>
-            <version>${project.version}</version>
-            <groupId>de.keyboardsurfer.android.widget</groupId>
-        </dependency>
-    </dependencies>
+    <dependency>
+      <artifactId>crouton</artifactId>
+      <version>${project.version}</version>
+      <groupId>de.keyboardsurfer.android.widget</groupId>
+    </dependency>
 
-    <build>
-        <sourceDirectory>src</sourceDirectory>
+    <dependency>
+      <groupId>com.actionbarsherlock</groupId>
+      <artifactId>actionbarsherlock</artifactId>
+      <version>4.2.0</version>
+      <type>apklib</type>
+    </dependency>
 
-        <plugins>
-            <plugin>
-                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-                <artifactId>android-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+    <dependency>
+      <groupId>com.viewpagerindicator</groupId>
+      <artifactId>library</artifactId>
+      <version>2.4.1</version>
+      <type>apklib</type>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+
+    <plugins>
+      <plugin>
+        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+        <artifactId>android-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

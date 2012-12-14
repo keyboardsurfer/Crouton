@@ -18,15 +18,17 @@
 
 <resources>
 
-	<string name="app_name">Crouton Demo</string>
-
-	<string name="button_show">Show</string>
-
-	<string name="hint_duration">Display duration in milliseconds.</string>
-	<string name="hint_text">The text you want to display.</string>
-
-	<string name="text_demo">This is a demo text, enter text below to display.</string>
-
-	<string name="warning_duration">You\'ll need to set the duration!</string>
-
+  <string name="app_name">Crouton Demo</string>
+  <string name="button_show">Show</string>
+  <string name="hint_duration">Display duration in milliseconds.</string>
+  <string name="hint_text">The text you want to display.</string>
+  <string name="text_demo">This is a demo text, enter text below to display.</string>
+  <string name="warning_duration">You\'ll need to set the duration!</string>
+  <string name="display_on_top">Display on top</string>
+  <string name="crouton">Crouton</string>
+  <string name="about">About</string>
+  <string name="git_hub">Source on GitHub</string>
+  <string name="repo_url">https://github.com/keyboardsurfer/Crouton</string>
+  <string name="gplus_url">https://plus.google.com/117509657298845443204</string>
+  <string name="credits">Crouton was written by %1$s. Feel free to provide feedback (bugs, etc) and pull requests on %2$s.</string>
 </resources>

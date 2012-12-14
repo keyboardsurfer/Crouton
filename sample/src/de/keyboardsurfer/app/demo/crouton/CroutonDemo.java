@@ -16,25 +16,38 @@
 
 package de.keyboardsurfer.app.demo.crouton;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.EditText;
-import android.widget.Spinner;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.viewpagerindicator.TitlePageIndicator;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
 
 
-public class CroutonDemo extends Activity implements OnItemSelectedListener {
+public class CroutonDemo extends SherlockFragmentActivity {
+
+  ViewPager croutonPager;
+
+  enum PageInfo {
+
+    Crouton(R.string.crouton), About(R.string.about);
+
+    int titleResId;
+
+    PageInfo(int titleResId) {
+      this.titleResId = titleResId;
+    }
+  }
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-
-    setUpSpinnerListener();
+    croutonPager = (ViewPager) findViewById(R.id.crouton_pager);
+    croutonPager.setAdapter(new CroutonPagerAdapter(getSupportFragmentManager()));
+    ((TitlePageIndicator) findViewById(R.id.titles)).setViewPager(croutonPager);
   }
 
   @Override
@@ -45,113 +58,31 @@ public class CroutonDemo extends Activity implements OnItemSelectedListener {
     super.onDestroy();
   }
 
-  private void setUpSpinnerListener() {
-    Spinner styleSpinner = (Spinner) findViewById(R.id.spinner_style);
-    styleSpinner.setOnItemSelectedListener(this);
-  }
+  class CroutonPagerAdapter extends FragmentPagerAdapter {
 
-  public void onClick(View view) {
-    switch (view.getId()) {
-      case R.id.button_show: {
-        showCrouton();
-        break;
-      }
-
-      default: {
-        break;
-      }
-    }
-  }
-
-  private void showCrouton() {
-    Style croutonStyle = getSelectedStyleFromSpinner();
-
-    if (croutonStyle != null) {
-      showNonCustomCrouton();
-    } else {
-      showCustomCrouton();
-    }
-  }
-
-  private Style getSelectedStyleFromSpinner() {
-    Spinner styleSpinner = (Spinner) findViewById(R.id.spinner_style);
-
-    switch ((int) styleSpinner.getSelectedItemId()) {
-      case 0: {
-        return Style.ALERT;
-      }
-
-      case 1: {
-        return Style.CONFIRM;
-      }
-
-      case 2: {
-        return Style.INFO;
-      }
-
-      default: {
-        return null;
-      }
-    }
-  }
-
-  private void showNonCustomCrouton() {
-    Style croutonStyle = getSelectedStyleFromSpinner();
-    String croutonText = getCroutonText();
-
-    Crouton.makeText(this, croutonText, croutonStyle).show();
-  }
-
-  private String getCroutonText() {
-    EditText croutonTextEdit = (EditText) findViewById(R.id.edit_text_text);
-
-    String croutonText = croutonTextEdit.getText().toString().trim();
-
-    if (TextUtils.isEmpty(croutonText)) {
-      croutonText = getString(R.string.text_demo);
+    public CroutonPagerAdapter(FragmentManager fm) {
+      super(fm);
     }
 
-    return croutonText;
-  }
+    @Override
+    public Fragment getItem(int position) {
 
-  private void showCustomCrouton() {
-    String croutonDurationString = getCroutonDurationString();
-
-    if (TextUtils.isEmpty(croutonDurationString)) {
-      Crouton.makeText(this, R.string.warning_duration, Style.ALERT).show();
-      return;
+      if (PageInfo.Crouton.ordinal() == position) {
+        return new CroutonFragment();
+      } else if (PageInfo.About.ordinal() == position) {
+        return new AboutFragment();
+      }
+      return null;
     }
 
-    int croutonDuration = Integer.parseInt(croutonDurationString);
-    Style croutonStyle = new Style.Builder().setDuration(croutonDuration).build();
-
-    String croutonText = getCroutonText();
-
-    Crouton.makeText(this, croutonText, croutonStyle).show();
-  }
-
-  private String getCroutonDurationString() {
-    EditText croutonDurationEdit = (EditText) findViewById(R.id.edit_text_duration);
-
-    return croutonDurationEdit.getText().toString().trim();
-  }
-
-  public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-    EditText croutonDurationEdit = (EditText) findViewById(R.id.edit_text_duration);
-
-    switch ((int) id) {
-      case 3: {
-        croutonDurationEdit.setVisibility(View.VISIBLE);
-        break;
-      }
-
-      default: {
-        croutonDurationEdit.setVisibility(View.GONE);
-        break;
-      }
+    @Override
+    public int getCount() {
+      return PageInfo.values().length;
     }
-  }
 
-  public void onNothingSelected(AdapterView<?> adapterView) {
+    @Override
+    public CharSequence getPageTitle(int position) {
+      return CroutonDemo.this.getString(PageInfo.values()[position].titleResId);
+    }
   }
 }

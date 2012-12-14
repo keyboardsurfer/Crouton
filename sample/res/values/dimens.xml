@@ -18,6 +18,6 @@
 
 <resources>
 
-    <dimen name="padding_form">20dp</dimen>
+    <dimen name="padding_default">20dp</dimen>
 
 </resources>
