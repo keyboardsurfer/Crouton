@@ -251,6 +251,18 @@ final class Manager extends Handler {
    *          The {@link Crouton} that should be removed.
    */
   void removeCroutonImmediately(Crouton crouton) {
+    // if Crouton has already been displayed then it may not be in the queue (because it was popped).
+    // This ensures the displayed Crouton is removed from its parent immediately, whether another instance
+    // of it exists in the queue or not.
+    // Note: crouton.isShowing() is false here even if it really is showing, as croutonView object in
+	  // Crouton seems to be out of sync with reality!
+	  if (crouton.getActivity() != null && crouton.getView() != null && crouton.getView().getParent() != null) {
+	    ((ViewGroup) crouton.getView().getParent()).removeView(crouton.getView());
+		  
+	    // remove any messages pending for the crouton
+	    removeAllMessagesForCrouton(crouton);
+	  }
+    // remove any matching croutons from queue
     if (croutonQueue != null) {
       final Iterator<Crouton> croutonIterator = croutonQueue.iterator();
       while (croutonIterator.hasNext()) {
