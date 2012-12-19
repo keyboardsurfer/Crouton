@@ -35,14 +35,14 @@
 		</developers>
     <modules>
         <module>library</module>
-        <module>sample</module>
+        <!--<module>sample</module>-->
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <android.version>4.0.1.2</android.version>
-        <android.version.platform>15</android.version.platform>
+        <android.version>4.1.1.4</android.version>
+        <android.version.platform>16</android.version.platform>
     </properties>
 
     <build>
