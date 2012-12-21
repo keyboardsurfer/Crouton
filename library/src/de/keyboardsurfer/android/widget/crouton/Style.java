@@ -19,7 +19,6 @@ package de.keyboardsurfer.android.widget.crouton;
 
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
@@ -236,14 +235,14 @@ public class Style {
 
     public Builder() {
       durationInMilliseconds = 3000;
-      heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
       paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
       backgroundColorValue = -1;
       isTileEnabled = false;
       textColorResourceId = android.R.color.white;
-      heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
+      heightInPixels = LayoutParams.WRAP_CONTENT;
+      widthInPixels = LayoutParams.MATCH_PARENT;
       gravity = Gravity.CENTER;
       imageDrawable = null;
       inAnimationResId = 0;
