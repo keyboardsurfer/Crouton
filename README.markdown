@@ -20,7 +20,7 @@ You can check some features in the Crouton Demo.
 
 ### Changelog
 
-#### 1.6
+#### 1.6 (19fa06077a860250ac4516ee158f72de68e788ce)
 
 - Crouton now can be used on any Android device with **API level 4+**.
 - Changes the package name to `de.keyboardsurfer.android.widget`
