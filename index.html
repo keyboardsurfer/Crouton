@@ -1,33 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
     <title>Crouton by keyboardsurfer</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
-
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/keyboardsurfer/Crouton">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/keyboardsurfer/Crouton/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/keyboardsurfer/Crouton/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-    <header>
-      <div class="container">
-        <h1>Crouton</h1>
-        <h2>Context sensitive notifications for Android  </h2>
+    <div class="wrapper">
 
-        <section id="downloads">
-          <a href="https://github.com/keyboardsurfer/Crouton/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/keyboardsurfer/Crouton/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/keyboardsurfer/Crouton" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+      <section>
+        <div id="title">
+          <h1>Crouton</h1>
+          <p>Context sensitive notifications for Android  </p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/keyboardsurfer">keyboardsurfer</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
 
-    <div class="container">
-      <section id="main_content">
         <h1>Crouton</h1>
 
 <p><img src="https://raw.github.com/keyboardsurfer/Crouton/master/sample/res/drawable-xhdpi/ic_launcher.png" alt="Crouton" title="Crouton logo"></p>
@@ -41,24 +51,38 @@
 <p>A Crouton will be displayed at the top of an application window.
 You can line up multiple Croutons for display, that will be shown one after another.</p>
 
-<h3>Important changes of upcoming version 1.6</h3>
-
-<p>Version 1.6 Crouton can be used on any Android device with API level 4+.</p>
-
-<p>Also 1.6 will change the package name to <code>de.keyboardsurfer.android.widget</code></p>
-
-<h3>A demo application is available on Google Play</h3>
+<p>You can check some features in the Crouton Demo.</p>
 
 <p><a href="http://play.google.com/store/apps/details?id=de.keyboardsurfer.app.demo.crouton">
   <img alt="Crouton Demo on Google Play" src="http://developer.android.com/images/brand/en_generic_rgb_wo_60.png"></a></p>
 
-<h3>Usage</h3>
+<h3>Changelog</h3>
+
+<h4>1.6 (19fa06077a860250ac4516ee158f72de68e788ce)</h4>
+
+<ul>
+<li>Crouton now can be used on any Android device with <strong>API level 4+</strong>.</li>
+<li>Changes the package name to <code>de.keyboardsurfer.android.widget</code>
+</li>
+<li>Adds possibility to set a custom width</li>
+<li>Integration with TalkBack</li>
+<li>Adds Accessibility features (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
+<li>Fixes bug that got Crouton out of sync with reality (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
+<li>New <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/LifecycleCallback.java">LifecycleCallback</a> (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
+<li>initializeCroutonView was refactored, to make it easier on the eyes</li>
+<li>removes redundant initialization within Style.Builder</li>
+<li>documentation improvments</li>
+</ul><h4>older versions</h4>
+
+<p>Please see the <code>git log</code></p>
+
+<h2>Usage</h2>
 
 <p>The API is kept as simple as the Toast API:</p>
 
 <p>Create a Crouton for any CharSequence:</p>
 
-<pre><code>Crouton.makeText(Activity, CharSequence, Style).show();
+<pre><code>Crouton.makeText(Activity, CharSequence, [Style]).show();
 </code></pre>
 
 <p>Create a Crouton with a String from your application's resources:</p>
@@ -66,12 +90,18 @@ You can line up multiple Croutons for display, that will be shown one after anot
 <pre><code>Crouton.makeText(Activity, int, Style).show();
 </code></pre>
 
-<p>You can also cancel scheduled Croutons by calling:</p>
+<h2>Important!</h2>
+
+<p>In your Activity.onDestroy() make sure to call</p>
 
 <pre><code>Crouton.cancelAllCroutons();
 </code></pre>
 
-<h3>Examples</h3>
+<p>to cancel cancel all scheduled Croutons.</p>
+
+<p>This is a workaround and further description is available in #24.</p>
+
+<h2>Basic Examples</h2>
 
 <p>Currently you can use the three different Style attributes displayed below out of the box:</p>
 
@@ -81,14 +111,14 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 <p><img src="https://github.com/keyboardsurfer/Crouton/raw/master/res/Info.png" alt="Info" title="Example of Style.INFO"></p>
 
-<h3>Extension and Modification</h3>
+<h2>Extension and Modification</h2>
 
-<p>The whole design of a Crouton is defined by <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Style.java">Style</a>.
+<p>The whole design of a Crouton is defined by <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a>.
 You can easily create your own Styles by calling one of the constructors of the Style class or use one of the already provided styles: Style.ALERT, Style.CONFIRM and Style.INFO.</p>
 
-<p>If you want to modify the general appearance you might want to have a look at the <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/ViewHolder.java">ViewHolder</a>.</p>
+<p>If you want to modify the general appearance you might want to have a look at the <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/ViewHolder.java">ViewHolder</a>.</p>
 
-<h3>Building</h3>
+<h2>Building</h2>
 
 <p>The build requires Maven. Operations are very simple:</p>
 
@@ -103,32 +133,47 @@ You can easily create your own Styles by calling one of the constructors of the 
 
 <div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
   <span class="nt">&lt;artifactId&gt;</span>crouton<span class="nt">&lt;/artifactId&gt;</span>
-  <span class="nt">&lt;version&gt;</span>1.5<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.6<span class="nt">&lt;/version&gt;</span>
   <span class="nt">&lt;groupId&gt;</span>de.keyboardsurfer.android.widget<span class="nt">&lt;/groupId&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
 
-<h3>Contribution</h3>
+<h2>Contribution</h2>
 
 <p>This section is subject to changes.</p>
 
-<p>For contributors using Eclipse there's a formatter available at the <a href="https://github.com/downloads/keyboardsurfer/Crouton/Crouton_Eclipseformatter.xml">download section</a>.
-If you want to contribute and create pull requests, make sure to use this formatter or format your commit in a way similar to it's example.</p>
+<h3>Pull requests welcome</h3>
 
-<h3>License</h3>
+<p>Feel free to contribute to Crouton.</p>
+
+<p>Either you found a bug or have created a new and awesome feature, just create a pull request.</p>
+
+<p>If you want to start to create a new feature or have any other questions regarding Crouton, <a href="https://github.com/keyboardsurfer/Crouton/issues/new">file an issue</a>.
+I'll try to answer as soon as I find the time.</p>
+
+<h3>Formatting</h3>
+
+<p>For contributors using Eclipse there's a formatter available at the <a href="https://github.com/downloads/keyboardsurfer/Crouton/Crouton_Eclipseformatter.xml">download section</a>.</p>
+
+<p>In order to reduce merging pains on my end, please use this formatter or format your commit in a way similar to it's example.</p>
+
+<p>If you're using IDEA, the Eclipse Formatter plugin should allow you to use the formatter as well.</p>
+
+<h2>License</h2>
 
 <ul>
 <li><a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Version 2.0</a></li>
-</ul><h3>Attributions</h3>
+</ul><h2>Attributions</h2>
 
-<p>The name and the idea of <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/neofonie/mobile/app/android/widget/crouton/Crouton.java">Crouton</a> originates in a <a href="http://android.cyrilmottier.com/?p=773">blog article</a> by Cyril Mottier.</p>
+<p>The name and the idea of <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Crouton.java">Crouton</a> originates in a <a href="http://android.cyrilmottier.com/?p=773">blog article</a> by Cyril Mottier.</p>
 
 <p>The Crouton logo has been created by <a href="http://marie-schweiz.de">Marie Schweiz</a>.</p>
 
 <p>The initial version was written by <a href="https://plus.google.com/117509657298845443204">Benjamin Weiss</a> at <a href="http://mobile.neofonie.de">Neofonie Mobile GmbH</a>.</p>
       </section>
-    </div>
 
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
   </body>
 </html>
