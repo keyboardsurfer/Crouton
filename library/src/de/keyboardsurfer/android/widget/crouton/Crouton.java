@@ -475,7 +475,7 @@ public final class Crouton {
    * croutons for the provided activity
    *
    * @param activity
-   *   - The {@link} Activity to clear the croutons for
+   *   - The {@link Activity} to clear the croutons for.
    */
   public static void clearCroutonsForActivity(Activity activity) {
     Manager.getInstance().clearCroutonsForActivity(activity);

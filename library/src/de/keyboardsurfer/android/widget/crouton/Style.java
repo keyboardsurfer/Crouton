@@ -490,7 +490,7 @@ public class Style {
     }
 
     /**
-     * The {@link ImageView.ScaleType} for the image
+     * The {@link android.widget.ImageView.ScaleType} for the image
      */
     public Builder setImageScaleType(ImageView.ScaleType imageScaleType) {
       this.imageScaleType = imageScaleType;
