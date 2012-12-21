@@ -611,11 +611,17 @@ public final class Crouton {
   }
 
   private void initializeCroutonView() {
-    //TODO refactor in a seperate View class!
     Resources resources = this.activity.getResources();
 
-    // create outer frame
-    this.croutonView = new FrameLayout(this.activity);
+    this.croutonView = initializeCroutonViewGroup(resources);
+
+    // create content view
+    RelativeLayout contentView = initializeContentView(resources);
+    this.croutonView.addView(contentView);
+  }
+
+  private FrameLayout initializeCroutonViewGroup(Resources resources) {
+    FrameLayout croutonView = new FrameLayout(this.activity);
 
     final int height;
     if (this.style.heightDimensionResId > 0) {
@@ -631,14 +637,14 @@ public final class Crouton {
       width = this.style.widthInPixels;
     }
 
-    this.croutonView.setLayoutParams(
+    croutonView.setLayoutParams(
       new FrameLayout.LayoutParams(width != 0 ? width : FrameLayout.LayoutParams.MATCH_PARENT, height));
 
     // set background
     if (this.style.backgroundColorValue != -1) {
-      this.croutonView.setBackgroundColor(this.style.backgroundColorValue);
+      croutonView.setBackgroundColor(this.style.backgroundColorValue);
     } else {
-      this.croutonView.setBackgroundColor(resources.getColor(this.style.backgroundColorResourceId));
+      croutonView.setBackgroundColor(resources.getColor(this.style.backgroundColorResourceId));
     }
 
     // set the background drawable if set. This will override the background
@@ -649,10 +655,12 @@ public final class Crouton {
       if (this.style.isTileEnabled) {
         drawable.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
       }
-      this.croutonView.setBackgroundDrawable(drawable);
+      croutonView.setBackgroundDrawable(drawable);
     }
+    return croutonView;
+  }
 
-    // create content view
+  private RelativeLayout initializeContentView(final Resources resources) {
     RelativeLayout contentView = new RelativeLayout(this.activity);
     contentView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
       RelativeLayout.LayoutParams.WRAP_CONTENT));
@@ -670,36 +678,28 @@ public final class Crouton {
     // only setup image if one is requested
     ImageView image = null;
     if ((this.style.imageDrawable != null) || (this.style.imageResId != 0)) {
-      image = new ImageView(this.activity);
-      image.setId(IMAGE_ID);
-      image.setAdjustViewBounds(true);
-      image.setScaleType(this.style.imageScaleType);
-
-      // set the image drawable if not null
-      if (this.style.imageDrawable != null) {
-        image.setImageDrawable(this.style.imageDrawable);
-      }
-
-      // set the image resource if not 0. This will overwrite the drawable
-      // if both are set
-      if (this.style.imageResId != 0) {
-        image.setImageResource(this.style.imageResId);
-      }
-
-      RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(
-        RelativeLayout.LayoutParams.WRAP_CONTENT,
-        RelativeLayout.LayoutParams.WRAP_CONTENT);
-      imageParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-      imageParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-      contentView.addView(image, imageParams);
+      image = initializeImageView();
+      contentView.addView(image, image.getLayoutParams());
     }
 
+    TextView text = initializeTextView(resources);
+
+    RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+      RelativeLayout.LayoutParams.WRAP_CONTENT);
+    if (image != null) {
+      textParams.addRule(RelativeLayout.RIGHT_OF, image.getId());
+    }
+    contentView.addView(text, textParams);
+    return contentView;
+  }
+
+  private TextView initializeTextView(final Resources resources) {
     TextView text = new TextView(this.activity);
     text.setId(TEXT_ID);
     text.setText(this.text);
     text.setTypeface(Typeface.DEFAULT_BOLD);
     text.setGravity(this.style.gravity);
-
+    
     // set the text color if set
     if (this.style.textColorResourceId != 0) {
       text.setTextColor(resources.getColor(this.style.textColorResourceId));
@@ -714,24 +714,47 @@ public final class Crouton {
 
     // Setup the shadow if requested
     if (this.style.textShadowColorResId != 0) {
-      int textShadowColor = resources.getColor(this.style.textShadowColorResId);
-      float textShadowRadius = this.style.textShadowRadius;
-      float textShadowDx = this.style.textShadowDx;
-      float textShadowDy = this.style.textShadowDy;
-      text.setShadowLayer(textShadowRadius, textShadowDx, textShadowDy, textShadowColor);
+      initializeTextViewShadow(resources, text);
     }
 
     // Set the text appearance
     if (this.style.textAppearanceResId != 0) {
       text.setTextAppearance(this.activity, this.style.textAppearanceResId);
     }
+    return text;
+  }
 
-    RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-      RelativeLayout.LayoutParams.WRAP_CONTENT);
-    if (image != null) {
-      textParams.addRule(RelativeLayout.RIGHT_OF, image.getId());
+  private void initializeTextViewShadow(final Resources resources, final TextView text) {
+    int textShadowColor = resources.getColor(this.style.textShadowColorResId);
+    float textShadowRadius = this.style.textShadowRadius;
+    float textShadowDx = this.style.textShadowDx;
+    float textShadowDy = this.style.textShadowDy;
+    text.setShadowLayer(textShadowRadius, textShadowDx, textShadowDy, textShadowColor);
+  }
+
+  private ImageView initializeImageView() {
+    ImageView image;
+    image = new ImageView(this.activity);
+    image.setId(IMAGE_ID);
+    image.setAdjustViewBounds(true);
+    image.setScaleType(this.style.imageScaleType);
+
+    // set the image drawable if not null
+    if (this.style.imageDrawable != null) {
+      image.setImageDrawable(this.style.imageDrawable);
     }
-    contentView.addView(text, textParams);
-    this.croutonView.addView(contentView);
+
+    // set the image resource if not 0. This will overwrite the drawable
+    // if both are set
+    if (this.style.imageResId != 0) {
+      image.setImageResource(this.style.imageResId);
+    }
+
+    RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(
+      RelativeLayout.LayoutParams.WRAP_CONTENT,
+      RelativeLayout.LayoutParams.WRAP_CONTENT);
+    imageParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+    imageParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+    return image;
   }
 }
