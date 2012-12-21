@@ -20,12 +20,13 @@ You can check some features in the Crouton Demo.
 
 ### Changelog
 
-#### 1.6 (19fa06077a860250ac4516ee158f72de68e788ce)
+#### [1.6](https://github.com/keyboardsurfer/Crouton/tree/1.6)
 
 - Crouton now can be used on any Android device with **API level 4+**.
 - Changes the package name to `de.keyboardsurfer.android.widget`
 - Adds possibility to set a custom width
-- Integration with TalkBack
+- Can now be added to any ViewGroup
+- Integration with TalkBack (@coreform)
 - Adds Accessibility features (@coreform)
 - Fixes bug that got Crouton out of sync with reality (@coreform)
 - New [LifecycleCallback](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/LifecycleCallback.java) (@coreform)
@@ -48,6 +49,12 @@ Create a Crouton for any CharSequence:
 Create a Crouton with a String from your application's resources:
 
     Crouton.makeText(Activity, int, Style).show();
+    
+Further you can attach a Crouton to any view like this:
+
+    Crouton.makeText(Activity, int, Style, int).show();
+
+If you would like a more graphical introduction to Crouton check out [this presentation](https://speakerdeck.com/keyboardsurfer/crouton-devfest-berlin-2012).
 
 ##Important!
 
@@ -71,9 +78,20 @@ Currently you can use the three different Style attributes displayed below out o
 ## Extension and Modification
 
 The whole design of a Crouton is defined by [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java).
-You can easily create your own Styles by calling one of the constructors of the Style class or use one of the already provided styles: Style.ALERT, Style.CONFIRM and Style.INFO.
 
-If you want to modify the general appearance you might want to have a look at the [ViewHolder](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/ViewHolder.java).
+You can use one of the styles Crouton ships with: **Style.ALERT**, **Style.CONFIRM** and **Style.INFO**. Or you can create your own Style.
+
+In general you can modify
+
+- display duration
+- dimension settings
+- options for the text to display
+- custom Views
+- appearance & disappearance Animation
+- displayed Image
+
+Since [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java) is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.
+
 
 ## Building
 
