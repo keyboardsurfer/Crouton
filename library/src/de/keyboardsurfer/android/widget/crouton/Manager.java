@@ -354,7 +354,7 @@ final class Manager extends Handler {
    * Adapted from https://http://eyes-free.googlecode.com/files/accessibility_codelab_demos_v2_src.zip
    * via https://github.com/coreform/android-formidable-validation
    *
-   * @param context, used to get AccesibilityManager
+   * @param context Used to get {@link AccessibilityManager}
    * @param text The text to announce.
    */
   public static void announceForAccessibilityCompat(Context context, CharSequence text) {
