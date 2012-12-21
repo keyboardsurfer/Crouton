@@ -25,7 +25,7 @@ You can check some features in the Crouton Demo.
 - Crouton now can be used on any Android device with **API level 4+**.
 - Changes the package name to `de.keyboardsurfer.android.widget`
 - Adds possibility to set a custom width
-- Can now be added to any ViewGroup
+- Can now be added to any ViewGroup (@coreform)
 - Integration with TalkBack (@coreform)
 - Adds Accessibility features (@coreform)
 - Fixes bug that got Crouton out of sync with reality (@coreform)
