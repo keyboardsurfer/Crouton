@@ -15,22 +15,28 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:orientation="vertical">
+  android:padding="@dimen/padding_default">
 
-  <com.viewpagerindicator.TitlePageIndicator
+  <LinearLayout
+    android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:id="@+id/titles"
-    app:footerIndicatorStyle="triangle"
-    android:background="@color/abs__background_holo_dark" />
+    android:layout_width="match_parent">
 
-  <android.support.v4.view.ViewPager
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:id="@+id/crouton_pager" />
+    <ImageView
+      android:src="@drawable/ic_launcher"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:contentDescription="@string/crouton"
+      android:layout_gravity="center" />
 
-</LinearLayout>
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/padding_default"
+      android:id="@+id/credits" />
+  </LinearLayout>
+</ScrollView>

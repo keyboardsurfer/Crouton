@@ -15,17 +15,20 @@
  * limitations under the License.
  */
 
-package de.neofonie.mobile.app.android.widget.crouton;
+package de.keyboardsurfer.android.widget.crouton;
 
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
-final class AnimationsBuilder {
-
+/**
+ * Builds the default animations for showing and hiding a {@link Crouton}.
+ */
+final class DefaultAnimationsBuilder {
   private static Animation slideInDownAnimation, slideOutUpAnimation;
 
-  private static final class SlideInDownAnimationParameters {
+  protected static final class SlideInDownAnimationParameters {
     private SlideInDownAnimationParameters() {
+      /* no-op */
     }
 
     public static final float FROM_X_DELTA = 0;
@@ -36,8 +39,9 @@ final class AnimationsBuilder {
     public static final long DURATION = 400;
   }
 
-  private static final class SlideOutUpAnimationParameters {
+  protected static final class SlideOutUpAnimationParameters {
     private SlideOutUpAnimationParameters() {
+      /* no-op */
     }
 
     public static final float FROM_X_DELTA = 0;
@@ -48,23 +52,32 @@ final class AnimationsBuilder {
     public static final long DURATION = 400;
   }
 
-  private AnimationsBuilder() {
+  private DefaultAnimationsBuilder() {
+    /* no-op */
   }
 
-  public static Animation buildSlideInDownAnimation() {
+  /**
+   * @return The default Animation for a showing {@link Crouton}.
+   */
+  public static Animation buildDefaultSlideInDownAnimation() {
     if (slideInDownAnimation == null) {
-      slideInDownAnimation = new TranslateAnimation(SlideInDownAnimationParameters.FROM_X_DELTA, SlideInDownAnimationParameters.TO_X_DELTA,
-          SlideInDownAnimationParameters.FROM_Y_DELTA, SlideInDownAnimationParameters.TO_Y_DELTA);
+      slideInDownAnimation = new TranslateAnimation(SlideInDownAnimationParameters.FROM_X_DELTA,
+        SlideInDownAnimationParameters.TO_X_DELTA,
+        SlideInDownAnimationParameters.FROM_Y_DELTA, SlideInDownAnimationParameters.TO_Y_DELTA);
       slideInDownAnimation.setDuration(SlideInDownAnimationParameters.DURATION);
     }
 
     return slideInDownAnimation;
   }
 
-  public static Animation buildSlideOutUpAnimation() {
+  /**
+   * @return The default Animation for a hiding {@link Crouton}.
+   */
+  public static Animation buildDefaultSlideOutUpAnimation() {
     if (slideOutUpAnimation == null) {
-      slideOutUpAnimation = new TranslateAnimation(SlideOutUpAnimationParameters.FROM_X_DELTA, SlideOutUpAnimationParameters.TO_X_DELTA,
-          SlideOutUpAnimationParameters.FROM_Y_DELTA, SlideOutUpAnimationParameters.TO_Y_DELTA);
+      slideOutUpAnimation = new TranslateAnimation(SlideOutUpAnimationParameters.FROM_X_DELTA,
+        SlideOutUpAnimationParameters.TO_X_DELTA,
+        SlideOutUpAnimationParameters.FROM_Y_DELTA, SlideOutUpAnimationParameters.TO_Y_DELTA);
       slideOutUpAnimation.setDuration(SlideOutUpAnimationParameters.DURATION);
     }
     return slideOutUpAnimation;

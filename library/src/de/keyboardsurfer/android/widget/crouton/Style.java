@@ -15,13 +15,13 @@
  * limitations under the License.
  */
 
-package de.neofonie.mobile.app.android.widget.crouton;
+package de.keyboardsurfer.android.widget.crouton;
 
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+
 
 /**
  * The style for a {@link Crouton}.
@@ -37,9 +37,12 @@ public class Style {
   public static final int holoBlueLight = 0xff33b5e5;
 
   static {
-    ALERT = new Builder().setDuration(5000).setBackgroundColorValue(holoRedLight).setHeight(LayoutParams.WRAP_CONTENT).build();
-    CONFIRM = new Builder().setDuration(3000).setBackgroundColorValue(holoGreenLight).setHeight(LayoutParams.WRAP_CONTENT).build();
-    INFO = new Builder().setDuration(3000).setBackgroundColorValue(holoBlueLight).setHeight(LayoutParams.WRAP_CONTENT).build();
+    ALERT = new Builder().setDuration(5000).setBackgroundColorValue(holoRedLight).setHeight(LayoutParams.WRAP_CONTENT)
+      .build();
+    CONFIRM = new Builder().setDuration(3000).setBackgroundColorValue(holoGreenLight).setHeight(
+      LayoutParams.WRAP_CONTENT).build();
+    INFO = new Builder().setDuration(3000).setBackgroundColorValue(holoBlueLight).setHeight(LayoutParams.WRAP_CONTENT)
+      .build();
   }
 
   /**
@@ -90,6 +93,16 @@ public class Style {
    * Resource ID for the height of the {@link Crouton}.
    */
   final int heightDimensionResId;
+  
+  /**
+   * The width of the {@link Crouton} in pixels.
+   */
+  final int widthInPixels;
+  
+  /**
+   * Resource ID for the width of the {@link Crouton}.
+   */
+  final int widthDimensionResId;
 
   /**
    * The text's gravity as provided by {@link Gravity}.
@@ -172,6 +185,8 @@ public class Style {
     this.textColorResourceId = builder.textColorResourceId;
     this.heightInPixels = builder.heightInPixels;
     this.heightDimensionResId = builder.heightDimensionResId;
+    this.widthInPixels = builder.widthInPixels;
+    this.widthDimensionResId = builder.widthDimensionResId;
     this.gravity = builder.gravity;
     this.imageDrawable = builder.imageDrawable;
     this.textSize = builder.textSize;
@@ -201,6 +216,8 @@ public class Style {
     private int textColorResourceId;
     private int heightInPixels;
     private int heightDimensionResId;
+    private int widthInPixels;
+    private int widthDimensionResId;
     private int gravity;
     private Drawable imageDrawable;
     private int textSize;
@@ -218,14 +235,14 @@ public class Style {
 
     public Builder() {
       durationInMilliseconds = 3000;
-      heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
       paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
       backgroundColorValue = -1;
       isTileEnabled = false;
       textColorResourceId = android.R.color.white;
-      heightInPixels = ViewGroup.LayoutParams.WRAP_CONTENT;
+      heightInPixels = LayoutParams.WRAP_CONTENT;
+      widthInPixels = LayoutParams.MATCH_PARENT;
       gravity = Gravity.CENTER;
       imageDrawable = null;
       inAnimationResId = 0;
@@ -236,7 +253,7 @@ public class Style {
 
     /**
      * Set the durationInMilliseconds option of the {@link Crouton}.
-     * 
+     *
      * @param duration
      *          The durationInMilliseconds the crouton will be displayed
      *          {@link Crouton} in milliseconds.
@@ -250,7 +267,7 @@ public class Style {
 
     /**
      * Set the backgroundColorResourceId option of the {@link Crouton}.
-     * 
+     *
      * @param backgroundColorResourceId
      *          The backgroundColorResourceId's resource id.
      * @return the {@link Builder}.
@@ -263,8 +280,8 @@ public class Style {
 
     /**
      * Set the backgroundColorResourceValue option of the {@link Crouton}.
-     * 
-     * @param backgroundColorResourceValue
+     *
+     * @param backgroundColorValue
      *          The backgroundColorResourceValue's e.g. 0xffff4444;
      * @return the {@link Builder}.
      */
@@ -275,7 +292,7 @@ public class Style {
 
     /**
      * Set the backgroundDrawableResourceId option for the {@link Crouton}.
-     * 
+     *
      * @param backgroundDrawableResourceId
      *          Resource ID of a backgroundDrawableResourceId image drawable.
      * @return the {@link Builder}.
@@ -288,7 +305,7 @@ public class Style {
 
     /**
      * Set the heightInPixels option for the {@link Crouton}.
-     * 
+     *
      * @param height
      *          The height of the {@link Crouton} in pixel. Can also be
      *          {@link LayoutParams#MATCH_PARENT} or
@@ -303,10 +320,9 @@ public class Style {
 
     /**
      * Set the resource id for the height option for the {@link Crouton}.
-     * 
+     *
      * @param heightDimensionResId
-     *          Resource ID of a dimension for the height of the {@link Crouton}
-     *          .
+     *          Resource ID of a dimension for the height of the {@link Crouton}.
      * @return the {@link Builder}.
      */
     public Builder setHeightDimensionResId(int heightDimensionResId) {
@@ -316,8 +332,36 @@ public class Style {
     }
 
     /**
+     * Set the widthInPixels option for the {@link Crouton}.
+     *
+     * @param width
+     *          The width of the {@link Crouton} in pixel. Can also be
+     *          {@link LayoutParams#MATCH_PARENT} or
+     *          {@link LayoutParams#WRAP_CONTENT}.
+     * @return the {@link Builder}.
+     */
+    public Builder setWidth(int width) {
+      this.widthInPixels = width;
+
+      return this;
+    }
+
+    /**
+     * Set the resource id for the width option for the {@link Crouton}.
+     *
+     * @param widthDimensionResId
+     *          Resource ID of a dimension for the width of the {@link Crouton}.
+     * @return the {@link Builder}.
+     */
+    public Builder setWidthDimensionResId(int widthDimensionResId) {
+      this.widthDimensionResId = widthDimensionResId;
+
+      return this;
+    }
+
+    /**
      * Set the isTileEnabled option for the {@link Crouton}.
-     * 
+     *
      * @param isTileEnabled
      *          <code>true</code> if you want the backgroundResourceId to be
      *          tiled, else <code>false</code>.
@@ -331,7 +375,7 @@ public class Style {
 
     /**
      * Set the textColorResourceId option for the {@link Crouton}.
-     * 
+     *
      * @param textColor
      *          The resource id of the text colorResourceId.
      * @return the {@link Builder}.
@@ -344,7 +388,7 @@ public class Style {
 
     /**
      * Set the gravity option for the {@link Crouton}.
-     * 
+     *
      * @param gravity
      *          The text's gravity as provided by {@link Gravity}.
      * @return the {@link Builder}.
@@ -357,7 +401,7 @@ public class Style {
 
     /**
      * Set the image option for the {@link Crouton}.
-     * 
+     *
      * @param imageDrawable
      *          An additional image to display in the {@link Crouton}.
      * @return the {@link Builder}.
@@ -370,7 +414,7 @@ public class Style {
 
     /**
      * Set the image resource option for the {@link Crouton}.
-     * 
+     *
      * @param imageResId
      *          An additional image to display in the {@link Crouton}.
      * @return the {@link Builder}.
@@ -446,7 +490,7 @@ public class Style {
     }
 
     /**
-     * The {@link ImageView.ScaleType} for the image
+     * The {@link android.widget.ImageView.ScaleType} for the image
      */
     public Builder setImageScaleType(ImageView.ScaleType imageScaleType) {
       this.imageScaleType = imageScaleType;

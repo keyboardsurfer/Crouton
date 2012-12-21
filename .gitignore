@@ -2,6 +2,7 @@
 *.apk
 *.ap_
 *.jar
+gen-external-apklibs
 
 # keystore
 *.keystore
