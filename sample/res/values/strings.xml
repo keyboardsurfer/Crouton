@@ -30,5 +30,8 @@
   <string name="git_hub">Source on GitHub</string>
   <string name="repo_url">https://github.com/keyboardsurfer/Crouton</string>
   <string name="gplus_url">https://plus.google.com/117509657298845443204</string>
-  <string name="credits">Crouton was written by %1$s. Feel free to provide feedback (bugs, etc) and pull requests on %2$s.</string>
+  <string name="credits">Crouton was written by %1$s.</string>
+  <string name="disclaimer">This app is not a complete example of what is possible with Crouton, merely a short demonstration of basic features.</string>
+  <string name="feedback">Feel free to provide feedback (bugs, etc) and pull requests on %1$s. Also further documentation is available there.</string>
+  <string name="attributions">This app uses software licensed under the %1$s. Further information can be seen in the app\'s source code on %2$s.</string>
 </resources>
