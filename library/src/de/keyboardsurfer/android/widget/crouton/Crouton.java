@@ -617,14 +617,22 @@ public final class Crouton {
     // create outer frame
     this.croutonView = new FrameLayout(this.activity);
 
-    int height = this.style.heightInPixels;
-
-    // if a height dimension has been set, this will overwrite any height in
-    // pixels
+    final int height;
     if (this.style.heightDimensionResId > 0) {
       height = resources.getDimensionPixelSize(this.style.heightDimensionResId);
+    } else {
+      height = this.style.heightInPixels;
     }
-    this.croutonView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height));
+
+    final int width;
+    if (this.style.widthDimensionResId > 0) {
+      width = resources.getDimensionPixelSize(this.style.widthDimensionResId);
+    } else {
+      width = this.style.widthInPixels;
+    }
+
+    this.croutonView.setLayoutParams(
+      new FrameLayout.LayoutParams(width != 0 ? width : FrameLayout.LayoutParams.MATCH_PARENT, height));
 
     // set background
     if (this.style.backgroundColorValue != -1) {

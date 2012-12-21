@@ -94,6 +94,16 @@ public class Style {
    * Resource ID for the height of the {@link Crouton}.
    */
   final int heightDimensionResId;
+  
+  /**
+   * The width of the {@link Crouton} in pixels.
+   */
+  final int widthInPixels;
+  
+  /**
+   * Resource ID for the width of the {@link Crouton}.
+   */
+  final int widthDimensionResId;
 
   /**
    * The text's gravity as provided by {@link Gravity}.
@@ -176,6 +186,8 @@ public class Style {
     this.textColorResourceId = builder.textColorResourceId;
     this.heightInPixels = builder.heightInPixels;
     this.heightDimensionResId = builder.heightDimensionResId;
+    this.widthInPixels = builder.widthInPixels;
+    this.widthDimensionResId = builder.widthDimensionResId;
     this.gravity = builder.gravity;
     this.imageDrawable = builder.imageDrawable;
     this.textSize = builder.textSize;
@@ -205,6 +217,8 @@ public class Style {
     private int textColorResourceId;
     private int heightInPixels;
     private int heightDimensionResId;
+    private int widthInPixels;
+    private int widthDimensionResId;
     private int gravity;
     private Drawable imageDrawable;
     private int textSize;
@@ -309,12 +323,39 @@ public class Style {
      * Set the resource id for the height option for the {@link Crouton}.
      *
      * @param heightDimensionResId
-     *          Resource ID of a dimension for the height of the {@link Crouton}
-     *          .
+     *          Resource ID of a dimension for the height of the {@link Crouton}.
      * @return the {@link Builder}.
      */
     public Builder setHeightDimensionResId(int heightDimensionResId) {
       this.heightDimensionResId = heightDimensionResId;
+
+      return this;
+    }
+
+    /**
+     * Set the widthInPixels option for the {@link Crouton}.
+     *
+     * @param width
+     *          The width of the {@link Crouton} in pixel. Can also be
+     *          {@link LayoutParams#MATCH_PARENT} or
+     *          {@link LayoutParams#WRAP_CONTENT}.
+     * @return the {@link Builder}.
+     */
+    public Builder setWidth(int width) {
+      this.widthInPixels = width;
+
+      return this;
+    }
+
+    /**
+     * Set the resource id for the width option for the {@link Crouton}.
+     *
+     * @param widthDimensionResId
+     *          Resource ID of a dimension for the width of the {@link Crouton}.
+     * @return the {@link Builder}.
+     */
+    public Builder setWidthDimensionResId(int widthDimensionResId) {
+      this.widthDimensionResId = widthDimensionResId;
 
       return this;
     }

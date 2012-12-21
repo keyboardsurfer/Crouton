@@ -96,7 +96,7 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
 
       case 2: {
         return Style.INFO;
-      }
+      }                                                                                                       
 
       default: {
         return null;

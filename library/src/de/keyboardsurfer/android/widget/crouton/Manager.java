@@ -195,9 +195,9 @@ final class Manager extends Handler {
         params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
       }
       // display Crouton in ViewGroup is it has been supplied
-      if((ViewGroup)crouton.getViewGroup() != null) {
+      if(crouton.getViewGroup() != null) {
     	  // TODO implement add to last position feature (need to align with how this will be requested for activity)
-    	  ((ViewGroup)crouton.getViewGroup()).addView(croutonView, 0, params);	
+    	  crouton.getViewGroup().addView(croutonView, 0, params);	
       } else {
     	  crouton.getActivity().addContentView(croutonView, params);
       }
