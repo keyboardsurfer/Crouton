@@ -20,12 +20,15 @@ package de.keyboardsurfer.android.widget.crouton;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
-
+/**
+ * Builds the default animations for showing and hiding a {@link Crouton}.
+ */
 final class DefaultAnimationsBuilder {
   private static Animation slideInDownAnimation, slideOutUpAnimation;
 
-  private static final class SlideInDownAnimationParameters {
+  protected static final class SlideInDownAnimationParameters {
     private SlideInDownAnimationParameters() {
+      /* no-op */
     }
 
     public static final float FROM_X_DELTA = 0;
@@ -36,8 +39,9 @@ final class DefaultAnimationsBuilder {
     public static final long DURATION = 400;
   }
 
-  private static final class SlideOutUpAnimationParameters {
+  protected static final class SlideOutUpAnimationParameters {
     private SlideOutUpAnimationParameters() {
+      /* no-op */
     }
 
     public static final float FROM_X_DELTA = 0;
@@ -49,8 +53,12 @@ final class DefaultAnimationsBuilder {
   }
 
   private DefaultAnimationsBuilder() {
+    /* no-op */
   }
 
+  /**
+   * @return The default Animation for a showing {@link Crouton}.
+   */
   public static Animation buildDefaultSlideInDownAnimation() {
     if (slideInDownAnimation == null) {
       slideInDownAnimation = new TranslateAnimation(SlideInDownAnimationParameters.FROM_X_DELTA,
@@ -62,6 +70,9 @@ final class DefaultAnimationsBuilder {
     return slideInDownAnimation;
   }
 
+  /**
+   * @return The default Animation for a hiding {@link Crouton}.
+   */
   public static Animation buildDefaultSlideOutUpAnimation() {
     if (slideOutUpAnimation == null) {
       slideOutUpAnimation = new TranslateAnimation(SlideOutUpAnimationParameters.FROM_X_DELTA,
