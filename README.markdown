@@ -17,6 +17,7 @@ You can check some features in the Crouton Demo.
          src="http://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
 </a>
 
+If you're already using Crouton and just want to download the latest version of the library, follow [this link](https://www.dropbox.com/sh/9vlov7im38vtqe9/Kpj6KZSv0D/Crouton).
 
 ### Changelog
 
