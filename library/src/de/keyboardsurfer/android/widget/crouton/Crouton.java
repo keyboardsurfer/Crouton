@@ -757,4 +757,19 @@ public final class Crouton {
     imageParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
     return image;
   }
+
+  @Override
+  public String toString() {
+    return "Crouton{" +
+      "text=" + text +
+      ", style=" + style +
+      ", customView=" + customView +
+      ", activity=" + activity +
+      ", viewGroup=" + viewGroup +
+      ", croutonView=" + croutonView +
+      ", inAnimation=" + inAnimation +
+      ", outAnimation=" + outAnimation +
+      ", lifecycleCallback=" + lifecycleCallback +
+      '}';
+  }
 }
