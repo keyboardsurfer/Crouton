@@ -143,4 +143,4 @@ The name and the idea of [Crouton](https://github.com/keyboardsurfer/Crouton/blo
 
 The Crouton logo has been created by [Marie Schweiz](http://marie-schweiz.de).
 
-The initial version was written by [Benjamin Weiss](https://plus.google.com/117509657298845443204) at [Neofonie Mobile GmbH](http://mobile.neofonie.de).
+The initial version was written by  <a href="https://plus.google.com/u/0/117509657298845443204?rel=author">Benjamin Weiss</a> at [Neofonie Mobile GmbH](http://mobile.neofonie.de).
