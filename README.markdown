@@ -139,8 +139,8 @@ If you're using IDEA, the Eclipse Formatter plugin should allow you to use the f
 
 ## Attributions
 
+The initial version was written by  <a href="https://plus.google.com/u/0/117509657298845443204?rel=author">Benjamin Weiss</a> at [Neofonie Mobile GmbH](http://mobile.neofonie.de).
+
 The name and the idea of [Crouton](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
 
 The Crouton logo has been created by [Marie Schweiz](http://marie-schweiz.de).
-
-The initial version was written by  <a href="https://plus.google.com/u/0/117509657298845443204?rel=author">Benjamin Weiss</a> at [Neofonie Mobile GmbH](http://mobile.neofonie.de).
