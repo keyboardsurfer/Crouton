@@ -56,16 +56,19 @@ You can line up multiple Croutons for display, that will be shown one after anot
 <p><a href="http://play.google.com/store/apps/details?id=de.keyboardsurfer.app.demo.crouton">
   <img alt="Crouton Demo on Google Play" src="http://developer.android.com/images/brand/en_generic_rgb_wo_60.png"></a></p>
 
+<p>If you're already using Crouton and just want to download the latest version of the library, follow <a href="https://www.dropbox.com/sh/9vlov7im38vtqe9/Kpj6KZSv0D/Crouton">this link</a>.</p>
+
 <h3>Changelog</h3>
 
-<h4>1.6 (19fa06077a860250ac4516ee158f72de68e788ce)</h4>
+<h4><a href="https://github.com/keyboardsurfer/Crouton/tree/1.6">1.6</a></h4>
 
 <ul>
 <li>Crouton now can be used on any Android device with <strong>API level 4+</strong>.</li>
 <li>Changes the package name to <code>de.keyboardsurfer.android.widget</code>
 </li>
 <li>Adds possibility to set a custom width</li>
-<li>Integration with TalkBack</li>
+<li>Can now be added to any ViewGroup (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
+<li>Integration with TalkBack (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
 <li>Adds Accessibility features (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
 <li>Fixes bug that got Crouton out of sync with reality (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
 <li>New <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/LifecycleCallback.java">LifecycleCallback</a> (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
@@ -90,6 +93,13 @@ You can line up multiple Croutons for display, that will be shown one after anot
 <pre><code>Crouton.makeText(Activity, int, Style).show();
 </code></pre>
 
+<p>Further you can attach a Crouton to any view like this:</p>
+
+<pre><code>Crouton.makeText(Activity, int, Style, int).show();
+</code></pre>
+
+<p>If you would like a more graphical introduction to Crouton check out <a href="https://speakerdeck.com/keyboardsurfer/crouton-devfest-berlin-2012">this presentation</a>.</p>
+
 <h2>Important!</h2>
 
 <p>In your Activity.onDestroy() make sure to call</p>
@@ -113,10 +123,20 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 <h2>Extension and Modification</h2>
 
-<p>The whole design of a Crouton is defined by <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a>.
-You can easily create your own Styles by calling one of the constructors of the Style class or use one of the already provided styles: Style.ALERT, Style.CONFIRM and Style.INFO.</p>
+<p>The whole design of a Crouton is defined by <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a>.</p>
 
-<p>If you want to modify the general appearance you might want to have a look at the <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/ViewHolder.java">ViewHolder</a>.</p>
+<p>You can use one of the styles Crouton ships with: <strong>Style.ALERT</strong>, <strong>Style.CONFIRM</strong> and <strong>Style.INFO</strong>. Or you can create your own Style.</p>
+
+<p>In general you can modify</p>
+
+<ul>
+<li>display duration</li>
+<li>dimension settings</li>
+<li>options for the text to display</li>
+<li>custom Views</li>
+<li>appearance &amp; disappearance Animation</li>
+<li>displayed Image</li>
+</ul><p>Since <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a> is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.</p>
 
 <h2>Building</h2>
 
@@ -165,15 +185,25 @@ I'll try to answer as soon as I find the time.</p>
 <li><a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Version 2.0</a></li>
 </ul><h2>Attributions</h2>
 
+<p>The initial version was written by  <a href="https://plus.google.com/u/0/117509657298845443204?rel=author">Benjamin Weiss</a> at <a href="http://mobile.neofonie.de">Neofonie Mobile GmbH</a>.</p>
+
 <p>The name and the idea of <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Crouton.java">Crouton</a> originates in a <a href="http://android.cyrilmottier.com/?p=773">blog article</a> by Cyril Mottier.</p>
 
 <p>The Crouton logo has been created by <a href="http://marie-schweiz.de">Marie Schweiz</a>.</p>
-
-<p>The initial version was written by <a href="https://plus.google.com/117509657298845443204">Benjamin Weiss</a> at <a href="http://mobile.neofonie.de">Neofonie Mobile GmbH</a>.</p>
       </section>
 
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-9429532-4");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
