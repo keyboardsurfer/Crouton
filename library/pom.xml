@@ -32,6 +32,27 @@
         <groupId>de.keyboardsurfer.android.widget</groupId>
     </parent>
 
+	<developers>
+		<developer>
+			<id>keyboardsurfer</id>
+			<name>Benjamin Weiss</name>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>git@github.com:keyboardsurfer/Crouton.git</url>
+		<developerConnection>scm:git:git@github.com:keyboardsurfer/Crouton.git</developerConnection>
+		<connection>scm:git:git@github.com:keyboardsurfer/Crouton.git</connection>
+	</scm>
+
     <dependencies>
         <dependency>
             <artifactId>android</artifactId>
