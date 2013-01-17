@@ -42,34 +42,48 @@
     <dependency>
       <artifactId>crouton</artifactId>
       <version>${project.version}</version>
-      <groupId>de.keyboardsurfer.android.widget</groupId>
-    </dependency>
+			<groupId>de.keyboardsurfer.android.widget</groupId>
+		</dependency>
 
     <dependency>
-      <groupId>com.actionbarsherlock</groupId>
-      <artifactId>actionbarsherlock</artifactId>
-      <version>4.2.0</version>
-      <type>apklib</type>
-    </dependency>
+      <artifactId>crouton</artifactId>
+      <version>${project.version}</version>
+			<groupId>de.keyboardsurfer.android.widget</groupId>
+			<classifier>javadoc</classifier>
+		</dependency>
 
     <dependency>
-      <groupId>com.viewpagerindicator</groupId>
-      <artifactId>library</artifactId>
-      <version>2.4.1</version>
-      <type>apklib</type>
-    </dependency>
+      <artifactId>crouton</artifactId>
+      <version>${project.version}</version>
+			<groupId>de.keyboardsurfer.android.widget</groupId>
+			<classifier>sources</classifier>
+		</dependency>
 
-  </dependencies>
+		<dependency>
+			<groupId>com.actionbarsherlock</groupId>
+			<artifactId>actionbarsherlock</artifactId>
+			<version>4.2.0</version>
+			<type>apklib</type>
+		</dependency>
 
-  <build>
-    <sourceDirectory>src</sourceDirectory>
+		<dependency>
+			<groupId>com.viewpagerindicator</groupId>
+			<artifactId>library</artifactId>
+			<version>2.4.1</version>
+			<type>apklib</type>
+		</dependency>
 
-    <plugins>
-      <plugin>
-        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-        <artifactId>android-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+
+		<plugins>
+			<plugin>
+				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

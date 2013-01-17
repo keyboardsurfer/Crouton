@@ -1,0 +1,46 @@
+buildscript {
+	repositories {
+		mavenCentral()
+			// To use a development snapshot version of the plugin, add the
+			// Sonatype Snapshots repository.
+			maven {
+				url "https://oss.sonatype.org/content/repositories/snapshots"
+			}
+	}
+
+	dependencies {
+		classpath 'org.gradle.api.plugins:gradle-android-plugin:1.2.1'
+	}
+}
+
+apply plugin: 'android'
+
+repositories {
+	mavenCentral()
+}
+
+// Sets the package version
+version = "1.0.0"
+
+// Signing configuration, valid for all builds (1)
+androidSignAndAlign {
+	keyStore = "path/to/my/keystore"
+		keyAlias = "my-key-alias"
+		keyStorePassword = "mystorepass"
+		keyAliasPassword = "myaliaspass"
+}
+
+// Configure the filtering of resources with properties from the Gradle's project scope (2)
+processResources {
+	expand (project.properties)
+}
+
+// Configure a dedicated debug build (3)
+task configureDebug << {
+	jar.classifier = "debug"
+}
+
+// Configure a dedicated release build (4)
+task configureRelease << {
+	proguard.enabled = true
+}

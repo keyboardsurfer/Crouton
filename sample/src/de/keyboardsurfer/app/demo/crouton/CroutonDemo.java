@@ -53,7 +53,7 @@ public class CroutonDemo extends SherlockFragmentActivity {
   @Override
   protected void onDestroy() {
     // Workaround until there's a way to detach the Activity from Crouton while
-    // there are still some in the Queue. #
+    // there are still some in the Queue.
     Crouton.clearCroutonsForActivity(this);
     super.onDestroy();
   }
