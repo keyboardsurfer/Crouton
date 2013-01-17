@@ -34,6 +34,7 @@
       <name>Benjamin Weiss</name>
 		</developer>
 	</developers>
+
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -41,10 +42,12 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+
 	<scm>
 		<url>git@github.com:keyboardsurfer/Crouton.git</url>
+		<developerConnection>scm:git:git@github.com:keyboardsurfer/Crouton.git</developerConnection>
+		<connection>scm:git:git@github.com:keyboardsurfer/Crouton.git</connection>
 	</scm>
-
 
 	<modules>
 		<module>library</module>
@@ -53,7 +56,6 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
 		<android.version>4.1.1.4</android.version>
 		<android.version.platform>16</android.version.platform>
 	</properties>
