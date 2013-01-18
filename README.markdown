@@ -94,12 +94,43 @@ In general you can modify
 Since [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java) is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.
 
 
-## Building
+## Maven
+
+### From maven central
+
+Crouton is available in the maven central repository.
+
+To use crouton simply add
+
+```xml
+<dependency>
+  <artifactId>crouton</artifactId>
+  <version>1.6</version>
+  <groupId>de.keyboardsurfer.android.widget</groupId>
+</dependency>
+```
+
+to your pom.xml
+
+If you also want the sources or javadoc add the respective classifier  
+
+```xml
+  <classifier>sources</classifier>
+```
+
+or
+
+```xml
+  <classifier>javadoc</classifier>
+```
+to the dependency.
+
+### DIY
 
 The build requires Maven. Operations are very simple:
 
-* `mvn -f library/pom.xml clean package` will build `jar` library;
-* `mvn clean package` will build `jar` library and sample application `apk` package;
+* `mvn -f library/pom.xml clean package` will build a `jar` library;
+* `mvn clean package` will build a `jar` library and the sample application `apk`;
 * `mvn -f library/pom.xml clean install` will put Crouton in your local Maven repository.
 
 After putting Crouton in the repository you can add it as a dependency.
@@ -113,8 +144,6 @@ After putting Crouton in the repository you can add it as a dependency.
 ```
 
 ## Contribution
-
-This section is subject to changes.
 
 ### Pull requests welcome
 
