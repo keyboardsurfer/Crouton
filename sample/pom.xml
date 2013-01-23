@@ -23,13 +23,38 @@
 
   <name>Crouton Demo</name>
   <artifactId>de.keyboardsurfer.app.demo.crouton</artifactId>
+	<version>1.6.1</version>
+  <groupId>de.keyboardsurfer.app.demo.crouton</groupId>
   <packaging>apk</packaging>
 
-  <parent>
-    <artifactId>crouton-parent</artifactId>
-    <version>1.6</version>
-    <groupId>de.keyboardsurfer.android.widget</groupId>
-  </parent>
+  <developers>
+    <developer>
+      <id>keyboardsurfer</id>
+      <name>Benjamin Weiss</name>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>git@github.com:keyboardsurfer/Crouton.git</url>
+		<developerConnection>scm:git:git@github.com:keyboardsurfer/Crouton.git</developerConnection>
+		<connection>scm:git:git@github.com:keyboardsurfer/Crouton.git</connection>
+	</scm>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<crouton.version>1.6</crouton.version>
+		<android.version>4.1.1.4</android.version>
+		<android.version.platform>16</android.version.platform>
+	</properties>
 
   <dependencies>
     <dependency>
@@ -41,20 +66,20 @@
 
     <dependency>
       <artifactId>crouton</artifactId>
-      <version>${project.version}</version>
+			<version>${crouton.version}</version>
 			<groupId>de.keyboardsurfer.android.widget</groupId>
 		</dependency>
 
     <dependency>
       <artifactId>crouton</artifactId>
-      <version>${project.version}</version>
+      <version>${crouton.version}</version>
 			<groupId>de.keyboardsurfer.android.widget</groupId>
 			<classifier>javadoc</classifier>
 		</dependency>
 
     <dependency>
       <artifactId>crouton</artifactId>
-      <version>${project.version}</version>
+      <version>${crouton.version}</version>
 			<groupId>de.keyboardsurfer.android.widget</groupId>
 			<classifier>sources</classifier>
 		</dependency>
@@ -79,10 +104,19 @@
 		<sourceDirectory>src</sourceDirectory>
 
 		<plugins>
-			<plugin>
-				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
-				<artifactId>android-maven-plugin</artifactId>
-			</plugin>
+				<plugin>
+					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+					<artifactId>android-maven-plugin</artifactId>
+					<version>3.4.1</version>
+					<extensions>true</extensions>
+					<configuration>
+						<sdk>
+							<platform>${android.version.platform}</platform>
+						</sdk>
+						<undeployBeforeDeploy>true</undeployBeforeDeploy>
+						<lazyLibraryUnpack>true</lazyLibraryUnpack>
+					</configuration>
+				</plugin>
 		</plugins>
 	</build>
 
