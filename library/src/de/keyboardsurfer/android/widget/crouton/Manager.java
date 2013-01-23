@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.FrameLayout;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -195,9 +196,13 @@ final class Manager extends Handler {
         params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
       }
       // display Crouton in ViewGroup is it has been supplied
-      if(crouton.getViewGroup() != null) {
+      if (crouton.getViewGroup() != null) {
     	  // TODO implement add to last position feature (need to align with how this will be requested for activity)
-    	  crouton.getViewGroup().addView(croutonView, 0, params);	
+          if (crouton.getViewGroup() instanceof FrameLayout) {
+    	      crouton.getViewGroup().addView(croutonView, params);	
+          } else {
+    	      crouton.getViewGroup().addView(croutonView, 0, params);	
+          }
       } else {
     	  crouton.getActivity().addContentView(croutonView, params);
       }
