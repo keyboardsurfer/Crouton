@@ -755,6 +755,9 @@ public final class Crouton {
       RelativeLayout.LayoutParams.WRAP_CONTENT);
     imageParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
     imageParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+    
+    image.setLayoutParams(imageParams);
+    
     return image;
   }
 
