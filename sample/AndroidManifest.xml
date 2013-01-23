@@ -17,7 +17,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.keyboardsurfer.app.demo.crouton"
-    android:versionCode="6"
+    android:versionCode="7"
     android:versionName="1.6.1" >
 
     <uses-sdk
@@ -36,7 +36,7 @@
         <activity
             android:name="CroutonDemo"
             android:label="@string/app_name"
-            android:theme="@style/Sherlock.Theme.Light" >
+            android:theme="@style/Theme.Sherlock.Light" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
