@@ -385,8 +385,8 @@ public class Style {
      * Set the isProgressEnabled option for the {@link Crouton}.
      *
      * @param isProgressEnabled
-     *          <code>true</code> if you want a small indeterminate ProgressBar to be displayed
-     *          , else <code>false</code>.
+     *          <code>true</code> if you want a small indeterminate ProgressBar 
+     *          to be displayed with the Crouton, else <code>false</code>.
      * @return the {@link Builder}.
      */
     public Builder setProgressEnabled(boolean isProgressEnabled) {
