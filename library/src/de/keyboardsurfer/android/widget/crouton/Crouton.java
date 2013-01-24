@@ -25,6 +25,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -681,6 +683,13 @@ public final class Crouton {
       image = initializeImageView();
       contentView.addView(image, image.getLayoutParams());
     }
+    
+    // only setup progressbar if one is requested
+    if (this.style.isProgressEnabled) {
+       DisplayMetrics metrics = resources.getDisplayMetrics();
+       ProgressBar progressBar = initializeProgressBar(metrics);      
+       contentView.addView(progressBar, progressBar.getLayoutParams());
+    }
 
     TextView text = initializeTextView(resources);
 
@@ -759,6 +768,20 @@ public final class Crouton {
     image.setLayoutParams(imageParams);
     
     return image;
+  }
+  
+  private ProgressBar initializeProgressBar(DisplayMetrics metrics) {
+     int progressBarSize = (int) (15 * metrics.density);       
+     ProgressBar progressBar = new ProgressBar(this.activity);
+     progressBar.setIndeterminate(true);  
+     RelativeLayout.LayoutParams progressParams =
+              new RelativeLayout.LayoutParams(progressBarSize, progressBarSize);         
+     progressParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+     progressParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+     
+     progressBar.setLayoutParams(progressParams);
+     
+     return progressBar;
   }
 
   @Override
