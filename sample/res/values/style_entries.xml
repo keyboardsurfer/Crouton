@@ -21,7 +21,8 @@
 	<string-array name="style">
 		<item>Alert</item>
 		<item>Confirm</item>
-		<item>Info</item>
+		<item>Info</item>		
+		<item>Info with ProgressBar</item>
 		<item>Custom</item>
 	</string-array>
 
