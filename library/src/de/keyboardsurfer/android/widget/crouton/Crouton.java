@@ -27,6 +27,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -55,6 +56,8 @@ public final class Crouton {
   private final Style style;
   private final View customView;
 
+  private OnClickListener clickListener;
+  
   private Activity activity;
   private ViewGroup viewGroup;
   private FrameLayout croutonView;
@@ -646,6 +649,9 @@ public final class Crouton {
   private FrameLayout initializeCroutonViewGroup(Resources resources) {
     FrameLayout croutonView = new FrameLayout(this.activity);
 
+    if(clickListener!=null)
+    	croutonView.setOnClickListener(clickListener);
+    
     final int height;
     if (this.style.heightDimensionResId > 0) {
       height = resources.getDimensionPixelSize(this.style.heightDimensionResId);
@@ -784,6 +790,11 @@ public final class Crouton {
     return image;
   }
 
+  public Crouton setOnClickListener(OnClickListener clickListener){
+	  this.clickListener=clickListener;
+	  return this;
+  }
+  
   @Override
   public String toString() {
     return "Crouton{" +
