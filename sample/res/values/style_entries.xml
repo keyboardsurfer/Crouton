@@ -22,6 +22,7 @@
 		<item>Alert</item>
 		<item>Confirm</item>
 		<item>Info</item>
+    <item>Infinite</item>
 		<item>Custom</item>
 	</string-array>
 

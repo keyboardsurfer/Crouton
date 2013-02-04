@@ -34,4 +34,5 @@
   <string name="disclaimer">This app is not a complete example of what is possible with Crouton, merely a short demonstration of basic features.</string>
   <string name="feedback">Feel free to provide feedback (bugs, etc) and pull requests on %1$s. Also further documentation is available there.</string>
   <string name="attributions">This app uses software licensed under the %1$s. Further information can be seen in the app\'s source code on %2$s.</string>
+  <string name="infinity_text">This Crouton will be visible until you click on it or rotate the device.</string>
 </resources>
