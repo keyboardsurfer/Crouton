@@ -56,7 +56,7 @@ public final class Crouton {
   private final Style style;
   private final View customView;
 
-  private OnClickListener clickListener;
+  private OnClickListener onClickListener;
   
   private Activity activity;
   private ViewGroup viewGroup;
@@ -154,7 +154,7 @@ public final class Crouton {
     this.style = new Style.Builder().build();
     this.text = null;
   }
-
+  
   /**
    * Creates a {@link Crouton} with provided text and style for a given
    * activity.
@@ -556,6 +556,16 @@ public final class Crouton {
   }
 
   /**
+   * Allows setting of an {@link OnClickListener} directly to a {@link Crouton} without having to use a custom view.
+   * @param onClickListener The {@link OnClickListener} to set.
+   * @return this {@link Crouton}.
+   */
+  public Crouton setOnClickListener(OnClickListener onClickListener){
+    this.onClickListener = onClickListener;
+    return this;
+  }
+
+  /**
    * @return <code>true</code> if the {@link Crouton} is being displayed, else
    *         <code>false</code>.
    */
@@ -649,8 +659,8 @@ public final class Crouton {
   private FrameLayout initializeCroutonViewGroup(Resources resources) {
     FrameLayout croutonView = new FrameLayout(this.activity);
 
-    if(clickListener!=null)
-    	croutonView.setOnClickListener(clickListener);
+    if(onClickListener != null)
+    	croutonView.setOnClickListener(onClickListener);
     
     final int height;
     if (this.style.heightDimensionResId > 0) {
@@ -790,11 +800,6 @@ public final class Crouton {
     return image;
   }
 
-  public Crouton setOnClickListener(OnClickListener clickListener){
-	  this.clickListener=clickListener;
-	  return this;
-  }
-  
   @Override
   public String toString() {
     return "Crouton{" +
