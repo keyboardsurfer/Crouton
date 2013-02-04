@@ -34,11 +34,17 @@ import de.keyboardsurfer.android.widget.crouton.Style;
  * @since 14.12.12
  */
 public class CroutonFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+  
+  private static final Style INFINITE = new Style.Builder().
+                                              setBackgroundColorValue(Style.holoBlueLight).
+                                              setDuration(Style.DURATION_INFINITE).build();
+  
   private CheckBox displayOnTop;
   private Spinner styleSpinner;
   private EditText croutonTextEdit;
   private EditText croutonDurationEdit;
-
+  private Crouton crouton;
+  
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -67,7 +73,11 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
         showCrouton();
         break;
       }
+      
       default: {
+        if (crouton != null) {
+          Crouton.hide(crouton);
+        }
         break;
       }
     }
@@ -96,7 +106,11 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
 
       case 2: {
         return Style.INFO;
-      }                                                                                                       
+      }
+      
+      case 3: {
+        return INFINITE;
+      }
 
       default: {
         return null;
@@ -144,24 +158,32 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
   }
 
   private void showCrouton(String croutonText, Style croutonStyle) {
-    final Crouton crouton;
+    if (INFINITE == croutonStyle) {
+      croutonText = getString(R.string.infinity_text);
+    }
     if (displayOnTop.isChecked()) {
       crouton = Crouton.makeText(getActivity(), croutonText, croutonStyle);
     } else {
       crouton = Crouton.makeText(getActivity(), croutonText, croutonStyle, R.id.alternate_view_group);
     }
-    crouton.show();
+    crouton.setOnClickListener(this).show();
   }
 
   @Override
   public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
     switch ((int) id) {
       case 3: {
+        croutonTextEdit.setVisibility(View.GONE);
+        croutonDurationEdit.setVisibility(View.GONE);
+        break;
+      }
+      case 4: {
         croutonDurationEdit.setVisibility(View.VISIBLE);
         break;
       }
 
       default: {
+        croutonTextEdit.setVisibility(View.VISIBLE);
         croutonDurationEdit.setVisibility(View.GONE);
         break;
       }
