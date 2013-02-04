@@ -76,6 +76,11 @@ public class Style {
    * Whether we should isTileEnabled the backgroundResourceId or not.
    */
   final boolean isTileEnabled;
+  
+  /**
+   * Whether we should show a small ProgressBar using indeterminate (spinning circle) inside the Crouton.
+   */
+  final boolean isProgressEnabled;
 
   /**
    * The text colorResourceId's resource id.
@@ -182,6 +187,7 @@ public class Style {
     this.backgroundColorResourceId = builder.backgroundColorResourceId;
     this.backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
     this.isTileEnabled = builder.isTileEnabled;
+    this.isProgressEnabled = builder.isProgressEnabled;
     this.textColorResourceId = builder.textColorResourceId;
     this.heightInPixels = builder.heightInPixels;
     this.heightDimensionResId = builder.heightDimensionResId;
@@ -213,6 +219,7 @@ public class Style {
     private int backgroundColorResourceId;
     private int backgroundDrawableResourceId;
     private boolean isTileEnabled;
+    private boolean isProgressEnabled;
     private int textColorResourceId;
     private int heightInPixels;
     private int heightDimensionResId;
@@ -240,6 +247,7 @@ public class Style {
       backgroundDrawableResourceId = 0;
       backgroundColorValue = -1;
       isTileEnabled = false;
+      isProgressEnabled = false;
       textColorResourceId = android.R.color.white;
       heightInPixels = LayoutParams.WRAP_CONTENT;
       widthInPixels = LayoutParams.MATCH_PARENT;
@@ -369,6 +377,20 @@ public class Style {
      */
     public Builder setTileEnabled(boolean isTileEnabled) {
       this.isTileEnabled = isTileEnabled;
+
+      return this;
+    }
+    
+    /**
+     * Set the isProgressEnabled option for the {@link Crouton}.
+     *
+     * @param isProgressEnabled
+     *          <code>true</code> if you want a small indeterminate ProgressBar 
+     *          to be displayed with the Crouton, else <code>false</code>.
+     * @return the {@link Builder}.
+     */
+    public Builder setProgressEnabled(boolean isProgressEnabled) {
+      this.isProgressEnabled = isProgressEnabled;
 
       return this;
     }
