@@ -466,6 +466,14 @@ public final class Crouton {
   }
 
   /**
+   * Allows hiding of a previously displayed {@link Crouton}.
+   * @param crouton The {@link Crouton} you want to hide.
+   */
+  public static void hide(Crouton crouton) {
+    Manager.getInstance().removeCrouton(crouton);
+  }
+
+  /**
    * Cancels all queued {@link Crouton}s. If there is a {@link Crouton}
    * displayed currently, it will be the last one displayed.
    */

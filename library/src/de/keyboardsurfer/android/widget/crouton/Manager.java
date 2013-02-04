@@ -105,8 +105,7 @@ final class Manager extends Handler {
   }
 
   private long calculateCroutonDuration(Crouton crouton) {
-    long croutonDuration = 0;
-    croutonDuration += crouton.getStyle().durationInMilliseconds;
+    long croutonDuration = crouton.getStyle().durationInMilliseconds;
     croutonDuration += crouton.getInAnimation().getDuration();
     croutonDuration += crouton.getOutAnimation().getDuration();
     return croutonDuration;
@@ -209,8 +208,10 @@ final class Manager extends Handler {
     }
     croutonView.startAnimation(crouton.getInAnimation());
     announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
-    sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
-      crouton.getStyle().durationInMilliseconds + +crouton.getInAnimation().getDuration());
+    if (Style.DURATION_INFINITE != crouton.getStyle().durationInMilliseconds) {
+      sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
+        crouton.getStyle().durationInMilliseconds + +crouton.getInAnimation().getDuration());
+    }
   }
 
   /**
@@ -221,7 +222,7 @@ final class Manager extends Handler {
    *          The {@link Crouton} added to a {@link ViewGroup} and should be
    *          removed.
    */
-  private void removeCrouton(Crouton crouton) {
+  protected void removeCrouton(Crouton crouton) {
     View croutonView = crouton.getView();
     ViewGroup croutonParentView = (ViewGroup) croutonView.getParent();
 

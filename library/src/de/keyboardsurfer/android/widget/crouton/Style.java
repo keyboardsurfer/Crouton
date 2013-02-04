@@ -28,6 +28,13 @@ import android.widget.ImageView;
  */
 
 public class Style {
+
+  /**
+   * Display a {@link Crouton} for an infinite amount of time or 
+   * until {@link de.keyboardsurfer.android.widget.crouton.Crouton#cancel()} has been called.
+   */
+  public static final int DURATION_INFINITE = -1;
+  
   public static final Style ALERT;
   public static final Style CONFIRM;
   public static final Style INFO;
