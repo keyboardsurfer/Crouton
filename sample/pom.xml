@@ -23,7 +23,7 @@
 
 	<name>Crouton Demo</name>
 	<artifactId>de.keyboardsurfer.app.demo.crouton</artifactId>
-	<version>1.6.1</version>
+	<version>1.7</version>
 	<groupId>de.keyboardsurfer.app.demo.crouton</groupId>
 	<packaging>apk</packaging>
 
@@ -51,7 +51,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<crouton.version>1.6</crouton.version>
+		<crouton.version>1.7</crouton.version>
 		<android.version>4.1.1.4</android.version>
 		<android.version.platform>16</android.version.platform>
 	</properties>
