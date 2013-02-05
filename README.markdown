@@ -21,7 +21,13 @@ You can check some features in the Crouton Demo.
 If you're already using Crouton and just want to download the latest version of the library, follow [this link](https://www.dropbox.com/sh/9vlov7im38vtqe9/Kpj6KZSv0D/Crouton).
 
 ### Changelog
-#### Current version: 1.6.1
+#### Current version: 1.7
+
+#### [1.7](https://github.com/keyboardsurfer/Crouton/tree/1.7)
+
+- `Crouton.setOnClickListener(OnClickListener)` has been introduced.
+- Infinite display of Crouton is possible via `Style.setDuration(Style.DURATION_INFINITE)`
+- Via `Crouton.hide(Crouton)` a Crouton can be hidden.
 
 #### [1.6](https://github.com/keyboardsurfer/Crouton/tree/1.6)
 
@@ -107,7 +113,7 @@ To use crouton simply add
 ```xml
 <dependency>
   <artifactId>crouton</artifactId>
-  <version>1.6.1</version>
+  <version>1.7</version>
   <groupId>de.keyboardsurfer.android.widget</groupId>
 </dependency>
 ```
