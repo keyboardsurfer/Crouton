@@ -23,13 +23,13 @@ If you're already using Crouton and just want to download the latest version of 
 ### Changelog
 #### Current version: 1.7
 
-#### [1.7](https://github.com/keyboardsurfer/Crouton/tree/1.7)
+####[1.7](https://github.com/keyboardsurfer/Crouton/tree/1.7)
 
 - `Crouton.setOnClickListener(OnClickListener)` has been introduced.
 - Infinite display of Crouton is possible via `Style.setDuration(Style.DURATION_INFINITE)`
 - Via `Crouton.hide(Crouton)` a Crouton can be hidden.
 
-#### [1.6](https://github.com/keyboardsurfer/Crouton/tree/1.6)
+####[1.6](https://github.com/keyboardsurfer/Crouton/tree/1.6)
 
 - Crouton now can be used on any Android device with **API level 4+**.
 - Changes the package name to `de.keyboardsurfer.android.widget`
