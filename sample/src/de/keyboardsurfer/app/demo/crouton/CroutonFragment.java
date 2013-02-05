@@ -34,17 +34,17 @@ import de.keyboardsurfer.android.widget.crouton.Style;
  * @since 14.12.12
  */
 public class CroutonFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
-  
+
   private static final Style INFINITE = new Style.Builder().
-                                              setBackgroundColorValue(Style.holoBlueLight).
-                                              setDuration(Style.DURATION_INFINITE).build();
-  
+    setBackgroundColorValue(Style.holoBlueLight).
+    setDuration(Style.DURATION_INFINITE).build();
+
   private CheckBox displayOnTop;
   private Spinner styleSpinner;
   private EditText croutonTextEdit;
   private EditText croutonDurationEdit;
-  private Crouton crouton;
-  
+  private Crouton infiniteCrouton;
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -73,10 +73,11 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
         showCrouton();
         break;
       }
-      
+
       default: {
-        if (crouton != null) {
-          Crouton.hide(crouton);
+        if (infiniteCrouton != null) {
+          Crouton.hide(infiniteCrouton);
+          infiniteCrouton = null;
         }
         break;
       }
@@ -107,7 +108,7 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
       case 2: {
         return Style.INFO;
       }
-      
+
       case 3: {
         return INFINITE;
       }
@@ -158,13 +159,20 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
   }
 
   private void showCrouton(String croutonText, Style croutonStyle) {
-    if (INFINITE == croutonStyle) {
+    final boolean infinite = INFINITE == croutonStyle;
+    
+    if (infinite) {
       croutonText = getString(R.string.infinity_text);
     }
+    
+    final Crouton crouton;
     if (displayOnTop.isChecked()) {
       crouton = Crouton.makeText(getActivity(), croutonText, croutonStyle);
     } else {
       crouton = Crouton.makeText(getActivity(), croutonText, croutonStyle, R.id.alternate_view_group);
+    }
+    if (infinite) {
+      infiniteCrouton = crouton;
     }
     crouton.setOnClickListener(this).show();
   }
