@@ -48,7 +48,8 @@
 
 <p><strong>Crouton</strong> is a class that can be used by Android developers that feel the need for an <strong>alternative to the Context insensitive <a href="http://developer.android.com/reference/android/widget/Toast.html">Toast</a></strong>.</p>
 
-<p>A Crouton will be displayed at the top of an application window.
+<p>A Crouton will be displayed at the position the developer decides.
+Standard will be the of an application window.
 You can line up multiple Croutons for display, that will be shown one after another.</p>
 
 <p>You can check some features in the Crouton Demo.</p>
@@ -60,7 +61,17 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 <h3>Changelog</h3>
 
-<h4><a href="https://github.com/keyboardsurfer/Crouton/tree/1.6">1.6</a></h4>
+<h4>Current version: 1.7</h4>
+
+<h4><a href="https://github.com/keyboardsurfer/Crouton/tree/1.7">1.7</a></h4>
+
+<ul>
+<li>
+<code>Crouton.setOnClickListener(OnClickListener)</code> has been introduced.</li>
+<li>Infinite display of Crouton is possible via <code>Style.setDuration(Style.DURATION_INFINITE)</code>
+</li>
+<li>Via <code>Crouton.hide(Crouton)</code> a Crouton can be hidden.</li>
+</ul><h4><a href="https://github.com/keyboardsurfer/Crouton/tree/1.6">1.6</a></h4>
 
 <ul>
 <li>Crouton now can be used on any Android device with <strong>API level 4+</strong>.</li>
@@ -138,15 +149,44 @@ You can line up multiple Croutons for display, that will be shown one after anot
 <li>displayed Image</li>
 </ul><p>Since <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a> is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.</p>
 
-<h2>Building</h2>
+<h2>Maven</h2>
+
+<h3>From maven central</h3>
+
+<p>Crouton is available in the maven central repository.</p>
+
+<p>To use crouton simply add</p>
+
+<div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>crouton<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.7<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>de.keyboardsurfer.android.widget<span class="nt">&lt;/groupId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+
+<p>to your pom.xml</p>
+
+<p>If you also want the sources or javadoc add the respective classifier  </p>
+
+<div class="highlight"><pre>  <span class="nt">&lt;classifier&gt;</span>sources<span class="nt">&lt;/classifier&gt;</span>
+</pre></div>
+
+<p>or</p>
+
+<div class="highlight"><pre>  <span class="nt">&lt;classifier&gt;</span>javadoc<span class="nt">&lt;/classifier&gt;</span>
+</pre></div>
+
+<p>to the dependency.</p>
+
+<h3>DIY</h3>
 
 <p>The build requires Maven. Operations are very simple:</p>
 
 <ul>
 <li>
-<code>mvn -f library/pom.xml clean package</code> will build <code>jar</code> library;</li>
+<code>mvn -f library/pom.xml clean package</code> will build a <code>jar</code> library;</li>
 <li>
-<code>mvn clean package</code> will build <code>jar</code> library and sample application <code>apk</code> package;</li>
+<code>mvn clean package</code> will build a <code>jar</code> library and the sample application <code>apk</code>;</li>
 <li>
 <code>mvn -f library/pom.xml clean install</code> will put Crouton in your local Maven repository.</li>
 </ul><p>After putting Crouton in the repository you can add it as a dependency.</p>
@@ -159,8 +199,6 @@ You can line up multiple Croutons for display, that will be shown one after anot
 </pre></div>
 
 <h2>Contribution</h2>
-
-<p>This section is subject to changes.</p>
 
 <h3>Pull requests welcome</h3>
 
