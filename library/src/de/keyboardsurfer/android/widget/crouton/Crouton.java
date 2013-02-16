@@ -509,7 +509,7 @@ public final class Crouton {
   }
 
   public Animation getInAnimation() {
-    if ((this.inAnimation == null) && (this.activity != null)) {
+    if ((null == this.inAnimation) && (null != this.activity)) {
       if (getStyle().inAnimationResId > 0) {
         this.inAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().inAnimationResId);
       } else {
@@ -521,7 +521,7 @@ public final class Crouton {
   }
 
   public Animation getOutAnimation() {
-    if ((this.outAnimation == null) && (this.activity != null)) {
+    if ((null == this.outAnimation) && (null != this.activity)) {
       if (getStyle().outAnimationResId > 0) {
         this.outAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().outAnimationResId);
       } else {
@@ -578,7 +578,7 @@ public final class Crouton {
    *         <code>false</code>.
    */
   boolean isShowing() {
-    return (activity != null) && (croutonView != null) && (croutonView.getParent() != null);
+    return (null != activity) && (null != croutonView) && (null != croutonView.getParent());
   }
 
   /**
@@ -642,12 +642,12 @@ public final class Crouton {
    */
   View getView() {
     // return the custom view if one exists
-    if (this.customView != null) {
+    if (null != this.customView) {
       return this.customView;
     }
 
     // if already setup return the view
-    if (this.croutonView == null) {
+    if (null == this.croutonView) {
       initializeCroutonView();
     }
 
@@ -667,7 +667,7 @@ public final class Crouton {
   private FrameLayout initializeCroutonViewGroup(Resources resources) {
     FrameLayout croutonView = new FrameLayout(this.activity);
 
-    if(onClickListener != null)
+    if(null != onClickListener)
     	croutonView.setOnClickListener(onClickListener);
     
     final int height;
@@ -724,7 +724,7 @@ public final class Crouton {
 
     // only setup image if one is requested
     ImageView image = null;
-    if ((this.style.imageDrawable != null) || (this.style.imageResId != 0)) {
+    if ((null != this.style.imageDrawable) || (0 != this.style.imageResId)) {
       image = initializeImageView();
       contentView.addView(image, image.getLayoutParams());
     }
@@ -733,7 +733,7 @@ public final class Crouton {
 
     RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
       RelativeLayout.LayoutParams.WRAP_CONTENT);
-    if (image != null) {
+    if (null != image) {
       textParams.addRule(RelativeLayout.RIGHT_OF, image.getId());
     }
     contentView.addView(text, textParams);
@@ -787,7 +787,7 @@ public final class Crouton {
     image.setScaleType(this.style.imageScaleType);
 
     // set the image drawable if not null
-    if (this.style.imageDrawable != null) {
+    if (null != this.style.imageDrawable) {
       image.setImageDrawable(this.style.imageDrawable);
     }
 

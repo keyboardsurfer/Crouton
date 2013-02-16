@@ -59,7 +59,7 @@ final class Manager extends Handler {
    * @return The currently used instance of the {@link Manager}.
    */
   static synchronized Manager getInstance() {
-    if (INSTANCE == null) {
+    if (null == INSTANCE) {
       INSTANCE = new Manager();
     }
 
@@ -70,7 +70,7 @@ final class Manager extends Handler {
    * Inserts a {@link Crouton} to be displayed.
    *
    * @param crouton
-   *          The {@link Crouton} to be displayed.
+   *   The {@link Crouton} to be displayed.
    */
   void add(Crouton crouton) {
     croutonQueue.add(crouton);
@@ -89,15 +89,15 @@ final class Manager extends Handler {
     final Crouton currentCrouton = croutonQueue.peek();
 
     // If the activity is null we poll the Crouton off the queue.
-    if (currentCrouton.getActivity() == null) {
+    if (null == currentCrouton.getActivity()) {
       croutonQueue.poll();
     }
 
     if (!currentCrouton.isShowing()) {
       // Display the Crouton
       sendMessage(currentCrouton, Messages.ADD_CROUTON_TO_VIEW);
-      if(currentCrouton.getLifecycleCallback() != null) {
-    	  currentCrouton.getLifecycleCallback().onDisplayed();
+      if (null != currentCrouton.getLifecycleCallback()) {
+        currentCrouton.getLifecycleCallback().onDisplayed();
       }
     } else {
       sendMessageDelayed(currentCrouton, Messages.DISPLAY_CROUTON, calculateCroutonDuration(currentCrouton));
@@ -115,9 +115,9 @@ final class Manager extends Handler {
    * Sends a {@link Crouton} within a {@link Message}.
    *
    * @param crouton
-   *          The {@link Crouton} that should be sent.
+   *   The {@link Crouton} that should be sent.
    * @param messageId
-   *          The {@link Message} id.
+   *   The {@link Message} id.
    */
   private void sendMessage(Crouton crouton, final int messageId) {
     final Message message = obtainMessage(messageId);
@@ -129,11 +129,11 @@ final class Manager extends Handler {
    * Sends a {@link Crouton} within a delayed {@link Message}.
    *
    * @param crouton
-   *          The {@link Crouton} that should be sent.
+   *   The {@link Crouton} that should be sent.
    * @param messageId
-   *          The {@link Message} id.
+   *   The {@link Message} id.
    * @param delay
-   *          The delay in milliseconds.
+   *   The delay in milliseconds.
    */
   private void sendMessageDelayed(Crouton crouton, final int messageId, final long delay) {
     Message message = obtainMessage(messageId);
@@ -163,8 +163,8 @@ final class Manager extends Handler {
 
       case Messages.REMOVE_CROUTON: {
         removeCrouton(crouton);
-        if(crouton.getLifecycleCallback() != null) {
-        	crouton.getLifecycleCallback().onRemoved();
+        if (null != crouton.getLifecycleCallback()) {
+          crouton.getLifecycleCallback().onRemoved();
         }
         break;
       }
@@ -180,7 +180,7 @@ final class Manager extends Handler {
    * Adds a {@link Crouton} to the {@link ViewParent} of it's {@link Activity}.
    *
    * @param crouton
-   *          The {@link Crouton} that should be added.
+   *   The {@link Crouton} that should be added.
    */
   private void addCroutonToView(Crouton crouton) {
     // don't add if it is already showing
@@ -189,19 +189,19 @@ final class Manager extends Handler {
     }
 
     View croutonView = crouton.getView();
-    if (croutonView.getParent() == null) {
+    if (null == croutonView.getParent()) {
       ViewGroup.LayoutParams params = croutonView.getLayoutParams();
-      if (params == null) {
+      if (null == params) {
         params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
       }
       // display Crouton in ViewGroup is it has been supplied
-      if (crouton.getViewGroup() != null) {
-    	  // TODO implement add to last position feature (need to align with how this will be requested for activity)
-          if (crouton.getViewGroup() instanceof FrameLayout) {
-    	      crouton.getViewGroup().addView(croutonView, params);	
-          } else {
-    	      crouton.getViewGroup().addView(croutonView, 0, params);	
-          }
+      if (null != crouton.getViewGroup()) {
+        // TODO implement add to last position feature (need to align with how this will be requested for activity)
+        if (crouton.getViewGroup() instanceof FrameLayout) {
+          crouton.getViewGroup().addView(croutonView, params);
+        } else {
+          crouton.getViewGroup().addView(croutonView, 0, params);
+        }
       } else {
         Activity activity = crouton.getActivity();
         if (null == activity || activity.isFinishing()) {
@@ -214,7 +214,7 @@ final class Manager extends Handler {
     announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
     if (Style.DURATION_INFINITE != crouton.getStyle().durationInMilliseconds) {
       sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
-        crouton.getStyle().durationInMilliseconds + +crouton.getInAnimation().getDuration());
+        crouton.getStyle().durationInMilliseconds + crouton.getInAnimation().getDuration());
     }
   }
 
@@ -223,14 +223,14 @@ final class Manager extends Handler {
    * durationInMilliseconds.
    *
    * @param crouton
-   *          The {@link Crouton} added to a {@link ViewGroup} and should be
-   *          removed.
+   *   The {@link Crouton} added to a {@link ViewGroup} and should be
+   *   removed.
    */
   protected void removeCrouton(Crouton crouton) {
     View croutonView = crouton.getView();
     ViewGroup croutonParentView = (ViewGroup) croutonView.getParent();
 
-    if (croutonParentView != null) {
+    if (null != croutonParentView) {
       croutonView.startAnimation(crouton.getOutAnimation());
 
       // Remove the Crouton from the queue.
@@ -238,11 +238,11 @@ final class Manager extends Handler {
 
       // Remove the crouton from the view's parent.
       croutonParentView.removeView(croutonView);
-      if (removed != null) {
+      if (null != removed) {
         removed.detachActivity();
         removed.detachViewGroup();
-        if(removed.getLifecycleCallback() != null) {
-        	removed.getLifecycleCallback().onRemoved();
+        if (null != removed.getLifecycleCallback()) {
+          removed.getLifecycleCallback().onRemoved();
         }
         removed.detachLifecycleCallback();
       }
@@ -258,26 +258,26 @@ final class Manager extends Handler {
    * displayed.
    *
    * @param crouton
-   *          The {@link Crouton} that should be removed.
+   *   The {@link Crouton} that should be removed.
    */
   void removeCroutonImmediately(Crouton crouton) {
     // if Crouton has already been displayed then it may not be in the queue (because it was popped).
     // This ensures the displayed Crouton is removed from its parent immediately, whether another instance
     // of it exists in the queue or not.
     // Note: crouton.isShowing() is false here even if it really is showing, as croutonView object in
-	  // Crouton seems to be out of sync with reality!
-	  if (crouton.getActivity() != null && crouton.getView() != null && crouton.getView().getParent() != null) {
-	    ((ViewGroup) crouton.getView().getParent()).removeView(crouton.getView());
-		  
-	    // remove any messages pending for the crouton
-	    removeAllMessagesForCrouton(crouton);
-	  }
+    // Crouton seems to be out of sync with reality!
+    if (null != crouton.getActivity() && null != crouton.getView() && null != crouton.getView().getParent()) {
+      ((ViewGroup) crouton.getView().getParent()).removeView(crouton.getView());
+
+      // remove any messages pending for the crouton
+      removeAllMessagesForCrouton(crouton);
+    }
     // remove any matching croutons from queue
-    if (croutonQueue != null) {
+    if (null != croutonQueue) {
       final Iterator<Crouton> croutonIterator = croutonQueue.iterator();
       while (croutonIterator.hasNext()) {
         final Crouton c = croutonIterator.next();
-        if (c.equals(crouton) && (c.getActivity() != null)) {
+        if (c.equals(crouton) && (null != c.getActivity())) {
           // remove the crouton from the content view
           if (crouton.isShowing()) {
             ((ViewGroup) c.getView().getParent()).removeView(c.getView());
@@ -302,7 +302,7 @@ final class Manager extends Handler {
   void clearCroutonQueue() {
     removeAllMessages();
 
-    if (croutonQueue != null) {
+    if (null != croutonQueue) {
       // remove any views that may already have been added to the activity's
       // content view
       for (Crouton crouton : croutonQueue) {
@@ -319,11 +319,11 @@ final class Manager extends Handler {
    * crouton from {@link Activity}s content view immediately.
    */
   void clearCroutonsForActivity(Activity activity) {
-    if (croutonQueue != null) {
+    if (null != croutonQueue) {
       Iterator<Crouton> croutonIterator = croutonQueue.iterator();
       while (croutonIterator.hasNext()) {
         Crouton crouton = croutonIterator.next();
-        if ((crouton.getActivity() != null) && crouton.getActivity().equals(activity)) {
+        if ((null != crouton.getActivity()) && crouton.getActivity().equals(activity)) {
           // remove the crouton from the content view
           if (crouton.isShowing()) {
             ((ViewGroup) crouton.getView().getParent()).removeView(crouton.getView());
@@ -358,14 +358,16 @@ final class Manager extends Handler {
    * using the appropriate event type. If your application only targets SDK
    * 16+, you can just call View.announceForAccessibility(CharSequence).
    * </p>
-   *
+   * <p/>
    * note: AccessibilityManager is only available from API lvl 4.
-   *
+   * <p/>
    * Adapted from https://http://eyes-free.googlecode.com/files/accessibility_codelab_demos_v2_src.zip
    * via https://github.com/coreform/android-formidable-validation
    *
-   * @param context Used to get {@link AccessibilityManager}
-   * @param text The text to announce.
+   * @param context
+   *   Used to get {@link AccessibilityManager}
+   * @param text
+   *   The text to announce.
    */
   public static void announceForAccessibilityCompat(Context context, CharSequence text) {
     if (Build.VERSION.SDK_INT >= 4) {

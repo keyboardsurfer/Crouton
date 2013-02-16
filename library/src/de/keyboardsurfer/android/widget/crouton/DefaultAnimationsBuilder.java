@@ -60,7 +60,7 @@ final class DefaultAnimationsBuilder {
    * @return The default Animation for a showing {@link Crouton}.
    */
   public static Animation buildDefaultSlideInDownAnimation() {
-    if (slideInDownAnimation == null) {
+    if (null == slideInDownAnimation) {
       slideInDownAnimation = new TranslateAnimation(SlideInDownAnimationParameters.FROM_X_DELTA,
         SlideInDownAnimationParameters.TO_X_DELTA,
         SlideInDownAnimationParameters.FROM_Y_DELTA, SlideInDownAnimationParameters.TO_Y_DELTA);
@@ -74,7 +74,7 @@ final class DefaultAnimationsBuilder {
    * @return The default Animation for a hiding {@link Crouton}.
    */
   public static Animation buildDefaultSlideOutUpAnimation() {
-    if (slideOutUpAnimation == null) {
+    if (null == slideOutUpAnimation) {
       slideOutUpAnimation = new TranslateAnimation(SlideOutUpAnimationParameters.FROM_X_DELTA,
         SlideOutUpAnimationParameters.TO_X_DELTA,
         SlideOutUpAnimationParameters.FROM_Y_DELTA, SlideOutUpAnimationParameters.TO_Y_DELTA);

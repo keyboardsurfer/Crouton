@@ -34,9 +34,18 @@ public class Style {
    * until {@link de.keyboardsurfer.android.widget.crouton.Crouton#cancel()} has been called.
    */
   public static final int DURATION_INFINITE = -1;
-  
+
+  /**
+   * Default style for alerting the user.
+   */
   public static final Style ALERT;
+  /**
+   * Default style for confirming an action.
+   */
   public static final Style CONFIRM;
+  /**
+   * Default style for general information.
+   */
   public static final Style INFO;
 
   public static final int holoRedLight = 0xffff4444;
