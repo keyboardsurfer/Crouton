@@ -203,7 +203,11 @@ final class Manager extends Handler {
     	      crouton.getViewGroup().addView(croutonView, 0, params);	
           }
       } else {
-    	  crouton.getActivity().addContentView(croutonView, params);
+        Activity activity = crouton.getActivity();
+        if (null == activity || activity.isFinishing()) {
+          return;
+        }
+        activity.addContentView(croutonView, params);
       }
     }
     croutonView.startAnimation(crouton.getInAnimation());
