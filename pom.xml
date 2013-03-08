@@ -20,83 +20,120 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <name>Crouton Parent</name>
-  <artifactId>crouton-parent</artifactId>
-  <version>1.7</version>
-  <groupId>de.keyboardsurfer.android.widget</groupId>
-  <packaging>pom</packaging>
+    <name>Crouton Parent</name>
+    <artifactId>crouton-parent</artifactId>
+    <version>1.8-SNAPSHOT</version>
+    <groupId>de.keyboardsurfer.android.widget</groupId>
+    <packaging>pom</packaging>
 
-  <developers>
-    <developer>
-      <id>keyboardsurfer</id>
-      <name>Benjamin Weiss</name>
-		</developer>
-	</developers>
 
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+    <repositories>
+        <repository>
+            <id>bizzby.mvn.repo</id>
+            <url>https://github.com/Bizzby/public-mvn-repo/raw/master</url>
+            <!-- use snapshot version -->
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>internal.repos</id>
+            <name>Internal Repository</name>
+            <url>file:///Users/chris/Git/mvn-repos</url>
+        </repository>
+    </distributionManagement>
 
-	<scm>
-		<url>git@github.com:keyboardsurfer/Crouton.git</url>
-		<developerConnection>scm:git:git@github.com:keyboardsurfer/Crouton.git</developerConnection>
-		<connection>scm:git:git@github.com:keyboardsurfer/Crouton.git</connection>
-	</scm>
+    <developers>
+        <developer>
+            <id>keyboardsurfer</id>
+            <name>Benjamin Weiss</name>
+        </developer>
+    </developers>
 
-	<modules>
-		<module>library</module>
-		<module>sample</module>
-	</modules>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<android.version>4.1.1.4</android.version>
-		<android.version.platform>16</android.version.platform>
-	</properties>
+    <scm>
+        <url>git@github.com:keyboardsurfer/Crouton.git</url>
+        <developerConnection>scm:git:git@github.com:keyboardsurfer/Crouton.git</developerConnection>
+        <connection>scm:git:git@github.com:keyboardsurfer/Crouton.git</connection>
+    </scm>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.5.1</version>
-					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>2.2</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>2.9</version>
-				</plugin>
-				<plugin>
-					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
-					<artifactId>android-maven-plugin</artifactId>
-					<version>3.4.1</version>
-					<extensions>true</extensions>
-					<configuration>
-						<sdk>
-							<platform>${android.version.platform}</platform>
-						</sdk>
-						<undeployBeforeDeploy>true</undeployBeforeDeploy>
-						<lazyLibraryUnpack>true</lazyLibraryUnpack>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+    <modules>
+        <module>library</module>
+        <!--<module>sample</module>-->
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <android.version>4.1.1.4</android.version>
+        <android.version.platform>16</android.version.platform>
+        <android.support.version>12</android.support.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <artifactId>android</artifactId>
+                <groupId>com.google.android</groupId>
+                <version>${android.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>android.support</groupId>
+                <artifactId>compatibility-v4</artifactId>
+                <version>${android.support.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.5.1</version>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.2.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.9</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                    <artifactId>android-maven-plugin</artifactId>
+                    <version>3.5.1</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <sdk>
+                            <platform>${android.version.platform}</platform>
+                        </sdk>
+                        <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                        <lazyLibraryUnpack>true</lazyLibraryUnpack>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
