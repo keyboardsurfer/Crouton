@@ -26,7 +26,7 @@
     <url>https://github.com/keyboardsurfer/Crouton</url>
     <artifactId>crouton</artifactId>
     <groupId>de.keyboardsurfer.android.widget</groupId>
-    <version>${project.parent.version</version>
+    <version>${project.parent.version}</version>
     <packaging>jar</packaging>
 
     <parent>
