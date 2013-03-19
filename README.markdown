@@ -133,6 +133,22 @@ or
 ```
 to the dependency.
 
+If you are referencing a newer version of the Android Support Package in your application, eclude my dependency like this:
+
+```xml
+<dependency>
+	<artifactId>crouton</artifactId>
+	<version>${crouton.version}</version>
+	<groupId>de.keyboardsurfer.android.widget</groupId>
+	<exclusions>
+	    <exclusion>
+	        <groupId>com.google.android</groupId>
+	        <artifactId>support-v4</artifactId>
+	    </exclusion>
+	</exclusions>
+</dependency>
+```
+
 ### DIY
 
 The build requires Maven. Operations are very simple:
