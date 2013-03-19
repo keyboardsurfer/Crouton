@@ -133,7 +133,7 @@ or
 ```
 to the dependency.
 
-If you are referencing a newer version of the Android Support Package in your application, eclude my dependency like this:
+If you are referencing a newer version of the Android Support Library in your application, you might want to exclude Crouton's dependency like this:
 
 ```xml
 <dependency>
