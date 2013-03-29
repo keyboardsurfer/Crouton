@@ -17,107 +17,107 @@
 	-->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<name>Crouton Demo</name>
-	<artifactId>de.keyboardsurfer.app.demo.crouton</artifactId>
-	<version>1.7</version>
-	<groupId>de.keyboardsurfer.app.demo.crouton</groupId>
-	<packaging>apk</packaging>
+  <name>Crouton Demo</name>
+  <artifactId>de.keyboardsurfer.app.demo.crouton</artifactId>
+  <version>1.7</version>
+  <groupId>de.keyboardsurfer.app.demo.crouton</groupId>
+  <packaging>apk</packaging>
 
-	<developers>
-		<developer>
-			<id>keyboardsurfer</id>
-			<name>Benjamin Weiss</name>
-		</developer>
-	</developers>
+  <developers>
+    <developer>
+      <id>keyboardsurfer</id>
+      <name>Benjamin Weiss</name>
+    </developer>
+  </developers>
 
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-	<scm>
-		<url>git@github.com:keyboardsurfer/Crouton.git</url>
-		<developerConnection>scm:git:git@github.com:keyboardsurfer/Crouton.git</developerConnection>
-		<connection>scm:git:git@github.com:keyboardsurfer/Crouton.git</connection>
-	</scm>
+  <scm>
+    <url>git@github.com:keyboardsurfer/Crouton.git</url>
+    <developerConnection>scm:git:git@github.com:keyboardsurfer/Crouton.git</developerConnection>
+    <connection>scm:git:git@github.com:keyboardsurfer/Crouton.git</connection>
+  </scm>
 
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<crouton.version>1.7</crouton.version>
-		<android.version>4.1.1.4</android.version>
-		<android.version.platform>16</android.version.platform>
-	</properties>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <crouton.version>1.7</crouton.version>
+    <android.version>4.1.1.4</android.version>
+    <android.version.platform>16</android.version.platform>
+  </properties>
 
-	<dependencies>
-		<dependency>
-			<artifactId>android</artifactId>
-			<version>${android.version}</version>
-			<groupId>com.google.android</groupId>
-			<scope>provided</scope>
-		</dependency>
+  <dependencies>
+    <dependency>
+      <artifactId>android</artifactId>
+      <version>${android.version}</version>
+      <groupId>com.google.android</groupId>
+      <scope>provided</scope>
+    </dependency>
 
-		<dependency>
-			<artifactId>crouton</artifactId>
-			<version>${crouton.version}</version>
-			<groupId>de.keyboardsurfer.android.widget</groupId>
-		</dependency>
+    <dependency>
+      <artifactId>crouton</artifactId>
+      <version>${crouton.version}</version>
+      <groupId>de.keyboardsurfer.android.widget</groupId>
+    </dependency>
 
-		<dependency>
-			<artifactId>crouton</artifactId>
-			<version>${crouton.version}</version>
-			<groupId>de.keyboardsurfer.android.widget</groupId>
-			<classifier>javadoc</classifier>
-		</dependency>
+    <dependency>
+      <artifactId>crouton</artifactId>
+      <version>${crouton.version}</version>
+      <groupId>de.keyboardsurfer.android.widget</groupId>
+      <classifier>javadoc</classifier>
+    </dependency>
 
-		<dependency>
-			<artifactId>crouton</artifactId>
-			<version>${crouton.version}</version>
-			<groupId>de.keyboardsurfer.android.widget</groupId>
-			<classifier>sources</classifier>
-		</dependency>
+    <dependency>
+      <artifactId>crouton</artifactId>
+      <version>${crouton.version}</version>
+      <groupId>de.keyboardsurfer.android.widget</groupId>
+      <classifier>sources</classifier>
+    </dependency>
 
-		<dependency>
-			<groupId>com.actionbarsherlock</groupId>
-			<artifactId>actionbarsherlock</artifactId>
-			<version>4.2.0</version>
-			<type>apklib</type>
-		</dependency>
+    <dependency>
+      <groupId>com.actionbarsherlock</groupId>
+      <artifactId>actionbarsherlock</artifactId>
+      <version>4.2.0</version>
+      <type>apklib</type>
+    </dependency>
 
-		<dependency>
-			<groupId>com.viewpagerindicator</groupId>
-			<artifactId>library</artifactId>
-			<version>2.4.1</version>
-			<type>apklib</type>
-		</dependency>
+    <dependency>
+      <groupId>com.viewpagerindicator</groupId>
+      <artifactId>library</artifactId>
+      <version>2.4.1</version>
+      <type>apklib</type>
+    </dependency>
 
-	</dependencies>
+  </dependencies>
 
-	<build>
-		<sourceDirectory>src</sourceDirectory>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
 
-		<plugins>
-			<plugin>
-				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
-				<artifactId>android-maven-plugin</artifactId>
-				<version>3.4.1</version>
-				<extensions>true</extensions>
-				<configuration>
-					<sdk>
-						<platform>${android.version.platform}</platform>
-					</sdk>
-					<undeployBeforeDeploy>true</undeployBeforeDeploy>
-					<lazyLibraryUnpack>true</lazyLibraryUnpack>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <plugins>
+      <plugin>
+        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+        <artifactId>android-maven-plugin</artifactId>
+        <version>3.4.1</version>
+        <extensions>true</extensions>
+        <configuration>
+          <sdk>
+            <platform>${android.version.platform}</platform>
+          </sdk>
+          <undeployBeforeDeploy>true</undeployBeforeDeploy>
+          <lazyLibraryUnpack>true</lazyLibraryUnpack>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
