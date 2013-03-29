@@ -14,12 +14,16 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+-->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.keyboardsurfer.mobile.app.android.widget.crouton"
     android:versionCode="1"
     android:versionName="1.7" 
     android:minSdkVersion="4">
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="16" />
 
 </manifest>
