@@ -28,24 +28,17 @@
     <groupId>de.keyboardsurfer.android.widget</groupId>
     <packaging>pom</packaging>
 
-
-    <repositories>
-        <repository>
-            <id>bizzby.mvn.repo</id>
-            <url>https://github.com/Bizzby/public-mvn-repo/raw/master</url>
-            <!-- use snapshot version -->
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
     <distributionManagement>
         <repository>
-            <id>internal.repos</id>
-            <name>Internal Repository</name>
-            <url>file:///Users/chris/Git/mvn-repos</url>
+            <id>archiva.internal</id>
+            <name>Bizzby Realease</name>
+            <url>http://165.225.136.142:8080/repository/internal/</url>
         </repository>
+        <snapshotRepository>
+            <id>archiva.snapshots</id>
+            <name>Snapshot repo</name>
+            <url>http://165.225.136.142:8080/repository/snapshots/</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <developers>
