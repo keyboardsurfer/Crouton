@@ -55,6 +55,7 @@ public final class Crouton {
     private final CharSequence text;
     private final Style style;
     private final View customView;
+    private Configuration configuration;
 
     private OnClickListener onClickListener;
 
@@ -86,6 +87,7 @@ public final class Crouton {
         this.text = text;
         this.style = style;
         this.customView = null;
+        this.configuration = new Configuration.Builder().build();
     }
 
     /**
@@ -110,6 +112,7 @@ public final class Crouton {
         this.style = style;
         this.viewGroup = viewGroup;
         this.customView = null;
+        this.configuration = new Configuration.Builder().build();
     }
 
     /**
@@ -131,6 +134,7 @@ public final class Crouton {
         this.customView = customView;
         this.style = new Style.Builder().build();
         this.text = null;
+        this.configuration = new Configuration.Builder().build();
     }
 
     /**
@@ -144,14 +148,31 @@ public final class Crouton {
      *   The {@link ViewGroup} that this {@link Crouton} should be added to.
      */
     private Crouton(Activity activity, View customView, ViewGroup viewGroup) {
+        this(activity, customView, viewGroup, new Configuration.Builder().build());
+    }
+
+    /**
+     * Creates the {@link Crouton}.
+     *
+     * @param activity
+     *   The {@link Activity} that represents the context in which the Crouton should exist.
+     * @param customView
+     *   The custom {@link View} to display
+     * @param viewGroup
+     *   The {@link ViewGroup} that this {@link Crouton} should be added to.
+     * @param configuration
+     *   The configuration for this crouton
+     */
+    private Crouton(Activity activity, View customView, ViewGroup viewGroup, Configuration configuration)
+    {
         if ((activity == null) || (customView == null)) {
             throw new IllegalArgumentException("Null parameters are not accepted");
         }
-
         this.activity = activity;
         this.customView = customView;
         this.viewGroup = viewGroup;
         this.style = new Style.Builder().build();
+        this.configuration = configuration;
         this.text = null;
     }
 
@@ -321,6 +342,25 @@ public final class Crouton {
     }
 
     /**
+     * Creates a {@link Crouton} with provided text-resource and style for a given
+     * activity.
+     *
+     * @param activity
+     *   The {@link Activity} that represents the context in which the Crouton should exist.
+     * @param customView
+     *   The custom {@link View} to display
+     * @param viewGroupResId
+     *   The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
+     * @param configuration
+     *   The configuration of
+     *
+     * @return The created {@link Crouton}.
+     */
+    public static Crouton make(Activity activity, View customView, int viewGroupResId, Configuration configuration) {
+        return new Crouton(activity, customView, (ViewGroup) activity.findViewById(viewGroupResId)).setConfiguration(configuration);
+    }
+
+    /**
      * Creates a {@link Crouton} with provided text and style for a given activity
      * and displays it directly.
      *
@@ -368,6 +408,24 @@ public final class Crouton {
      */
     public static void showText(Activity activity, CharSequence text, Style style, int viewGroupResId) {
         makeText(activity, text, style, (ViewGroup) activity.findViewById(viewGroupResId)).show();
+    }
+    /**
+     * Creates a {@link Crouton} with provided text and style for a given activity
+     * and displays it directly.
+     *
+     * @param activity
+     *   The {@link Activity} that represents the context in which the Crouton should exist.
+     * @param text
+     *   The text you want to display.
+     * @param style
+     *   The style that this {@link Crouton} should be created with.
+     * @param viewGroupResId
+     *   The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
+     * @param configuration
+     *   The configuration to setup none visual configurations
+     */
+    public static void showText(Activity activity, CharSequence text, Style style, int viewGroupResId, Configuration configuration) {
+        makeText(activity, text, style, (ViewGroup) activity.findViewById(viewGroupResId)).setConfiguration(configuration).show();
     }
 
 
@@ -574,6 +632,19 @@ public final class Crouton {
     }
 
     /**
+     * Set the configuration on this crouton, idea being you can modify the none visual aspects pre showing it.
+     *
+     * @param configuration a configuration build using {@link Configuration.Builder}
+     * @return this {@link Crouton}
+     */
+    public Crouton setConfiguration(final Configuration configuration) {
+        if(configuration != null){
+            this.configuration = configuration;
+        }
+        return this;
+    }
+
+    /**
      * @return <code>true</code> if the {@link Crouton} is being displayed, else
      *         <code>false</code>.
      */
@@ -614,6 +685,14 @@ public final class Crouton {
      */
     Style getStyle() {
         return style;
+    }
+
+    /**
+     * @return the crouton style
+     */
+    Configuration getConfiguration()
+    {
+        return configuration;
     }
 
     /**
@@ -822,4 +901,6 @@ public final class Crouton {
                 ", lifecycleCallback=" + lifecycleCallback +
                 '}';
     }
+
+
 }

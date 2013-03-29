@@ -29,11 +29,6 @@ import android.widget.ImageView;
 
 public class Style {
 
-    /**
-     * Display a {@link Crouton} for an infinite amount of time or
-     * until {@link de.keyboardsurfer.android.widget.crouton.Crouton#cancel()} has been called.
-     */
-    public static final int DURATION_INFINITE = -1;
 
     /**
      * Default style for alerting the user.
@@ -53,19 +48,19 @@ public class Style {
     public static final int holoBlueLight = 0xff33b5e5;
 
     static {
-        ALERT = new Builder().setDuration(5000).setBackgroundColorValue(holoRedLight).setHeight(LayoutParams.WRAP_CONTENT)
+        ALERT = new Builder()
+                .setBackgroundColorValue(holoRedLight)
+                .setHeight(LayoutParams.WRAP_CONTENT)
                 .build();
-        CONFIRM = new Builder().setDuration(3000).setBackgroundColorValue(holoGreenLight).setHeight(
-                LayoutParams.WRAP_CONTENT).build();
-        INFO = new Builder().setDuration(3000).setBackgroundColorValue(holoBlueLight).setHeight(LayoutParams.WRAP_CONTENT)
+        CONFIRM = new Builder()
+                .setBackgroundColorValue(holoGreenLight)
+                .setHeight(LayoutParams.WRAP_CONTENT)
+                .build();
+        INFO = new Builder()
+                .setBackgroundColorValue(holoBlueLight)
+                .setHeight(LayoutParams.WRAP_CONTENT)
                 .build();
     }
-
-    /**
-     * The durationInMilliseconds the {@link Crouton} will be displayed in
-     * milliseconds.
-     */
-    final int durationInMilliseconds;
 
     /**
      * The resource id of the backgroundResourceId.
@@ -194,7 +189,7 @@ public class Style {
     final int paddingDimensionResId;
 
     private Style(final Builder builder) {
-        this.durationInMilliseconds = builder.durationInMilliseconds;
+
         this.backgroundColorResourceId = builder.backgroundColorResourceId;
         this.backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
         this.isTileEnabled = builder.isTileEnabled;
@@ -250,7 +245,6 @@ public class Style {
         private int paddingDimensionResId;
 
         public Builder() {
-            durationInMilliseconds = 3000;
             paddingInPixels = 10;
             backgroundColorResourceId = android.R.color.holo_blue_light;
             backgroundDrawableResourceId = 0;
@@ -267,19 +261,6 @@ public class Style {
             imageScaleType = ImageView.ScaleType.FIT_XY;
         }
 
-        /**
-         * Set the durationInMilliseconds option of the {@link Crouton}.
-         *
-         * @param duration
-         *          The durationInMilliseconds the crouton will be displayed
-         *          {@link Crouton} in milliseconds.
-         * @return the {@link Builder}.
-         */
-        public Builder setDuration(int duration) {
-            this.durationInMilliseconds = duration;
-
-            return this;
-        }
 
         /**
          * Set the backgroundColorResourceId option of the {@link Crouton}.
