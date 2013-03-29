@@ -112,9 +112,13 @@ public final class Manager extends Handler {
         Manager manager;
         for (SoftReference<Manager> softInstance : sSoftInstances)
         {
-            if(softInstance != null && softInstance.get() != null) {
-                manager = softInstance.get();
-                manager.clearCroutonsForActivity(activity);
+            if(softInstance != null) {
+                if (softInstance.get() != null) {
+                    manager = softInstance.get();
+                    manager.clearCroutonsForActivity(activity);
+                } else {
+                    sSoftInstances.remove(softInstance);
+                }
             }
         }
         if(sDefaultInstance != null)
