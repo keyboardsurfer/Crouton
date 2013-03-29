@@ -27,6 +27,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Manager;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
 /**
@@ -38,14 +39,14 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
   private static final Style INFINITE = new Style.Builder().
     setBackgroundColorValue(Style.holoBlueLight).
     setDuration(Style.DURATION_INFINITE).build();
-
   private CheckBox displayOnTop;
   private Spinner styleSpinner;
   private EditText croutonTextEdit;
   private EditText croutonDurationEdit;
   private Crouton infiniteCrouton;
+    private Manager mManager;
 
-  @Override
+    @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
   }
@@ -158,13 +159,19 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
     return croutonDurationEdit.getText().toString().trim();
   }
 
+    private Manager getCroutonManager(){
+        if(mManager == null)
+            mManager = Crouton.getNewManager();
+        return mManager;
+    }
+
   private void showCrouton(String croutonText, Style croutonStyle) {
     final boolean infinite = INFINITE == croutonStyle;
-    
+
     if (infinite) {
       croutonText = getString(R.string.infinity_text);
     }
-    
+
     final Crouton crouton;
     if (displayOnTop.isChecked()) {
       crouton = Crouton.makeText(getActivity(), croutonText, croutonStyle);
@@ -174,7 +181,7 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
     if (infinite) {
       infiniteCrouton = crouton;
     }
-    crouton.setOnClickListener(this).show();
+    crouton.setOnClickListener(this).setCroutonManager(infinite ? null : getCroutonManager()).show();
   }
 
   @Override

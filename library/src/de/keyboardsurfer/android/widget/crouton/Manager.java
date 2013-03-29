@@ -29,7 +29,11 @@ import android.view.ViewParent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.FrameLayout;
+
+import java.lang.ref.SoftReference;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -37,7 +41,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Manages the lifecycle of {@link Crouton}s.
  */
-final class Manager extends Handler {
+public final class Manager extends Handler {
   private static final class Messages {
     private Messages() { /* no-op */
     }
@@ -47,7 +51,8 @@ final class Manager extends Handler {
     public static final int REMOVE_CROUTON = 0xc2007de1;
   }
 
-  private static Manager INSTANCE;
+    private static Manager sDefaultInstance;
+    private static List<SoftReference<Manager>> sSoftInstances = new ArrayList<SoftReference<Manager>>();
 
   private Queue<Crouton> croutonQueue;
 
@@ -59,12 +64,62 @@ final class Manager extends Handler {
    * @return The currently used instance of the {@link Manager}.
    */
   static synchronized Manager getInstance() {
-    if (null == INSTANCE) {
-      INSTANCE = new Manager();
+    if (null == sDefaultInstance) {
+      sDefaultInstance = new Manager();
     }
 
-    return INSTANCE;
+    return sDefaultInstance;
   }
+
+    /**
+     * Instead of using the default instance create a new one, so we can show multiple croutons at the same time.
+     * It is up to you to maintain the reference to the instances so that you can put croutons onto certain queues.
+     * <p/>
+     * <b>Make sure you know what you are doing when using this method!</b>
+     * <p/>
+     * @return new Manager instance, this will always be a new instance.
+     */
+      static Manager getNewInstance() {
+          final Manager manager = new Manager();
+          sSoftInstances.add(new SoftReference<Manager>(manager));
+          return manager;
+      }
+
+    /**
+     * Clear the crouton queues that are available!
+     */
+    static void clearAllCroutonQueues() {
+        Manager manager;
+        for (SoftReference<Manager> softInstance : sSoftInstances)
+        {
+            if(softInstance != null) {
+                if (softInstance.get() != null) {
+                    manager = softInstance.get();
+                    manager.clearCroutonQueue();
+                } else {
+                    sSoftInstances.remove(softInstance);
+                }
+            }
+        }
+        if(sDefaultInstance != null)
+            sDefaultInstance.clearCroutonQueue();
+    }
+
+    /**
+     * Clear the crouton queues that are available! For an Activity!
+     */
+    static void clearAllCroutonsForActivity(final Activity activity) {
+        Manager manager;
+        for (SoftReference<Manager> softInstance : sSoftInstances)
+        {
+            if(softInstance != null && softInstance.get() != null) {
+                manager = softInstance.get();
+                manager.clearCroutonsForActivity(activity);
+            }
+        }
+        if(sDefaultInstance != null)
+            sDefaultInstance.clearCroutonsForActivity(activity);
+    }
 
   /**
    * Inserts a {@link Crouton} to be displayed.
@@ -226,7 +281,7 @@ final class Manager extends Handler {
    *   The {@link Crouton} added to a {@link ViewGroup} and should be
    *   removed.
    */
-  protected void removeCrouton(Crouton crouton) {
+  void removeCrouton(Crouton crouton) {
     View croutonView = crouton.getView();
     ViewGroup croutonParentView = (ViewGroup) croutonView.getParent();
 
@@ -320,9 +375,9 @@ final class Manager extends Handler {
    */
   void clearCroutonsForActivity(Activity activity) {
     if (null != croutonQueue) {
-      Iterator<Crouton> croutonIterator = croutonQueue.iterator();
+      final Iterator<Crouton> croutonIterator = croutonQueue.iterator();
       while (croutonIterator.hasNext()) {
-        Crouton crouton = croutonIterator.next();
+        final Crouton crouton = croutonIterator.next();
         if ((null != crouton.getActivity()) && crouton.getActivity().equals(activity)) {
           // remove the crouton from the content view
           if (crouton.isShowing()) {
