@@ -24,7 +24,7 @@
 
     <name>Crouton Parent</name>
     <artifactId>crouton-parent</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8.0-SNAPSHOT</version>
     <groupId>de.keyboardsurfer.android.widget</groupId>
     <packaging>pom</packaging>
 
