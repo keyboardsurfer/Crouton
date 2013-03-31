@@ -51,8 +51,8 @@ public final class Manager extends Handler {
     public static final int REMOVE_CROUTON = 0xc2007de1;
   }
 
-    private static Manager sDefaultInstance;
-    private static List<SoftReference<Manager>> sSoftInstances = new ArrayList<SoftReference<Manager>>();
+  private static Manager DEFAULT_MANAGER;
+  private static List<SoftReference<Manager>> sSoftManagerInstances = new ArrayList<SoftReference<Manager>>();
 
   private Queue<Crouton> croutonQueue;
 
@@ -64,66 +64,71 @@ public final class Manager extends Handler {
    * @return The currently used instance of the {@link Manager}.
    */
   static synchronized Manager getInstance() {
-    if (null == sDefaultInstance) {
-      sDefaultInstance = new Manager();
+    if (null == DEFAULT_MANAGER) {
+      DEFAULT_MANAGER = new Manager();
     }
 
-    return sDefaultInstance;
+    return DEFAULT_MANAGER;
   }
 
-    /**
-     * Instead of using the default instance create a new one, so we can show multiple croutons at the same time.
-     * It is up to you to maintain the reference to the instances so that you can put croutons onto certain queues.
-     * <p/>
-     * <b>Make sure you know what you are doing when using this method!</b>
-     * <p/>
-     * @return new Manager instance, this will always be a new instance.
-     */
-      static Manager getNewInstance() {
-          final Manager manager = new Manager();
-          sSoftInstances.add(new SoftReference<Manager>(manager));
-          return manager;
+  /**
+   * Creates a new {@link Manager} that maintains it's own Croutons,
+   * so multiple Croutons can be displayed at the same time.
+   * <p/>
+   * <p/>
+   * It is up to the caller to maintain reference to the instances
+   * so that you can put Croutons onto certain queues.
+   * <p/>
+   * <p/>
+   * <b>Make sure you know what you are doing when using this method!</b>
+   * <p/>
+   *
+   * @return new Manager instance, this will always be a new instance.
+   */
+  static Manager getNewInstance() {
+    final Manager manager = new Manager();
+    sSoftManagerInstances.add(new SoftReference<Manager>(manager));
+    return manager;
+  }
+
+  /**
+   * Clears all {@link Crouton} queues and removes all queued and currently displayed {@link Crouton}s.
+   */
+  static void clearAllCroutonQueues() {
+    Manager manager;
+    for (SoftReference<Manager> softInstance : sSoftManagerInstances) {
+      if (null != softInstance && null != softInstance.get()) {
+        manager = softInstance.get();
+        manager.clearCroutonQueue();
+      } else {
+        sSoftManagerInstances.remove(softInstance);
       }
-
-    /**
-     * Clear the crouton queues that are available!
-     */
-    static void clearAllCroutonQueues() {
-        Manager manager;
-        for (SoftReference<Manager> softInstance : sSoftInstances)
-        {
-            if(softInstance != null) {
-                if (softInstance.get() != null) {
-                    manager = softInstance.get();
-                    manager.clearCroutonQueue();
-                } else {
-                    sSoftInstances.remove(softInstance);
-                }
-            }
-        }
-        if(sDefaultInstance != null)
-            sDefaultInstance.clearCroutonQueue();
     }
-
-    /**
-     * Clear the crouton queues that are available! For an Activity!
-     */
-    static void clearAllCroutonsForActivity(final Activity activity) {
-        Manager manager;
-        for (SoftReference<Manager> softInstance : sSoftInstances)
-        {
-            if(softInstance != null) {
-                if (softInstance.get() != null) {
-                    manager = softInstance.get();
-                    manager.clearCroutonsForActivity(activity);
-                } else {
-                    sSoftInstances.remove(softInstance);
-                }
-            }
-        }
-        if(sDefaultInstance != null)
-            sDefaultInstance.clearCroutonsForActivity(activity);
+    if (null != DEFAULT_MANAGER) {
+      DEFAULT_MANAGER.clearCroutonQueue();
     }
+  }
+
+  /**
+   * Clears all {@link Crouton}s that hold a reference to a provided {@link Activity}.
+   *
+   * @param activity
+   *   The {@link Activity} to clear the Croutons for.
+   */
+  static void clearAllCroutonsForActivity(final Activity activity) {
+    Manager manager;
+    for (SoftReference<Manager> softInstance : sSoftManagerInstances) {
+      if (null != softInstance && null != softInstance.get()) {
+        manager = softInstance.get();
+        manager.clearCroutonsForActivity(activity);
+      } else {
+        sSoftManagerInstances.remove(softInstance);
+      }
+    }
+    if (null != DEFAULT_MANAGER) {
+      DEFAULT_MANAGER.clearCroutonsForActivity(activity);
+    }
+  }
 
   /**
    * Inserts a {@link Crouton} to be displayed.
