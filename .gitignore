@@ -39,3 +39,6 @@ local.properties
 
 # maven target
 target
+
+#gradle folder
+.gradle
