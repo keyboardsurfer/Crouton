@@ -249,8 +249,10 @@ public class Style {
     private int paddingInPixels;
     private int paddingDimensionResId;
 
+    /**
+     * Creates a {@link Builder} to build a {@link Style} upon.
+     */
     public Builder() {
-      durationInMilliseconds = 3000;
       paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
@@ -265,6 +267,29 @@ public class Style {
       outAnimationResId = 0;
       imageResId = 0;
       imageScaleType = ImageView.ScaleType.FIT_XY;
+    }
+
+    /**
+     * Creates a {@link Builder} to build a {@link Style} upon.
+     *
+     * @param baseStyle
+     *   The base {@link Style} to use for this {@link Style}.
+     */
+    public Builder(final Style baseStyle) {
+      paddingInPixels = baseStyle.paddingInPixels;
+      backgroundColorResourceId = baseStyle.backgroundColorResourceId;
+      backgroundDrawableResourceId = baseStyle.backgroundDrawableResourceId;
+      backgroundColorValue = baseStyle.backgroundColorValue;
+      isTileEnabled = baseStyle.isTileEnabled;
+      textColorResourceId = baseStyle.textColorResourceId;
+      heightInPixels = baseStyle.heightInPixels;
+      widthInPixels = baseStyle.widthInPixels;
+      gravity = baseStyle.gravity;
+      imageDrawable = baseStyle.imageDrawable;
+      inAnimationResId = baseStyle.inAnimationResId;
+      outAnimationResId = baseStyle.outAnimationResId;
+      imageResId = baseStyle.imageResId;
+      imageScaleType = baseStyle.imageScaleType;
     }
 
     /**
