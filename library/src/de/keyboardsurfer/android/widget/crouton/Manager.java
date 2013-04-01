@@ -106,6 +106,7 @@ public final class Manager extends Handler {
       for (SoftReference<Manager> softManager : sSoftManagerInstances) {
         if (softManager.get().equals(manager)) {
           sSoftManagerInstances.remove(softManager);
+          break;
         }
       }
     }
