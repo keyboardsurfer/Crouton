@@ -276,20 +276,30 @@ public class Style {
      *   The base {@link Style} to use for this {@link Style}.
      */
     public Builder(final Style baseStyle) {
-      paddingInPixels = baseStyle.paddingInPixels;
+      durationInMilliseconds = baseStyle.durationInMilliseconds;
+      backgroundColorValue = baseStyle.backgroundColorValue;
       backgroundColorResourceId = baseStyle.backgroundColorResourceId;
       backgroundDrawableResourceId = baseStyle.backgroundDrawableResourceId;
-      backgroundColorValue = baseStyle.backgroundColorValue;
       isTileEnabled = baseStyle.isTileEnabled;
       textColorResourceId = baseStyle.textColorResourceId;
       heightInPixels = baseStyle.heightInPixels;
+      heightDimensionResId = baseStyle.heightDimensionResId;
       widthInPixels = baseStyle.widthInPixels;
-      gravity = baseStyle.gravity;
-      imageDrawable = baseStyle.imageDrawable;
+      widthDimensionResId = baseStyle.widthDimensionResId;
+      gravity  = baseStyle.gravity;
+      imageDrawable  = baseStyle.imageDrawable;
+      textSize = baseStyle.textSize;
+      textShadowColorResId = baseStyle.textShadowColorResId;
+      textShadowRadius = baseStyle.textShadowRadius;
+      textShadowDx = baseStyle.textShadowDx;
+      textShadowDy = baseStyle.textShadowDy;
+      textAppearanceResId = baseStyle.textAppearanceResId;
       inAnimationResId = baseStyle.inAnimationResId;
       outAnimationResId = baseStyle.outAnimationResId;
       imageResId = baseStyle.imageResId;
       imageScaleType = baseStyle.imageScaleType;
+      paddingInPixels = baseStyle.paddingInPixels;
+      paddingDimensionResId = baseStyle.paddingDimensionResId;
     }
 
     /**
