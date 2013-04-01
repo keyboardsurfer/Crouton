@@ -57,7 +57,7 @@ public final class Crouton {
   private final View customView;
 
   private OnClickListener onClickListener;
-  
+
   private Activity activity;
   private ViewGroup viewGroup;
   private FrameLayout croutonView;
@@ -66,7 +66,7 @@ public final class Crouton {
   private LifecycleCallback lifecycleCallback = null;
   private Manager manager = null;
 
-    /**
+  /**
    * Creates the {@link Crouton}.
    *
    * @param activity
@@ -156,16 +156,19 @@ public final class Crouton {
     this.text = null;
   }
 
-    /**
-     * Short hand for getting a new Manager, this will provide you a new queue to put croutons on.
-     * You should only need this in special cases.
-     *
-     * @return a new Manger instance
-     */
+  /**
+   * Convenience method for retrieving a new Manager instance.
+   * This will provide you with a new queue to put croutons on.
+   * You should only need this in special cases.
+   *
+   * @return a new {@link Manager} instance.
+   *
+   * @see de.keyboardsurfer.android.widget.crouton.Manager#getNewInstance()
+   */
   public static Manager getNewManager() {
-      return Manager.getNewInstance();
+    return Manager.getNewInstance();
   }
-  
+
   /**
    * Creates a {@link Crouton} with provided text and style for a given
    * activity.
@@ -478,10 +481,14 @@ public final class Crouton {
 
   /**
    * Allows hiding of a previously displayed {@link Crouton}.
-   * @param crouton The {@link Crouton} you want to hide.
+   *
+   * @param crouton
+   *   The {@link Crouton} you want to hide.
    */
   public static void hide(final Crouton crouton) {
-      if(crouton != null) crouton.getCroutonManager().removeCrouton(crouton);
+    if (crouton != null) {
+      crouton.getCroutonManager().removeCrouton(crouton);
+    }
   }
 
   /**
@@ -507,7 +514,7 @@ public final class Crouton {
    * Cancels a {@link Crouton} immediately.
    */
   public void cancel() {
-      getCroutonManager().removeCroutonImmediately(this);
+    getCroutonManager().removeCroutonImmediately(this);
   }
 
   /**
@@ -552,36 +559,42 @@ public final class Crouton {
 
   /**
    * Allows setting of an {@link OnClickListener} directly to a {@link Crouton} without having to use a custom view.
-   * @param onClickListener The {@link OnClickListener} to set.
+   *
+   * @param onClickListener
+   *   The {@link OnClickListener} to set.
+   *
    * @return this {@link Crouton}.
    */
-  public Crouton setOnClickListener(OnClickListener onClickListener){
+  public Crouton setOnClickListener(OnClickListener onClickListener) {
     this.onClickListener = onClickListener;
     return this;
   }
 
-    /**
-     * Override the default crouton manager. This is responsible for queueing and showing the Crouton.
-     *
-     * @param manager valid manager. You can get a new one via {@link Crouton#getNewManager()}
-     * @return
-     */
-    public Crouton setCroutonManager(final Manager manager) {
-        this.manager = manager;
-        return this;
-    }
+  /**
+   * Override the default crouton manager. This is responsible for queueing and showing the Crouton.
+   *
+   * @param manager
+   *   A valid manager. You can get a new one via {@link Crouton#getNewManager()}
+   *
+   * @return this {@link Crouton}.
+   */
+  public Crouton setCroutonManager(final Manager manager) {
+    this.manager = manager;
+    return this;
+  }
 
-    /**
-     * Creates a manager if one has not be defined. Unless you this crouton to pass it to another manager it shows on the
-     * main one
-     * @return default manager by default unless you set Manager on creation.
-     */
-    Manager getCroutonManager() {
-        if(manager == null) {
-            manager = Manager.getInstance();
-        }
-        return manager;
+  /**
+   * Creates a manager if one has not be defined.
+   * Unless you this crouton to pass it to another manager it shows on the main one.
+   *
+   * @return The {@link Manager} you have set or the default {@link Manager}.
+   */
+  Manager getCroutonManager() {
+    if (null == manager) {
+      manager = Manager.getInstance();
     }
+    return manager;
+  }
 
   /**
    * @return <code>true</code> if the {@link Crouton} is being displayed, else
@@ -677,9 +690,10 @@ public final class Crouton {
   private FrameLayout initializeCroutonViewGroup(Resources resources) {
     FrameLayout croutonView = new FrameLayout(this.activity);
 
-    if(null != onClickListener)
-    	croutonView.setOnClickListener(onClickListener);
-    
+    if (null != onClickListener) {
+      croutonView.setOnClickListener(onClickListener);
+    }
+
     final int height;
     if (this.style.heightDimensionResId > 0) {
       height = resources.getDimensionPixelSize(this.style.heightDimensionResId);
@@ -756,7 +770,7 @@ public final class Crouton {
     text.setText(this.text);
     text.setTypeface(Typeface.DEFAULT_BOLD);
     text.setGravity(this.style.gravity);
-    
+
     // set the text color if set
     if (this.style.textColorResourceId != 0) {
       text.setTextColor(resources.getColor(this.style.textColorResourceId));
@@ -812,9 +826,9 @@ public final class Crouton {
       RelativeLayout.LayoutParams.WRAP_CONTENT);
     imageParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
     imageParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-    
+
     image.setLayoutParams(imageParams);
-    
+
     return image;
   }
 
@@ -835,8 +849,8 @@ public final class Crouton {
 
   /**
    * Convenience method to get the license text for embedding within your application.
-   * @return
-   *     The license text.
+   *
+   * @return The license text.
    */
   public static String getLicenseText() {
     return "This application uses the Crouton library.\n\n" +

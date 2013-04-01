@@ -85,16 +85,37 @@ public final class Manager extends Handler {
    *
    * @return new Manager instance, this will always be a new instance.
    */
-  static Manager getNewInstance() {
+  static synchronized Manager getNewInstance() {
     final Manager manager = new Manager();
     sSoftManagerInstances.add(new SoftReference<Manager>(manager));
     return manager;
   }
 
   /**
+   * Removes a {@link Manager} instance, thus effectively removing it's management capabilities.
+   * <p/>
+   * <b>
+   * You might not want to use the {@link Manager} after calling this method returned <code>true</code>.
+   * </b>
+   * <p/>
+   * @param manager The {@link Manager} to remove.
+   * @return <code>true</code> if the {@link Manager} was removed, else <code>false</code>.
+   */
+  static synchronized boolean removeInstance(Manager manager) {
+    if (null != manager && !DEFAULT_MANAGER.equals(manager)) {
+      for (SoftReference<Manager> softManager : sSoftManagerInstances) {
+        if (softManager.get().equals(manager)) {
+          sSoftManagerInstances.remove(softManager);
+        }
+      }
+    }
+    return false;
+  }
+
+  /**
    * Clears all {@link Crouton} queues and removes all queued and currently displayed {@link Crouton}s.
    */
-  static void clearAllCroutonQueues() {
+  static synchronized void clearAllCroutonQueues() {
     Manager manager;
     for (SoftReference<Manager> softInstance : sSoftManagerInstances) {
       if (null != softInstance && null != softInstance.get()) {
@@ -115,7 +136,7 @@ public final class Manager extends Handler {
    * @param activity
    *   The {@link Activity} to clear the Croutons for.
    */
-  static void clearAllCroutonsForActivity(final Activity activity) {
+  static synchronized void clearAllCroutonsForActivity(final Activity activity) {
     Manager manager;
     for (SoftReference<Manager> softInstance : sSoftManagerInstances) {
       if (null != softInstance && null != softInstance.get()) {
