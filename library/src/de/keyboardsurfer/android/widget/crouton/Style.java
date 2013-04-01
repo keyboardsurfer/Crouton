@@ -30,7 +30,7 @@ import android.widget.ImageView;
 public class Style {
 
   /**
-   * Display a {@link Crouton} for an infinite amount of time or 
+   * Display a {@link Crouton} for an infinite amount of time or
    * until {@link de.keyboardsurfer.android.widget.crouton.Crouton#cancel()} has been called.
    */
   public static final int DURATION_INFINITE = -1;
@@ -109,12 +109,12 @@ public class Style {
    * Resource ID for the height of the {@link Crouton}.
    */
   final int heightDimensionResId;
-  
+
   /**
    * The width of the {@link Crouton} in pixels.
    */
   final int widthInPixels;
-  
+
   /**
    * Resource ID for the width of the {@link Crouton}.
    */
@@ -296,8 +296,9 @@ public class Style {
      * Set the durationInMilliseconds option of the {@link Crouton}.
      *
      * @param duration
-     *          The durationInMilliseconds the crouton will be displayed
-     *          {@link Crouton} in milliseconds.
+     *   The durationInMilliseconds the crouton will be displayed
+     *   {@link Crouton} in milliseconds.
+     *
      * @return the {@link Builder}.
      */
     public Builder setDuration(int duration) {
@@ -310,7 +311,8 @@ public class Style {
      * Set the backgroundColorResourceId option of the {@link Crouton}.
      *
      * @param backgroundColorResourceId
-     *          The backgroundColorResourceId's resource id.
+     *   The backgroundColorResourceId's resource id.
+     *
      * @return the {@link Builder}.
      */
     public Builder setBackgroundColor(int backgroundColorResourceId) {
@@ -323,7 +325,8 @@ public class Style {
      * Set the backgroundColorResourceValue option of the {@link Crouton}.
      *
      * @param backgroundColorValue
-     *          The backgroundColorResourceValue's e.g. 0xffff4444;
+     *   The backgroundColorResourceValue's e.g. 0xffff4444;
+     *
      * @return the {@link Builder}.
      */
     public Builder setBackgroundColorValue(int backgroundColorValue) {
@@ -335,7 +338,8 @@ public class Style {
      * Set the backgroundDrawableResourceId option for the {@link Crouton}.
      *
      * @param backgroundDrawableResourceId
-     *          Resource ID of a backgroundDrawableResourceId image drawable.
+     *   Resource ID of a backgroundDrawableResourceId image drawable.
+     *
      * @return the {@link Builder}.
      */
     public Builder setBackgroundDrawable(int backgroundDrawableResourceId) {
@@ -348,9 +352,10 @@ public class Style {
      * Set the heightInPixels option for the {@link Crouton}.
      *
      * @param height
-     *          The height of the {@link Crouton} in pixel. Can also be
-     *          {@link LayoutParams#MATCH_PARENT} or
-     *          {@link LayoutParams#WRAP_CONTENT}.
+     *   The height of the {@link Crouton} in pixel. Can also be
+     *   {@link LayoutParams#MATCH_PARENT} or
+     *   {@link LayoutParams#WRAP_CONTENT}.
+     *
      * @return the {@link Builder}.
      */
     public Builder setHeight(int height) {
@@ -363,7 +368,8 @@ public class Style {
      * Set the resource id for the height option for the {@link Crouton}.
      *
      * @param heightDimensionResId
-     *          Resource ID of a dimension for the height of the {@link Crouton}.
+     *   Resource ID of a dimension for the height of the {@link Crouton}.
+     *
      * @return the {@link Builder}.
      */
     public Builder setHeightDimensionResId(int heightDimensionResId) {
@@ -376,9 +382,10 @@ public class Style {
      * Set the widthInPixels option for the {@link Crouton}.
      *
      * @param width
-     *          The width of the {@link Crouton} in pixel. Can also be
-     *          {@link LayoutParams#MATCH_PARENT} or
-     *          {@link LayoutParams#WRAP_CONTENT}.
+     *   The width of the {@link Crouton} in pixel. Can also be
+     *   {@link LayoutParams#MATCH_PARENT} or
+     *   {@link LayoutParams#WRAP_CONTENT}.
+     *
      * @return the {@link Builder}.
      */
     public Builder setWidth(int width) {
@@ -391,7 +398,8 @@ public class Style {
      * Set the resource id for the width option for the {@link Crouton}.
      *
      * @param widthDimensionResId
-     *          Resource ID of a dimension for the width of the {@link Crouton}.
+     *   Resource ID of a dimension for the width of the {@link Crouton}.
+     *
      * @return the {@link Builder}.
      */
     public Builder setWidthDimensionResId(int widthDimensionResId) {
@@ -404,8 +412,9 @@ public class Style {
      * Set the isTileEnabled option for the {@link Crouton}.
      *
      * @param isTileEnabled
-     *          <code>true</code> if you want the backgroundResourceId to be
-     *          tiled, else <code>false</code>.
+     *   <code>true</code> if you want the backgroundResourceId to be
+     *   tiled, else <code>false</code>.
+     *
      * @return the {@link Builder}.
      */
     public Builder setTileEnabled(boolean isTileEnabled) {
@@ -418,7 +427,8 @@ public class Style {
      * Set the textColorResourceId option for the {@link Crouton}.
      *
      * @param textColor
-     *          The resource id of the text colorResourceId.
+     *   The resource id of the text colorResourceId.
+     *
      * @return the {@link Builder}.
      */
     public Builder setTextColor(int textColor) {
@@ -431,7 +441,8 @@ public class Style {
      * Set the gravity option for the {@link Crouton}.
      *
      * @param gravity
-     *          The text's gravity as provided by {@link Gravity}.
+     *   The text's gravity as provided by {@link Gravity}.
+     *
      * @return the {@link Builder}.
      */
     public Builder setGravity(int gravity) {
@@ -444,7 +455,8 @@ public class Style {
      * Set the image option for the {@link Crouton}.
      *
      * @param imageDrawable
-     *          An additional image to display in the {@link Crouton}.
+     *   An additional image to display in the {@link Crouton}.
+     *
      * @return the {@link Builder}.
      */
     public Builder setImageDrawable(Drawable imageDrawable) {
@@ -457,7 +469,8 @@ public class Style {
      * Set the image resource option for the {@link Crouton}.
      *
      * @param imageResId
-     *          An additional image to display in the {@link Crouton}.
+     *   An additional image to display in the {@link Crouton}.
+     *
      * @return the {@link Builder}.
      */
     public Builder setImageResource(int imageResId) {
