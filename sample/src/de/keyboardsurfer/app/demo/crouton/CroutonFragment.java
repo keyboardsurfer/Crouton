@@ -118,12 +118,7 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
       }
     }
   }
-
-  private void showBuiltInCrouton(final Style croutonStyle) {
-    String croutonText = getCroutonText();
-    showCrouton(croutonText, croutonStyle);
-  }
-
+  
   private String getCroutonText() {
     String croutonText = croutonTextEdit.getText().toString().trim();
 
@@ -131,6 +126,11 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
       croutonText = getString(R.string.text_demo);
     }
     return croutonText;
+  }
+
+  private void showBuiltInCrouton(final Style croutonStyle) {
+    String croutonText = getCroutonText();
+    showCrouton(croutonText, croutonStyle);
   }
 
   private void showAdvancedCrouton() {
