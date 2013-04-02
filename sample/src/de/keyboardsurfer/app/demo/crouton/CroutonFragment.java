@@ -88,13 +88,9 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
     Style croutonStyle = getSelectedStyleFromSpinner();
 
     if (croutonStyle != null) {
-      showNonCustomCrouton();
+      showBuiltInCrouton(croutonStyle);
     } else {
-      if (styleSpinner.getSelectedItemId() == 4) {
-        showCustomCrouton();
-      } else {
-        showCustomViewCrouton();
-      }
+      showAdvancedCrouton();
     }
   }
 
@@ -123,23 +119,32 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
     }
   }
 
-  private void showNonCustomCrouton() {
-    Style croutonStyle = getSelectedStyleFromSpinner();
+  private void showBuiltInCrouton(final Style croutonStyle) {
     String croutonText = getCroutonText();
-
     showCrouton(croutonText, croutonStyle);
   }
 
   private String getCroutonText() {
-
-
     String croutonText = croutonTextEdit.getText().toString().trim();
 
     if (TextUtils.isEmpty(croutonText)) {
       croutonText = getString(R.string.text_demo);
     }
-
     return croutonText;
+  }
+
+  private void showAdvancedCrouton() {
+    switch (styleSpinner.getSelectedItemPosition()) {
+      case 4: {
+        showCustomCrouton();
+        break;
+      }
+
+      case 5: {
+        showCustomViewCrouton();
+        break;
+      }
+    }
   }
 
   private void showCustomCrouton() {
@@ -175,11 +180,11 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
 
   private void showCrouton(String croutonText, Style croutonStyle) {
     final boolean infinite = INFINITE == croutonStyle;
-    
+
     if (infinite) {
       croutonText = getString(R.string.infinity_text);
     }
-    
+
     final Crouton crouton;
     if (displayOnTop.isChecked()) {
       crouton = Crouton.makeText(getActivity(), croutonText, croutonStyle);
@@ -195,14 +200,16 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
   @Override
   public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
     switch ((int) id) {
-      case 3:   // Infinite
+      
+      case 4: { // Custom Style
+        croutonTextEdit.setVisibility(View.VISIBLE);
+        croutonDurationEdit.setVisibility(View.VISIBLE);
+        break;
+      }
+
       case 5: { // Custom View
         croutonTextEdit.setVisibility(View.GONE);
         croutonDurationEdit.setVisibility(View.GONE);
-        break;
-      }
-      case 4: { // Custom Style
-        croutonDurationEdit.setVisibility(View.VISIBLE);
         break;
       }
 
