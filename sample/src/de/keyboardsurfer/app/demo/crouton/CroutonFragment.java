@@ -90,7 +90,11 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
     if (croutonStyle != null) {
       showNonCustomCrouton();
     } else {
-      showCustomCrouton();
+      if (styleSpinner.getSelectedItemId() == 4) {
+        showCustomCrouton();
+      } else {
+        showCustomViewCrouton();
+      }
     }
   }
 
@@ -154,6 +158,17 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
     showCrouton(croutonText, croutonStyle);
   }
 
+  private void showCustomViewCrouton() {
+    View view = getLayoutInflater(null).inflate(R.layout.crouton_custom_view, null);
+    final Crouton crouton;
+    if (displayOnTop.isChecked()) {
+      crouton = Crouton.make(getActivity(), view);
+    } else {
+      crouton = Crouton.make(getActivity(), view, R.id.alternate_view_group);
+    }
+    crouton.show();
+  }
+
   private String getCroutonDurationString() {
     return croutonDurationEdit.getText().toString().trim();
   }
@@ -180,12 +195,13 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
   @Override
   public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
     switch ((int) id) {
-      case 3: {
+      case 3:   // Infinite
+      case 5: { // Custom View
         croutonTextEdit.setVisibility(View.GONE);
         croutonDurationEdit.setVisibility(View.GONE);
         break;
       }
-      case 4: {
+      case 4: { // Custom Style
         croutonDurationEdit.setVisibility(View.VISIBLE);
         break;
       }
