@@ -17,6 +17,7 @@
 
 package de.keyboardsurfer.android.widget.crouton;
 
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
@@ -24,61 +25,41 @@ import android.view.animation.TranslateAnimation;
  * Builds the default animations for showing and hiding a {@link Crouton}.
  */
 final class DefaultAnimationsBuilder {
+  private static final long DURATION = 400;
   private static Animation slideInDownAnimation, slideOutUpAnimation;
-
-  protected static final class SlideInDownAnimationParameters {
-    private SlideInDownAnimationParameters() {
-      /* no-op */
-    }
-
-    public static final float FROM_X_DELTA = 0;
-    public static final float TO_X_DELTA = 0;
-    public static final float FROM_Y_DELTA = -50;
-    public static final float TO_Y_DELTA = 0;
-
-    public static final long DURATION = 400;
-  }
-
-  protected static final class SlideOutUpAnimationParameters {
-    private SlideOutUpAnimationParameters() {
-      /* no-op */
-    }
-
-    public static final float FROM_X_DELTA = 0;
-    public static final float TO_X_DELTA = 0;
-    public static final float FROM_Y_DELTA = 0;
-    public static final float TO_Y_DELTA = -50;
-
-    public static final long DURATION = 400;
-  }
 
   private DefaultAnimationsBuilder() {
     /* no-op */
   }
 
   /**
+   * @param croutonView
+   *   The croutonView which gets animated.
    * @return The default Animation for a showing {@link Crouton}.
    */
-  public static Animation buildDefaultSlideInDownAnimation() {
+  public static Animation buildDefaultSlideInDownAnimation(View croutonView) {
     if (null == slideInDownAnimation) {
-      slideInDownAnimation = new TranslateAnimation(SlideInDownAnimationParameters.FROM_X_DELTA,
-        SlideInDownAnimationParameters.TO_X_DELTA,
-        SlideInDownAnimationParameters.FROM_Y_DELTA, SlideInDownAnimationParameters.TO_Y_DELTA);
-      slideInDownAnimation.setDuration(SlideInDownAnimationParameters.DURATION);
+      slideInDownAnimation = new TranslateAnimation(
+        0, 0,                               // X: from, to
+        -croutonView.getMeasuredHeight(), 0 // Y: from, to
+      );
+      slideInDownAnimation.setDuration(DURATION);
     }
-
     return slideInDownAnimation;
   }
 
   /**
+   * @param croutonView
+   *   The croutonView which gets animated.
    * @return The default Animation for a hiding {@link Crouton}.
    */
-  public static Animation buildDefaultSlideOutUpAnimation() {
+  public static Animation buildDefaultSlideOutUpAnimation(View croutonView) {
     if (null == slideOutUpAnimation) {
-      slideOutUpAnimation = new TranslateAnimation(SlideOutUpAnimationParameters.FROM_X_DELTA,
-        SlideOutUpAnimationParameters.TO_X_DELTA,
-        SlideOutUpAnimationParameters.FROM_Y_DELTA, SlideOutUpAnimationParameters.TO_Y_DELTA);
-      slideOutUpAnimation.setDuration(SlideOutUpAnimationParameters.DURATION);
+      slideOutUpAnimation = new TranslateAnimation(
+        0, 0,                               // X: from, to
+        0, -croutonView.getMeasuredHeight() // Y: from, to
+      );
+      slideOutUpAnimation.setDuration(DURATION);
     }
     return slideOutUpAnimation;
   }
