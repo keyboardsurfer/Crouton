@@ -29,21 +29,6 @@ import android.widget.ImageView;
 
 public class Style {
 
-  /**
-   * Display a {@link Crouton} for an infinite amount of time or
-   * until {@link de.keyboardsurfer.android.widget.crouton.Crouton#cancel()} has been called.
-   */
-  public static final int DURATION_INFINITE = -1;
-
-  /**
-   * The default short display duration of a {@link Crouton}.
-   */
-  public static final int DURATION_SHORT = 3000;
-  /**
-   * The default long display duration of a {@link Crouton}.
-   */
-  public static final int DURATION_LONG = 5000;
-
   public static final int holoRedLight = 0xffff4444;
   public static final int holoGreenLight = 0xff99cc00;
   public static final int holoBlueLight = 0xff33b5e5;
@@ -62,19 +47,19 @@ public class Style {
   public static final Style INFO;
 
   static {
-    ALERT = new Builder().setDuration(DURATION_LONG).setBackgroundColorValue(holoRedLight).setHeight(LayoutParams.WRAP_CONTENT)
-      .build();
-    CONFIRM = new Builder().setDuration(DURATION_SHORT).setBackgroundColorValue(holoGreenLight).setHeight(
-      LayoutParams.WRAP_CONTENT).build();
-    INFO = new Builder().setDuration(DURATION_SHORT).setBackgroundColorValue(holoBlueLight).setHeight(LayoutParams.WRAP_CONTENT)
-      .build();
+    ALERT = new Builder()
+            .setBackgroundColorValue(holoRedLight)
+            .setHeight(LayoutParams.WRAP_CONTENT)
+            .build();
+    CONFIRM = new Builder()
+            .setBackgroundColorValue(holoGreenLight)
+            .setHeight(LayoutParams.WRAP_CONTENT)
+            .build();
+    INFO = new Builder()
+            .setBackgroundColorValue(holoBlueLight)
+            .setHeight(LayoutParams.WRAP_CONTENT)
+            .build();
   }
-
-  /**
-   * The durationInMilliseconds the {@link Crouton} will be displayed in
-   * milliseconds.
-   */
-  final int durationInMilliseconds;
 
   /**
    * The resource id of the backgroundResourceId.
@@ -183,16 +168,6 @@ public class Style {
   final int textAppearanceResId;
 
   /**
-   * The resource id for the in animation
-   */
-  final int inAnimationResId;
-
-  /**
-   * The resource id for the out animation
-   */
-  final int outAnimationResId;
-
-  /**
    * The padding for the crouton view content in pixels
    */
   final int paddingInPixels;
@@ -203,7 +178,6 @@ public class Style {
   final int paddingDimensionResId;
 
   private Style(final Builder builder) {
-    this.durationInMilliseconds = builder.durationInMilliseconds;
     this.backgroundColorResourceId = builder.backgroundColorResourceId;
     this.backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
     this.isTileEnabled = builder.isTileEnabled;
@@ -220,8 +194,6 @@ public class Style {
     this.textShadowDx = builder.textShadowDx;
     this.textShadowDy = builder.textShadowDy;
     this.textAppearanceResId = builder.textAppearanceResId;
-    this.inAnimationResId = builder.inAnimationResId;
-    this.outAnimationResId = builder.outAnimationResId;
     this.imageResId = builder.imageResId;
     this.imageScaleType = builder.imageScaleType;
     this.paddingInPixels = builder.paddingInPixels;
@@ -233,7 +205,6 @@ public class Style {
    * Builder for the {@link Style} object.
    */
   public static class Builder {
-    private int durationInMilliseconds;
     private int backgroundColorValue;
     private int backgroundColorResourceId;
     private int backgroundDrawableResourceId;
@@ -251,8 +222,6 @@ public class Style {
     private float textShadowDx;
     private float textShadowDy;
     private int textAppearanceResId;
-    private int inAnimationResId;
-    private int outAnimationResId;
     private int imageResId;
     private ImageView.ScaleType imageScaleType;
     private int paddingInPixels;
@@ -262,7 +231,6 @@ public class Style {
      * Creates a {@link Builder} to build a {@link Style} upon.
      */
     public Builder() {
-      durationInMilliseconds = DURATION_SHORT;
       paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
@@ -273,8 +241,6 @@ public class Style {
       widthInPixels = LayoutParams.MATCH_PARENT;
       gravity = Gravity.CENTER;
       imageDrawable = null;
-      inAnimationResId = 0;
-      outAnimationResId = 0;
       imageResId = 0;
       imageScaleType = ImageView.ScaleType.FIT_XY;
     }
@@ -286,7 +252,6 @@ public class Style {
      *   The base {@link Style} to use for this {@link Style}.
      */
     public Builder(final Style baseStyle) {
-      durationInMilliseconds = baseStyle.durationInMilliseconds;
       backgroundColorValue = baseStyle.backgroundColorValue;
       backgroundColorResourceId = baseStyle.backgroundColorResourceId;
       backgroundDrawableResourceId = baseStyle.backgroundDrawableResourceId;
@@ -304,27 +269,10 @@ public class Style {
       textShadowDx = baseStyle.textShadowDx;
       textShadowDy = baseStyle.textShadowDy;
       textAppearanceResId = baseStyle.textAppearanceResId;
-      inAnimationResId = baseStyle.inAnimationResId;
-      outAnimationResId = baseStyle.outAnimationResId;
       imageResId = baseStyle.imageResId;
       imageScaleType = baseStyle.imageScaleType;
       paddingInPixels = baseStyle.paddingInPixels;
       paddingDimensionResId = baseStyle.paddingDimensionResId;
-    }
-
-    /**
-     * Set the durationInMilliseconds option of the {@link Crouton}.
-     *
-     * @param duration
-     *   The durationInMilliseconds the crouton will be displayed
-     *   {@link Crouton} in milliseconds.
-     *
-     * @return the {@link Builder}.
-     */
-    public Builder setDuration(int duration) {
-      this.durationInMilliseconds = duration;
-
-      return this;
     }
 
     /**
@@ -544,22 +492,6 @@ public class Style {
      */
     public Builder setTextAppearance(int textAppearanceResId) {
       this.textAppearanceResId = textAppearanceResId;
-      return this;
-    }
-
-    /**
-     * The resource id for the in animation
-     */
-    public Builder setInAnimation(int inAnimationResId) {
-      this.inAnimationResId = inAnimationResId;
-      return this;
-    }
-
-    /**
-     * The resource id for the out animation
-     */
-    public Builder setOutAnimation(int outAnimationResId) {
-      this.outAnimationResId = outAnimationResId;
       return this;
     }
 

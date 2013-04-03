@@ -57,6 +57,7 @@ public final class Crouton {
   private final View customView;
 
   private OnClickListener onClickListener;
+  private Configuration configuration = Configuration.DEFAULT;
   
   private Activity activity;
   private ViewGroup viewGroup;
@@ -144,6 +145,22 @@ public final class Crouton {
    *   The {@link ViewGroup} that this {@link Crouton} should be added to.
    */
   private Crouton(Activity activity, View customView, ViewGroup viewGroup) {
+    this(activity, customView, viewGroup, Configuration.DEFAULT);
+  }
+
+  /**
+   * Creates the {@link Crouton}.
+   *
+   * @param activity
+   *   The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param customView
+   *   The custom {@link View} to display
+   * @param viewGroup
+   *   The {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param configuration
+   *   The {@link Configuration} for this crouton.
+   */
+  private Crouton(final Activity activity, final View customView, final ViewGroup viewGroup, final Configuration configuration) {
     if ((activity == null) || (customView == null)) {
       throw new IllegalArgumentException("Null parameters are not accepted");
     }
@@ -153,6 +170,7 @@ public final class Crouton {
     this.viewGroup = viewGroup;
     this.style = new Style.Builder().build();
     this.text = null;
+    this.configuration = configuration;
   }
   
   /**
@@ -321,6 +339,25 @@ public final class Crouton {
   }
 
   /**
+   * Creates a {@link Crouton} with provided text-resource and style for a given
+   * activity.
+   *
+   * @param activity
+   *   The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param customView
+   *   The custom {@link View} to display
+   * @param viewGroupResId
+   *   The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param configuration
+   *   The configuration for this crouton how it gets managed by the Manager.
+   *
+   * @return The created {@link Crouton}.
+   */
+  public static Crouton make(Activity activity, View customView, int viewGroupResId, final Configuration configuration) {
+    return new Crouton(activity, customView, (ViewGroup) activity.findViewById(viewGroupResId), configuration);
+  }
+
+  /**
    * Creates a {@link Crouton} with provided text and style for a given activity
    * and displays it directly.
    *
@@ -368,6 +405,25 @@ public final class Crouton {
    */
   public static void showText(Activity activity, CharSequence text, Style style, int viewGroupResId) {
     makeText(activity, text, style, (ViewGroup) activity.findViewById(viewGroupResId)).show();
+  }
+
+  /**
+   * Creates a {@link Crouton} with provided text and style for a given activity
+   * and displays it directly.
+   *
+   * @param activity
+   *   The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param text
+   *   The text you want to display.
+   * @param style
+   *   The style that this {@link Crouton} should be created with.
+   * @param viewGroupResId
+   *   The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param configuration
+   *   The configuration to apply to this Crouton
+   */
+  public static void showText(Activity activity, CharSequence text, Style style, int viewGroupResId, final Configuration configuration) {
+    makeText(activity, text, style, (ViewGroup) activity.findViewById(viewGroupResId)).setConfiguration(configuration).show();
   }
 
 
@@ -510,8 +566,8 @@ public final class Crouton {
 
   public Animation getInAnimation() {
     if ((null == this.inAnimation) && (null != this.activity)) {
-      if (getStyle().inAnimationResId > 0) {
-        this.inAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().inAnimationResId);
+      if (getConfiguration().inAnimationResId > 0) {
+        this.inAnimation = AnimationUtils.loadAnimation(getActivity(), getConfiguration().inAnimationResId);
       } else {
         this.inAnimation = DefaultAnimationsBuilder.buildDefaultSlideInDownAnimation(getView());
       }
@@ -522,8 +578,8 @@ public final class Crouton {
 
   public Animation getOutAnimation() {
     if ((null == this.outAnimation) && (null != this.activity)) {
-      if (getStyle().outAnimationResId > 0) {
-        this.outAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().outAnimationResId);
+      if (getConfiguration().outAnimationResId > 0) {
+        this.outAnimation = AnimationUtils.loadAnimation(getActivity(), getConfiguration().outAnimationResId);
       } else {
         this.outAnimation = DefaultAnimationsBuilder.buildDefaultSlideOutUpAnimation(getView());
       }
@@ -547,6 +603,19 @@ public final class Crouton {
    */
   public Crouton setOnClickListener(OnClickListener onClickListener){
     this.onClickListener = onClickListener;
+    return this;
+  }
+
+  /**
+   * Set the configuration on this crouton, idea being you can modify the none visual aspects pre showing it.
+   *
+   * @param configuration a configuration build using {@link Configuration.Builder}
+   * @return this {@link Crouton}
+   */
+  public Crouton setConfiguration(final Configuration configuration) {
+    if (configuration != null) {
+      this.configuration = configuration;
+    }
     return this;
   }
 
@@ -591,6 +660,13 @@ public final class Crouton {
    */
   Style getStyle() {
     return style;
+  }
+
+  /**
+   * @return this croutons configuration
+   */
+  Configuration getConfiguration(){
+    return configuration;
   }
 
   /**
