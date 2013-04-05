@@ -356,6 +356,14 @@ public final class Manager extends Handler {
   }
 
   /**
+   * Clears all showing and queued Croutons attached to this manager.
+   * This is <strong>not</strong> thread safe, but calling multiple times will have no adverse affects.
+   */
+  public void clearAllCroutons(){
+    clearCroutonQueue();
+  }
+
+  /**
    * Removes all {@link Crouton}s from the queue.
    */
   void clearCroutonQueue() {
@@ -365,6 +373,7 @@ public final class Manager extends Handler {
       // remove any views that may already have been added to the activity's
       // content view
       for (Crouton crouton : croutonQueue) {
+        if(crouton == null) continue;
         if (crouton.isShowing()) {
           ((ViewGroup) crouton.getView().getParent()).removeView(crouton.getView());
         }
