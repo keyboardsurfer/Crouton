@@ -192,7 +192,7 @@ public final class Manager extends Handler {
   }
 
   private long calculateCroutonDuration(Crouton crouton) {
-    long croutonDuration = crouton.getStyle().durationInMilliseconds;
+    long croutonDuration = crouton.getConfiguration().durationInMilliseconds;
     croutonDuration += crouton.getInAnimation().getDuration();
     croutonDuration += crouton.getOutAnimation().getDuration();
     return croutonDuration;
@@ -310,9 +310,9 @@ public final class Manager extends Handler {
 
         croutonView.startAnimation(crouton.getInAnimation());
         announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
-        if (Style.DURATION_INFINITE != crouton.getStyle().durationInMilliseconds) {
+        if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
           sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
-                crouton.getStyle().durationInMilliseconds + crouton.getInAnimation().getDuration());
+                crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
         }
       }
     });

@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import de.keyboardsurfer.android.widget.crouton.Configuration;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Manager;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -37,8 +38,11 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 public class CroutonFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
   private static final Style INFINITE = new Style.Builder().
-    setBackgroundColorValue(Style.holoBlueLight).
-    setDuration(Style.DURATION_INFINITE).build();
+    setBackgroundColorValue(Style.holoBlueLight).build();
+  private static final Configuration INFINATE_CONFIG = new Configuration.Builder()
+          .setDuration(Configuration.DURATION_INFINITE)
+          .build();
+
   private CheckBox displayOnTop;
   private Spinner styleSpinner;
   private EditText croutonTextEdit;
@@ -131,7 +135,7 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
 
   private void showBuiltInCrouton(final Style croutonStyle) {
     String croutonText = getCroutonText();
-    showCrouton(croutonText, croutonStyle);
+    showCrouton(croutonText, croutonStyle, Configuration.DEFAULT);
   }
 
   private void showAdvancedCrouton() {
@@ -152,16 +156,17 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
     String croutonDurationString = getCroutonDurationString();
 
     if (TextUtils.isEmpty(croutonDurationString)) {
-      showCrouton(getString(R.string.warning_duration), Style.ALERT);
+      showCrouton(getString(R.string.warning_duration), Style.ALERT, Configuration.DEFAULT);
       return;
     }
 
     int croutonDuration = Integer.parseInt(croutonDurationString);
-    Style croutonStyle = new Style.Builder().setDuration(croutonDuration).build();
+    Style croutonStyle = new Style.Builder().build();
+    Configuration croutonConfiguration = new Configuration.Builder().setDuration(croutonDuration).build();
 
     String croutonText = getCroutonText();
 
-    showCrouton(croutonText, croutonStyle);
+    showCrouton(croutonText, croutonStyle, croutonConfiguration);
   }
 
   private void showCustomViewCrouton() {
@@ -179,13 +184,7 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
     return croutonDurationEdit.getText().toString().trim();
   }
 
-    private Manager getCroutonManager(){
-        if(mManager == null)
-            mManager = Crouton.getNewManager();
-        return mManager;
-    }
-
-  private void showCrouton(String croutonText, Style croutonStyle) {
+  private void showCrouton(String croutonText, Style croutonStyle, Configuration configuration) {
     final boolean infinite = INFINITE == croutonStyle;
 
     if (infinite) {
@@ -201,7 +200,7 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
     if (infinite) {
       infiniteCrouton = crouton;
     }
-    crouton.setOnClickListener(this).setCroutonManager(infinite ? null : getCroutonManager()).show();
+    crouton.setOnClickListener(this).setConfiguration(infinite ? INFINATE_CONFIG : configuration).show();
   }
 
   @Override
