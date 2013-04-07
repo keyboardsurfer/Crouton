@@ -26,7 +26,6 @@ import android.widget.ImageView;
 /**
  * The style for a {@link Crouton}.
  */
-
 public class Style {
 
   public static final int holoRedLight = 0xffff4444;
@@ -448,7 +447,7 @@ public class Style {
     }
 
     /**
-     * The text size in sp
+     * The text size in sp.
      */
     public Builder setTextSize(int textSize) {
       this.textSize = textSize;
@@ -456,7 +455,7 @@ public class Style {
     }
 
     /**
-     * The text shadow color's resource id
+     * The text shadow color resource id.
      */
     public Builder setTextShadowColor(int textShadowColorResId) {
       this.textShadowColorResId = textShadowColorResId;
@@ -464,7 +463,7 @@ public class Style {
     }
 
     /**
-     * The text shadow radius
+     * The text shadow radius.
      */
     public Builder setTextShadowRadius(float textShadowRadius) {
       this.textShadowRadius = textShadowRadius;
@@ -472,7 +471,7 @@ public class Style {
     }
 
     /**
-     * The text shadow horizontal offset
+     * The text shadow horizontal offset.
      */
     public Builder setTextShadowDx(float textShadowDx) {
       this.textShadowDx = textShadowDx;
@@ -480,7 +479,7 @@ public class Style {
     }
 
     /**
-     * The text shadow vertical offset
+     * The text shadow vertical offset.
      */
     public Builder setTextShadowDy(float textShadowDy) {
       this.textShadowDy = textShadowDy;
@@ -496,7 +495,7 @@ public class Style {
     }
 
     /**
-     * The {@link android.widget.ImageView.ScaleType} for the image
+     * The {@link android.widget.ImageView.ScaleType} for the image.
      */
     public Builder setImageScaleType(ImageView.ScaleType imageScaleType) {
       this.imageScaleType = imageScaleType;
@@ -504,7 +503,7 @@ public class Style {
     }
 
     /**
-     * The padding for the crouton view's content in pixels
+     * The padding for the crouton view's content in pixels.
      */
     public Builder setPaddingInPixels(int padding) {
       this.paddingInPixels = padding;
@@ -512,7 +511,7 @@ public class Style {
     }
 
     /**
-     * The resource id for the padding for the crouton view's content
+     * The resource id for the padding for the crouton view's content.
      */
     public Builder setPaddingDimensionResId(int paddingResId) {
       this.paddingDimensionResId = paddingResId;

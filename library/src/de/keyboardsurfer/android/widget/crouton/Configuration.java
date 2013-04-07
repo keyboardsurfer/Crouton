@@ -1,12 +1,27 @@
+/*
+ * Copyright 2013 Benjamin Weiss
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.keyboardsurfer.android.widget.crouton;
 
 /**
+ * Allows configuring a {@link Crouton}s behaviour aside from the actual view, which is defined via {@link Style}.
  * Created with Intellij with Android.
  * See licencing for usage of this code.
- * <p/>
- * User: chris
- * Date: 29/03/2013
- * Time: 18:12
+ *
+ * @author chris
+ * @since 2.0
  */
 public class Configuration {
 
@@ -54,6 +69,9 @@ public class Configuration {
     this.outAnimationResId = builder.outAnimationResId;
   }
 
+  /**
+   * Creates a {@link Builder} to build a {@link Configuration} upon.
+   */
   public static class Builder {
     private int durationInMilliseconds = DURATION_SHORT;
     private int inAnimationResId = 0;
@@ -73,7 +91,11 @@ public class Configuration {
     }
 
     /**
-     * The resource id for the in animation
+     * The resource id for the in animation.
+     *
+     * @param inAnimationResId The resource identifier for the animation that's being shown
+     *                         when the {@link Crouton} is going to be displayed.
+     * @return the {@link Builder}.
      */
     public Builder setInAnimation(final int inAnimationResId) {
       this.inAnimationResId = inAnimationResId;
@@ -83,6 +105,10 @@ public class Configuration {
 
     /**
      * The resource id for the out animation
+     *
+     * @param outAnimationResId The resource identifier for the animation that's being shown
+     *                          when the {@link Crouton} is going to be removed.
+     * @return the {@link Builder}.
      */
     public Builder setOutAnimation(final int outAnimationResId) {
       this.outAnimationResId = outAnimationResId;
@@ -91,7 +117,9 @@ public class Configuration {
     }
 
     /**
-     * @return a configured {@link Style} object.
+     * Builds the {@link Configuration}.
+     *
+     * @return The built {@link Configuration}.
      */
     public Configuration build() {
       return new Configuration(this);
