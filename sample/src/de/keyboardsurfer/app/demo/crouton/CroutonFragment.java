@@ -28,7 +28,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import de.keyboardsurfer.android.widget.crouton.Configuration;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Manager;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
 /**
@@ -39,7 +38,7 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
 
   private static final Style INFINITE = new Style.Builder().
     setBackgroundColorValue(Style.holoBlueLight).build();
-  private static final Configuration INFINATE_CONFIG = new Configuration.Builder()
+  private static final Configuration CONFIGURATION_INFINITE = new Configuration.Builder()
           .setDuration(Configuration.DURATION_INFINITE)
           .build();
 
@@ -48,7 +47,6 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
   private EditText croutonTextEdit;
   private EditText croutonDurationEdit;
   private Crouton infiniteCrouton;
-    private Manager mManager;
 
     @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -200,7 +198,7 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
     if (infinite) {
       infiniteCrouton = crouton;
     }
-    crouton.setOnClickListener(this).setConfiguration(infinite ? INFINATE_CONFIG : configuration).show();
+    crouton.setOnClickListener(this).setConfiguration(infinite ? CONFIGURATION_INFINITE : configuration).show();
   }
 
   @Override

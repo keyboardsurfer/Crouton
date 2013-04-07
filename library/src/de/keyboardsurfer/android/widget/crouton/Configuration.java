@@ -39,9 +39,9 @@ public class Configuration {
    * The default long display duration of a {@link Crouton}.
    */
   public static final int DURATION_LONG = 5000;
+  
   /**
-   * The durationInMilliseconds the {@link Crouton} will be displayed in
-   * milliseconds.
+   * The default {@link Configuration} of a {@link Crouton}.
    */
   public static final Configuration DEFAULT;
 
@@ -55,11 +55,11 @@ public class Configuration {
    */
   final int durationInMilliseconds;
   /**
-   * The resource id for the in animation
+   * The resource id for the in animation.
    */
   final int inAnimationResId;
   /**
-   * The resource id for the out animation
+   * The resource id for the out animation.
    */
   final int outAnimationResId;
 
