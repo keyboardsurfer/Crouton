@@ -36,6 +36,19 @@ public class Style {
   public static final int DURATION_INFINITE = -1;
 
   /**
+   * The default short display duration of a {@link Crouton}.
+   */
+  public static final int DURATION_SHORT = 3000;
+  /**
+   * The default long display duration of a {@link Crouton}.
+   */
+  public static final int DURATION_LONG = 5000;
+
+  public static final int holoRedLight = 0xffff4444;
+  public static final int holoGreenLight = 0xff99cc00;
+  public static final int holoBlueLight = 0xff33b5e5;
+
+  /**
    * Default style for alerting the user.
    */
   public static final Style ALERT;
@@ -48,16 +61,12 @@ public class Style {
    */
   public static final Style INFO;
 
-  public static final int holoRedLight = 0xffff4444;
-  public static final int holoGreenLight = 0xff99cc00;
-  public static final int holoBlueLight = 0xff33b5e5;
-
   static {
-    ALERT = new Builder().setDuration(5000).setBackgroundColorValue(holoRedLight).setHeight(LayoutParams.WRAP_CONTENT)
+    ALERT = new Builder().setDuration(DURATION_LONG).setBackgroundColorValue(holoRedLight).setHeight(LayoutParams.WRAP_CONTENT)
       .build();
-    CONFIRM = new Builder().setDuration(3000).setBackgroundColorValue(holoGreenLight).setHeight(
+    CONFIRM = new Builder().setDuration(DURATION_SHORT).setBackgroundColorValue(holoGreenLight).setHeight(
       LayoutParams.WRAP_CONTENT).build();
-    INFO = new Builder().setDuration(3000).setBackgroundColorValue(holoBlueLight).setHeight(LayoutParams.WRAP_CONTENT)
+    INFO = new Builder().setDuration(DURATION_SHORT).setBackgroundColorValue(holoBlueLight).setHeight(LayoutParams.WRAP_CONTENT)
       .build();
   }
 
@@ -253,6 +262,7 @@ public class Style {
      * Creates a {@link Builder} to build a {@link Style} upon.
      */
     public Builder() {
+      durationInMilliseconds = DURATION_SHORT;
       paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
