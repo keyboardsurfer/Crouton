@@ -48,15 +48,12 @@ public class Style {
   static {
     ALERT = new Builder()
             .setBackgroundColorValue(holoRedLight)
-            .setHeight(LayoutParams.WRAP_CONTENT)
             .build();
     CONFIRM = new Builder()
             .setBackgroundColorValue(holoGreenLight)
-            .setHeight(LayoutParams.WRAP_CONTENT)
             .build();
     INFO = new Builder()
             .setBackgroundColorValue(holoBlueLight)
-            .setHeight(LayoutParams.WRAP_CONTENT)
             .build();
   }
 
