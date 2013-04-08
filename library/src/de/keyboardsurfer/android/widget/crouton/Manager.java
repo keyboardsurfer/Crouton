@@ -99,7 +99,10 @@ public final class Manager extends Handler {
    * You might not want to use the {@link Manager} after calling this method returned <code>true</code>.
    * </b>
    * <p/>
-   * @param manager The {@link Manager} to remove.
+   *
+   * @param manager
+   *   The {@link Manager} to remove.
+   *
    * @return <code>true</code> if the {@link Manager} was removed, else <code>false</code>.
    */
   static synchronized boolean removeInstance(Manager manager) {
@@ -312,7 +315,7 @@ public final class Manager extends Handler {
         announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
         if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
           sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
-                crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
+            crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
         }
       }
     });
