@@ -16,9 +16,11 @@
 package de.keyboardsurfer.android.widget.crouton;
 
 /**
- * Allows configuring a {@link Crouton}s behaviour aside from the actual view, which is defined via {@link Style}.
- * Created with Intellij with Android.
- * See licencing for usage of this code.
+ * Allows configuring a {@link Crouton}s behaviour aside from the actual view,
+ * which is defined via {@link Style}.
+ * 
+ * This allows to re-use a {@link Style} while modifying parameters that only have to be applied
+ * when the {@link Crouton} is being displayed.
  *
  * @author chris
  * @since 1.8
