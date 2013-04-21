@@ -545,7 +545,7 @@ public final class Crouton {
    * @return 
    *     The license text.
    */
-  public String getLicenseText() {
+  public static String getLicenseText() {
     return "This application uses the Crouton library.\n\n" +
       "Copyright 2012 - 2013 Benjamin Weiss \n" +
       "Copyright 2012 Neofonie Mobile GmbH\n" +
