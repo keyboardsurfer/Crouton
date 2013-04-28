@@ -57,13 +57,26 @@ You can line up multiple Croutons for display, that will be shown one after anot
 <p><a href="http://play.google.com/store/apps/details?id=de.keyboardsurfer.app.demo.crouton">
   <img alt="Crouton Demo on Google Play" src="http://developer.android.com/images/brand/en_generic_rgb_wo_60.png"></a></p>
 
-<p>If you're already using Crouton and just want to download the latest version of the library, follow <a href="https://www.dropbox.com/sh/9vlov7im38vtqe9/Kpj6KZSv0D/Crouton">this link</a>.</p>
+<p>If you're already using Crouton and just want to download the latest version of the library, follow <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22de.keyboardsurfer.android.widget%22">this link</a>.</p>
 
 <h3>Changelog</h3>
 
-<h4>Current version: 1.7</h4>
+<h4>Current version: 1.8</h4>
 
-<h4><a href="https://github.com/keyboardsurfer/Crouton/tree/1.7">1.7</a></h4>
+<h4><a href="https://github.com/keyboardsurfer/Crouton/tree/1.8">1.8</a></h4>
+
+<ul>
+<li>Improves support for custom views</li>
+<li>Smoothing out animations for multiple line Croutons</li>
+<li>Cleans up Style
+
+<ul>
+<li>Configuration is now available for non-UI information</li>
+<li>Style only holds UI-relevant information</li>
+</ul>
+</li>
+<li>Introduces DURATION_SHORT and DURATION_LONG constants</li>
+</ul><h4><a href="https://github.com/keyboardsurfer/Crouton/tree/1.7">1.7</a></h4>
 
 <ul>
 <li>
@@ -178,6 +191,21 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 <p>to the dependency.</p>
 
+<p>If you are referencing a newer version of the Android Support Library in your application, you might want to exclude Crouton's dependency like this:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>crouton<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${crouton.version}<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>de.keyboardsurfer.android.widget<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;exclusions&gt;</span>
+        <span class="nt">&lt;exclusion&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.google.android<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>support-v4<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;/exclusion&gt;</span>
+    <span class="nt">&lt;/exclusions&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+
 <h3>DIY</h3>
 
 <p>The build requires Maven. Operations are very simple:</p>
@@ -193,7 +221,7 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 <div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
   <span class="nt">&lt;artifactId&gt;</span>crouton<span class="nt">&lt;/artifactId&gt;</span>
-  <span class="nt">&lt;version&gt;</span>1.6<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;version&gt;</span>${crouton.version}<span class="nt">&lt;/version&gt;</span>
   <span class="nt">&lt;groupId&gt;</span>de.keyboardsurfer.android.widget<span class="nt">&lt;/groupId&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
