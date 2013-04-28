@@ -679,7 +679,15 @@ public final class Crouton {
    *         <code>false</code>.
    */
   boolean isShowing() {
-    return (null != activity) && (null != croutonView) && (null != croutonView.getParent());
+    return (null != activity) && (isCroutonViewNotNull() || isCustomViewNotNull());
+  }
+  
+  private boolean isCroutonViewNotNull() {
+    return (null != croutonView) && (null != croutonView.getParent());
+  }
+  
+  private boolean isCustomViewNotNull() {
+    return (null != customView) && (null != customView.getParent());
   }
 
   /** Removes the activity reference this {@link Crouton} is holding */
