@@ -35,9 +35,7 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 
-/**
- * Manages the lifecycle of {@link Crouton}s.
- */
+/** Manages the lifecycle of {@link Crouton}s. */
 final class Manager extends Handler {
   private static final class Messages {
     private Messages() { /* no-op */
@@ -56,9 +54,7 @@ final class Manager extends Handler {
     croutonQueue = new LinkedBlockingQueue<Crouton>();
   }
 
-  /**
-   * @return The currently used instance of the {@link Manager}.
-   */
+  /** @return The currently used instance of the {@link Manager}. */
   static synchronized Manager getInstance() {
     if (null == INSTANCE) {
       INSTANCE = new Manager();
@@ -78,9 +74,7 @@ final class Manager extends Handler {
     displayCrouton();
   }
 
-  /**
-   * Displays the next {@link Crouton} within the queue.
-   */
+  /** Displays the next {@link Crouton} within the queue. */
   private void displayCrouton() {
     if (croutonQueue.isEmpty()) {
       return;
@@ -310,9 +304,7 @@ final class Manager extends Handler {
     }
   }
 
-  /**
-   * Removes all {@link Crouton}s from the queue.
-   */
+  /** Removes all {@link Crouton}s from the queue. */
   void clearCroutonQueue() {
     removeAllMessages();
 

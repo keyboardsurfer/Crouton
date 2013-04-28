@@ -21,9 +21,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
-/**
- * Builds the default animations for showing and hiding a {@link Crouton}.
- */
+/** Builds the default animations for showing and hiding a {@link Crouton}. */
 final class DefaultAnimationsBuilder {
   private static final long DURATION = 400;
   private static Animation slideInDownAnimation, slideOutUpAnimation;
@@ -35,6 +33,7 @@ final class DefaultAnimationsBuilder {
   /**
    * @param croutonView
    *   The croutonView which gets animated.
+   *
    * @return The default Animation for a showing {@link Crouton}.
    */
   public static Animation buildDefaultSlideInDownAnimation(View croutonView) {
@@ -51,6 +50,7 @@ final class DefaultAnimationsBuilder {
   /**
    * @param croutonView
    *   The croutonView which gets animated.
+   *
    * @return The default Animation for a hiding {@link Crouton}.
    */
   public static Animation buildDefaultSlideOutUpAnimation(View croutonView) {
