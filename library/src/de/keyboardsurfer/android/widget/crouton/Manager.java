@@ -26,6 +26,7 @@ import android.support.v4.view.accessibility.AccessibilityEventCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.FrameLayout;
@@ -34,9 +35,7 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 
-/**
- * Manages the lifecycle of {@link Crouton}s.
- */
+/** Manages the lifecycle of {@link Crouton}s. */
 final class Manager extends Handler {
   private static final class Messages {
     private Messages() { /* no-op */
@@ -55,9 +54,7 @@ final class Manager extends Handler {
     croutonQueue = new LinkedBlockingQueue<Crouton>();
   }
 
-  /**
-   * @return The currently used instance of the {@link Manager}.
-   */
+  /** @return The currently used instance of the {@link Manager}. */
   static synchronized Manager getInstance() {
     if (null == INSTANCE) {
       INSTANCE = new Manager();
@@ -77,9 +74,7 @@ final class Manager extends Handler {
     displayCrouton();
   }
 
-  /**
-   * Displays the next {@link Crouton} within the queue.
-   */
+  /** Displays the next {@link Crouton} within the queue. */
   private void displayCrouton() {
     if (croutonQueue.isEmpty()) {
       return;
@@ -105,7 +100,7 @@ final class Manager extends Handler {
   }
 
   private long calculateCroutonDuration(Crouton crouton) {
-    long croutonDuration = crouton.getStyle().durationInMilliseconds;
+    long croutonDuration = crouton.getConfiguration().durationInMilliseconds;
     croutonDuration += crouton.getInAnimation().getDuration();
     croutonDuration += crouton.getOutAnimation().getDuration();
     return croutonDuration;
@@ -182,17 +177,17 @@ final class Manager extends Handler {
    * @param crouton
    *   The {@link Crouton} that should be added.
    */
-  private void addCroutonToView(Crouton crouton) {
+  private void addCroutonToView(final Crouton crouton) {
     // don't add if it is already showing
     if (crouton.isShowing()) {
       return;
     }
 
-    View croutonView = crouton.getView();
+    final View croutonView = crouton.getView();
     if (null == croutonView.getParent()) {
       ViewGroup.LayoutParams params = croutonView.getLayoutParams();
       if (null == params) {
-        params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
       }
       // display Crouton in ViewGroup is it has been supplied
       if (null != crouton.getViewGroup()) {
@@ -210,12 +205,25 @@ final class Manager extends Handler {
         activity.addContentView(croutonView, params);
       }
     }
-    croutonView.startAnimation(crouton.getInAnimation());
-    announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
-    if (Style.DURATION_INFINITE != crouton.getStyle().durationInMilliseconds) {
-      sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
-        crouton.getStyle().durationInMilliseconds + crouton.getInAnimation().getDuration());
-    }
+
+    croutonView.requestLayout(); // This is needed so the animation can use the measured with/height
+    croutonView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+      @Override
+      public void onGlobalLayout() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+          croutonView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+        } else {
+          croutonView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+        }
+
+        croutonView.startAnimation(crouton.getInAnimation());
+        announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
+        if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
+          sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
+            crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
+        }
+      }
+    });
   }
 
   /**
@@ -296,9 +304,7 @@ final class Manager extends Handler {
     }
   }
 
-  /**
-   * Removes all {@link Crouton}s from the queue.
-   */
+  /** Removes all {@link Crouton}s from the queue. */
   void clearCroutonQueue() {
     removeAllMessages();
 

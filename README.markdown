@@ -21,7 +21,16 @@ You can check some features in the Crouton Demo.
 If you're already using Crouton and just want to download the latest version of the library, follow [this link](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22de.keyboardsurfer.android.widget%22).
 
 ### Changelog
-#### Current version: 1.7
+#### Current version: 1.8
+
+####[1.8](https://github.com/keyboardsurfer/Crouton/tree/1.8)
+
+- Improves support for custom views
+- Smoothing out animations for multiple line Croutons
+- Cleans up Style
+  - Configuration is now available for non-UI information
+  - Style only holds UI-relevant information
+- Introduces DURATION_SHORT and DURATION_LONG constants
 
 ####[1.7](https://github.com/keyboardsurfer/Crouton/tree/1.7)
 
@@ -162,7 +171,7 @@ After putting Crouton in the repository you can add it as a dependency.
 ```xml
 <dependency>
   <artifactId>crouton</artifactId>
-  <version>1.6</version>
+  <version>${crouton.version}</version>
   <groupId>de.keyboardsurfer.android.widget</groupId>
 </dependency>
 ```
