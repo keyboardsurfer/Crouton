@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:gravity="center_vertical"
-  android:background="@drawable/abs__list_selector_background_transition_holo_light"
+  android:background="#ff33b5e5"
   android:padding="10dp">
 
   <ImageView
