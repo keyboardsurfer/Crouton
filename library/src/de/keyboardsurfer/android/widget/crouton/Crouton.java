@@ -634,7 +634,9 @@ public final class Crouton {
     return "Crouton{" +
       "text=" + text +
       ", style=" + style +
+      ", configuration=" + configuration +
       ", customView=" + customView +
+      ", onClickListener=" + onClickListener +
       ", activity=" + activity +
       ", viewGroup=" + viewGroup +
       ", croutonView=" + croutonView +
