@@ -65,7 +65,6 @@ public final class Crouton {
   private Animation inAnimation;
   private Animation outAnimation;
   private LifecycleCallback lifecycleCallback = null;
-  private Manager manager = null;
 
   /**
    * Creates the {@link Crouton}.
@@ -158,19 +157,7 @@ public final class Crouton {
     this.text = null;
     this.configuration = configuration;
   }
-
-  /**
-   * Convenience method for retrieving a new Manager instance.
-   * This will provide you with a new queue to put croutons on.
-   * You should only need this in special cases.
-   *
-   * @return a new {@link Manager} instance.
-   * @see de.keyboardsurfer.android.widget.crouton.Manager#getNewInstance()
-   */
-  public static Manager getNewManager() {
-    return Manager.getNewInstance();
-  }
-
+  
   /**
    * Creates a {@link Crouton} with provided text and style for a given
    * activity.
@@ -448,10 +435,8 @@ public final class Crouton {
    *
    * @param crouton The {@link Crouton} you want to hide.
    */
-  public static void hide(final Crouton crouton) {
-    if (crouton != null) {
-      crouton.getCroutonManager().removeCrouton(crouton);
-    }
+  public static void hide(Crouton crouton) {
+    Manager.getInstance().removeCrouton(crouton);
   }
 
   /**
@@ -459,7 +444,7 @@ public final class Crouton {
    * displayed currently, it will be the last one displayed.
    */
   public static void cancelAllCroutons() {
-    Manager.clearAllCroutonQueues();
+    Manager.getInstance().clearCroutonQueue();
   }
 
   /**
@@ -469,14 +454,15 @@ public final class Crouton {
    * @param activity - The {@link Activity} to clear the croutons for.
    */
   public static void clearCroutonsForActivity(Activity activity) {
-    Manager.clearAllCroutonsForActivity(activity);
+    Manager.getInstance().clearCroutonsForActivity(activity);
   }
 
   /**
    * Cancels a {@link Crouton} immediately.
    */
   public void cancel() {
-    getCroutonManager().removeCroutonImmediately(this);
+    Manager manager = Manager.getInstance();
+    manager.removeCroutonImmediately(this);
   }
 
   /**
@@ -484,7 +470,7 @@ public final class Crouton {
    * the time, this {@link Crouton} will be displayed afterwards.
    */
   public void show() {
-    getCroutonManager().add(this);
+    Manager.getInstance().add(this);
   }
 
   public Animation getInAnimation() {
@@ -527,30 +513,6 @@ public final class Crouton {
   public Crouton setOnClickListener(OnClickListener onClickListener) {
     this.onClickListener = onClickListener;
     return this;
-  }
-
-  /**
-   * Override the default crouton manager. This is responsible for queueing and showing the Crouton.
-   *
-   * @param manager A valid manager. You can get a new one via {@link Crouton#getNewManager()}
-   * @return this {@link Crouton}.
-   */
-  public Crouton setCroutonManager(final Manager manager) {
-    this.manager = manager;
-    return this;
-  }
-
-  /**
-   * Creates a manager if one has not be defined.
-   * Unless you this crouton to pass it to another manager it shows on the main one.
-   *
-   * @return The {@link Manager} you have set or the default {@link Manager}.
-   */
-  Manager getCroutonManager() {
-    if (null == manager) {
-      manager = Manager.getInstance();
-    }
-    return manager;
   }
 
   /**

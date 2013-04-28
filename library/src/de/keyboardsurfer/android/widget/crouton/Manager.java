@@ -30,11 +30,7 @@ import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.FrameLayout;
-
-import java.lang.ref.SoftReference;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -42,7 +38,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Manages the lifecycle of {@link Crouton}s.
  */
-public final class Manager extends Handler {
+final class Manager extends Handler {
   private static final class Messages {
     private Messages() { /* no-op */
     }
@@ -52,8 +48,7 @@ public final class Manager extends Handler {
     public static final int REMOVE_CROUTON = 0xc2007de1;
   }
 
-  private static Manager DEFAULT_MANAGER;
-  private static List<SoftReference<Manager>> sSoftManagerInstances = new ArrayList<SoftReference<Manager>>();
+  private static Manager INSTANCE;
 
   private Queue<Crouton> croutonQueue;
 
@@ -65,95 +60,11 @@ public final class Manager extends Handler {
    * @return The currently used instance of the {@link Manager}.
    */
   static synchronized Manager getInstance() {
-    if (null == DEFAULT_MANAGER) {
-      DEFAULT_MANAGER = new Manager();
+    if (null == INSTANCE) {
+      INSTANCE = new Manager();
     }
 
-    return DEFAULT_MANAGER;
-  }
-
-  /**
-   * Creates a new {@link Manager} that maintains it's own Croutons,
-   * so multiple Croutons can be displayed at the same time.
-   * <p/>
-   * <p/>
-   * It is up to the caller to maintain reference to the instances
-   * so that you can put Croutons onto certain queues.
-   * <p/>
-   * <p/>
-   * <b>Make sure you know what you are doing when using this method!</b>
-   * <p/>
-   *
-   * @return new Manager instance, this will always be a new instance.
-   */
-  static synchronized Manager getNewInstance() {
-    final Manager manager = new Manager();
-    sSoftManagerInstances.add(new SoftReference<Manager>(manager));
-    return manager;
-  }
-
-  /**
-   * Removes a {@link Manager} instance, thus effectively removing it's management capabilities.
-   * <p/>
-   * <b>
-   * You might not want to use the {@link Manager} after calling this method returned <code>true</code>.
-   * </b>
-   * <p/>
-   *
-   * @param manager
-   *   The {@link Manager} to remove.
-   *
-   * @return <code>true</code> if the {@link Manager} was removed, else <code>false</code>.
-   */
-  static synchronized boolean removeInstance(Manager manager) {
-    if (null != manager && !DEFAULT_MANAGER.equals(manager)) {
-      for (SoftReference<Manager> softManager : sSoftManagerInstances) {
-        if (softManager.get().equals(manager)) {
-          sSoftManagerInstances.remove(softManager);
-          break;
-        }
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Clears all {@link Crouton} queues and removes all queued and currently displayed {@link Crouton}s.
-   */
-  static synchronized void clearAllCroutonQueues() {
-    Manager manager;
-    for (SoftReference<Manager> softInstance : sSoftManagerInstances) {
-      if (null != softInstance && null != softInstance.get()) {
-        manager = softInstance.get();
-        manager.clearCroutonQueue();
-      } else {
-        sSoftManagerInstances.remove(softInstance);
-      }
-    }
-    if (null != DEFAULT_MANAGER) {
-      DEFAULT_MANAGER.clearCroutonQueue();
-    }
-  }
-
-  /**
-   * Clears all {@link Crouton}s that hold a reference to a provided {@link Activity}.
-   *
-   * @param activity
-   *   The {@link Activity} to clear the Croutons for.
-   */
-  static synchronized void clearAllCroutonsForActivity(final Activity activity) {
-    Manager manager;
-    for (SoftReference<Manager> softInstance : sSoftManagerInstances) {
-      if (null != softInstance && null != softInstance.get()) {
-        manager = softInstance.get();
-        manager.clearCroutonsForActivity(activity);
-      } else {
-        sSoftManagerInstances.remove(softInstance);
-      }
-    }
-    if (null != DEFAULT_MANAGER) {
-      DEFAULT_MANAGER.clearCroutonsForActivity(activity);
-    }
+    return INSTANCE;
   }
 
   /**
@@ -329,7 +240,7 @@ public final class Manager extends Handler {
    *   The {@link Crouton} added to a {@link ViewGroup} and should be
    *   removed.
    */
-  void removeCrouton(Crouton crouton) {
+  protected void removeCrouton(Crouton crouton) {
     View croutonView = crouton.getView();
     ViewGroup croutonParentView = (ViewGroup) croutonView.getParent();
 
@@ -423,9 +334,9 @@ public final class Manager extends Handler {
    */
   void clearCroutonsForActivity(Activity activity) {
     if (null != croutonQueue) {
-      final Iterator<Crouton> croutonIterator = croutonQueue.iterator();
+      Iterator<Crouton> croutonIterator = croutonQueue.iterator();
       while (croutonIterator.hasNext()) {
-        final Crouton crouton = croutonIterator.next();
+        Crouton crouton = croutonIterator.next();
         if ((null != crouton.getActivity()) && crouton.getActivity().equals(activity)) {
           // remove the crouton from the content view
           if (crouton.isShowing()) {

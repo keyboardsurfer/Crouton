@@ -48,7 +48,7 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
   private EditText croutonDurationEdit;
   private Crouton infiniteCrouton;
 
-    @Override
+  @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
   }
@@ -184,11 +184,11 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
 
   private void showCrouton(String croutonText, Style croutonStyle, Configuration configuration) {
     final boolean infinite = INFINITE == croutonStyle;
-
+    
     if (infinite) {
       croutonText = getString(R.string.infinity_text);
     }
-
+    
     final Crouton crouton;
     if (displayOnTop.isChecked()) {
       crouton = Crouton.makeText(getActivity(), croutonText, croutonStyle);
