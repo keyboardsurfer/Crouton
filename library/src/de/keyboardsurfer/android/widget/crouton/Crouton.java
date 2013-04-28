@@ -530,6 +530,7 @@ public final class Crouton {
       if (getStyle().inAnimationResId > 0) {
         this.inAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().inAnimationResId);
       } else {
+        measureCroutonView();
         this.inAnimation = DefaultAnimationsBuilder.buildDefaultSlideInDownAnimation(getView());
       }
     }
@@ -675,6 +676,19 @@ public final class Crouton {
     }
 
     return croutonView;
+  }
+
+  private void measureCroutonView() {
+      View view = getView();
+      int widthSpec;
+      if (viewGroup != null) {
+        widthSpec = View.MeasureSpec.makeMeasureSpec(viewGroup.getMeasuredWidth(), View.MeasureSpec.AT_MOST);
+      } else {
+        widthSpec = View.MeasureSpec.makeMeasureSpec(activity.getWindow().getDecorView().getMeasuredWidth(),
+                  View.MeasureSpec.AT_MOST);
+      }
+
+      view.measure(widthSpec, View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
   }
 
   private void initializeCroutonView() {
