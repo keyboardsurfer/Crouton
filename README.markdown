@@ -82,7 +82,7 @@ In your Activity.onDestroy() make sure to call
     
 to cancel cancel all scheduled Croutons.
 
-This is a workaround and further description is available in #24.
+This is a workaround and further description is available in [issue #24](https://github.com/keyboardsurfer/Crouton/issues/24).
 
 ## Basic Examples
 Currently you can use the three different Style attributes displayed below out of the box:
