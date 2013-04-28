@@ -54,6 +54,7 @@ public final class Crouton {
   private static final int TEXT_ID = 0x101;
   private final CharSequence text;
   private final Style style;
+  private Configuration configuration = Configuration.DEFAULT;
   private final View customView;
 
   private OnClickListener onClickListener;
@@ -64,7 +65,6 @@ public final class Crouton {
   private Animation inAnimation;
   private Animation outAnimation;
   private LifecycleCallback lifecycleCallback = null;
-  private Manager manager = null;
 
   /**
    * Creates the {@link Crouton}.
@@ -145,6 +145,23 @@ public final class Crouton {
    *   The {@link ViewGroup} that this {@link Crouton} should be added to.
    */
   private Crouton(Activity activity, View customView, ViewGroup viewGroup) {
+    this(activity, customView, viewGroup, Configuration.DEFAULT);
+  }
+
+  /**
+   * Creates the {@link Crouton}.
+   *
+   * @param activity
+   *   The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param customView
+   *   The custom {@link View} to display
+   * @param viewGroup
+   *   The {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param configuration
+   *   The {@link Configuration} for this {@link Crouton}.
+   */
+  private Crouton(final Activity activity, final View customView, final ViewGroup viewGroup,
+                  final Configuration configuration) {
     if ((activity == null) || (customView == null)) {
       throw new IllegalArgumentException("Null parameters are not accepted");
     }
@@ -154,19 +171,7 @@ public final class Crouton {
     this.viewGroup = viewGroup;
     this.style = new Style.Builder().build();
     this.text = null;
-  }
-
-  /**
-   * Convenience method for retrieving a new Manager instance.
-   * This will provide you with a new queue to put croutons on.
-   * You should only need this in special cases.
-   *
-   * @return a new {@link Manager} instance.
-   *
-   * @see de.keyboardsurfer.android.widget.crouton.Manager#getNewInstance()
-   */
-  public static Manager getNewManager() {
-    return Manager.getNewInstance();
+    this.configuration = configuration;
   }
 
   /**
@@ -335,6 +340,26 @@ public final class Crouton {
   }
 
   /**
+   * Creates a {@link Crouton} with provided text-resource and style for a given
+   * activity.
+   *
+   * @param activity
+   *   The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param customView
+   *   The custom {@link View} to display
+   * @param viewGroupResId
+   *   The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param configuration
+   *   The configuration for this crouton.
+   *
+   * @return The created {@link Crouton}.
+   */
+  public static Crouton make(Activity activity, View customView, int viewGroupResId,
+                             final Configuration configuration) {
+    return new Crouton(activity, customView, (ViewGroup) activity.findViewById(viewGroupResId), configuration);
+  }
+
+  /**
    * Creates a {@link Crouton} with provided text and style for a given activity
    * and displays it directly.
    *
@@ -382,6 +407,27 @@ public final class Crouton {
    */
   public static void showText(Activity activity, CharSequence text, Style style, int viewGroupResId) {
     makeText(activity, text, style, (ViewGroup) activity.findViewById(viewGroupResId)).show();
+  }
+
+  /**
+   * Creates a {@link Crouton} with provided text and style for a given activity
+   * and displays it directly.
+   *
+   * @param activity
+   *   The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param text
+   *   The text you want to display.
+   * @param style
+   *   The style that this {@link Crouton} should be created with.
+   * @param viewGroupResId
+   *   The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
+   * @param configuration
+   *   The configuration for this Crouton.
+   */
+  public static void showText(Activity activity, CharSequence text, Style style, int viewGroupResId,
+                              final Configuration configuration) {
+    makeText(activity, text, style, (ViewGroup) activity.findViewById(viewGroupResId)).setConfiguration(configuration)
+      .show();
   }
 
 
@@ -485,10 +531,8 @@ public final class Crouton {
    * @param crouton
    *   The {@link Crouton} you want to hide.
    */
-  public static void hide(final Crouton crouton) {
-    if (crouton != null) {
-      crouton.getCroutonManager().removeCrouton(crouton);
-    }
+  public static void hide(Crouton crouton) {
+    Manager.getInstance().removeCrouton(crouton);
   }
 
   /**
@@ -496,7 +540,7 @@ public final class Crouton {
    * displayed currently, it will be the last one displayed.
    */
   public static void cancelAllCroutons() {
-    Manager.clearAllCroutonQueues();
+    Manager.getInstance().clearCroutonQueue();
   }
 
   /**
@@ -507,14 +551,13 @@ public final class Crouton {
    *   - The {@link Activity} to clear the croutons for.
    */
   public static void clearCroutonsForActivity(Activity activity) {
-    Manager.clearAllCroutonsForActivity(activity);
+    Manager.getInstance().clearCroutonsForActivity(activity);
   }
 
-  /**
-   * Cancels a {@link Crouton} immediately.
-   */
+  /** Cancels a {@link Crouton} immediately. */
   public void cancel() {
-    getCroutonManager().removeCroutonImmediately(this);
+    Manager manager = Manager.getInstance();
+    manager.removeCroutonImmediately(this);
   }
 
   /**
@@ -522,13 +565,13 @@ public final class Crouton {
    * the time, this {@link Crouton} will be displayed afterwards.
    */
   public void show() {
-    getCroutonManager().add(this);
+    Manager.getInstance().add(this);
   }
 
   public Animation getInAnimation() {
     if ((null == this.inAnimation) && (null != this.activity)) {
-      if (getStyle().inAnimationResId > 0) {
-        this.inAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().inAnimationResId);
+      if (getConfiguration().inAnimationResId > 0) {
+        this.inAnimation = AnimationUtils.loadAnimation(getActivity(), getConfiguration().inAnimationResId);
       } else {
         measureCroutonView();
         this.inAnimation = DefaultAnimationsBuilder.buildDefaultSlideInDownAnimation(getView());
@@ -540,8 +583,8 @@ public final class Crouton {
 
   public Animation getOutAnimation() {
     if ((null == this.outAnimation) && (null != this.activity)) {
-      if (getStyle().outAnimationResId > 0) {
-        this.outAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().outAnimationResId);
+      if (getConfiguration().outAnimationResId > 0) {
+        this.outAnimation = AnimationUtils.loadAnimation(getActivity(), getConfiguration().outAnimationResId);
       } else {
         this.outAnimation = DefaultAnimationsBuilder.buildDefaultSlideOutUpAnimation(getView());
       }
@@ -572,30 +615,62 @@ public final class Crouton {
   }
 
   /**
-   * Override the default crouton manager. This is responsible for queueing and showing the Crouton.
+   * Set the {@link Configuration} on this {@link Crouton}, prior to showing it.
    *
-   * @param manager
-   *   A valid manager. You can get a new one via {@link Crouton#getNewManager()}
+   * @param configuration
+   *   a {@link Configuration} built using the {@link Configuration.Builder}.
    *
    * @return this {@link Crouton}.
    */
-  public Crouton setCroutonManager(final Manager manager) {
-    this.manager = manager;
+  public Crouton setConfiguration(final Configuration configuration) {
+    if (configuration != null) {
+      this.configuration = configuration;
+    }
     return this;
   }
 
-  /**
-   * Creates a manager if one has not be defined.
-   * Unless you this crouton to pass it to another manager it shows on the main one.
-   *
-   * @return The {@link Manager} you have set or the default {@link Manager}.
-   */
-  Manager getCroutonManager() {
-    if (null == manager) {
-      manager = Manager.getInstance();
-    }
-    return manager;
+  @Override
+  public String toString() {
+    return "Crouton{" +
+      "text=" + text +
+      ", style=" + style +
+      ", customView=" + customView +
+      ", activity=" + activity +
+      ", viewGroup=" + viewGroup +
+      ", croutonView=" + croutonView +
+      ", inAnimation=" + inAnimation +
+      ", outAnimation=" + outAnimation +
+      ", lifecycleCallback=" + lifecycleCallback +
+      '}';
   }
+
+  /**
+   * Convenience method to get the license text for embedding within your application.
+   *
+   * @return The license text.
+   */
+  public static String getLicenseText() {
+    return "This application uses the Crouton library.\n\n" +
+      "Copyright 2012 - 2013 Benjamin Weiss \n" +
+      "Copyright 2012 Neofonie Mobile GmbH\n" +
+      "\n" +
+      "Licensed under the Apache License, Version 2.0 (the \"License\");\n" +
+      "you may not use this file except in compliance with the License.\n" +
+      "You may obtain a copy of the License at\n" +
+      "\n" +
+      "   http://www.apache.org/licenses/LICENSE-2.0\n" +
+      "\n" +
+      "Unless required by applicable law or agreed to in writing, software\n" +
+      "distributed under the License is distributed on an \"AS IS\" BASIS,\n" +
+      "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n" +
+      "See the License for the specific language governing permissions and\n" +
+      "limitations under the License.";
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////
+  // You have reached the internal API of Crouton.
+  // If you do not plan to develop for Crouton there is nothing of interest below here.
+  //////////////////////////////////////////////////////////////////////////////////////
 
   /**
    * @return <code>true</code> if the {@link Crouton} is being displayed, else
@@ -605,65 +680,52 @@ public final class Crouton {
     return (null != activity) && (null != croutonView) && (null != croutonView.getParent());
   }
 
-  /**
-   * Removes the activity reference this {@link Crouton} is holding
-   */
+  /** Removes the activity reference this {@link Crouton} is holding */
   void detachActivity() {
     activity = null;
   }
 
-  /**
-   * Removes the viewGroup reference this {@link Crouton} is holding
-   */
+  /** Removes the viewGroup reference this {@link Crouton} is holding */
   void detachViewGroup() {
     viewGroup = null;
   }
 
-  /**
-   * Removes the lifecycleCallback reference this {@link Crouton} is holding
-   */
+  /** Removes the lifecycleCallback reference this {@link Crouton} is holding */
   void detachLifecycleCallback() {
     lifecycleCallback = null;
   }
 
-  /**
-   * @return the lifecycleCallback
-   */
+  /** @return the lifecycleCallback */
   LifecycleCallback getLifecycleCallback() {
     return lifecycleCallback;
   }
 
-  /**
-   * @return the style
-   */
+  /** @return the style */
   Style getStyle() {
     return style;
   }
 
-  /**
-   * @return the activity
-   */
+  /** @return this croutons configuration */
+  Configuration getConfiguration() {
+    return configuration;
+  }
+
+  /** @return the activity */
   Activity getActivity() {
     return activity;
   }
 
-  /**
-   * @return the viewGroup
-   */
+  /** @return the viewGroup */
   ViewGroup getViewGroup() {
     return viewGroup;
   }
 
-  /**
-   * @return the text
-   */
+  /** @return the text */
   CharSequence getText() {
     return text;
   }
 
-  /**
-   * @return the view
-   */
+  /** @return the view */
   View getView() {
     // return the custom view if one exists
     if (null != this.customView) {
@@ -844,43 +906,5 @@ public final class Crouton {
     image.setLayoutParams(imageParams);
 
     return image;
-  }
-
-  @Override
-  public String toString() {
-    return "Crouton{" +
-      "text=" + text +
-      ", style=" + style +
-      ", customView=" + customView +
-      ", activity=" + activity +
-      ", viewGroup=" + viewGroup +
-      ", croutonView=" + croutonView +
-      ", inAnimation=" + inAnimation +
-      ", outAnimation=" + outAnimation +
-      ", lifecycleCallback=" + lifecycleCallback +
-      '}';
-  }
-
-  /**
-   * Convenience method to get the license text for embedding within your application.
-   *
-   * @return The license text.
-   */
-  public static String getLicenseText() {
-    return "This application uses the Crouton library.\n\n" +
-      "Copyright 2012 - 2013 Benjamin Weiss \n" +
-      "Copyright 2012 Neofonie Mobile GmbH\n" +
-      "\n" +
-      "Licensed under the Apache License, Version 2.0 (the \"License\");\n" +
-      "you may not use this file except in compliance with the License.\n" +
-      "You may obtain a copy of the License at\n" +
-      "\n" +
-      "   http://www.apache.org/licenses/LICENSE-2.0\n" +
-      "\n" +
-      "Unless required by applicable law or agreed to in writing, software\n" +
-      "distributed under the License is distributed on an \"AS IS\" BASIS,\n" +
-      "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n" +
-      "See the License for the specific language governing permissions and\n" +
-      "limitations under the License.";
   }
 }

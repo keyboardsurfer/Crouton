@@ -23,58 +23,31 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
 
-/**
- * The style for a {@link Crouton}.
- */
-
+/** The style for a {@link Crouton}. */
 public class Style {
-
-  /**
-   * Display a {@link Crouton} for an infinite amount of time or
-   * until {@link de.keyboardsurfer.android.widget.crouton.Crouton#cancel()} has been called.
-   */
-  public static final int DURATION_INFINITE = -1;
-
-  /**
-   * The default short display duration of a {@link Crouton}.
-   */
-  public static final int DURATION_SHORT = 3000;
-  /**
-   * The default long display duration of a {@link Crouton}.
-   */
-  public static final int DURATION_LONG = 5000;
 
   public static final int holoRedLight = 0xffff4444;
   public static final int holoGreenLight = 0xff99cc00;
   public static final int holoBlueLight = 0xff33b5e5;
 
-  /**
-   * Default style for alerting the user.
-   */
+  /** Default style for alerting the user. */
   public static final Style ALERT;
-  /**
-   * Default style for confirming an action.
-   */
+  /** Default style for confirming an action. */
   public static final Style CONFIRM;
-  /**
-   * Default style for general information.
-   */
+  /** Default style for general information. */
   public static final Style INFO;
 
   static {
-    ALERT = new Builder().setDuration(DURATION_LONG).setBackgroundColorValue(holoRedLight).setHeight(LayoutParams.WRAP_CONTENT)
+    ALERT = new Builder()
+      .setBackgroundColorValue(holoRedLight)
       .build();
-    CONFIRM = new Builder().setDuration(DURATION_SHORT).setBackgroundColorValue(holoGreenLight).setHeight(
-      LayoutParams.WRAP_CONTENT).build();
-    INFO = new Builder().setDuration(DURATION_SHORT).setBackgroundColorValue(holoBlueLight).setHeight(LayoutParams.WRAP_CONTENT)
+    CONFIRM = new Builder()
+      .setBackgroundColorValue(holoGreenLight)
+      .build();
+    INFO = new Builder()
+      .setBackgroundColorValue(holoBlueLight)
       .build();
   }
-
-  /**
-   * The durationInMilliseconds the {@link Crouton} will be displayed in
-   * milliseconds.
-   */
-  final int durationInMilliseconds;
 
   /**
    * The resource id of the backgroundResourceId.
@@ -97,9 +70,7 @@ public class Style {
    */
   final int backgroundColorValue;
 
-  /**
-   * Whether we should isTileEnabled the backgroundResourceId or not.
-   */
+  /** Whether we should isTileEnabled the backgroundResourceId or not. */
   final boolean isTileEnabled;
 
   /**
@@ -109,39 +80,25 @@ public class Style {
    */
   final int textColorResourceId;
 
-  /**
-   * The height of the {@link Crouton} in pixels.
-   */
+  /** The height of the {@link Crouton} in pixels. */
   final int heightInPixels;
 
-  /**
-   * Resource ID for the height of the {@link Crouton}.
-   */
+  /** Resource ID for the height of the {@link Crouton}. */
   final int heightDimensionResId;
 
-  /**
-   * The width of the {@link Crouton} in pixels.
-   */
+  /** The width of the {@link Crouton} in pixels. */
   final int widthInPixels;
 
-  /**
-   * Resource ID for the width of the {@link Crouton}.
-   */
+  /** Resource ID for the width of the {@link Crouton}. */
   final int widthDimensionResId;
 
-  /**
-   * The text's gravity as provided by {@link Gravity}.
-   */
+  /** The text's gravity as provided by {@link Gravity}. */
   final int gravity;
 
-  /**
-   * An additional image to display in the {@link Crouton}.
-   */
+  /** An additional image to display in the {@link Crouton}. */
   final Drawable imageDrawable;
 
-  /**
-   * An additional image to display in the {@link Crouton}.
-   */
+  /** An additional image to display in the {@link Crouton}. */
   final int imageResId;
 
   /**
@@ -157,53 +114,28 @@ public class Style {
    */
   final int textSize;
 
-  /**
-   * The text shadow color's resource id
-   */
+  /** The text shadow color's resource id */
   final int textShadowColorResId;
 
-  /**
-   * The text shadow radius
-   */
+  /** The text shadow radius */
   final float textShadowRadius;
 
-  /**
-   * The text shadow vertical offset
-   */
+  /** The text shadow vertical offset */
   final float textShadowDy;
 
-  /**
-   * The text shadow horizontal offset
-   */
+  /** The text shadow horizontal offset */
   final float textShadowDx;
 
-  /**
-   * The text appearance resource id for the text.
-   */
+  /** The text appearance resource id for the text. */
   final int textAppearanceResId;
 
-  /**
-   * The resource id for the in animation
-   */
-  final int inAnimationResId;
-
-  /**
-   * The resource id for the out animation
-   */
-  final int outAnimationResId;
-
-  /**
-   * The padding for the crouton view content in pixels
-   */
+  /** The padding for the crouton view content in pixels */
   final int paddingInPixels;
 
-  /**
-   * The resource id for the padding for the view content
-   */
+  /** The resource id for the padding for the view content */
   final int paddingDimensionResId;
 
   private Style(final Builder builder) {
-    this.durationInMilliseconds = builder.durationInMilliseconds;
     this.backgroundColorResourceId = builder.backgroundColorResourceId;
     this.backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
     this.isTileEnabled = builder.isTileEnabled;
@@ -220,8 +152,6 @@ public class Style {
     this.textShadowDx = builder.textShadowDx;
     this.textShadowDy = builder.textShadowDy;
     this.textAppearanceResId = builder.textAppearanceResId;
-    this.inAnimationResId = builder.inAnimationResId;
-    this.outAnimationResId = builder.outAnimationResId;
     this.imageResId = builder.imageResId;
     this.imageScaleType = builder.imageScaleType;
     this.paddingInPixels = builder.paddingInPixels;
@@ -229,11 +159,8 @@ public class Style {
     this.backgroundColorValue = builder.backgroundColorValue;
   }
 
-  /**
-   * Builder for the {@link Style} object.
-   */
+  /** Builder for the {@link Style} object. */
   public static class Builder {
-    private int durationInMilliseconds;
     private int backgroundColorValue;
     private int backgroundColorResourceId;
     private int backgroundDrawableResourceId;
@@ -251,18 +178,13 @@ public class Style {
     private float textShadowDx;
     private float textShadowDy;
     private int textAppearanceResId;
-    private int inAnimationResId;
-    private int outAnimationResId;
     private int imageResId;
     private ImageView.ScaleType imageScaleType;
     private int paddingInPixels;
     private int paddingDimensionResId;
 
-    /**
-     * Creates a {@link Builder} to build a {@link Style} upon.
-     */
+    /** Creates a {@link Builder} to build a {@link Style} upon. */
     public Builder() {
-      durationInMilliseconds = DURATION_SHORT;
       paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
@@ -273,8 +195,6 @@ public class Style {
       widthInPixels = LayoutParams.MATCH_PARENT;
       gravity = Gravity.CENTER;
       imageDrawable = null;
-      inAnimationResId = 0;
-      outAnimationResId = 0;
       imageResId = 0;
       imageScaleType = ImageView.ScaleType.FIT_XY;
     }
@@ -286,7 +206,6 @@ public class Style {
      *   The base {@link Style} to use for this {@link Style}.
      */
     public Builder(final Style baseStyle) {
-      durationInMilliseconds = baseStyle.durationInMilliseconds;
       backgroundColorValue = baseStyle.backgroundColorValue;
       backgroundColorResourceId = baseStyle.backgroundColorResourceId;
       backgroundDrawableResourceId = baseStyle.backgroundDrawableResourceId;
@@ -296,35 +215,18 @@ public class Style {
       heightDimensionResId = baseStyle.heightDimensionResId;
       widthInPixels = baseStyle.widthInPixels;
       widthDimensionResId = baseStyle.widthDimensionResId;
-      gravity  = baseStyle.gravity;
-      imageDrawable  = baseStyle.imageDrawable;
+      gravity = baseStyle.gravity;
+      imageDrawable = baseStyle.imageDrawable;
       textSize = baseStyle.textSize;
       textShadowColorResId = baseStyle.textShadowColorResId;
       textShadowRadius = baseStyle.textShadowRadius;
       textShadowDx = baseStyle.textShadowDx;
       textShadowDy = baseStyle.textShadowDy;
       textAppearanceResId = baseStyle.textAppearanceResId;
-      inAnimationResId = baseStyle.inAnimationResId;
-      outAnimationResId = baseStyle.outAnimationResId;
       imageResId = baseStyle.imageResId;
       imageScaleType = baseStyle.imageScaleType;
       paddingInPixels = baseStyle.paddingInPixels;
       paddingDimensionResId = baseStyle.paddingDimensionResId;
-    }
-
-    /**
-     * Set the durationInMilliseconds option of the {@link Crouton}.
-     *
-     * @param duration
-     *   The durationInMilliseconds the crouton will be displayed
-     *   {@link Crouton} in milliseconds.
-     *
-     * @return the {@link Builder}.
-     */
-    public Builder setDuration(int duration) {
-      this.durationInMilliseconds = duration;
-
-      return this;
     }
 
     /**
@@ -499,97 +401,61 @@ public class Style {
       return this;
     }
 
-    /**
-     * The text size in sp
-     */
+    /** The text size in sp. */
     public Builder setTextSize(int textSize) {
       this.textSize = textSize;
       return this;
     }
 
-    /**
-     * The text shadow color's resource id
-     */
+    /** The text shadow color resource id. */
     public Builder setTextShadowColor(int textShadowColorResId) {
       this.textShadowColorResId = textShadowColorResId;
       return this;
     }
 
-    /**
-     * The text shadow radius
-     */
+    /** The text shadow radius. */
     public Builder setTextShadowRadius(float textShadowRadius) {
       this.textShadowRadius = textShadowRadius;
       return this;
     }
 
-    /**
-     * The text shadow horizontal offset
-     */
+    /** The text shadow horizontal offset. */
     public Builder setTextShadowDx(float textShadowDx) {
       this.textShadowDx = textShadowDx;
       return this;
     }
 
-    /**
-     * The text shadow vertical offset
-     */
+    /** The text shadow vertical offset. */
     public Builder setTextShadowDy(float textShadowDy) {
       this.textShadowDy = textShadowDy;
       return this;
     }
 
-    /**
-     * The text appearance resource id for the text.
-     */
+    /** The text appearance resource id for the text. */
     public Builder setTextAppearance(int textAppearanceResId) {
       this.textAppearanceResId = textAppearanceResId;
       return this;
     }
 
-    /**
-     * The resource id for the in animation
-     */
-    public Builder setInAnimation(int inAnimationResId) {
-      this.inAnimationResId = inAnimationResId;
-      return this;
-    }
-
-    /**
-     * The resource id for the out animation
-     */
-    public Builder setOutAnimation(int outAnimationResId) {
-      this.outAnimationResId = outAnimationResId;
-      return this;
-    }
-
-    /**
-     * The {@link android.widget.ImageView.ScaleType} for the image
-     */
+    /** The {@link android.widget.ImageView.ScaleType} for the image. */
     public Builder setImageScaleType(ImageView.ScaleType imageScaleType) {
       this.imageScaleType = imageScaleType;
       return this;
     }
 
-    /**
-     * The padding for the crouton view's content in pixels
-     */
+    /** The padding for the crouton view's content in pixels. */
     public Builder setPaddingInPixels(int padding) {
       this.paddingInPixels = padding;
       return this;
     }
 
-    /**
-     * The resource id for the padding for the crouton view's content
-     */
+    /** The resource id for the padding for the crouton view's content. */
     public Builder setPaddingDimensionResId(int paddingResId) {
       this.paddingDimensionResId = paddingResId;
       return this;
     }
 
-    /**
-     * @return a configured {@link Style} object.
-     */
+    /** @return a configured {@link Style} object. */
     public Style build() {
       return new Style(this);
     }
