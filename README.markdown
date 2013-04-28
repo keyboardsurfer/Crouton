@@ -162,7 +162,7 @@ After putting Crouton in the repository you can add it as a dependency.
 ```xml
 <dependency>
   <artifactId>crouton</artifactId>
-  <version>1.6</version>
+  <version>${crouton.version}</version>
   <groupId>de.keyboardsurfer.android.widget</groupId>
 </dependency>
 ```
