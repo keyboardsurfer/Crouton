@@ -38,13 +38,11 @@ final class DefaultAnimationsBuilder {
    * @return The default Animation for a showing {@link Crouton}.
    */
   public static Animation buildDefaultSlideInDownAnimation(View croutonView) {
-    if (null == slideInDownAnimation) {
-      slideInDownAnimation = new TranslateAnimation(
-        0, 0,                               // X: from, to
-        -croutonView.getMeasuredHeight(), 0 // Y: from, to
-      );
-      slideInDownAnimation.setDuration(DURATION);
-    }
+    slideInDownAnimation = new TranslateAnimation(
+      0, 0,                               // X: from, to
+      -croutonView.getMeasuredHeight(), 0 // Y: from, to
+    );
+    slideInDownAnimation.setDuration(DURATION);
     return slideInDownAnimation;
   }
 
@@ -54,13 +52,11 @@ final class DefaultAnimationsBuilder {
    * @return The default Animation for a hiding {@link Crouton}.
    */
   public static Animation buildDefaultSlideOutUpAnimation(View croutonView) {
-    if (null == slideOutUpAnimation) {
-      slideOutUpAnimation = new TranslateAnimation(
-        0, 0,                               // X: from, to
-        0, -croutonView.getMeasuredHeight() // Y: from, to
-      );
-      slideOutUpAnimation.setDuration(DURATION);
-    }
+    slideOutUpAnimation = new TranslateAnimation(
+      0, 0,                               // X: from, to
+      0, -croutonView.getMeasuredHeight() // Y: from, to
+    );
+    slideOutUpAnimation.setDuration(DURATION);
     return slideOutUpAnimation;
   }
 }
