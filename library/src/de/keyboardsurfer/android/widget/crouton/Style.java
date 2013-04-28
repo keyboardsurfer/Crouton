@@ -460,4 +460,31 @@ public class Style {
       return new Style(this);
     }
   }
+
+  @Override
+  public String toString() {
+    return "Style{" +
+      "backgroundColorResourceId=" + backgroundColorResourceId +
+      ", backgroundDrawableResourceId=" + backgroundDrawableResourceId +
+      ", backgroundColorValue=" + backgroundColorValue +
+      ", isTileEnabled=" + isTileEnabled +
+      ", textColorResourceId=" + textColorResourceId +
+      ", heightInPixels=" + heightInPixels +
+      ", heightDimensionResId=" + heightDimensionResId +
+      ", widthInPixels=" + widthInPixels +
+      ", widthDimensionResId=" + widthDimensionResId +
+      ", gravity=" + gravity +
+      ", imageDrawable=" + imageDrawable +
+      ", imageResId=" + imageResId +
+      ", imageScaleType=" + imageScaleType +
+      ", textSize=" + textSize +
+      ", textShadowColorResId=" + textShadowColorResId +
+      ", textShadowRadius=" + textShadowRadius +
+      ", textShadowDy=" + textShadowDy +
+      ", textShadowDx=" + textShadowDx +
+      ", textAppearanceResId=" + textAppearanceResId +
+      ", paddingInPixels=" + paddingInPixels +
+      ", paddingDimensionResId=" + paddingDimensionResId +
+      '}';
+  }
 }

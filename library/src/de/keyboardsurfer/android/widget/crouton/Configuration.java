@@ -121,4 +121,13 @@ public final class Configuration {
       return new Configuration(this);
     }
   }
+
+  @Override
+  public String toString() {
+    return "Configuration{" +
+      "durationInMilliseconds=" + durationInMilliseconds +
+      ", inAnimationResId=" + inAnimationResId +
+      ", outAnimationResId=" + outAnimationResId +
+      '}';
+  }
 }
