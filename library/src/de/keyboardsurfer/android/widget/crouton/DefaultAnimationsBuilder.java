@@ -36,7 +36,7 @@ final class DefaultAnimationsBuilder {
    *
    * @return The default Animation for a showing {@link Crouton}.
    */
-  public static Animation buildDefaultSlideInDownAnimation(View croutonView) {
+  static Animation buildDefaultSlideInDownAnimation(View croutonView) {
     slideInDownAnimation = new TranslateAnimation(
       0, 0,                               // X: from, to
       -croutonView.getMeasuredHeight(), 0 // Y: from, to
@@ -51,7 +51,7 @@ final class DefaultAnimationsBuilder {
    *
    * @return The default Animation for a hiding {@link Crouton}.
    */
-  public static Animation buildDefaultSlideOutUpAnimation(View croutonView) {
+  static Animation buildDefaultSlideOutUpAnimation(View croutonView) {
     slideOutUpAnimation = new TranslateAnimation(
       0, 0,                               // X: from, to
       0, -croutonView.getMeasuredHeight() // Y: from, to
