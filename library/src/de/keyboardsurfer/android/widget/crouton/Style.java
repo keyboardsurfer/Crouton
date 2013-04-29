@@ -62,6 +62,16 @@ public class Style {
    * 0 for no backgroundDrawableResourceId.
    */
   final int backgroundDrawableResourceId;
+  
+  /**
+   * The resource id of the backgroundDrawableResourceIdXml.
+   * <p/>
+   * This one is for using with an xml drawable
+   * <p/>
+   * 
+   * 0 for no backgroundDrawableResourceIdXml.
+   */
+  final int backgroundDrawableResourceIdXml;
 
   /**
    * The backgroundColorResourceValue's e.g. 0xffff4444;
@@ -138,6 +148,7 @@ public class Style {
   private Style(final Builder builder) {
     this.backgroundColorResourceId = builder.backgroundColorResourceId;
     this.backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
+    this.backgroundDrawableResourceIdXml = builder.backgroundDrawableResourceIdXml;
     this.isTileEnabled = builder.isTileEnabled;
     this.textColorResourceId = builder.textColorResourceId;
     this.heightInPixels = builder.heightInPixels;
@@ -161,9 +172,10 @@ public class Style {
 
   /** Builder for the {@link Style} object. */
   public static class Builder {
-    private int backgroundColorValue;
+	private int backgroundColorValue;
     private int backgroundColorResourceId;
     private int backgroundDrawableResourceId;
+    private int backgroundDrawableResourceIdXml;
     private boolean isTileEnabled;
     private int textColorResourceId;
     private int heightInPixels;
@@ -188,6 +200,7 @@ public class Style {
       paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
+      backgroundDrawableResourceIdXml = 0;
       backgroundColorValue = -1;
       isTileEnabled = false;
       textColorResourceId = android.R.color.white;
@@ -209,6 +222,7 @@ public class Style {
       backgroundColorValue = baseStyle.backgroundColorValue;
       backgroundColorResourceId = baseStyle.backgroundColorResourceId;
       backgroundDrawableResourceId = baseStyle.backgroundDrawableResourceId;
+      backgroundDrawableResourceIdXml = baseStyle.backgroundDrawableResourceIdXml;
       isTileEnabled = baseStyle.isTileEnabled;
       textColorResourceId = baseStyle.textColorResourceId;
       heightInPixels = baseStyle.heightInPixels;
@@ -266,6 +280,20 @@ public class Style {
      */
     public Builder setBackgroundDrawable(int backgroundDrawableResourceId) {
       this.backgroundDrawableResourceId = backgroundDrawableResourceId;
+
+      return this;
+    }
+    
+    /**
+     * Set the backgroundDrawableResourceIdXml option for the {@link Crouton}.
+     *
+     * @param backgroundDrawableResourceIdXml
+     *   Resource ID of a backgroundDrawableResourceIdXml drawable defined in xml such as gradient or shape.
+     *
+     * @return the {@link Builder}.
+     */
+    public Builder setBackgroundDrawableResourceXml(int backgroundDrawableResourceIdXml) {
+      this.backgroundDrawableResourceIdXml = backgroundDrawableResourceIdXml;
 
       return this;
     }
