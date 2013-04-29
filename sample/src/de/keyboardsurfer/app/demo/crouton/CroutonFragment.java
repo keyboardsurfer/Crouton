@@ -19,12 +19,14 @@ package de.keyboardsurfer.app.demo.crouton;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.Spinner;
 import de.keyboardsurfer.android.widget.crouton.Configuration;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
@@ -147,10 +149,28 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
         showCustomViewCrouton();
         break;
       }
+      case 6:{
+    	showCustomDrawableCrouton();
+    	break;
+      }
     }
   }
 
-  private void showCustomCrouton() {
+	private void showCustomDrawableCrouton() {
+		Style croutonStyle = new Style.Builder()
+				.setTextColor(R.color.white)
+				.setBackgroundDrawableResourceXml(R.drawable.crouton_background)
+				.setHeight(LayoutParams.WRAP_CONTENT)
+				.setWidth(LayoutParams.FILL_PARENT).setGravity(Gravity.CENTER)
+				.build();
+		Configuration croutonConfiguration = new Configuration.Builder()
+				.setDuration(500).setInAnimation(android.R.anim.fade_in)
+				.setOutAnimation(android.R.anim.fade_out).build();
+		String croutonText = getCroutonText();
+		showCrouton(croutonText, croutonStyle, croutonConfiguration);
+	}
+
+private void showCustomCrouton() {
     String croutonDurationString = getCroutonDurationString();
 
     if (TextUtils.isEmpty(croutonDurationString)) {

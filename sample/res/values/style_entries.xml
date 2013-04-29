@@ -25,6 +25,7 @@
 		<item>Infinite</item>
 		<item>Custom Style</item>
 		<item>Custom View</item>
+		<item>Custom Drawable</item>
 	</string-array>
 
 </resources>

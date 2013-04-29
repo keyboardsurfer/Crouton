@@ -814,6 +814,10 @@ public final class Crouton {
       }
       croutonView.setBackgroundDrawable(drawable);
     }
+  //previous option didn't work if you want to use drawables defined in xml such as gradient or shape
+    if (this.style.backgroundDrawableResourceIdXml != 0) {
+      croutonView.setBackgroundResource(style.backgroundDrawableResourceIdXml);
+    }
     return croutonView;
   }
 

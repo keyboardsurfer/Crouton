@@ -38,4 +38,6 @@
 
   <string name="custom_title">Custom Crouton</string>
   <string name="custom_message">Even with message!</string>
+  
+  <color name="white">#FFFFFFFF</color>
 </resources>
