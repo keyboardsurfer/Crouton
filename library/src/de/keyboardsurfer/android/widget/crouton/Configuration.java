@@ -45,10 +45,7 @@ public final class Configuration {
     DEFAULT = new Builder().setDuration(DURATION_SHORT).build();
   }
 
-  /**
-   * The durationInMilliseconds the {@link Crouton} will be displayed in
-   * milliseconds.
-   */
+  /** The durationInMilliseconds the {@link Crouton} will be displayed in milliseconds. */
   final int durationInMilliseconds;
   /** The resource id for the in animation. */
   final int inAnimationResId;
