@@ -178,6 +178,10 @@ After putting Crouton in the repository you can add it as a dependency.
 
 ## Contribution
 
+###Questions
+
+Questions regarding Crouton can be asked on [StackOverflow, using the crouton tag](http://stackoverflow.com/questions/tagged/crouton).
+
 ### Pull requests welcome
 
 Feel free to contribute to Crouton.
