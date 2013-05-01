@@ -101,10 +101,7 @@ public class Style {
   /** An additional image to display in the {@link Crouton}. */
   final int imageResId;
 
-  /**
-   * The {@link ImageView.ScaleType} for the image to display in the
-   * {@link Crouton}.
-   */
+  /** The {@link ImageView.ScaleType} for the image to display in the {@link Crouton}. */
   final ImageView.ScaleType imageScaleType;
 
   /**
