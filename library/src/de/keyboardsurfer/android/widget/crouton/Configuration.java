@@ -25,7 +25,7 @@ package de.keyboardsurfer.android.widget.crouton;
  * @author chris
  * @since 1.8
  */
-public final class Configuration {
+public class Configuration {
 
 
   /**
