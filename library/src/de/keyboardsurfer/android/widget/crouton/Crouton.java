@@ -54,7 +54,7 @@ public final class Crouton {
   private static final int TEXT_ID = 0x101;
   private final CharSequence text;
   private final Style style;
-  private Configuration configuration = Configuration.DEFAULT;
+  private Configuration configuration = null;
   private final View customView;
 
   private OnClickListener onClickListener;
@@ -623,9 +623,7 @@ public final class Crouton {
    * @return this {@link Crouton}.
    */
   public Crouton setConfiguration(final Configuration configuration) {
-    if (configuration != null) {
-      this.configuration = configuration;
-    }
+    this.configuration = configuration;
     return this;
   }
 
@@ -717,6 +715,9 @@ public final class Crouton {
 
   /** @return this croutons configuration */
   Configuration getConfiguration() {
+    if (null == configuration) {
+      configuration = getStyle().configuration;
+    }
     return configuration;
   }
 

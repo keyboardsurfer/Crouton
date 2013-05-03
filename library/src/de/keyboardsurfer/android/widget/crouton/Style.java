@@ -50,6 +50,12 @@ public class Style {
   }
 
   /**
+   * The {@link Configuration} for this {@link Style}.
+   * It can be overridden via {@link Crouton#setConfiguration(Configuration)}.
+   */
+  final Configuration configuration;
+
+  /**
    * The resource id of the backgroundResourceId.
    * <p/>
    * 0 for no backgroundResourceId.
@@ -133,6 +139,7 @@ public class Style {
   final int paddingDimensionResId;
 
   private Style(final Builder builder) {
+    this.configuration = builder.configuration;
     this.backgroundColorResourceId = builder.backgroundColorResourceId;
     this.backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
     this.isTileEnabled = builder.isTileEnabled;
@@ -158,6 +165,7 @@ public class Style {
 
   /** Builder for the {@link Style} object. */
   public static class Builder {
+    private Configuration configuration;
     private int backgroundColorValue;
     private int backgroundColorResourceId;
     private int backgroundDrawableResourceId;
@@ -182,6 +190,7 @@ public class Style {
 
     /** Creates a {@link Builder} to build a {@link Style} upon. */
     public Builder() {
+      configuration = Configuration.DEFAULT;
       paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
@@ -203,6 +212,7 @@ public class Style {
      *   The base {@link Style} to use for this {@link Style}.
      */
     public Builder(final Style baseStyle) {
+      configuration = baseStyle.configuration;
       backgroundColorValue = baseStyle.backgroundColorValue;
       backgroundColorResourceId = baseStyle.backgroundColorResourceId;
       backgroundDrawableResourceId = baseStyle.backgroundDrawableResourceId;
@@ -224,6 +234,18 @@ public class Style {
       imageScaleType = baseStyle.imageScaleType;
       paddingInPixels = baseStyle.paddingInPixels;
       paddingDimensionResId = baseStyle.paddingDimensionResId;
+    }
+    /**
+     * Set the {@link Configuration} option of the {@link Crouton}.
+     *
+     * @param configuration
+     *   The {@link Configuration}.
+     *
+     * @return the {@link Builder}.
+     */
+    public Builder setConfiguration(Configuration configuration) {
+      this.configuration = configuration;
+      return this;
     }
 
     /**
@@ -461,7 +483,8 @@ public class Style {
   @Override
   public String toString() {
     return "Style{" +
-      "backgroundColorResourceId=" + backgroundColorResourceId +
+      "configuration=" + configuration +
+      ", backgroundColorResourceId=" + backgroundColorResourceId +
       ", backgroundDrawableResourceId=" + backgroundDrawableResourceId +
       ", backgroundColorValue=" + backgroundColorValue +
       ", isTileEnabled=" + isTileEnabled +
