@@ -123,6 +123,8 @@ public final class Crouton {
    *   The text you want to display.
    * @param style
    *   The {@link Style} that this Crouton should be created with.
+   * @param configuration
+   *   The {@link Configuration} that this Crouton should be created with.
    * @param viewGroup
    *   The {@link ViewGroup} that this Crouton should be added to.
    */
