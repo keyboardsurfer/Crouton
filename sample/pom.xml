@@ -23,7 +23,7 @@
 
   <name>Crouton Demo</name>
   <artifactId>de.keyboardsurfer.app.demo.crouton</artifactId>
-  <version>1.8</version>
+  <version>1.8.1</version>
   <groupId>de.keyboardsurfer.app.demo.crouton</groupId>
   <packaging>apk</packaging>
 
