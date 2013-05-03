@@ -29,20 +29,31 @@ public class Style {
   public static final int holoRedLight = 0xffff4444;
   public static final int holoGreenLight = 0xff99cc00;
   public static final int holoBlueLight = 0xff33b5e5;
+  public static final int holoOrangeLight = 0xffffbb33;
+  
+  public static final int holoRedDark = 0xffcc0000;
+  public static final int holoGreenDark = 0xff669900;
+  public static final int holoBlueDark = 0xff0099cc;
+  public static final int holoOrangeDark = 0xffff8800;
 
   /** Default style for alerting the user. */
   public static final Style ALERT;
   /** Default style for confirming an action. */
   public static final Style CONFIRM;
+  /** Default style for warning the user. */
+  public static final Style WARN;
   /** Default style for general information. */
   public static final Style INFO;
-
+  
   static {
     ALERT = new Builder()
       .setBackgroundColorValue(holoRedLight)
       .build();
     CONFIRM = new Builder()
       .setBackgroundColorValue(holoGreenLight)
+      .build();
+    WARN = new Builder()
+      .setBackgroundColorValue(holoOrangeLight)
       .build();
     INFO = new Builder()
       .setBackgroundColorValue(holoBlueLight)

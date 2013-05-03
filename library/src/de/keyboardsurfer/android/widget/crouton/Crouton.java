@@ -112,6 +112,33 @@ public final class Crouton {
     this.viewGroup = viewGroup;
     this.customView = null;
   }
+  
+  /**
+   * Creates the Crouton.
+   *
+   * @param activity
+   *   The {@link Activity} that represents the context in which the Crouton
+   *   should exist.
+   * @param text
+   *   The text you want to display.
+   * @param style
+   *   The {@link Style} that this Crouton should be created with.
+   * @param viewGroup
+   *   The {@link ViewGroup} that this Crouton should be added to.
+   */
+  private Crouton(Activity activity, CharSequence text, Style style,
+	    Configuration configuration, ViewGroup viewGroup) {
+    if ((activity == null) || (text == null) || (style == null)) {
+      throw new IllegalArgumentException("Null parameters are not accepted");
+    }
+
+    this.activity = activity;
+    this.text = text;
+    this.style = style;
+    this.configuration = configuration;
+    this.viewGroup = viewGroup;
+    this.customView = null;
+  }
 
   /**
    * Creates the {@link Crouton}.
@@ -209,6 +236,27 @@ public final class Crouton {
    */
   public static Crouton makeText(Activity activity, CharSequence text, Style style, ViewGroup viewGroup) {
     return new Crouton(activity, text, style, viewGroup);
+  }
+  
+  /**
+   * Creates a {@link Crouton} with provided text, style and configuration for
+   * a given activity.
+   *
+   * @param activity
+   *   The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param text
+   *   The text you want to display.
+   * @param style
+   *   The {@link Style} that this Crouton should be created with.
+   * @param configuration
+   *   The {@link Configuration} that this Crouton should be created with.
+   * @param viewGroup
+   *   The {@link ViewGroup} that this Crouton should be added to.
+   * @return The created Crouton.
+   */
+  public static Crouton makeText(Activity activity, CharSequence text,
+      Style style, Configuration configuration, ViewGroup viewGroup) {
+    return new Crouton(activity, text, style, configuration, viewGroup);
   }
 
   /**
