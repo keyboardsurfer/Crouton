@@ -25,7 +25,7 @@ package de.keyboardsurfer.android.widget.crouton;
  * @author chris
  * @since 1.8
  */
-public final class Configuration {
+public class Configuration {
 
 
   /**
@@ -45,10 +45,7 @@ public final class Configuration {
     DEFAULT = new Builder().setDuration(DURATION_SHORT).build();
   }
 
-  /**
-   * The durationInMilliseconds the {@link Crouton} will be displayed in
-   * milliseconds.
-   */
+  /** The durationInMilliseconds the {@link Crouton} will be displayed in milliseconds. */
   final int durationInMilliseconds;
   /** The resource id for the in animation. */
   final int inAnimationResId;

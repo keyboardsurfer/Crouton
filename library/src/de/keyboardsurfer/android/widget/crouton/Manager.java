@@ -38,8 +38,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /** Manages the lifecycle of {@link Crouton}s. */
 final class Manager extends Handler {
   private static final class Messages {
-    private Messages() { /* no-op */
-    }
+    private Messages() { /* no-op */ }
 
     public static final int DISPLAY_CROUTON = 0xc2007;
     public static final int ADD_CROUTON_TO_VIEW = 0xc20074dd;
@@ -405,5 +404,12 @@ final class Manager extends Handler {
       // getParent().requestSendAccessibilityEvent(this, event);
       accessibilityManager.sendAccessibilityEvent(event);
     }
+  }
+
+  @Override
+  public String toString() {
+    return "Manager{" +
+      "croutonQueue=" + croutonQueue +
+      '}';
   }
 }
