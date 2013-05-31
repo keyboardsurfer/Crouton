@@ -3,6 +3,7 @@
 *.ap_
 *.jar
 gen-external-apklibs
+build
 
 # keystore
 *.keystore
@@ -42,3 +43,4 @@ target
 
 #gradle folder
 .gradle
+.gradletasknamecache

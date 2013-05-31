@@ -14,47 +14,33 @@
  * limitations under the License.
  */
 buildscript {
-	repositories {
-		mavenCentral()
-	}
+    repositories { mavenCentral() }
 
-	dependencies {
-       classpath 'com.android.tools.build:gradle:0.4'
-	}
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.4.2'
+    }
 }
 
 apply plugin: 'android-library'
 
-repositories {
-    mavenLocal()
-}
+repositories { mavenLocal() }
 
 dependencies {
-    compile 'com.google.android:support-v4:r12'
+    compile 'com.google.android:support-v4:r13'
 }
 
-version = "1.8.1"                      
+version = "1.8.1"
 
 android {
-  compileSdkVersion 17
-  buildToolsVersion "17"
-  sourceSets {
-      main {
-          manifest {
-              srcFile 'AndroidManifest.xml'
-          }
-          java {
-              srcDir 'src'
-          }
-          res {
-              srcDir 'res'
-          }
-          assets {
-              srcDir 'assets'
-          }
-          resources {
-              srcDir 'src'
-          }
-      }
-  }
+    compileSdkVersion 17
+    buildToolsVersion "17"
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+    }
 }
