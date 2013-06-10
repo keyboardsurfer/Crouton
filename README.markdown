@@ -122,7 +122,7 @@ To use crouton simply add
 ```xml
 <dependency>
   <artifactId>crouton</artifactId>
-  <version>1.7</version>
+  <version>${crouton.version}</version>
   <groupId>de.keyboardsurfer.android.widget</groupId>
 </dependency>
 ```
