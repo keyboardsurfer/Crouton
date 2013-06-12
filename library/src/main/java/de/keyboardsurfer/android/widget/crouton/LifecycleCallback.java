@@ -1,6 +1,5 @@
 /*
  * Copyright 2012 - 2013 Benjamin Weiss
- * Copyright 2012 Neofonie Mobile GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +16,13 @@
 
 package de.keyboardsurfer.android.widget.crouton;
 
+/** Provides callback methods on major lifecycle events of a {@link Crouton}. */
 public interface LifecycleCallback {
-	public void onDisplayed();
-	public void onRemoved();
-	//public void onCeasarDressing();
+  /** Will be called when your Crouton has been displayed. */
+  public void onDisplayed();
+
+  /** Will be called when your {@link Crouton} has been removed. */
+  public void onRemoved();
+
+  //public void onCeasarDressing();
 }

@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import de.keyboardsurfer.android.widget.crouton.Configuration;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
@@ -36,8 +37,10 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 public class CroutonFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
   private static final Style INFINITE = new Style.Builder().
-    setBackgroundColorValue(Style.holoBlueLight).
-    setDuration(Style.DURATION_INFINITE).build();
+    setBackgroundColorValue(Style.holoBlueLight).build();
+  private static final Configuration CONFIGURATION_INFINITE = new Configuration.Builder()
+          .setDuration(Configuration.DURATION_INFINITE)
+          .build();
 
   private CheckBox displayOnTop;
   private Spinner styleSpinner;
@@ -88,9 +91,9 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
     Style croutonStyle = getSelectedStyleFromSpinner();
 
     if (croutonStyle != null) {
-      showNonCustomCrouton();
+      showBuiltInCrouton(croutonStyle);
     } else {
-      showCustomCrouton();
+      showAdvancedCrouton();
     }
   }
 
@@ -118,47 +121,68 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
       }
     }
   }
-
-  private void showNonCustomCrouton() {
-    Style croutonStyle = getSelectedStyleFromSpinner();
-    String croutonText = getCroutonText();
-
-    showCrouton(croutonText, croutonStyle);
-  }
-
+  
   private String getCroutonText() {
-
-
     String croutonText = croutonTextEdit.getText().toString().trim();
 
     if (TextUtils.isEmpty(croutonText)) {
       croutonText = getString(R.string.text_demo);
     }
-
     return croutonText;
+  }
+
+  private void showBuiltInCrouton(final Style croutonStyle) {
+    String croutonText = getCroutonText();
+    showCrouton(croutonText, croutonStyle, Configuration.DEFAULT);
+  }
+
+  private void showAdvancedCrouton() {
+    switch (styleSpinner.getSelectedItemPosition()) {
+      case 4: {
+        showCustomCrouton();
+        break;
+      }
+
+      case 5: {
+        showCustomViewCrouton();
+        break;
+      }
+    }
   }
 
   private void showCustomCrouton() {
     String croutonDurationString = getCroutonDurationString();
 
     if (TextUtils.isEmpty(croutonDurationString)) {
-      showCrouton(getString(R.string.warning_duration), Style.ALERT);
+      showCrouton(getString(R.string.warning_duration), Style.ALERT, Configuration.DEFAULT);
       return;
     }
 
     int croutonDuration = Integer.parseInt(croutonDurationString);
-    Style croutonStyle = new Style.Builder().setDuration(croutonDuration).build();
+    Style croutonStyle = new Style.Builder().build();
+    Configuration croutonConfiguration = new Configuration.Builder().setDuration(croutonDuration).build();
 
     String croutonText = getCroutonText();
 
-    showCrouton(croutonText, croutonStyle);
+    showCrouton(croutonText, croutonStyle, croutonConfiguration);
+  }
+
+  private void showCustomViewCrouton() {
+    View view = getLayoutInflater(null).inflate(R.layout.crouton_custom_view, null);
+    final Crouton crouton;
+    if (displayOnTop.isChecked()) {
+      crouton = Crouton.make(getActivity(), view);
+    } else {
+      crouton = Crouton.make(getActivity(), view, R.id.alternate_view_group);
+    }
+    crouton.show();
   }
 
   private String getCroutonDurationString() {
     return croutonDurationEdit.getText().toString().trim();
   }
 
-  private void showCrouton(String croutonText, Style croutonStyle) {
+  private void showCrouton(String croutonText, Style croutonStyle, Configuration configuration) {
     final boolean infinite = INFINITE == croutonStyle;
     
     if (infinite) {
@@ -174,19 +198,22 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
     if (infinite) {
       infiniteCrouton = crouton;
     }
-    crouton.setOnClickListener(this).show();
+    crouton.setOnClickListener(this).setConfiguration(infinite ? CONFIGURATION_INFINITE : configuration).show();
   }
 
   @Override
   public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
     switch ((int) id) {
-      case 3: {
-        croutonTextEdit.setVisibility(View.GONE);
-        croutonDurationEdit.setVisibility(View.GONE);
+      
+      case 4: { // Custom Style
+        croutonTextEdit.setVisibility(View.VISIBLE);
+        croutonDurationEdit.setVisibility(View.VISIBLE);
         break;
       }
-      case 4: {
-        croutonDurationEdit.setVisibility(View.VISIBLE);
+
+      case 5: { // Custom View
+        croutonTextEdit.setVisibility(View.GONE);
+        croutonDurationEdit.setVisibility(View.GONE);
         break;
       }
 
