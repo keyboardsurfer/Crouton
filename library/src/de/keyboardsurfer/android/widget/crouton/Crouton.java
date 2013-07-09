@@ -26,6 +26,7 @@ import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -821,7 +822,7 @@ public final class Crouton {
   private RelativeLayout initializeContentView(final Resources resources) {
     RelativeLayout contentView = new RelativeLayout(this.activity);
     contentView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-      RelativeLayout.LayoutParams.WRAP_CONTENT));
+      RelativeLayout.LayoutParams.MATCH_PARENT));
 
     // set padding
     int padding = this.style.paddingInPixels;
@@ -847,6 +848,11 @@ public final class Crouton {
     if (null != image) {
       textParams.addRule(RelativeLayout.RIGHT_OF, image.getId());
     }
+    
+    if (this.style.gravity == Gravity.CENTER) textParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+    else if (this.style.gravity == Gravity.CENTER_VERTICAL) textParams.addRule(RelativeLayout.CENTER_VERTICAL);
+    else if (this.style.gravity == Gravity.CENTER_HORIZONTAL) textParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+
     contentView.addView(text, textParams);
     return contentView;
   }
