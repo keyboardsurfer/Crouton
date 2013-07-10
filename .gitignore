@@ -1,11 +1,13 @@
+# Copyright: Benjamin Weiss (keyboardsurfer) https://github.com/keyboardsurfer
+# Under CC-BY-SA V3.0 (https://creativecommons.org/licenses/by-sa/3.0/legalcode)
+
 # built application files
 *.apk
 *.ap_
 *.jar
-gen-external-apklibs
 
-# keystore
-*.keystore
+# lint files
+lint.xml
 
 # files for the dex VM
 *.dex
@@ -16,7 +18,12 @@ gen-external-apklibs
 # generated files
 bin/
 gen/
-target/
+classes/
+build/
+gen-external-apklibs/
+
+# maven output folder
+target
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -34,8 +41,24 @@ local.properties
 # OSX files
 .DS_Store
 
-#vi swap files
+# Windows files
+Thumbs.db
+
+# vi swap files
 *.swp
 
-# maven target
-target
+# backup files
+*.bak
+
+# gradle stuff
+.gradle
+.gradletasknamecache
+
+#for oh-my-zsh jira plugin (https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#jira)
+.jira-url
+
+#keystores
+*.keystore
+
+#IDEA atlassian plugin
+atlassian-ide-plugin.xml
