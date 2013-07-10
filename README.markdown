@@ -191,6 +191,8 @@ Either you found a bug or have created a new and awesome feature, just create a 
 If you want to start to create a new feature or have any other questions regarding Crouton, [file an issue](https://github.com/keyboardsurfer/Crouton/issues/new).
 I'll try to answer as soon as I find the time.
 
+Please note, if you're working on a pull request, make sure to use the [develop branch](https://github.com/keyboardsurfer/Crouton/tree/develop) as your base.
+
 ### Formatting
 
 For contributors using Eclipse there's a formatter available at the [download section](https://github.com/downloads/keyboardsurfer/Crouton/Crouton_Eclipseformatter.xml).
