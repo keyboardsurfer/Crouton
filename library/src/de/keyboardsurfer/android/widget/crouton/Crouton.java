@@ -25,6 +25,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -679,11 +681,11 @@ public final class Crouton {
   boolean isShowing() {
     return (null != activity) && (isCroutonViewNotNull() || isCustomViewNotNull());
   }
-  
+
   private boolean isCroutonViewNotNull() {
     return (null != croutonView) && (null != croutonView.getParent());
   }
-  
+
   private boolean isCustomViewNotNull() {
     return (null != customView) && (null != customView.getParent());
   }
@@ -854,7 +856,13 @@ public final class Crouton {
   private TextView initializeTextView(final Resources resources) {
     TextView text = new TextView(this.activity);
     text.setId(TEXT_ID);
-    text.setText(this.text);
+    if (this.style.fontName != null) {
+        setTextWithCustomFont(text, this.style.fontName);
+    } else if (this.style.fontNameResId != 0) {
+        setTextWithCustomFont(text, resources.getString(this.style.fontNameResId));
+    } else {
+        text.setText(this.text);
+    }
     text.setTypeface(Typeface.DEFAULT_BOLD);
     text.setGravity(this.style.gravity);
 
@@ -880,6 +888,15 @@ public final class Crouton {
       text.setTextAppearance(this.activity, this.style.textAppearanceResId);
     }
     return text;
+  }
+
+  private void setTextWithCustomFont(TextView text, String fontName) {
+      if (this.text != null) {
+          SpannableString s = new SpannableString(this.text);
+          s.setSpan(new TypefaceSpan(text.getContext(), fontName), 0, s.length(),
+                  Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+          text.setText(s);
+      }
   }
 
   private void initializeTextViewShadow(final Resources resources, final TextView text) {
