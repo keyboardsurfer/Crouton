@@ -44,3 +44,5 @@ target
 #gradle folder
 .gradle
 .gradletasknamecache
+
+atlassian-ide-plugin.xml
