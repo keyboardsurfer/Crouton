@@ -17,6 +17,7 @@
 
 package de.keyboardsurfer.android.widget.crouton;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
@@ -30,6 +31,7 @@ import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.FrameLayout;
+
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -176,6 +178,7 @@ final class Manager extends Handler {
    * @param crouton
    *   The {@link Crouton} that should be added.
    */
+  @SuppressLint("NewApi")
   private void addCroutonToView(final Crouton crouton) {
     // don't add if it is already showing
     if (crouton.isShowing()) {
@@ -222,6 +225,14 @@ final class Manager extends Handler {
             crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
         }
       }
+    });
+    
+    // Adds click listener to dismiss Crouton (regardless of duration) 
+    croutonView.setOnClickListener(new View.OnClickListener() {
+	  @Override
+	  public void onClick(View v) {
+	    Crouton.hide(crouton);
+	  }
     });
   }
 

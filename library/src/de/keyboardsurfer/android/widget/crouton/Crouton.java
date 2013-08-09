@@ -113,6 +113,33 @@ public final class Crouton {
     this.viewGroup = viewGroup;
     this.customView = null;
   }
+  
+  /**
+   * Creates the Crouton.
+   *
+   * @param activity
+   *   The {@link Activity} that represents the context in which the Crouton
+   *   should exist.
+   * @param text
+   *   The text you want to display.
+   * @param style
+   *   The {@link Style} that this Crouton should be created with.
+   * @param configuration
+   *   The {@link Configuration} that this Crouton should be created with.
+   */
+  private Crouton(Activity activity, CharSequence text, Style style,
+	    Configuration configuration) {
+    if ((activity == null) || (text == null) || (style == null)) {
+      throw new IllegalArgumentException("Null parameters are not accepted");
+    }
+
+    this.activity = activity;
+    this.text = text;
+    this.style = style;
+    this.configuration = configuration;
+    this.viewGroup = null;
+    this.customView = null;
+  }
 
   /**
    * Creates the {@link Crouton}.
@@ -211,6 +238,25 @@ public final class Crouton {
   public static Crouton makeText(Activity activity, CharSequence text, Style style, ViewGroup viewGroup) {
     return new Crouton(activity, text, style, viewGroup);
   }
+  
+  /**
+   * Creates a {@link Crouton} with provided text, style and configuration for
+   * a given activity.
+   *
+   * @param activity
+   *   The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param text
+   *   The text you want to display.
+   * @param style
+   *   The {@link Style} that this Crouton should be created with.
+   * @param configuration
+   *   The {@link Configuration} that this Crouton should be created with.
+   * @return The created Crouton.
+   */
+  public static Crouton makeText(Activity activity, CharSequence text,
+      Style style, Configuration configuration) {
+    return new Crouton(activity, text, style, configuration);
+  }
 
   /**
    * Creates a {@link Crouton} with provided text and style for a given
@@ -267,6 +313,25 @@ public final class Crouton {
    */
   public static Crouton makeText(Activity activity, int textResourceId, Style style, ViewGroup viewGroup) {
     return makeText(activity, activity.getString(textResourceId), style, viewGroup);
+  }
+  
+  /**
+   * Creates a {@link Crouton} with provided text-resource and style for a given
+   * activity.
+   *
+   * @param activity
+   *   The {@link Activity} that represents the context in which the Crouton should exist.
+   * @param textResourceId
+   *   The resource id of the text you want to display.
+   * @param style
+   *   The style that this {@link Crouton} should be created with.
+   * @param configuration
+   *   The {@link Configuration} that this Crouton should be created with.
+   *
+   * @return The created {@link Crouton}.
+   */
+  public static Crouton makeText(Activity activity, int textResourceId, Style style, Configuration configuration) {
+    return makeText(activity, activity.getString(textResourceId), style, configuration);
   }
 
   /**
