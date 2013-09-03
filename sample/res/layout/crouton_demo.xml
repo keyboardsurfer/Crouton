@@ -60,6 +60,7 @@
     android:checked="true" />
 
   <LinearLayout
+    android:orientation="vertical"
     android:id="@+id/alternate_view_group"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
