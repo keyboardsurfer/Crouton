@@ -14,40 +14,64 @@
 * limitations under the License.
 */
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.5.6'
-    }
-}
 apply plugin: 'android'
+version = '1.8.1'
+
+buildscript {
+  repositories {
+    maven {
+      url 'https://github.com/dahlgren/vpi-aar/raw/master'
+    }
+  }
+}
 
 repositories {
-    mavenCentral()
-    mavenLocal()
+  maven {
+    url 'https://github.com/dahlgren/vpi-aar/raw/master'
+  }
 }
 
 dependencies {
-    compile 'com.actionbarsherlock:actionbarsherlock:4.3.1'
-    compile 'com.google.android:support-v4:r13'
-    compile 'de.keyboardsurfer.android.widget:crouton:1.8.1'
+    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    compile 'com.android.support:support-v4:18.0.+'
+    compile('com.viewpagerindicator:library:2.4.2-SNAPSHOT') {
+      exclude group: 'com.google.android', module: 'support-v4'
+    }
+    compile('de.keyboardsurfer.android.widget:crouton:1.8.1') {
+       exclude group: 'com.google.android', module: 'support-v4'
+    }
 }
 
-version = "1.8.1"
-
 android {
-    compileSdkVersion 17
-    buildToolsVersion "17"
-    sourceSets {
-        main {
-            manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
-            resources.srcDirs = ['src']
-            res.srcDirs = ['res']
-            assets.srcDirs = ['assets']
-        }
+  buildToolsVersion '18.1'
+    compileSdkVersion 18
+    defaultConfig {
+      versionCode 11
+        versionName "1.8.1"
+        minSdkVersion 7
+        targetSdkVersion 18
+  }
+  signingConfigs {
+    release { }
+  }
+  buildTypes {
+    release {
+      signingConfig signingConfigs.release
     }
+  }
+
+  def config = new Properties()
+  new File('signingConfigs.release').withInputStream { stream -> config.load(stream) }
+  if (project.hasProperty('keyStore')) {
+    android.signingConfigs.release.storeFile = file(keyStore)
+  }
+  if (project.hasProperty('storePassword')) {
+    android.signingConfigs.release.storePassword = storePassword
+  }
+  if (project.hasProperty('keyAlias')) {
+    android.signingConfigs.release.keyAlias = keyAlias
+  }
+  if (project.hasProperty('keyPassword')) {
+    android.signingConfigs.release.keyPassword = keyPassword
+  }
 }

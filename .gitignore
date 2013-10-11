@@ -45,4 +45,7 @@ target
 .gradle
 .gradletasknamecache
 
+#signing config
+signingConfigs.release
+
 atlassian-ide-plugin.xml

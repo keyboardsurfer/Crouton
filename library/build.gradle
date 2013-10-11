@@ -13,25 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-buildscript {
-  repositories { mavenCentral() }
+apply plugin: 'android-library'
 
-  dependencies {
-    classpath 'com.android.tools.build:gradle:0.5.6'
+dependencies {
+  compile 'com.android.support:support-v4:18.0.+'
+}
+
+android {
+  buildToolsVersion '18.1'
+  compileSdkVersion 18
+  defaultConfig {
+    versionCode 5
+    versionName "1.8.1"
+    minSdkVersion 4
+    targetSdkVersion 18
   }
 }
 
-apply plugin: 'android-library'
-
-repositories { mavenLocal() }
-
-dependencies {
-  compile 'com.google.android:support-v4:r13'
-}
-
-version = "1.8.1"
-
-android {
-  compileSdkVersion 17
-  buildToolsVersion "17"
+task jar(type: Jar) {
+  from android.sourceSets.main.java
 }

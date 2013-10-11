@@ -110,14 +110,43 @@ In general you can modify
 
 Since [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java) is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.
 
+## Gradle
+
+## From maven central
+
+Add maven central to your `build.gradle`:
+
+```groovy
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+}
+ 
+repositories {
+  mavenCentral()
+}
+```
+
+Then declare Crouton within your dependencies:
+
+```groovy
+dependencies {
+  ...
+  compile('de.keyboardsurfer.android.widget:crouton:1.8.1') {
+    // exclusion is not neccessary, but generally a good idea.
+    exclude group: 'com.google.android', module: 'support-v4'
+  }
+  ...
+}
+```
+
 
 ## Maven
 
 ### From maven central
 
-Crouton is available in the maven central repository.
-
-To use crouton simply add
+To use crouton within your maven build simply add
 
 ```xml
 <dependency>
