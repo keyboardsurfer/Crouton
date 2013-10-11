@@ -45,6 +45,7 @@ dependencies {
 android {
   buildToolsVersion '18.1'
     compileSdkVersion 18
+
     defaultConfig {
       versionCode 11
         versionName "1.8.1"
@@ -62,16 +63,8 @@ android {
 
   def config = new Properties()
   new File('signingConfigs.release').withInputStream { stream -> config.load(stream) }
-  if (project.hasProperty('keyStore')) {
-    android.signingConfigs.release.storeFile = file(keyStore)
-  }
-  if (project.hasProperty('storePassword')) {
-    android.signingConfigs.release.storePassword = storePassword
-  }
-  if (project.hasProperty('keyAlias')) {
-    android.signingConfigs.release.keyAlias = keyAlias
-  }
-  if (project.hasProperty('keyPassword')) {
-    android.signingConfigs.release.keyPassword = keyPassword
-  }
+    android.signingConfigs.release.storeFile = file(config.keyStore)
+    android.signingConfigs.release.storePassword = config.storePassword
+    android.signingConfigs.release.keyAlias = config.keyAlias
+    android.signingConfigs.release.keyPassword = config.keyPassword
 }
