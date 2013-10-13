@@ -38,10 +38,27 @@ final class DefaultAnimationsBuilder {
    * @return The default Animation for a showing {@link Crouton}.
    */
   static Animation buildDefaultSlideInDownAnimation(View croutonView) {
+    return buildDefaultSlideInDownAnimation(croutonView, false);
+  }
+  
+  /**
+   * @param croutonView
+   *   The croutonView which gets animated.
+   * @param isDownUnder
+   *   True if the Crouton should animate in and out opposite to the "normal" way.
+   *   This will in fact yield a Crouton that animates-in in an upwardly fashion,
+   *   animates out in a downward fashion, and thus behaves more like its real-world
+   *   counterpart bobbing up in a bowl of soup and then sinking down. Also note that
+   *   water spins in the opposite direction in the southern hemisphere.
+   *
+   * @return The default Animation for a showing {@link Crouton}.
+   */
+  static Animation buildDefaultSlideInDownAnimation(View croutonView, boolean isDownUnder) {
     if (!areLastMeasuredInAnimationHeightAndCurrentEqual(croutonView) || (null == slideInDownAnimation)) {
+    	int directionAdjust = (isDownUnder)? 1 : -1;
       slideInDownAnimation = new TranslateAnimation(
         0, 0,                               // X: from, to
-        -croutonView.getMeasuredHeight(), 0 // Y: from, to
+        directionAdjust * croutonView.getMeasuredHeight(), 0 // Y: from, to
       );
       slideInDownAnimation.setDuration(DURATION);
       setLastInAnimationHeight(croutonView.getMeasuredHeight());
@@ -56,10 +73,21 @@ final class DefaultAnimationsBuilder {
    * @return The default Animation for a hiding {@link Crouton}.
    */
   static Animation buildDefaultSlideOutUpAnimation(View croutonView) {
+    return buildDefaultSlideOutUpAnimation(croutonView, false);
+  }
+  
+  /**
+   * @param croutonView
+   *   The croutonView which gets animated.
+   *
+   * @return The default Animation for a hiding {@link Crouton}.
+   */
+  static Animation buildDefaultSlideOutUpAnimation(View croutonView, boolean isDownUnder) {
     if (!areLastMeasuredOutAnimationHeightAndCurrentEqual(croutonView) || (null == slideOutUpAnimation)) {
+    	int directionAdjust = (isDownUnder)? 1 : -1;
       slideOutUpAnimation = new TranslateAnimation(
         0, 0,                               // X: from, to
-        0, -croutonView.getMeasuredHeight() // Y: from, to
+        0, directionAdjust * croutonView.getMeasuredHeight() // Y: from, to
       );
       slideOutUpAnimation.setDuration(DURATION);
       setLastOutAnimationHeight(croutonView.getMeasuredHeight());

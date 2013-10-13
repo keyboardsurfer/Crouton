@@ -17,6 +17,7 @@
 
 package de.keyboardsurfer.android.widget.crouton;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
@@ -188,13 +189,22 @@ final class Manager extends Handler {
       if (null == params) {
         params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
       }
-      // display Crouton in ViewGroup is it has been supplied
+      // display Crouton in ViewGroup if it has been supplied
       if (null != crouton.getViewGroup()) {
         // TODO implement add to last position feature (need to align with how this will be requested for activity)
         if (crouton.getViewGroup() instanceof FrameLayout) {
           crouton.getViewGroup().addView(croutonView, params);
         } else {
-          crouton.getViewGroup().addView(croutonView, 0, params);
+            // get the viewGroupPosition from {@link Configuration}
+        	int viewGroupPosition = crouton.getConfiguration().viewGroupPosition;
+        	if(viewGroupPosition > crouton.getViewGroup().getChildCount()) {
+        		// find end position
+        		viewGroupPosition = crouton.getViewGroup().getChildCount();
+        	} else if(viewGroupPosition < 0) {
+        		// find middle position in the ViewGroup
+        		viewGroupPosition = ((Double)Math.floor(crouton.getViewGroup().getChildCount() / 2)).intValue();
+        	}
+          crouton.getViewGroup().addView(croutonView, viewGroupPosition, params);
         }
       } else {
         Activity activity = crouton.getActivity();
@@ -207,6 +217,8 @@ final class Manager extends Handler {
 
     croutonView.requestLayout(); // This is needed so the animation can use the measured with/height
     croutonView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+    @SuppressWarnings("deprecation")
+	@SuppressLint("NewApi")
       @Override
       public void onGlobalLayout() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
@@ -216,7 +228,8 @@ final class Manager extends Handler {
         }
 
         croutonView.startAnimation(crouton.getInAnimation());
-        announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
+        crouton.getView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+        announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());	//legacy
         if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
           sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
             crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());

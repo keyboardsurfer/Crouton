@@ -37,6 +37,16 @@ public class Configuration {
   public static final int DURATION_SHORT = 3000;
   /** The default long display duration of a {@link Crouton}. */
   public static final int DURATION_LONG = 5000;
+  
+  /** The default start position of a {@link Crouton} within the potentially specified ViewGroup. */
+  public static final int POSITION_START = 0;
+  /** The default middle position of a {@link Crouton} within the potentially specified ViewGroup. */
+  public static final int POSITION_MIDDLE = -1;
+  /** The default end position of a {@link Crouton} within the potentially specified ViewGroup. */
+  public static final int POSITION_END = Integer.MAX_VALUE;
+  /** Special code that can be used for inAnimationResId or outAnimationResId to yield a DownUnder
+   *  version of their respective animations. See {@link Crouton}. */
+  public static final int ANIMMODE_DOWNUNDER = -1;	//assuming -1 will never be a valid resource
 
   /** The default {@link Configuration} of a {@link Crouton}. */
   public static final Configuration DEFAULT;
@@ -51,11 +61,14 @@ public class Configuration {
   final int inAnimationResId;
   /** The resource id for the out animation. */
   final int outAnimationResId;
+  /** The position within the possibly specified viewGroup. */
+  final int viewGroupPosition;
 
   private Configuration(Builder builder) {
     this.durationInMilliseconds = builder.durationInMilliseconds;
     this.inAnimationResId = builder.inAnimationResId;
     this.outAnimationResId = builder.outAnimationResId;
+    this.viewGroupPosition = builder.viewGroupPosition;
   }
 
   /** Creates a {@link Builder} to build a {@link Configuration} upon. */
@@ -63,13 +76,14 @@ public class Configuration {
     private int durationInMilliseconds = DURATION_SHORT;
     private int inAnimationResId = 0;
     private int outAnimationResId = 0;
+    private int viewGroupPosition = POSITION_START;
 
     /**
      * Set the durationInMilliseconds option of the {@link Crouton}.
      *
      * @param duration
-     *   The durationInMilliseconds the crouton will be displayed
-     *   {@link Crouton} in milliseconds.
+     *   The durationInMilliseconds the {@link Crouton} will be displayed
+     *   in milliseconds.
      *
      * @return the {@link Builder}.
      */
@@ -110,6 +124,24 @@ public class Configuration {
     }
 
     /**
+     * The integer position that the {@link Crouton} should be displayed at
+     * within the specified ViewGroup.
+     * If the position given exceeds the maximum positions actually available
+     * within the ViewGroup at the moment of display, then the position will
+     * be forced to the last position available.
+     *
+     * @param viewGroupPosition
+     *   The integer position that the {@link Crouton} should be displayed at
+     *   within the specified ViewGroup.
+     *
+     * @return the {@link Builder}.
+     */
+    public Builder setViewGroupPosition(final int viewGroupPosition) {
+      this.viewGroupPosition = viewGroupPosition;
+
+      return this;
+    }
+    /**
      * Builds the {@link Configuration}.
      *
      * @return The built {@link Configuration}.
@@ -125,6 +157,7 @@ public class Configuration {
       "durationInMilliseconds=" + durationInMilliseconds +
       ", inAnimationResId=" + inAnimationResId +
       ", outAnimationResId=" + outAnimationResId +
+      ", viewGroupPosition=" + viewGroupPosition +
       '}';
   }
 }

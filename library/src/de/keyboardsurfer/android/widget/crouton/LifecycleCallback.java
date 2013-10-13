@@ -24,5 +24,5 @@ public interface LifecycleCallback {
   /** Will be called when your {@link Crouton} has been removed. */
   public void onRemoved();
 
-  //public void onCeasarDressing();
+  //public void onCaesarDressing();
 }

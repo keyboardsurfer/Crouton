@@ -574,7 +574,12 @@ public final class Crouton {
         this.inAnimation = AnimationUtils.loadAnimation(getActivity(), getConfiguration().inAnimationResId);
       } else {
         measureCroutonView();
-        this.inAnimation = DefaultAnimationsBuilder.buildDefaultSlideInDownAnimation(getView());
+        //Apply DownUnder feature if POSITION_END used or ANIMMODE_DOWNUNDER used
+        if(getConfiguration().viewGroupPosition == Configuration.POSITION_END || getConfiguration().inAnimationResId == Configuration.ANIMMODE_DOWNUNDER) {
+        	this.inAnimation = DefaultAnimationsBuilder.buildDefaultSlideInDownAnimation(getView(), true);
+        } else {
+        	this.inAnimation = DefaultAnimationsBuilder.buildDefaultSlideInDownAnimation(getView());
+        }
       }
     }
 
@@ -586,7 +591,12 @@ public final class Crouton {
       if (getConfiguration().outAnimationResId > 0) {
         this.outAnimation = AnimationUtils.loadAnimation(getActivity(), getConfiguration().outAnimationResId);
       } else {
-        this.outAnimation = DefaultAnimationsBuilder.buildDefaultSlideOutUpAnimation(getView());
+    	//Apply DownUnder feature if POSITION_END used or ANIMMODE_DOWNUNDER used
+      	if(getConfiguration().viewGroupPosition == Configuration.POSITION_END || getConfiguration().inAnimationResId == Configuration.ANIMMODE_DOWNUNDER) {
+        	this.outAnimation = DefaultAnimationsBuilder.buildDefaultSlideOutUpAnimation(getView(), true);
+        } else {
+            this.outAnimation = DefaultAnimationsBuilder.buildDefaultSlideOutUpAnimation(getView());
+        }
       }
     }
 
