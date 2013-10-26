@@ -57,5 +57,6 @@ Thumbs.db
 
 #signing config
 signingConfigs.release
+*.keystore
 
 atlassian-ide-plugin.xml

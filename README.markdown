@@ -187,22 +187,20 @@ If you are referencing a newer version of the Android Support Library in your ap
 </dependency>
 ```
 
-### DIY
+## DIY
 
-The build requires Maven. Operations are very simple:
+The build requires Gradle. Operations are very simple:
 
-* `mvn -f library/pom.xml clean package` will build a `jar` library;
-* `mvn clean package` will build a `jar` library and the sample application `apk`;
-* `mvn -f library/pom.xml clean install` will put Crouton in your local Maven repository.
+* install [gradle](http://www.gradle.org/)
+* `gradle build` builds the aar
+* `gradle jar` builds the jar
 
-After putting Crouton in the repository you can add it as a dependency.
+After putting Crouton in a repository you can add it as dependency.
 
-```xml
-<dependency>
-  <artifactId>crouton</artifactId>
-  <version>${crouton.version}</version>
-  <groupId>de.keyboardsurfer.android.widget</groupId>
-</dependency>
+```gradle
+compile('de.keyboardsurfer.android.widget:crouton:1.8.1') {
+  exclude group: 'com.google.android', module: 'support-v4'
+}
 ```
 
 ## Contribution
