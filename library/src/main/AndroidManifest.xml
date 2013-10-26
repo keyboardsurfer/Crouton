@@ -18,9 +18,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.keyboardsurfer.mobile.app.android.widget.crouton"
-    android:versionCode="1"
+    android:versionCode="5"
     android:versionName="1.8.1">
-    
-    <uses-sdk android:minSdkVersion="4" />
+    <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="18"/>
 
 </manifest>
