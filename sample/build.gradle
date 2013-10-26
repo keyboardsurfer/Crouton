@@ -32,39 +32,53 @@ repositories {
 }
 
 dependencies {
-    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
-    compile 'com.android.support:support-v4:18.0.+'
-    compile('com.viewpagerindicator:library:2.4.2-SNAPSHOT') {
-      exclude group: 'com.google.android', module: 'support-v4'
-    }
-    compile('de.keyboardsurfer.android.widget:crouton:1.8.1') {
-       exclude group: 'com.google.android', module: 'support-v4'
-    }
+  compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+  compile 'com.android.support:support-v4:18.0.+'
+  compile('com.viewpagerindicator:library:2.4.2-SNAPSHOT') {
+    exclude group: 'com.google.android', module: 'support-v4'
+  }
+  compile('de.keyboardsurfer.android.widget:crouton:1.8.1') {
+    exclude group: 'com.google.android', module: 'support-v4'
+  }
 }
 
 android {
   buildToolsVersion '18.1'
-    compileSdkVersion 18
+  compileSdkVersion 18
 
-    defaultConfig {
-      versionCode 11
-        versionName "1.8.1"
-        minSdkVersion 7
-        targetSdkVersion 18
+  defaultConfig {
+    versionCode 11
+    versionName "1.8.1"
+    minSdkVersion 7
+    targetSdkVersion 18
   }
   signingConfigs {
-    release { }
+    release {
+    }
   }
   buildTypes {
     release {
       signingConfig signingConfigs.release
+      new SigningProperties(project, 'signingConfigs.release').assignToSigningConfig(signingConfig)
     }
   }
+}
 
-  def config = new Properties()
-  new File('signingConfigs.release').withInputStream { stream -> config.load(stream) }
-    android.signingConfigs.release.storeFile = file(config.keyStore)
-    android.signingConfigs.release.storePassword = config.storePassword
-    android.signingConfigs.release.keyAlias = config.keyAlias
-    android.signingConfigs.release.keyPassword = config.keyPassword
+class SigningProperties extends Properties {
+  File storeFile
+  Project project
+
+  public SigningProperties(Project project, String fromFile) {
+    project.file(fromFile).withInputStream { stream -> load(stream) }
+    storeFile = project.file(keyStore)
+    this.project = project
+  }
+
+  public void assignToSigningConfig(signingConfig) {
+    signingConfig.storeFile = storeFile
+    signingConfig.storePassword = storePassword
+    signingConfig.keyAlias = keyAlias
+    signingConfig.keyPassword = keyPassword
+  }
+
 }
