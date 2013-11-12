@@ -20,8 +20,8 @@ You can check some features in the Crouton Demo.
 
 If you're already using Crouton and just want to download the latest version of the library, follow [this link](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22de.keyboardsurfer.android.widget%22).
 
-### Changelog
-#### Current version: 1.8.1
+## Changelog
+### Current version: 1.8.1
 
 ####[1.8](https://github.com/keyboardsurfer/Crouton/tree/1.8)
 
@@ -110,9 +110,10 @@ In general you can modify
 
 Since [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java) is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.
 
-## Gradle
+## Building
+### Gradle
 
-## From maven central
+#### From maven central
 
 Add maven central to your `build.gradle`:
 
@@ -142,9 +143,9 @@ dependencies {
 ```
 
 
-## Maven
+### Maven
 
-### From maven central
+#### From maven central
 
 To use crouton within your maven build simply add
 
@@ -187,7 +188,7 @@ If you are referencing a newer version of the Android Support Library in your ap
 </dependency>
 ```
 
-## DIY
+### DIY
 
 The build requires Gradle. Operations are very simple:
 
@@ -234,8 +235,7 @@ If you're using IDEA, the Eclipse Formatter plugin should allow you to use the f
 
 ## Attributions
 
-The initial version was written by  <a href="https://plus.google.com/u/0/117509657298845443204?rel=author">Benjamin Weiss</a> at [Neofonie Mobile GmbH](http://mobile.neofonie.de).
-
+The initial version was written by  <a href="https://plus.google.com/u/0/117509657298845443204?rel=author">Benjamin Weiss</a>.
 The name and the idea of [Crouton](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
 
 The Crouton logo has been created by [Marie Schweiz](http://marie-schweiz.de).
