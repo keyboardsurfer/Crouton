@@ -20,41 +20,8 @@ You can check some features in the Crouton Demo.
 
 If you're already using Crouton and just want to download the latest version of the library, follow [this link](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22de.keyboardsurfer.android.widget%22).
 
-## Changelog
+## [Changelog](https://github.com/keyboardsurfer/Crouton/wiki/Changelog)
 ### Current version: 1.8.1
-
-####[1.8](https://github.com/keyboardsurfer/Crouton/tree/1.8)
-
-- Improves support for custom views
-- Smoothing out animations for multiple line Croutons
-- Cleans up Style
-  - Configuration is now available for non-UI information
-  - Style only holds UI-relevant information
-- Introduces DURATION_SHORT and DURATION_LONG constants
-
-####[1.7](https://github.com/keyboardsurfer/Crouton/tree/1.7)
-
-- `Crouton.setOnClickListener(OnClickListener)` has been introduced.
-- Infinite display of Crouton is possible via `Style.setDuration(Style.DURATION_INFINITE)`
-- Via `Crouton.hide(Crouton)` a Crouton can be hidden.
-
-####[1.6](https://github.com/keyboardsurfer/Crouton/tree/1.6)
-
-- Crouton now can be used on any Android device with **API level 4+**.
-- Changes the package name to `de.keyboardsurfer.android.widget`
-- Adds possibility to set a custom width
-- Can now be added to any ViewGroup (@coreform)
-- Integration with TalkBack (@coreform)
-- Adds Accessibility features (@coreform)
-- Fixes bug that got Crouton out of sync with reality (@coreform)
-- New [LifecycleCallback](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/LifecycleCallback.java) (@coreform)
-- initializeCroutonView was refactored, to make it easier on the eyes
-- removes redundant initialization within Style.Builder
-- documentation improvments
-
-#### older versions
-
-Please see the `git log`
 
 ## Usage
 
