@@ -533,7 +533,7 @@ public final class Crouton {
    *   The {@link Crouton} you want to hide.
    */
   public static void hide(Crouton crouton) {
-    Manager.getInstance().removeCrouton(crouton);
+    crouton.hide();
   }
 
   /**
@@ -600,6 +600,13 @@ public final class Crouton {
    */
   public void setLifecycleCallback(LifecycleCallback lifecycleCallback) {
     this.lifecycleCallback = lifecycleCallback;
+  }
+
+  /**
+   * Removes this {@link Crouton}.
+   */
+  public void hide() {
+    Manager.getInstance().removeCrouton(this);
   }
 
   /**
