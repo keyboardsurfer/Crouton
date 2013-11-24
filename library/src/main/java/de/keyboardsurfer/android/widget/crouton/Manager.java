@@ -292,9 +292,7 @@ final class Manager extends Handler {
       final Crouton c = croutonIterator.next();
       if (c.equals(crouton) && (null != c.getActivity())) {
         // remove the crouton from the content view
-        if (crouton.isShowing()) {
-          ((ViewGroup) c.getView().getParent()).removeView(c.getView());
-        }
+        removeCroutonFromViewParent(crouton);
 
         // remove any messages pending for the crouton
         removeAllMessagesForCrouton(c);
@@ -317,9 +315,7 @@ final class Manager extends Handler {
     // remove any views that may already have been added to the activity's
     // content view
     for (Crouton crouton : croutonQueue) {
-      if (crouton.isShowing()) {
-        ((ViewGroup) crouton.getView().getParent()).removeView(crouton.getView());
-      }
+      removeCroutonFromViewParent(crouton);
     }
     croutonQueue.clear();
   }
@@ -334,14 +330,21 @@ final class Manager extends Handler {
       Crouton crouton = croutonIterator.next();
       if ((null != crouton.getActivity()) && crouton.getActivity().equals(activity)) {
         // remove the crouton from the content view
-        if (crouton.isShowing()) {
-          ((ViewGroup) crouton.getView().getParent()).removeView(crouton.getView());
-        }
+        removeCroutonFromViewParent(crouton);
 
         removeAllMessagesForCrouton(crouton);
 
         // remove the crouton from the queue
         croutonIterator.remove();
+      }
+    }
+  }
+
+  private void removeCroutonFromViewParent(Crouton crouton) {
+    if (crouton.isShowing()) {
+      ViewGroup parent = (ViewGroup) crouton.getView().getParent();
+      if (null != parent) {
+        parent.removeView(crouton.getView());
       }
     }
   }
