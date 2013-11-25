@@ -8,7 +8,7 @@ Context sensitive notifications for Android
 **Crouton** is a class that can be used by Android developers that feel the need for an **alternative to the Context insensitive [Toast](http://developer.android.com/reference/android/widget/Toast.html)**.
 
 A Crouton will be displayed at the position the developer decides.
-Standard will be the of an application window.
+Standard will be the top of an application window.
 You can line up multiple Croutons for display, that will be shown one after another.
 
 You can check some features in the Crouton Demo.
