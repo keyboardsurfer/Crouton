@@ -213,23 +213,26 @@ final class Manager extends Handler {
     }
 
     croutonView.requestLayout(); // This is needed so the animation can use the measured with/height
-    croutonView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-      @Override
-      public void onGlobalLayout() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-          croutonView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-        } else {
-          croutonView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-        }
+    ViewTreeObserver observer = croutonView.getViewTreeObserver();
+    if (null != observer) {
+      observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        @Override
+        public void onGlobalLayout() {
+          if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            croutonView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+          } else {
+            croutonView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+          }
 
-        croutonView.startAnimation(crouton.getInAnimation());
-        announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
-        if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
-          sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
-              crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
+          croutonView.startAnimation(crouton.getInAnimation());
+          announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
+          if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
+            sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
+                crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   /**
