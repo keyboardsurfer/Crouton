@@ -20,16 +20,20 @@ dependencies {
 }
 
 android {
-  buildToolsVersion '18.1'
-  compileSdkVersion 18
+  buildToolsVersion '19'
+  compileSdkVersion 19
   defaultConfig {
     versionCode 5
-    versionName "1.8.1"
+    versionName "1.8.2"
     minSdkVersion 4
-    targetSdkVersion 18
+    targetSdkVersion 19
   }
 }
 
 task jar(type: Jar) {
   from android.sourceSets.main.java
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = "1.8"
 }

@@ -15,7 +15,7 @@
 */
 
 apply plugin: 'android'
-version = '1.8.1'
+version = '1.8.2'
 
 buildscript {
   repositories {
@@ -37,20 +37,20 @@ dependencies {
   compile('com.viewpagerindicator:library:2.4.2-SNAPSHOT') {
     exclude group: 'com.google.android', module: 'support-v4'
   }
-  compile('de.keyboardsurfer.android.widget:crouton:1.8.1') {
+  compile('de.keyboardsurfer.android.widget:crouton:1.8.2') {
     exclude group: 'com.google.android', module: 'support-v4'
   }
 }
 
 android {
-  buildToolsVersion '18.1'
-  compileSdkVersion 18
+  buildToolsVersion '19'
+  compileSdkVersion 19
 
   defaultConfig {
-    versionCode 11
-    versionName "1.8.1"
+    versionCode 12
+    versionName "1.8.2"
     minSdkVersion 7
-    targetSdkVersion 18
+    targetSdkVersion 19
   }
   signingConfigs {
     release {
