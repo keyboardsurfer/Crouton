@@ -18,6 +18,7 @@ package de.keyboardsurfer.android.widget.crouton;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.FrameLayout;
@@ -207,6 +209,22 @@ final class Manager extends Handler {
         Activity activity = crouton.getActivity();
         if (null == activity || activity.isFinishing()) {
           return;
+        }
+        // Translucent status is only available as of Android 4.4 Kit Kat.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            int flags = activity.getWindow().getAttributes().flags;
+            int translucentStatusFlag = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+            /* Checks whether translucent status is enabled for this window.
+            * If true, sets the top margin to show the crouton just below the action bar. */
+            if ((flags & translucentStatusFlag) == translucentStatusFlag) {
+                int actionBarContainerId = Resources.getSystem().getIdentifier("action_bar_container", "id", "android");
+                View actionBarContainer = activity.findViewById(actionBarContainerId);
+                // The action bar is present: the app is using a Holo theme.
+                if (actionBarContainer != null) {
+                    ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) params;
+                    marginParams.topMargin = actionBarContainer.getBottom();
+                }
+            }
         }
         activity.addContentView(croutonView, params);
       }
