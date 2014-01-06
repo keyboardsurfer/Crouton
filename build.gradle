@@ -23,7 +23,8 @@ subprojects {
     }
 
     dependencies {
-      classpath 'com.android.tools.build:gradle:0.6+'
+      classpath 'com.android.tools.build:gradle:0.7+'
+      classpath 'com.github.dcendents:android-maven-plugin:1.0'
     }
   }
 
