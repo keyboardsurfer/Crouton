@@ -210,22 +210,8 @@ final class Manager extends Handler {
         if (null == activity || activity.isFinishing()) {
           return;
         }
-        // Translucent status is only available as of Android 4.4 Kit Kat.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            int flags = activity.getWindow().getAttributes().flags;
-            int translucentStatusFlag = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-            /* Checks whether translucent status is enabled for this window.
-            * If true, sets the top margin to show the crouton just below the action bar. */
-            if ((flags & translucentStatusFlag) == translucentStatusFlag) {
-                int actionBarContainerId = Resources.getSystem().getIdentifier("action_bar_container", "id", "android");
-                View actionBarContainer = activity.findViewById(actionBarContainerId);
-                // The action bar is present: the app is using a Holo theme.
-                if (actionBarContainer != null) {
-                    ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) params;
-                    marginParams.topMargin = actionBarContainer.getBottom();
-                }
-            }
-        }
+        handleTranslucentActionBar((ViewGroup.MarginLayoutParams) params, activity);
+
         activity.addContentView(croutonView, params);
       }
     }
@@ -250,6 +236,25 @@ final class Manager extends Handler {
           }
         }
       });
+    }
+  }
+
+  private void handleTranslucentActionBar(ViewGroup.MarginLayoutParams params, Activity activity) {
+    // Translucent status is only available as of Android 4.4 Kit Kat.
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      final int flags = activity.getWindow().getAttributes().flags;
+      final int translucentStatusFlag = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        /* Checks whether translucent status is enabled for this window.
+        * If true, sets the top margin to show the crouton just below the action bar. */
+      if ((flags & translucentStatusFlag) == translucentStatusFlag) {
+        final int actionBarContainerId = Resources.getSystem().getIdentifier("action_bar_container", "id", "android");
+        final View actionBarContainer = activity.findViewById(actionBarContainerId);
+        // The action bar is present: the app is using a Holo theme.
+        if (actionBarContainer != null) {
+          final ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) params;
+          marginParams.topMargin = actionBarContainer.getBottom();
+        }
+      }
     }
   }
 
