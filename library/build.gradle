@@ -38,7 +38,7 @@ android {
 }
 
 group = "de.keyboardsurfer.android.widget"
-artifact = "crouton"
+artifactId = "crouton"
 version = "1.8.2"
 
 android.libraryVariants.all { variant ->
@@ -46,10 +46,19 @@ android.libraryVariants.all { variant ->
   if (name.equals(com.android.builder.BuilderConstants.DEBUG)) {
     return; // Skip debug builds.
   }
-  def task = project.tasks.create "jar${name.capitalize()}", Jar
-  task.dependsOn variant.javaCompile
-  task.from variant.javaCompile.destinationDir
-  artifacts.add('archives', task);
+  task("javadoc${variant.name.capitalize()}", type: Javadoc) {
+    description "Generates Javadoc for $variant.name."
+    source = variant.javaCompile.source
+    ext.androidJar = "${android.plugin.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+    classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+  }
+
+  task("bundleJavadoc${variant.name.capitalize()}", type: Jar) {
+    description "Bundles Javadoc into zip for $variant.name."
+    classifier = "javadoc"
+    from tasks["javadoc${variant.name.capitalize()}"]
+  }
+
 }
 
 task sourcesJar(type: Jar) {
@@ -57,12 +66,30 @@ task sourcesJar(type: Jar) {
   from android.sourceSets.main.java
 }
 
-artifacts {
-  archives sourcesJar
+task jar(type: Jar) {
+  from 'build/classes'
 }
 
+task javadocJar(type: Jar, dependsOn: "javadocRelease") {
+  classifier = 'javadoc'
+  from 'build/docs/javadoc'
+}
+
+artifacts {
+  archives sourcesJar
+  archives javadocJar
+  archives jar
+}
+
+
 task wrapper(type: Wrapper) {
+  description "Generates the gradle wrapper"
   gradleVersion = "1.9"
+}
+
+
+signing {
+  sign configurations.archives
 }
 
 uploadArchives {
@@ -76,9 +103,9 @@ uploadArchives {
 
       pom.project {
         inceptionYear '2012'
-        name 'crouton'
-        packaging 'jar'
-        packaging 'aar'
+        name 'Crouton'
+        artifactId 'crouton'
+        packaging 'jar', 'aar'
         description 'Context sensitive notifications for Android'
         url 'https://github.com/keyboardsurfer/Crouton'
 
