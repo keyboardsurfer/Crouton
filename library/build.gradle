@@ -30,6 +30,11 @@ android {
     minSdkVersion 4
     targetSdkVersion 19
   }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
 }
 
 group = "de.keyboardsurfer.android.widget"
