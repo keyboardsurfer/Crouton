@@ -5,6 +5,7 @@
 *.apk
 *.ap_
 *.jar
+build
 
 # lint files
 lint.xml
@@ -50,15 +51,13 @@ Thumbs.db
 # backup files
 *.bak
 
-# gradle stuff
+#gradle folder
 .gradle
 .gradletasknamecache
 
-#for oh-my-zsh jira plugin (https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#jira)
-.jira-url
-
-#keystores
+#signing config
+signingConfigs.release
 *.keystore
+gradle.properties
 
-#IDEA atlassian plugin
 atlassian-ide-plugin.xml

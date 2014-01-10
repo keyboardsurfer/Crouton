@@ -1,46 +1,72 @@
-buildscript {
-	repositories {
-		mavenCentral()
-			// To use a development snapshot version of the plugin, add the
-			// Sonatype Snapshots repository.
-			maven {
-				url "https://oss.sonatype.org/content/repositories/snapshots"
-			}
-	}
-
-	dependencies {
-		classpath 'org.gradle.api.plugins:gradle-android-plugin:1.2.1'
-	}
-}
+/*
+* Copyright 2013 Benjamin Weiss
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
 apply plugin: 'android'
+version = '1.8.2'
+
+buildscript {
+  repositories {
+    maven {
+      url 'https://github.com/dahlgren/vpi-aar/raw/master'
+    }
+  }
+}
 
 repositories {
-	mavenCentral()
+  maven {
+    url 'https://github.com/dahlgren/vpi-aar/raw/master'
+  }
 }
 
-// Sets the package version
-version = "1.0.0"
-
-// Signing configuration, valid for all builds (1)
-androidSignAndAlign {
-	keyStore = "path/to/my/keystore"
-		keyAlias = "my-key-alias"
-		keyStorePassword = "mystorepass"
-		keyAliasPassword = "myaliaspass"
+dependencies {
+  compile project(':crouton-library')
+  compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+  compile 'com.android.support:support-v4:18.0.+'
+  compile('com.viewpagerindicator:library:2.4.2-SNAPSHOT') {
+    exclude group: 'com.google.android', module: 'support-v4'
+  }
 }
 
-// Configure the filtering of resources with properties from the Gradle's project scope (2)
-processResources {
-	expand (project.properties)
-}
+android {
+  buildToolsVersion '19'
+  compileSdkVersion 19
 
-// Configure a dedicated debug build (3)
-task configureDebug << {
-	jar.classifier = "debug"
-}
+  defaultConfig {
+    versionCode 12
+    versionName "1.8.2"
+    minSdkVersion 8
+    targetSdkVersion 19
+  }
 
-// Configure a dedicated release build (4)
-task configureRelease << {
-	proguard.enabled = true
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
+  
+  signingConfigs {
+    release {}
+  }
+  buildTypes {
+    release {
+      signingConfig signingConfigs.release
+
+      signingConfig.storeFile = file(keyStore)
+      signingConfig.storePassword = storePassword
+      signingConfig.keyAlias = keyAlias
+      signingConfig.keyPassword = keyPassword
+    }
+  }
 }

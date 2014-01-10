@@ -1,0 +1,17 @@
+language: java
+jdk: oraclejdk7
+
+before_install:
+- sudo apt-get update -qq
+- if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch; fi
+- wget http://dl.google.com/android/android-sdk_r22.3-linux.tgz
+- tar -zxf android-sdk_r22.3-linux.tgz
+- export ANDROID_HOME=`pwd`/android-sdk-linux
+- export PATH=${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${PATH}
+- echo yes |android update sdk --no-ui --all --force --filter platform-tools,build-tools-19.0.1,android-19,extra-android-support,extra-google-m2repository,extra-android-m2repository
+
+install:
+- TERM=dumb gradle tasks
+
+script:
+- TERM=dumb gradle build
