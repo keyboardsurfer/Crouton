@@ -76,29 +76,29 @@ uploadArchives {
 
       pom.project {
         name 'crouton'
-          packaging 'jar'
-          packaging 'aar'
-          description 'Context sensitive notifications for Android'
-          url 'https://github.com/keyboardsurfer/Crouton'
+        packaging 'jar'
+        packaging 'aar'
+        description 'Context sensitive notifications for Android'
+        url 'https://github.com/keyboardsurfer/Crouton'
 
-          scm {
-            url 'scm:git@github.com:keyboardsurfer/Crouton.git'
-              connection 'scm:git@github.com:keyboardsurfer/Crouton.git'
-              developerConnection 'scm:git@github.com:keyboardsurfer/Crouton.git'
-          }
+        scm {
+          url 'scm:git@github.com:keyboardsurfer/Crouton.git'
+          connection 'scm:git@github.com:keyboardsurfer/Crouton.git'
+          developerConnection 'scm:git@github.com:keyboardsurfer/Crouton.git'
+        }
 
         licenses {
           license {
             name 'The Apache Software License, Version 2.0'
-              url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-              distribution 'repo'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            distribution 'repo'
           }
         }
 
         developers {
           developer {
             id 'keyboardsurfer'
-              name 'Benjamin Weiss'
+            name 'Benjamin Weiss'
           }
         }
       }
