@@ -52,11 +52,6 @@ task sourcesJar(type: Jar) {
   from android.sourceSets.main.java
 }
 
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//  classifier = 'javadoc'
-//  from android.javadoc.destinationDir
-//}
-
 artifacts {
   archives sourcesJar
 }
@@ -75,6 +70,7 @@ uploadArchives {
       }
 
       pom.project {
+        inceptionYear '2012'
         name 'crouton'
         packaging 'jar'
         packaging 'aar'

@@ -32,12 +32,10 @@ repositories {
 }
 
 dependencies {
+  compile project(':crouton-library')
   compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
   compile 'com.android.support:support-v4:18.0.+'
   compile('com.viewpagerindicator:library:2.4.2-SNAPSHOT') {
-    exclude group: 'com.google.android', module: 'support-v4'
-  }
-  compile('de.keyboardsurfer.android.widget:crouton:1.8.2') {
     exclude group: 'com.google.android', module: 'support-v4'
   }
 }
