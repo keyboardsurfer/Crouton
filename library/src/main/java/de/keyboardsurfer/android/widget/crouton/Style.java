@@ -191,7 +191,7 @@ public class Style {
     public Builder() {
       configuration = Configuration.DEFAULT;
       paddingInPixels = 10;
-      backgroundColorResourceId = android.R.color.holo_blue_light;
+      backgroundColorResourceId = holoBlueLight;
       backgroundDrawableResourceId = 0;
       backgroundColorValue = -1;
       isTileEnabled = false;

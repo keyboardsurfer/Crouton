@@ -27,7 +27,6 @@
   <string name="display_on_top">Display on top</string>
   <string name="crouton">Crouton</string>
   <string name="about">About</string>
-  <string name="git_hub">Source on GitHub</string>
   <string name="repo_url">https://github.com/keyboardsurfer/Crouton</string>
   <string name="gplus_url">https://plus.google.com/117509657298845443204</string>
   <string name="credits">Crouton was written by %1$s.</string>

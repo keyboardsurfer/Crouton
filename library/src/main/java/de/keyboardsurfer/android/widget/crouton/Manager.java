@@ -16,6 +16,7 @@
 
 package de.keyboardsurfer.android.widget.crouton;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -195,7 +196,7 @@ final class Manager extends Handler {
     if (null == croutonView.getParent()) {
       ViewGroup.LayoutParams params = croutonView.getLayoutParams();
       if (null == params) {
-        params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
       }
       // display Crouton in ViewGroup is it has been supplied
       if (null != crouton.getViewGroup()) {
@@ -221,6 +222,7 @@ final class Manager extends Handler {
     if (null != observer) {
       observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
         @Override
+        @TargetApi(16)
         public void onGlobalLayout() {
           if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
             croutonView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
@@ -239,6 +241,7 @@ final class Manager extends Handler {
     }
   }
 
+  @TargetApi(19)
   private void handleTranslucentActionBar(ViewGroup.MarginLayoutParams params, Activity activity) {
     // Translucent status is only available as of Android 4.4 Kit Kat.
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
