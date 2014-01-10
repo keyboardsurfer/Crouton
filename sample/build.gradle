@@ -53,32 +53,16 @@ android {
     targetSdkVersion 19
   }
   signingConfigs {
-    release {
-    }
+    release {}
   }
   buildTypes {
     release {
       signingConfig signingConfigs.release
-      new SigningProperties(project, 'signingConfigs.release').assignToSigningConfig(signingConfig)
+
+      signingConfig.storeFile = file(keyStore)
+      signingConfig.storePassword = storePassword
+      signingConfig.keyAlias = keyAlias
+      signingConfig.keyPassword = keyPassword
     }
   }
-}
-
-class SigningProperties extends Properties {
-  File storeFile
-  Project project
-
-  public SigningProperties(Project project, String fromFile) {
-    project.file(fromFile).withInputStream { stream -> load(stream) }
-    storeFile = project.file(keyStore)
-    this.project = project
-  }
-
-  public void assignToSigningConfig(signingConfig) {
-    signingConfig.storeFile = storeFile
-    signingConfig.storePassword = storePassword
-    signingConfig.keyAlias = keyAlias
-    signingConfig.keyPassword = keyPassword
-  }
-
 }

@@ -58,5 +58,6 @@ Thumbs.db
 #signing config
 signingConfigs.release
 *.keystore
+gradle.properties
 
 atlassian-ide-plugin.xml
