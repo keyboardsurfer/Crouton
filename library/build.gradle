@@ -67,7 +67,7 @@ task sourcesJar(type: Jar) {
 }
 
 task jar(type: Jar) {
-  from 'build/classes'
+  from 'build/classes/release'
 }
 
 task javadocJar(type: Jar, dependsOn: "javadocRelease") {
