@@ -41,7 +41,7 @@
         <h1>
 <a name="crouton" class="anchor" href="#crouton"><span class="octicon octicon-link"></span></a>Crouton</h1>
 
-<p><img src="https://raw.github.com/keyboardsurfer/Crouton/master/sample/res/drawable-xhdpi/ic_launcher.png" alt="Crouton" title="Crouton logo"></p>
+<p><img src="https://raw.github.com/keyboardsurfer/Crouton/master/sample/src/main/res/drawable-xhdpi/ic_launcher.png" alt="Crouton" title="Crouton logo"></p>
 
 <p>Context sensitive notifications for Android</p>
 
@@ -51,7 +51,7 @@
 <p><strong>Crouton</strong> is a class that can be used by Android developers that feel the need for an <strong>alternative to the Context insensitive <a href="http://developer.android.com/reference/android/widget/Toast.html">Toast</a></strong>.</p>
 
 <p>A Crouton will be displayed at the position the developer decides.
-Standard will be the of an application window.
+Standard will be the top of an application window.
 You can line up multiple Croutons for display, that will be shown one after another.</p>
 
 <p>You can check some features in the Crouton Demo.</p>
@@ -61,58 +61,12 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 <p>If you're already using Crouton and just want to download the latest version of the library, follow <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22de.keyboardsurfer.android.widget%22">this link</a>.</p>
 
+<h2>
+<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a><a href="https://github.com/keyboardsurfer/Crouton/wiki/Changelog">Changelog</a>
+</h2>
+
 <h3>
-<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h3>
-
-<h4>
-<a name="current-version-18" class="anchor" href="#current-version-18"><span class="octicon octicon-link"></span></a>Current version: 1.8</h4>
-
-<h4>
-<a name="18" class="anchor" href="#18"><span class="octicon octicon-link"></span></a><a href="https://github.com/keyboardsurfer/Crouton/tree/1.8">1.8</a>
-</h4>
-
-<ul>
-<li>Improves support for custom views</li>
-<li>Smoothing out animations for multiple line Croutons</li>
-<li>Cleans up Style
-
-<ul>
-<li>Configuration is now available for non-UI information</li>
-<li>Style only holds UI-relevant information</li>
-</ul>
-</li>
-<li>Introduces DURATION_SHORT and DURATION_LONG constants</li>
-</ul><h4>
-<a name="17" class="anchor" href="#17"><span class="octicon octicon-link"></span></a><a href="https://github.com/keyboardsurfer/Crouton/tree/1.7">1.7</a>
-</h4>
-
-<ul>
-<li>
-<code>Crouton.setOnClickListener(OnClickListener)</code> has been introduced.</li>
-<li>Infinite display of Crouton is possible via <code>Style.setDuration(Style.DURATION_INFINITE)</code>
-</li>
-<li>Via <code>Crouton.hide(Crouton)</code> a Crouton can be hidden.</li>
-</ul><h4>
-<a name="16" class="anchor" href="#16"><span class="octicon octicon-link"></span></a><a href="https://github.com/keyboardsurfer/Crouton/tree/1.6">1.6</a>
-</h4>
-
-<ul>
-<li>Crouton now can be used on any Android device with <strong>API level 4+</strong>.</li>
-<li>Changes the package name to <code>de.keyboardsurfer.android.widget</code>
-</li>
-<li>Adds possibility to set a custom width</li>
-<li>Can now be added to any ViewGroup (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
-<li>Integration with TalkBack (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
-<li>Adds Accessibility features (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
-<li>Fixes bug that got Crouton out of sync with reality (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
-<li>New <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/LifecycleCallback.java">LifecycleCallback</a> (<a href="https://github.com/coreform" class="user-mention">@coreform</a>)</li>
-<li>initializeCroutonView was refactored, to make it easier on the eyes</li>
-<li>removes redundant initialization within Style.Builder</li>
-<li>documentation improvments</li>
-</ul><h4>
-<a name="older-versions" class="anchor" href="#older-versions"><span class="octicon octicon-link"></span></a>older versions</h4>
-
-<p>Please see the <code>git log</code></p>
+<a name="current-version-182" class="anchor" href="#current-version-182"><span class="octicon octicon-link"></span></a>Current version: 1.8.2</h3>
 
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
@@ -146,7 +100,7 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 <p>to cancel cancel all scheduled Croutons.</p>
 
-<p>This is a workaround and further description is available in #24.</p>
+<p>This is a workaround and further description is available in <a href="https://github.com/keyboardsurfer/Crouton/issues/24">issue #24</a>.</p>
 
 <h2>
 <a name="basic-examples" class="anchor" href="#basic-examples"><span class="octicon octicon-link"></span></a>Basic Examples</h2>
@@ -178,18 +132,50 @@ You can line up multiple Croutons for display, that will be shown one after anot
 </ul><p>Since <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a> is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.</p>
 
 <h2>
-<a name="maven" class="anchor" href="#maven"><span class="octicon octicon-link"></span></a>Maven</h2>
+<a name="building" class="anchor" href="#building"><span class="octicon octicon-link"></span></a>Building</h2>
 
 <h3>
-<a name="from-maven-central" class="anchor" href="#from-maven-central"><span class="octicon octicon-link"></span></a>From maven central</h3>
+<a name="gradle" class="anchor" href="#gradle"><span class="octicon octicon-link"></span></a>Gradle</h3>
 
-<p>Crouton is available in the maven central repository.</p>
+<h4>
+<a name="from-maven-central" class="anchor" href="#from-maven-central"><span class="octicon octicon-link"></span></a>From maven central</h4>
 
-<p>To use crouton simply add</p>
+<p>Add maven central to your <code>build.gradle</code>:</p>
+
+<div class="highlight highlight-groovy"><pre><span class="n">buildscript</span> <span class="o">{</span>
+  <span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">mavenCentral</span><span class="o">()</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">repositories</span> <span class="o">{</span>
+  <span class="n">mavenCentral</span><span class="o">()</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>Then declare Crouton within your dependencies:</p>
+
+<div class="highlight highlight-groovy"><pre><span class="n">dependencies</span> <span class="o">{</span>
+  <span class="o">...</span>
+  <span class="n">compile</span><span class="o">(</span><span class="s1">'de.keyboardsurfer.android.widget:crouton:1.8.1'</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// exclusion is not neccessary, but generally a good idea.</span>
+    <span class="n">exclude</span> <span class="nl">group:</span> <span class="s1">'com.google.android'</span><span class="o">,</span> <span class="nl">module:</span> <span class="s1">'support-v4'</span>
+  <span class="o">}</span>
+  <span class="o">...</span>
+<span class="o">}</span>
+</pre></div>
+
+<h3>
+<a name="maven" class="anchor" href="#maven"><span class="octicon octicon-link"></span></a>Maven</h3>
+
+<h4>
+<a name="from-maven-central-1" class="anchor" href="#from-maven-central-1"><span class="octicon octicon-link"></span></a>From maven central</h4>
+
+<p>To use crouton within your maven build simply add</p>
 
 <div class="highlight highlight-xml"><pre><span class="nt">&lt;dependency&gt;</span>
   <span class="nt">&lt;artifactId&gt;</span>crouton<span class="nt">&lt;/artifactId&gt;</span>
-  <span class="nt">&lt;version&gt;</span>1.7<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;version&gt;</span>${crouton.version}<span class="nt">&lt;/version&gt;</span>
   <span class="nt">&lt;groupId&gt;</span>de.keyboardsurfer.android.widget<span class="nt">&lt;/groupId&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
@@ -226,26 +212,29 @@ You can line up multiple Croutons for display, that will be shown one after anot
 <h3>
 <a name="diy" class="anchor" href="#diy"><span class="octicon octicon-link"></span></a>DIY</h3>
 
-<p>The build requires Maven. Operations are very simple:</p>
+<p>The build requires Gradle. Operations are very simple:</p>
 
 <ul>
+<li>install <a href="http://www.gradle.org/">gradle</a>
+</li>
 <li>
-<code>mvn -f library/pom.xml clean package</code> will build a <code>jar</code> library;</li>
+<code>gradle build</code> builds the aar</li>
 <li>
-<code>mvn clean package</code> will build a <code>jar</code> library and the sample application <code>apk</code>;</li>
-<li>
-<code>mvn -f library/pom.xml clean install</code> will put Crouton in your local Maven repository.</li>
-</ul><p>After putting Crouton in the repository you can add it as a dependency.</p>
+<code>gradle jar</code> builds the jar</li>
+</ul><p>After putting Crouton in a repository you can add it as dependency.</p>
 
-<div class="highlight highlight-xml"><pre><span class="nt">&lt;dependency&gt;</span>
-  <span class="nt">&lt;artifactId&gt;</span>crouton<span class="nt">&lt;/artifactId&gt;</span>
-  <span class="nt">&lt;version&gt;</span>${crouton.version}<span class="nt">&lt;/version&gt;</span>
-  <span class="nt">&lt;groupId&gt;</span>de.keyboardsurfer.android.widget<span class="nt">&lt;/groupId&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-</pre></div>
+<pre lang="gradle"><code>compile('de.keyboardsurfer.android.widget:crouton:1.8.1') {
+  exclude group: 'com.google.android', module: 'support-v4'
+}
+</code></pre>
 
 <h2>
 <a name="contribution" class="anchor" href="#contribution"><span class="octicon octicon-link"></span></a>Contribution</h2>
+
+<h3>
+<a name="questions" class="anchor" href="#questions"><span class="octicon octicon-link"></span></a>Questions</h3>
+
+<p>Questions regarding Crouton can be asked on <a href="http://stackoverflow.com/questions/tagged/crouton">StackOverflow, using the crouton tag</a>.</p>
 
 <h3>
 <a name="pull-requests-welcome" class="anchor" href="#pull-requests-welcome"><span class="octicon octicon-link"></span></a>Pull requests welcome</h3>
@@ -256,6 +245,8 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 <p>If you want to start to create a new feature or have any other questions regarding Crouton, <a href="https://github.com/keyboardsurfer/Crouton/issues/new">file an issue</a>.
 I'll try to answer as soon as I find the time.</p>
+
+<p>Please note, if you're working on a pull request, make sure to use the <a href="https://github.com/keyboardsurfer/Crouton/tree/develop">develop branch</a> as your base.</p>
 
 <h3>
 <a name="formatting" class="anchor" href="#formatting"><span class="octicon octicon-link"></span></a>Formatting</h3>
@@ -274,9 +265,8 @@ I'll try to answer as soon as I find the time.</p>
 </ul><h2>
 <a name="attributions" class="anchor" href="#attributions"><span class="octicon octicon-link"></span></a>Attributions</h2>
 
-<p>The initial version was written by  <a href="https://plus.google.com/u/0/117509657298845443204?rel=author">Benjamin Weiss</a> at <a href="http://mobile.neofonie.de">Neofonie Mobile GmbH</a>.</p>
-
-<p>The name and the idea of <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Crouton.java">Crouton</a> originates in a <a href="http://android.cyrilmottier.com/?p=773">blog article</a> by Cyril Mottier.</p>
+<p>The initial version was written by  <a href="https://plus.google.com/u/0/117509657298845443204?rel=author">Benjamin Weiss</a>.
+The name and the idea of <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Crouton.java">Crouton</a> originates in a <a href="http://android.cyrilmottier.com/?p=773">blog article</a> by Cyril Mottier.</p>
 
 <p>The Crouton logo has been created by <a href="http://marie-schweiz.de">Marie Schweiz</a>.</p>
       </section>
