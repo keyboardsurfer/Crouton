@@ -160,7 +160,7 @@ If you are referencing a newer version of the Android Support Library in your ap
 The build requires Gradle. Operations are very simple:
 
 * install [gradle](http://www.gradle.org/)
-* `gradle build` builds the aar
+* `gradle assemble` builds all artifacts
 * `gradle jar` builds the jar
 
 After putting Crouton in a repository you can add it as dependency.
@@ -170,6 +170,33 @@ compile('de.keyboardsurfer.android.widget:crouton:1.8.1') {
   exclude group: 'com.google.android', module: 'support-v4'
 }
 ```
+
+###Signing
+
+To sign your artifacts, create a file at the repository root, called `gradle.properties` that contains:
+
+
+```
+# makes building faster
+org.gradle.daemon true
+
+# only requried for the demo
+keyStore=theKeyStoreFileName
+storePassword=theStorePassword
+keyAlias=theKeyAlias
+keyPassword=theKeyPassword
+
+# for uploading to a repository
+repositoryUrl=yourRepositoryUrl
+sonatypeUser=yourSonatypeUser
+sonatypePass=yourSonatypePassword
+
+# if you want to sign the built artifacts
+signing.keyId=yourKeyId
+signing.password=yourGPGPassword
+signing.secretKeyRingFile=/path/to/your/secring
+```
+
 
 ## Contribution
 
