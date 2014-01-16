@@ -218,7 +218,7 @@ You can line up multiple Croutons for display, that will be shown one after anot
 <li>install <a href="http://www.gradle.org/">gradle</a>
 </li>
 <li>
-<code>gradle build</code> builds the aar</li>
+<code>gradle assemble</code> builds all artifacts</li>
 <li>
 <code>gradle jar</code> builds the jar</li>
 </ul><p>After putting Crouton in a repository you can add it as dependency.</p>
@@ -226,6 +226,31 @@ You can line up multiple Croutons for display, that will be shown one after anot
 <pre lang="gradle"><code>compile('de.keyboardsurfer.android.widget:crouton:1.8.1') {
   exclude group: 'com.google.android', module: 'support-v4'
 }
+</code></pre>
+
+<h3>
+<a name="signing" class="anchor" href="#signing"><span class="octicon octicon-link"></span></a>Signing</h3>
+
+<p>To sign your artifacts, create a file at the repository root, called <code>gradle.properties</code> that contains:</p>
+
+<pre><code># makes building faster
+org.gradle.daemon true
+
+# only requried for the demo
+keyStore=theKeyStoreFileName
+storePassword=theStorePassword
+keyAlias=theKeyAlias
+keyPassword=theKeyPassword
+
+# for uploading to a repository
+repositoryUrl=yourRepositoryUrl
+sonatypeUser=yourSonatypeUser
+sonatypePass=yourSonatypePassword
+
+# if you want to sign the built artifacts
+signing.keyId=yourKeyId
+signing.password=yourGPGPassword
+signing.secretKeyRingFile=/path/to/your/secring
 </code></pre>
 
 <h2>
