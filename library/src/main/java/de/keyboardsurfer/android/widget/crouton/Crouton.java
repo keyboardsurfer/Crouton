@@ -879,11 +879,11 @@ public final class Crouton {
       textParams.addRule(RelativeLayout.RIGHT_OF, image.getId());
     }
 
-    if (this.style.gravity == Gravity.CENTER) {
+    if ((this.style.gravity & Gravity.CENTER) != 0) {
       textParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-    } else if (this.style.gravity == Gravity.CENTER_VERTICAL) {
+    } else if ((this.style.gravity & Gravity.CENTER_VERTICAL) != 0) {
       textParams.addRule(RelativeLayout.CENTER_VERTICAL);
-    } else if (this.style.gravity == Gravity.CENTER_HORIZONTAL) {
+    } else if ((this.style.gravity & Gravity.CENTER_HORIZONTAL) != 0) {
       textParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
     }
 
@@ -899,7 +899,9 @@ public final class Crouton {
     text.setGravity(this.style.gravity);
 
     // set the text color if set
-    if (this.style.textColorResourceId != 0) {
+    if (this.style.textColorValue != -1) {
+        text.setTextColor(this.style.textColorValue);
+    } else if (this.style.textColorResourceId != 0) {
       text.setTextColor(resources.getColor(this.style.textColorResourceId));
     }
 

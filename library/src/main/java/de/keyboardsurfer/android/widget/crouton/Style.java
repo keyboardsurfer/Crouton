@@ -84,6 +84,13 @@ public class Style {
    * 0 sets the text colorResourceId to the system theme default.
    */
   final int textColorResourceId;
+  
+  /**
+   * The textColorResourceValue's e.g. 0xffff4444;
+   * <p/>
+   * -1 for no value.
+   */
+  final int textColorValue;
 
   /** The height of the {@link Crouton} in pixels. */
   final int heightInPixels;
@@ -143,6 +150,7 @@ public class Style {
     this.backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
     this.isTileEnabled = builder.isTileEnabled;
     this.textColorResourceId = builder.textColorResourceId;
+    this.textColorValue = builder.textColorValue;
     this.heightInPixels = builder.heightInPixels;
     this.heightDimensionResId = builder.heightDimensionResId;
     this.widthInPixels = builder.widthInPixels;
@@ -170,6 +178,7 @@ public class Style {
     private int backgroundDrawableResourceId;
     private boolean isTileEnabled;
     private int textColorResourceId;
+    private int textColorValue;
     private int heightInPixels;
     private int heightDimensionResId;
     private int widthInPixels;
@@ -196,6 +205,7 @@ public class Style {
       backgroundColorValue = -1;
       isTileEnabled = false;
       textColorResourceId = android.R.color.white;
+      textColorValue = -1;
       heightInPixels = LayoutParams.WRAP_CONTENT;
       widthInPixels = LayoutParams.MATCH_PARENT;
       gravity = Gravity.CENTER;
@@ -217,6 +227,7 @@ public class Style {
       backgroundDrawableResourceId = baseStyle.backgroundDrawableResourceId;
       isTileEnabled = baseStyle.isTileEnabled;
       textColorResourceId = baseStyle.textColorResourceId;
+      textColorValue = baseStyle.textColorValue;
       heightInPixels = baseStyle.heightInPixels;
       heightDimensionResId = baseStyle.heightDimensionResId;
       widthInPixels = baseStyle.widthInPixels;
@@ -378,6 +389,19 @@ public class Style {
     }
 
     /**
+     * Set the textColorResourceValue option of the {@link Crouton}.
+     *
+     * @param textColorValue
+     *   The textColorResourceValue's e.g. 0xffff4444;
+     *
+     * @return the {@link Builder}.
+     */
+    public Builder setTextColorValue(int textColorValue) {
+      this.textColorValue = textColorValue;
+      return this;
+    }
+    
+    /**
      * Set the gravity option for the {@link Crouton}.
      *
      * @param gravity
@@ -488,6 +512,7 @@ public class Style {
       ", backgroundColorValue=" + backgroundColorValue +
       ", isTileEnabled=" + isTileEnabled +
       ", textColorResourceId=" + textColorResourceId +
+      ", textColorValue=" + textColorValue +
       ", heightInPixels=" + heightInPixels +
       ", heightDimensionResId=" + heightDimensionResId +
       ", widthInPixels=" + widthInPixels +
