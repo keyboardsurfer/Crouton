@@ -899,7 +899,9 @@ public final class Crouton {
     text.setGravity(this.style.gravity);
 
     // set the text color if set
-    if (this.style.textColorResourceId != 0) {
+    if (this.style.textColorValue != -1) {
+        text.setTextColor(this.style.textColorValue);
+    } else if (this.style.textColorResourceId != 0) {
       text.setTextColor(resources.getColor(this.style.textColorResourceId));
     }
 
