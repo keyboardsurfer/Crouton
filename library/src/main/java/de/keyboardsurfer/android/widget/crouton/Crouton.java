@@ -879,11 +879,11 @@ public final class Crouton {
       textParams.addRule(RelativeLayout.RIGHT_OF, image.getId());
     }
 
-    if (this.style.gravity == Gravity.CENTER) {
+    if ((this.style.gravity & Gravity.CENTER) != 0) {
       textParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-    } else if (this.style.gravity == Gravity.CENTER_VERTICAL) {
+    } else if ((this.style.gravity & Gravity.CENTER_VERTICAL) != 0) {
       textParams.addRule(RelativeLayout.CENTER_VERTICAL);
-    } else if (this.style.gravity == Gravity.CENTER_HORIZONTAL) {
+    } else if ((this.style.gravity & Gravity.CENTER_HORIZONTAL) != 0) {
       textParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
     }
 
