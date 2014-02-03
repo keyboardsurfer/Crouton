@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2013 Benjamin Weiss
+ * Copyright 2012 - 2014 Benjamin Weiss
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,8 @@ import android.widget.ImageView;
 
 /** The style for a {@link Crouton}. */
 public class Style {
+  
+  public static final int NOT_SET = -1;
 
   public static final int holoRedLight = 0xffff4444;
   public static final int holoGreenLight = 0xff99cc00;
@@ -71,7 +73,7 @@ public class Style {
   /**
    * The backgroundColorResourceValue's e.g. 0xffff4444;
    * <p/>
-   * -1 for no value.
+   * NOT_SET for no value.
    */
   final int backgroundColorValue;
 
@@ -84,6 +86,13 @@ public class Style {
    * 0 sets the text colorResourceId to the system theme default.
    */
   final int textColorResourceId;
+
+  /**
+   * The textColorResourceValue's e.g. 0xffff4444;
+   * <p/>
+   * NOT_SET for no value.
+   */
+  final int textColorValue;
 
   /** The height of the {@link Crouton} in pixels. */
   final int heightInPixels;
@@ -143,6 +152,7 @@ public class Style {
     this.backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
     this.isTileEnabled = builder.isTileEnabled;
     this.textColorResourceId = builder.textColorResourceId;
+    this.textColorValue = builder.textColorValue;
     this.heightInPixels = builder.heightInPixels;
     this.heightDimensionResId = builder.heightDimensionResId;
     this.widthInPixels = builder.widthInPixels;
@@ -170,6 +180,7 @@ public class Style {
     private int backgroundDrawableResourceId;
     private boolean isTileEnabled;
     private int textColorResourceId;
+    private int textColorValue;
     private int heightInPixels;
     private int heightDimensionResId;
     private int widthInPixels;
@@ -193,9 +204,10 @@ public class Style {
       paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
-      backgroundColorValue = -1;
+      backgroundColorValue = NOT_SET;
       isTileEnabled = false;
       textColorResourceId = android.R.color.white;
+      textColorValue = NOT_SET;
       heightInPixels = LayoutParams.WRAP_CONTENT;
       widthInPixels = LayoutParams.MATCH_PARENT;
       gravity = Gravity.CENTER;
@@ -217,6 +229,7 @@ public class Style {
       backgroundDrawableResourceId = baseStyle.backgroundDrawableResourceId;
       isTileEnabled = baseStyle.isTileEnabled;
       textColorResourceId = baseStyle.textColorResourceId;
+      textColorValue = baseStyle.textColorValue;
       heightInPixels = baseStyle.heightInPixels;
       heightDimensionResId = baseStyle.heightDimensionResId;
       widthInPixels = baseStyle.widthInPixels;
@@ -378,6 +391,19 @@ public class Style {
     }
 
     /**
+     * Set the textColorResourceValue option of the {@link Crouton}.
+     *
+     * @param textColorValue
+     *   The textColorResourceValue's e.g. 0xffff4444;
+     *
+     * @return the {@link Builder}.
+     */
+    public Builder setTextColorValue(int textColorValue) {
+      this.textColorValue = textColorValue;
+      return this;
+    }
+
+    /**
      * Set the gravity option for the {@link Crouton}.
      *
      * @param gravity
@@ -488,6 +514,7 @@ public class Style {
       ", backgroundColorValue=" + backgroundColorValue +
       ", isTileEnabled=" + isTileEnabled +
       ", textColorResourceId=" + textColorResourceId +
+      ", textColorValue=" + textColorValue +
       ", heightInPixels=" + heightInPixels +
       ", heightDimensionResId=" + heightDimensionResId +
       ", widthInPixels=" + widthInPixels +

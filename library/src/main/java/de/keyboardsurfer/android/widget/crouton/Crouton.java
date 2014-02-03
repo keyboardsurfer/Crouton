@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2013 Benjamin Weiss
+ * Copyright 2012 - 2014 Benjamin Weiss
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -830,7 +830,7 @@ public final class Crouton {
         new FrameLayout.LayoutParams(width != 0 ? width : FrameLayout.LayoutParams.MATCH_PARENT, height));
 
     // set background
-    if (this.style.backgroundColorValue != -1) {
+    if (this.style.backgroundColorValue != Style.NOT_SET) {
       croutonView.setBackgroundColor(this.style.backgroundColorValue);
     } else {
       croutonView.setBackgroundColor(resources.getColor(this.style.backgroundColorResourceId));
@@ -879,11 +879,11 @@ public final class Crouton {
       textParams.addRule(RelativeLayout.RIGHT_OF, image.getId());
     }
 
-    if (this.style.gravity == Gravity.CENTER) {
+    if ((this.style.gravity & Gravity.CENTER) != 0) {
       textParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-    } else if (this.style.gravity == Gravity.CENTER_VERTICAL) {
+    } else if ((this.style.gravity & Gravity.CENTER_VERTICAL) != 0) {
       textParams.addRule(RelativeLayout.CENTER_VERTICAL);
-    } else if (this.style.gravity == Gravity.CENTER_HORIZONTAL) {
+    } else if ((this.style.gravity & Gravity.CENTER_HORIZONTAL) != 0) {
       textParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
     }
 
@@ -899,7 +899,9 @@ public final class Crouton {
     text.setGravity(this.style.gravity);
 
     // set the text color if set
-    if (this.style.textColorResourceId != 0) {
+    if (this.style.textColorValue != Style.NOT_SET) {
+        text.setTextColor(this.style.textColorValue);
+    } else if (this.style.textColorResourceId != 0) {
       text.setTextColor(resources.getColor(this.style.textColorResourceId));
     }
 

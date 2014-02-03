@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Benjamin Weiss
+ * Copyright 2012 - 2014 Benjamin Weiss
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,21 +25,21 @@ android {
   buildToolsVersion '19'
   compileSdkVersion 19
   defaultConfig {
-    versionCode 6
-    versionName "1.8.2"
+    versionCode 7
+    versionName "1.8.3"
     minSdkVersion 8
     targetSdkVersion 19
   }
 
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_7
-    targetCompatibility JavaVersion.VERSION_1_7
+    sourceCompatibility JavaVersion.VERSION_1_6
+    targetCompatibility JavaVersion.VERSION_1_6
   }
 }
 
 group = "de.keyboardsurfer.android.widget"
 artifactId = "crouton"
-version = "1.8.2"
+version = "1.8.3"
 
 android.libraryVariants.all { variant ->
   def name = variant.buildType.name
@@ -84,7 +84,7 @@ artifacts {
 
 task wrapper(type: Wrapper) {
   description "Generates the gradle wrapper"
-  gradleVersion = "1.9"
+  gradleVersion = "1.10"
 }
 
 
