@@ -25,8 +25,8 @@ android {
   buildToolsVersion '19'
   compileSdkVersion 19
   defaultConfig {
-    versionCode 6
-    versionName "1.8.2"
+    versionCode 7
+    versionName "1.8.3"
     minSdkVersion 8
     targetSdkVersion 19
   }
@@ -39,7 +39,7 @@ android {
 
 group = "de.keyboardsurfer.android.widget"
 artifactId = "crouton"
-version = "1.8.2"
+version = "1.8.3"
 
 android.libraryVariants.all { variant ->
   def name = variant.buildType.name
