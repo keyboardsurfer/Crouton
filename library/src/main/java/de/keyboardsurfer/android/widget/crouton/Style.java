@@ -24,6 +24,8 @@ import android.widget.ImageView;
 
 /** The style for a {@link Crouton}. */
 public class Style {
+  
+  public static final int NOT_SET = -1;
 
   public static final int holoRedLight = 0xffff4444;
   public static final int holoGreenLight = 0xff99cc00;
@@ -71,7 +73,7 @@ public class Style {
   /**
    * The backgroundColorResourceValue's e.g. 0xffff4444;
    * <p/>
-   * -1 for no value.
+   * NOT_SET for no value.
    */
   final int backgroundColorValue;
 
@@ -88,7 +90,7 @@ public class Style {
   /**
    * The textColorResourceValue's e.g. 0xffff4444;
    * <p/>
-   * -1 for no value.
+   * NOT_SET for no value.
    */
   final int textColorValue;
 
@@ -202,10 +204,10 @@ public class Style {
       paddingInPixels = 10;
       backgroundColorResourceId = android.R.color.holo_blue_light;
       backgroundDrawableResourceId = 0;
-      backgroundColorValue = -1;
+      backgroundColorValue = NOT_SET;
       isTileEnabled = false;
       textColorResourceId = android.R.color.white;
-      textColorValue = -1;
+      textColorValue = NOT_SET;
       heightInPixels = LayoutParams.WRAP_CONTENT;
       widthInPixels = LayoutParams.MATCH_PARENT;
       gravity = Gravity.CENTER;

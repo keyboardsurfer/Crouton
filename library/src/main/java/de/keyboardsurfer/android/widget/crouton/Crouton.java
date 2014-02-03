@@ -830,7 +830,7 @@ public final class Crouton {
         new FrameLayout.LayoutParams(width != 0 ? width : FrameLayout.LayoutParams.MATCH_PARENT, height));
 
     // set background
-    if (this.style.backgroundColorValue != -1) {
+    if (this.style.backgroundColorValue != Style.NOT_SET) {
       croutonView.setBackgroundColor(this.style.backgroundColorValue);
     } else {
       croutonView.setBackgroundColor(resources.getColor(this.style.backgroundColorResourceId));
@@ -899,7 +899,7 @@ public final class Crouton {
     text.setGravity(this.style.gravity);
 
     // set the text color if set
-    if (this.style.textColorValue != -1) {
+    if (this.style.textColorValue != Style.NOT_SET) {
         text.setTextColor(this.style.textColorValue);
     } else if (this.style.textColorResourceId != 0) {
       text.setTextColor(resources.getColor(this.style.textColorResourceId));
