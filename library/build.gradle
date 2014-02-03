@@ -84,7 +84,7 @@ artifacts {
 
 task wrapper(type: Wrapper) {
   description "Generates the gradle wrapper"
-  gradleVersion = "1.9"
+  gradleVersion = "1.10"
 }
 
 
