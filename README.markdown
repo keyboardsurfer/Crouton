@@ -29,15 +29,19 @@ The API is kept as simple as the Toast API:
 
 Create a Crouton for any CharSequence:
 
-    Crouton.makeText(Activity, CharSequence, [Style]).show();
+    Crouton.makeText(Activity, CharSequence, Style).show();
     
 Create a Crouton with a String from your application's resources:
 
     Crouton.makeText(Activity, int, Style).show();
     
-Further you can attach a Crouton to any view like this:
+Further you can attach a Crouton to any ViewGroup like this:
 
     Crouton.makeText(Activity, int, Style, int).show();
+
+    Crouton.makeText(Activity, int, Style, ViewGroup).show();
+    
+Also `Crouton.show(...)` methods are available for convenient fire and forget display of Croutons. 
 
 If you would like a more graphical introduction to Crouton check out [this presentation](https://speakerdeck.com/keyboardsurfer/crouton-devfest-berlin-2012).
 
