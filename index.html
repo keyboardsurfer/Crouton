@@ -75,7 +75,7 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 <p>Create a Crouton for any CharSequence:</p>
 
-<pre><code>Crouton.makeText(Activity, CharSequence, [Style]).show();
+<pre><code>Crouton.makeText(Activity, CharSequence, Style).show();
 </code></pre>
 
 <p>Create a Crouton with a String from your application's resources:</p>
@@ -83,10 +83,14 @@ You can line up multiple Croutons for display, that will be shown one after anot
 <pre><code>Crouton.makeText(Activity, int, Style).show();
 </code></pre>
 
-<p>Further you can attach a Crouton to any view like this:</p>
+<p>Further you can attach a Crouton to any ViewGroup like this:</p>
 
 <pre><code>Crouton.makeText(Activity, int, Style, int).show();
+
+Crouton.makeText(Activity, int, Style, ViewGroup).show();
 </code></pre>
+
+<p>Also <code>Crouton.show(...)</code> methods are available for convenient fire and forget display of Croutons. </p>
 
 <p>If you would like a more graphical introduction to Crouton check out <a href="https://speakerdeck.com/keyboardsurfer/crouton-devfest-berlin-2012">this presentation</a>.</p>
 
