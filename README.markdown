@@ -152,7 +152,7 @@ If you are referencing a newer version of the Android Support Library in your ap
 	<groupId>de.keyboardsurfer.android.widget</groupId>
 	<exclusions>
 	    <exclusion>
-	        <groupId>com.google.android</groupId>
+	        <groupId>com.android.support</groupId>
 	        <artifactId>support-v4</artifactId>
 	    </exclusion>
 	</exclusions>
