@@ -169,7 +169,7 @@ The build requires Gradle. Operations are very simple:
 
 After putting Crouton in a repository you can add it as dependency.
 
-```gradle
+```groovy
 compile('de.keyboardsurfer.android.widget:crouton:1.8.3') {
   exclude group: 'com.google.android', module: 'support-v4'
 }
@@ -180,7 +180,7 @@ compile('de.keyboardsurfer.android.widget:crouton:1.8.3') {
 To sign your artifacts, create a file at the repository root, called `gradle.properties` that contains:
 
 
-```
+```properties
 # makes building faster
 org.gradle.daemon true
 
