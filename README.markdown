@@ -66,7 +66,7 @@ Currently you can use the three different Style attributes displayed below out o
 
 ## Extension and Modification
 
-The whole design of a Crouton is defined by [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java).
+The whole design of a Crouton is defined by  [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/main/java/de/keyboardsurfer/android/widget/crouton/Style.java).
 
 You can use one of the styles Crouton ships with: **Style.ALERT**, **Style.CONFIRM** and **Style.INFO**. Or you can create your own Style.
 
