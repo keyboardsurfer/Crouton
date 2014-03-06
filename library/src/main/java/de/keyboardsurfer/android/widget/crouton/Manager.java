@@ -1,5 +1,6 @@
 /*
- * Copyright 2012 - 2014 Benjamin Weiss
+ * Copyright 2012 - 2013 Benjamin Weiss
+ * Copyright 2012 Neofonie Mobile GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +17,13 @@
 
 package de.keyboardsurfer.android.widget.crouton;
 
-import android.annotation.TargetApi;
+import java.util.Iterator;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -28,18 +32,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
-import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.FrameLayout;
-import java.util.Iterator;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 
-/**
- * Manages the lifecycle of {@link Crouton}s.
- */
+/** Manages the lifecycle of {@link Crouton}s. */
 final class Manager extends Handler {
   private static final class Messages {
     private Messages() { /* no-op */ }
@@ -51,15 +49,13 @@ final class Manager extends Handler {
 
   private static Manager INSTANCE;
 
-  private final Queue<Crouton> croutonQueue;
+  private Queue<Crouton> croutonQueue;
 
   private Manager() {
     croutonQueue = new LinkedBlockingQueue<Crouton>();
   }
 
-  /**
-   * @return The currently used instance of the {@link Manager}.
-   */
+  /** @return The currently used instance of the {@link Manager}. */
   static synchronized Manager getInstance() {
     if (null == INSTANCE) {
       INSTANCE = new Manager();
@@ -72,16 +68,14 @@ final class Manager extends Handler {
    * Inserts a {@link Crouton} to be displayed.
    *
    * @param crouton
-   *     The {@link Crouton} to be displayed.
+   *   The {@link Crouton} to be displayed.
    */
   void add(Crouton crouton) {
     croutonQueue.add(crouton);
     displayCrouton();
   }
 
-  /**
-   * Displays the next {@link Crouton} within the queue.
-   */
+  /** Displays the next {@link Crouton} within the queue. */
   private void displayCrouton() {
     if (croutonQueue.isEmpty()) {
       return;
@@ -117,9 +111,9 @@ final class Manager extends Handler {
    * Sends a {@link Crouton} within a {@link Message}.
    *
    * @param crouton
-   *     The {@link Crouton} that should be sent.
+   *   The {@link Crouton} that should be sent.
    * @param messageId
-   *     The {@link Message} id.
+   *   The {@link Message} id.
    */
   private void sendMessage(Crouton crouton, final int messageId) {
     final Message message = obtainMessage(messageId);
@@ -131,11 +125,11 @@ final class Manager extends Handler {
    * Sends a {@link Crouton} within a delayed {@link Message}.
    *
    * @param crouton
-   *     The {@link Crouton} that should be sent.
+   *   The {@link Crouton} that should be sent.
    * @param messageId
-   *     The {@link Message} id.
+   *   The {@link Message} id.
    * @param delay
-   *     The delay in milliseconds.
+   *   The delay in milliseconds.
    */
   private void sendMessageDelayed(Crouton crouton, final int messageId, final long delay) {
     Message message = obtainMessage(messageId);
@@ -151,9 +145,7 @@ final class Manager extends Handler {
   @Override
   public void handleMessage(Message message) {
     final Crouton crouton = (Crouton) message.obj;
-    if (null == crouton) {
-      return;
-    }
+
     switch (message.what) {
       case Messages.DISPLAY_CROUTON: {
         displayCrouton();
@@ -184,7 +176,7 @@ final class Manager extends Handler {
    * Adds a {@link Crouton} to the {@link ViewParent} of it's {@link Activity}.
    *
    * @param crouton
-   *     The {@link Crouton} that should be added.
+   *   The {@link Crouton} that should be added.
    */
   private void addCroutonToView(final Crouton crouton) {
     // don't add if it is already showing
@@ -196,7 +188,7 @@ final class Manager extends Handler {
     if (null == croutonView.getParent()) {
       ViewGroup.LayoutParams params = croutonView.getLayoutParams();
       if (null == params) {
-        params = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
       }
       // display Crouton in ViewGroup is it has been supplied
       if (null != crouton.getViewGroup()) {
@@ -211,54 +203,42 @@ final class Manager extends Handler {
         if (null == activity || activity.isFinishing()) {
           return;
         }
-        handleTranslucentActionBar((ViewGroup.MarginLayoutParams) params, activity);
-
         activity.addContentView(croutonView, params);
       }
     }
 
     croutonView.requestLayout(); // This is needed so the animation can use the measured with/height
-    ViewTreeObserver observer = croutonView.getViewTreeObserver();
-    if (null != observer) {
-      observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-        @Override
-        @TargetApi(16)
-        public void onGlobalLayout() {
-          if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-            croutonView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-          } else {
-            croutonView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-          }
+    croutonView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+      @SuppressWarnings("deprecation")
+	@SuppressLint("NewApi")
+	@Override
+      public void onGlobalLayout() {
+						if (croutonView != null) {
+							if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+								croutonView.getViewTreeObserver()
+										.removeGlobalOnLayoutListener(this);
+							} else {
+								croutonView.getViewTreeObserver()
+										.removeOnGlobalLayoutListener(this);
+							}
+							croutonView.startAnimation(crouton.getInAnimation());
+						}
 
-          croutonView.startAnimation(crouton.getInAnimation());
-          announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
-          if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
-            sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
-                crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
-          }
-        }
-      });
-    }
-  }
-
-  @TargetApi(19)
-  private void handleTranslucentActionBar(ViewGroup.MarginLayoutParams params, Activity activity) {
-    // Translucent status is only available as of Android 4.4 Kit Kat.
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      final int flags = activity.getWindow().getAttributes().flags;
-      final int translucentStatusFlag = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        /* Checks whether translucent status is enabled for this window.
-        * If true, sets the top margin to show the crouton just below the action bar. */
-      if ((flags & translucentStatusFlag) == translucentStatusFlag) {
-        final int actionBarContainerId = Resources.getSystem().getIdentifier("action_bar_container", "id", "android");
-        final View actionBarContainer = activity.findViewById(actionBarContainerId);
-        // The action bar is present: the app is using a Holo theme.
-        if (actionBarContainer != null) {
-          final ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) params;
-          marginParams.topMargin = actionBarContainer.getBottom();
-        }
+						if (crouton != null) {
+							announceForAccessibilityCompat(
+									crouton.getActivity(), crouton.getText());
+							if (Configuration.DURATION_INFINITE != crouton
+									.getConfiguration().durationInMilliseconds) {
+								sendMessageDelayed(
+										crouton,
+										Messages.REMOVE_CROUTON,
+										crouton.getConfiguration().durationInMilliseconds
+												+ crouton.getInAnimation()
+														.getDuration());
+							}
+						}
       }
-    }
+    });
   }
 
   /**
@@ -266,8 +246,8 @@ final class Manager extends Handler {
    * durationInMilliseconds.
    *
    * @param crouton
-   *     The {@link Crouton} added to a {@link ViewGroup} and should be
-   *     removed.
+   *   The {@link Crouton} added to a {@link ViewGroup} and should be
+   *   removed.
    */
   protected void removeCrouton(Crouton crouton) {
     View croutonView = crouton.getView();
@@ -301,7 +281,7 @@ final class Manager extends Handler {
    * displayed.
    *
    * @param crouton
-   *     The {@link Crouton} that should be removed.
+   *   The {@link Crouton} that should be removed.
    */
   void removeCroutonImmediately(Crouton crouton) {
     // if Crouton has already been displayed then it may not be in the queue (because it was popped).
@@ -316,37 +296,43 @@ final class Manager extends Handler {
       removeAllMessagesForCrouton(crouton);
     }
     // remove any matching croutons from queue
-    final Iterator<Crouton> croutonIterator = croutonQueue.iterator();
-    while (croutonIterator.hasNext()) {
-      final Crouton c = croutonIterator.next();
-      if (c.equals(crouton) && (null != c.getActivity())) {
-        // remove the crouton from the content view
-        removeCroutonFromViewParent(crouton);
+    if (null != croutonQueue) {
+      final Iterator<Crouton> croutonIterator = croutonQueue.iterator();
+      while (croutonIterator.hasNext()) {
+        final Crouton c = croutonIterator.next();
+        if (c.equals(crouton) && (null != c.getActivity())) {
+          // remove the crouton from the content view
+          if (crouton.isShowing()) {
+            ((ViewGroup) c.getView().getParent()).removeView(c.getView());
+          }
 
-        // remove any messages pending for the crouton
-        removeAllMessagesForCrouton(c);
+          // remove any messages pending for the crouton
+          removeAllMessagesForCrouton(c);
 
-        // remove the crouton from the queue
-        croutonIterator.remove();
+          // remove the crouton from the queue
+          croutonIterator.remove();
 
-        // we have found our crouton so just break
-        break;
+          // we have found our crouton so just break
+          break;
+        }
       }
     }
   }
 
-  /**
-   * Removes all {@link Crouton}s from the queue.
-   */
+  /** Removes all {@link Crouton}s from the queue. */
   void clearCroutonQueue() {
     removeAllMessages();
 
-    // remove any views that may already have been added to the activity's
-    // content view
-    for (Crouton crouton : croutonQueue) {
-      removeCroutonFromViewParent(crouton);
+    if (null != croutonQueue) {
+      // remove any views that may already have been added to the activity's
+      // content view
+      for (Crouton crouton : croutonQueue) {
+        if (crouton.isShowing()) {
+          ((ViewGroup) crouton.getView().getParent()).removeView(crouton.getView());
+        }
+      }
+      croutonQueue.clear();
     }
-    croutonQueue.clear();
   }
 
   /**
@@ -354,26 +340,21 @@ final class Manager extends Handler {
    * crouton from {@link Activity}s content view immediately.
    */
   void clearCroutonsForActivity(Activity activity) {
-    Iterator<Crouton> croutonIterator = croutonQueue.iterator();
-    while (croutonIterator.hasNext()) {
-      Crouton crouton = croutonIterator.next();
-      if ((null != crouton.getActivity()) && crouton.getActivity().equals(activity)) {
-        // remove the crouton from the content view
-        removeCroutonFromViewParent(crouton);
+    if (null != croutonQueue) {
+      Iterator<Crouton> croutonIterator = croutonQueue.iterator();
+      while (croutonIterator.hasNext()) {
+        Crouton crouton = croutonIterator.next();
+        if ((null != crouton.getActivity()) && crouton.getActivity().equals(activity)) {
+          // remove the crouton from the content view
+          if (crouton.isShowing()) {
+            ((ViewGroup) crouton.getView().getParent()).removeView(crouton.getView());
+          }
 
-        removeAllMessagesForCrouton(crouton);
+          removeAllMessagesForCrouton(crouton);
 
-        // remove the crouton from the queue
-        croutonIterator.remove();
-      }
-    }
-  }
-
-  private void removeCroutonFromViewParent(Crouton crouton) {
-    if (crouton.isShowing()) {
-      ViewGroup parent = (ViewGroup) crouton.getView().getParent();
-      if (null != parent) {
-        parent.removeView(crouton.getView());
+          // remove the crouton from the queue
+          croutonIterator.remove();
+        }
       }
     }
   }
@@ -405,14 +386,14 @@ final class Manager extends Handler {
    * via https://github.com/coreform/android-formidable-validation
    *
    * @param context
-   *     Used to get {@link AccessibilityManager}
+   *   Used to get {@link AccessibilityManager}
    * @param text
-   *     The text to announce.
+   *   The text to announce.
    */
   public static void announceForAccessibilityCompat(Context context, CharSequence text) {
     if (Build.VERSION.SDK_INT >= 4) {
       AccessibilityManager accessibilityManager = (AccessibilityManager) context.getSystemService(
-          Context.ACCESSIBILITY_SERVICE);
+        Context.ACCESSIBILITY_SERVICE);
       if (!accessibilityManager.isEnabled()) {
         return;
       }
@@ -444,7 +425,7 @@ final class Manager extends Handler {
   @Override
   public String toString() {
     return "Manager{" +
-        "croutonQueue=" + croutonQueue +
-        '}';
+      "croutonQueue=" + croutonQueue +
+      '}';
   }
 }
