@@ -15,7 +15,7 @@
  */
 
 apply plugin: 'android'
-version = '1.8.3'
+version = '1.8.4'
 
 buildscript {
   repositories {
@@ -46,7 +46,7 @@ android {
 
   defaultConfig {
     versionCode 13
-    versionName "1.8.3"
+    versionName "1.8.4"
     minSdkVersion 8
     targetSdkVersion 19
   }
