@@ -21,7 +21,7 @@ You can check some features in the Crouton Demo.
 If you're already using Crouton and just want to download the latest version of the library, follow [this link](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22de.keyboardsurfer.android.widget%22).
 
 ## [Changelog](https://github.com/keyboardsurfer/Crouton/wiki/Changelog)
-### Current version: 1.8.3
+### Current version: 1.8.4
 
 ## Usage
 
@@ -66,7 +66,7 @@ Currently you can use the three different Style attributes displayed below out o
 
 ## Extension and Modification
 
-The whole design of a Crouton is defined by [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java).
+The whole design of a Crouton is defined by  [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/main/java/de/keyboardsurfer/android/widget/crouton/Style.java).
 
 You can use one of the styles Crouton ships with: **Style.ALERT**, **Style.CONFIRM** and **Style.INFO**. Or you can create your own Style.
 
@@ -105,7 +105,7 @@ Then declare Crouton within your dependencies:
 ```groovy
 dependencies {
   ...
-  compile('de.keyboardsurfer.android.widget:crouton:1.8.3') {
+  compile('de.keyboardsurfer.android.widget:crouton:1.8.4') {
     // exclusion is not neccessary, but generally a good idea.
     exclude group: 'com.google.android', module: 'support-v4'
   }
@@ -152,7 +152,7 @@ If you are referencing a newer version of the Android Support Library in your ap
 	<groupId>de.keyboardsurfer.android.widget</groupId>
 	<exclusions>
 	    <exclusion>
-	        <groupId>com.google.android</groupId>
+	        <groupId>com.android.support</groupId>
 	        <artifactId>support-v4</artifactId>
 	    </exclusion>
 	</exclusions>
@@ -169,38 +169,15 @@ The build requires Gradle. Operations are very simple:
 
 After putting Crouton in a repository you can add it as dependency.
 
-```gradle
-compile('de.keyboardsurfer.android.widget:crouton:1.8.3') {
+```groovy
+compile('de.keyboardsurfer.android.widget:crouton:1.8.4') {
   exclude group: 'com.google.android', module: 'support-v4'
 }
 ```
 
-###Signing
+###Building and Signing
 
-To sign your artifacts, create a file at the repository root, called `gradle.properties` that contains:
-
-
-```
-# makes building faster
-org.gradle.daemon true
-
-# only requried for the demo
-keyStore=theKeyStoreFileName
-storePassword=theStorePassword
-keyAlias=theKeyAlias
-keyPassword=theKeyPassword
-
-# for uploading to a repository
-repositoryUrl=yourRepositoryUrl
-sonatypeUser=yourSonatypeUser
-sonatypePass=yourSonatypePassword
-
-# if you want to sign the built artifacts
-signing.keyId=yourKeyId
-signing.password=yourGPGPassword
-signing.secretKeyRingFile=/path/to/your/secring
-```
-
+In order to build and sign Crouton locally you'll need to rename `gradle.properties.sample` to `gradle.properties`.
 
 ## Contribution
 
