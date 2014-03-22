@@ -29,7 +29,7 @@ The API is kept as simple as the Toast API:
 
 Create a Crouton for any CharSequence:
 
-    Crouton.makeText(Activity, CharSequence, [Style]).show();
+    Crouton.makeText(Activity, CharSequence, Style).show();
     
 Create a Crouton with a String from your application's resources:
 
