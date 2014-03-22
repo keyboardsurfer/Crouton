@@ -171,32 +171,9 @@ compile('de.keyboardsurfer.android.widget:crouton:1.8.3') {
 }
 ```
 
-###Signing
+###Building and Signing
 
-To sign your artifacts, create a file at the repository root, called `gradle.properties` that contains:
-
-
-```
-# makes building faster
-org.gradle.daemon true
-
-# only requried for the demo
-keyStore=theKeyStoreFileName
-storePassword=theStorePassword
-keyAlias=theKeyAlias
-keyPassword=theKeyPassword
-
-# for uploading to a repository
-repositoryUrl=yourRepositoryUrl
-sonatypeUser=yourSonatypeUser
-sonatypePass=yourSonatypePassword
-
-# if you want to sign the built artifacts
-signing.keyId=yourKeyId
-signing.password=yourGPGPassword
-signing.secretKeyRingFile=/path/to/your/secring
-```
-
+In order to build and sign Crouton locally you'll need to rename `gradle.properties.sample` to `gradle.properties`.
 
 ## Contribution
 
