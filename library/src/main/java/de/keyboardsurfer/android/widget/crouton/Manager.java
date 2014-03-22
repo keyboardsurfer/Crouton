@@ -412,11 +412,10 @@ final class Manager extends Handler {
   public static void announceForAccessibilityCompat(Context context, CharSequence text) {
     if (Build.VERSION.SDK_INT >= 4) {
       AccessibilityManager accessibilityManager = null;
-      if (context != null) {
-        accessibilityManager = (AccessibilityManager) context.getSystemService(
-            Context.ACCESSIBILITY_SERVICE);
+      if (null != context) {
+        accessibilityManager = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
       }
-      if (accessibilityManager == null || !accessibilityManager.isEnabled()) {
+      if (null == accessibilityManager || !accessibilityManager.isEnabled()) {
         return;
       }
 
