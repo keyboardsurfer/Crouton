@@ -32,6 +32,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -203,7 +204,7 @@ final class Manager extends Handler {
       if (null != crouton.getViewGroup()) {
         // TODO implement add to last position feature (need to align with how this will be requested for activity)
         final ViewGroup croutonViewGroup = crouton.getViewGroup();
-        if (croutonViewGroup instanceof FrameLayout || croutonViewGroup instanceof AdapterView) {
+        if (croutonViewGroup instanceof FrameLayout || croutonViewGroup instanceof AdapterView || croutonViewGroup instanceof RelativeLayout) {
           croutonViewGroup.addView(croutonView, params);
         } else {
           croutonViewGroup.addView(croutonView, 0, params);
