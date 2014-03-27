@@ -66,7 +66,7 @@ You can line up multiple Croutons for display, that will be shown one after anot
 </h2>
 
 <h3>
-<a name="current-version-183" class="anchor" href="#current-version-183"><span class="octicon octicon-link"></span></a>Current version: 1.8.3</h3>
+<a name="current-version-184" class="anchor" href="#current-version-184"><span class="octicon octicon-link"></span></a>Current version: 1.8.4</h3>
 
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
@@ -120,7 +120,7 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
 <h2>
 <a name="extension-and-modification" class="anchor" href="#extension-and-modification"><span class="octicon octicon-link"></span></a>Extension and Modification</h2>
 
-<p>The whole design of a Crouton is defined by <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a>.</p>
+<p>The whole design of a Crouton is defined by  <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/main/java/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a>.</p>
 
 <p>You can use one of the styles Crouton ships with: <strong>Style.ALERT</strong>, <strong>Style.CONFIRM</strong> and <strong>Style.INFO</strong>. Or you can create your own Style.</p>
 
@@ -161,7 +161,7 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
 
 <div class="highlight highlight-groovy"><pre><span class="n">dependencies</span> <span class="o">{</span>
   <span class="o">...</span>
-  <span class="n">compile</span><span class="o">(</span><span class="s1">'de.keyboardsurfer.android.widget:crouton:1.8.3'</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">compile</span><span class="o">(</span><span class="s1">'de.keyboardsurfer.android.widget:crouton:1.8.4'</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// exclusion is not neccessary, but generally a good idea.</span>
     <span class="n">exclude</span> <span class="nl">group:</span> <span class="s1">'com.google.android'</span><span class="o">,</span> <span class="nl">module:</span> <span class="s1">'support-v4'</span>
   <span class="o">}</span>
@@ -206,7 +206,7 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
     <span class="nt">&lt;groupId&gt;</span>de.keyboardsurfer.android.widget<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;exclusions&gt;</span>
         <span class="nt">&lt;exclusion&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>com.google.android<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.android.support<span class="nt">&lt;/groupId&gt;</span>
             <span class="nt">&lt;artifactId&gt;</span>support-v4<span class="nt">&lt;/artifactId&gt;</span>
         <span class="nt">&lt;/exclusion&gt;</span>
     <span class="nt">&lt;/exclusions&gt;</span>
@@ -227,35 +227,15 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
 <code>gradle jar</code> builds the jar</li>
 </ul><p>After putting Crouton in a repository you can add it as dependency.</p>
 
-<pre lang="gradle"><code>compile('de.keyboardsurfer.android.widget:crouton:1.8.3') {
-  exclude group: 'com.google.android', module: 'support-v4'
-}
-</code></pre>
+<div class="highlight highlight-groovy"><pre><span class="n">compile</span><span class="o">(</span><span class="s1">'de.keyboardsurfer.android.widget:crouton:1.8.4'</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">exclude</span> <span class="nl">group:</span> <span class="s1">'com.google.android'</span><span class="o">,</span> <span class="nl">module:</span> <span class="s1">'support-v4'</span>
+<span class="o">}</span>
+</pre></div>
 
 <h3>
-<a name="signing" class="anchor" href="#signing"><span class="octicon octicon-link"></span></a>Signing</h3>
+<a name="building-and-signing" class="anchor" href="#building-and-signing"><span class="octicon octicon-link"></span></a>Building and Signing</h3>
 
-<p>To sign your artifacts, create a file at the repository root, called <code>gradle.properties</code> that contains:</p>
-
-<pre><code># makes building faster
-org.gradle.daemon true
-
-# only requried for the demo
-keyStore=theKeyStoreFileName
-storePassword=theStorePassword
-keyAlias=theKeyAlias
-keyPassword=theKeyPassword
-
-# for uploading to a repository
-repositoryUrl=yourRepositoryUrl
-sonatypeUser=yourSonatypeUser
-sonatypePass=yourSonatypePassword
-
-# if you want to sign the built artifacts
-signing.keyId=yourKeyId
-signing.password=yourGPGPassword
-signing.secretKeyRingFile=/path/to/your/secring
-</code></pre>
+<p>In order to build and sign Crouton locally you'll need to rename <code>gradle.properties.sample</code> to <code>gradle.properties</code>.</p>
 
 <h2>
 <a name="contribution" class="anchor" href="#contribution"><span class="octicon octicon-link"></span></a>Contribution</h2>
