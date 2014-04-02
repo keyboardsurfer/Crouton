@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-
-
 subprojects {
+version = '1.8.4'
 
   buildscript {
     repositories {
@@ -25,7 +24,7 @@ subprojects {
     }
 
     dependencies {
-      classpath 'com.android.tools.build:gradle:0.8+'
+      classpath 'com.android.tools.build:gradle:0.9.+'
       classpath 'com.github.dcendents:android-maven-plugin:1.0'
     }
   }
@@ -34,5 +33,4 @@ subprojects {
     mavenCentral()
     mavenLocal()
   }
-
 }
