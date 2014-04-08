@@ -34,3 +34,8 @@ version = '1.8.4'
     mavenLocal()
   }
 }
+
+task wrapper(type: Wrapper) {
+  description "Generates the gradle wrapper"
+  gradleVersion = "1.11"
+}
