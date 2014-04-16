@@ -787,7 +787,7 @@ public final class Crouton {
   private void measureCroutonView() {
     View view = getView();
     int widthSpec;
-    if (viewGroup != null) {
+    if (null != viewGroup) {
       widthSpec = View.MeasureSpec.makeMeasureSpec(viewGroup.getMeasuredWidth(), View.MeasureSpec.AT_MOST);
     } else {
       widthSpec = View.MeasureSpec.makeMeasureSpec(activity.getWindow().getDecorView().getMeasuredWidth(),
@@ -908,7 +908,7 @@ public final class Crouton {
 
     // set the text color if set
     if (this.style.textColorValue != Style.NOT_SET) {
-        text.setTextColor(this.style.textColorValue);
+      text.setTextColor(this.style.textColorValue);
     } else if (this.style.textColorResourceId != 0) {
       text.setTextColor(resources.getColor(this.style.textColorResourceId));
     }
@@ -936,7 +936,7 @@ public final class Crouton {
     if (this.text != null) {
       SpannableString s = new SpannableString(this.text);
       s.setSpan(new TypefaceSpan(text.getContext(), fontName), 0, s.length(),
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+          Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
       text.setText(s);
     }
   }
