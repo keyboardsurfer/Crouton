@@ -146,6 +146,12 @@ public class Style {
   /** The resource id for the padding for the view content */
   final int paddingDimensionResId;
 
+  /** The file path and font name for the view content */
+  final String fontName;
+
+  /** The file path and font name resource id for the view content */
+  final int fontNameResId;
+
   private Style(final Builder builder) {
     this.configuration = builder.configuration;
     this.backgroundColorResourceId = builder.backgroundColorResourceId;
@@ -170,6 +176,8 @@ public class Style {
     this.paddingInPixels = builder.paddingInPixels;
     this.paddingDimensionResId = builder.paddingDimensionResId;
     this.backgroundColorValue = builder.backgroundColorValue;
+    this.fontName = builder.fontName;
+    this.fontNameResId = builder.fontNameResId;
   }
 
   /** Builder for the {@link Style} object. */
@@ -197,6 +205,8 @@ public class Style {
     private ImageView.ScaleType imageScaleType;
     private int paddingInPixels;
     private int paddingDimensionResId;
+    private String fontName;
+    private int fontNameResId;
 
     /** Creates a {@link Builder} to build a {@link Style} upon. */
     public Builder() {
@@ -214,6 +224,8 @@ public class Style {
       imageDrawable = null;
       imageResId = 0;
       imageScaleType = ImageView.ScaleType.FIT_XY;
+      fontName = null;
+      fontNameResId = 0;
     }
 
     /**
@@ -246,6 +258,8 @@ public class Style {
       imageScaleType = baseStyle.imageScaleType;
       paddingInPixels = baseStyle.paddingInPixels;
       paddingDimensionResId = baseStyle.paddingDimensionResId;
+      fontName = baseStyle.fontName;
+      fontNameResId = baseStyle.fontNameResId;
     }
     /**
      * Set the {@link Configuration} option of the {@link Crouton}.
@@ -499,6 +513,18 @@ public class Style {
       return this;
     }
 
+    /** The file path and name of the font for the crouton view's content. */
+    public Builder setFontName(String fontName) {
+      this.fontName = fontName;
+      return this;
+    }
+
+    /** The resource id for the file path and name of the font for the crouton view's content. */
+    public Builder setFontNameResId(int fontNameResId) {
+      this.fontNameResId = fontNameResId;
+      return this;
+    }
+
     /** @return a configured {@link Style} object. */
     public Style build() {
       return new Style(this);
@@ -531,6 +557,8 @@ public class Style {
       ", textAppearanceResId=" + textAppearanceResId +
       ", paddingInPixels=" + paddingInPixels +
       ", paddingDimensionResId=" + paddingDimensionResId +
+      ", fontName=" + fontName +
+      ", fontNameResId=" + fontNameResId +
       '}';
   }
 }
