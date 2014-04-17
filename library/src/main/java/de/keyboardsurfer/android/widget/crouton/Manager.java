@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
@@ -212,6 +213,7 @@ final class Manager extends Handler {
           return;
         }
         handleTranslucentActionBar((ViewGroup.MarginLayoutParams) params, activity);
+        handleActionBarOverlay((ViewGroup.MarginLayoutParams) params, activity);
 
         activity.addContentView(croutonView, params);
       }
@@ -250,6 +252,23 @@ final class Manager extends Handler {
         /* Checks whether translucent status is enabled for this window.
         * If true, sets the top margin to show the crouton just below the action bar. */
       if ((flags & translucentStatusFlag) == translucentStatusFlag) {
+        final int actionBarContainerId = Resources.getSystem().getIdentifier("action_bar_container", "id", "android");
+        final View actionBarContainer = activity.findViewById(actionBarContainerId);
+        // The action bar is present: the app is using a Holo theme.
+        if (actionBarContainer != null) {
+          final ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) params;
+          marginParams.topMargin = actionBarContainer.getBottom();
+        }
+      }
+    }
+  }
+
+  @TargetApi(11)
+  private void handleActionBarOverlay(ViewGroup.MarginLayoutParams params, Activity activity) {
+    // ActionBar overlay is only available as of Android 3.0 Honeycomb.
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+      final boolean flags = activity.getWindow().hasFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+      if (flags) {
         final int actionBarContainerId = Resources.getSystem().getIdentifier("action_bar_container", "id", "android");
         final View actionBarContainer = activity.findViewById(actionBarContainerId);
         // The action bar is present: the app is using a Holo theme.
