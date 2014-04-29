@@ -230,11 +230,13 @@ final class Manager extends Handler {
             croutonView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
           }
 
-          croutonView.startAnimation(crouton.getInAnimation());
-          announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
-          if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
-            sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
-                crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
+          if(crouton.getInAnimation() != null) {
+            croutonView.startAnimation(crouton.getInAnimation());
+            announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
+            if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
+              sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
+                  crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
+            }
           }
         }
       });
