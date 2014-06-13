@@ -161,11 +161,10 @@ If you are referencing a newer version of the Android Support Library in your ap
 
 ### DIY
 
-The build requires Gradle. Operations are very simple:
+The build requires the included gradle Wrapper
 
-* install [gradle](http://www.gradle.org/)
-* `gradle assemble` builds all artifacts
-* `gradle jar` builds the jar
+* `./gradlew assemble` builds all artifacts
+* `./gradle jar` builds the jar
 
 After putting Crouton in a repository you can add it as dependency.
 
