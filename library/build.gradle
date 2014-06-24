@@ -22,7 +22,7 @@ dependencies {
 }
 
 android {
-  buildToolsVersion '19.0.3'
+  buildToolsVersion '19.1.0'
   compileSdkVersion 19
   defaultConfig {
     versionCode 7
@@ -42,13 +42,13 @@ artifactId = "crouton"
 
 android.libraryVariants.all { variant ->
   def name = variant.buildType.name
-  if (name.equals(com.android.builder.BuilderConstants.DEBUG)) {
+  if (name.equals(com.android.builder.core.BuilderConstants.DEBUG)) {
     return; // Skip debug builds.
   }
   task("javadoc${variant.name.capitalize()}", type: Javadoc) {
     description "Generates Javadoc for $variant.name."
     source = variant.javaCompile.source
-    ext.androidJar = "${android.plugin.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+    ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
     classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
   }
 
