@@ -15,7 +15,6 @@
  */
 
 apply plugin: 'android'
-version = '1.8.4'
 
 buildscript {
   repositories {
@@ -34,19 +33,19 @@ repositories {
 dependencies {
   compile project(':crouton-library')
   compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
-  compile 'com.android.support:support-v4:18.0.+'
+  compile 'com.android.support:support-v4:19.1.+'
   compile('com.viewpagerindicator:library:2.4.2-SNAPSHOT') {
     exclude group: 'com.google.android', module: 'support-v4'
   }
 }
 
 android {
-  buildToolsVersion '19.0.1'
+  buildToolsVersion '19.1.0'
   compileSdkVersion 19
 
   defaultConfig {
-    versionCode 14
-    versionName "1.8.4"
+    versionCode 15
+    versionName = project.version
     minSdkVersion 8
     targetSdkVersion 19
   }

@@ -2,9 +2,6 @@
 # Under CC-BY-SA V3.0 (https://creativecommons.org/licenses/by-sa/3.0/legalcode)
 
 # built application files
-*.apk
-*.ap_
-*.jar
 build
 
 # lint files

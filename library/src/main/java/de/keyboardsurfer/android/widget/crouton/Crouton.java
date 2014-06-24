@@ -24,6 +24,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -785,7 +787,7 @@ public final class Crouton {
   private void measureCroutonView() {
     View view = getView();
     int widthSpec;
-    if (viewGroup != null) {
+    if (null != viewGroup) {
       widthSpec = View.MeasureSpec.makeMeasureSpec(viewGroup.getMeasuredWidth(), View.MeasureSpec.AT_MOST);
     } else {
       widthSpec = View.MeasureSpec.makeMeasureSpec(activity.getWindow().getDecorView().getMeasuredWidth(),
@@ -894,13 +896,19 @@ public final class Crouton {
   private TextView initializeTextView(final Resources resources) {
     TextView text = new TextView(this.activity);
     text.setId(TEXT_ID);
-    text.setText(this.text);
+    if (this.style.fontName != null) {
+      setTextWithCustomFont(text, this.style.fontName);
+    } else if (this.style.fontNameResId != 0) {
+      setTextWithCustomFont(text, resources.getString(this.style.fontNameResId));
+    } else {
+      text.setText(this.text);
+    }
     text.setTypeface(Typeface.DEFAULT_BOLD);
     text.setGravity(this.style.gravity);
 
     // set the text color if set
     if (this.style.textColorValue != Style.NOT_SET) {
-        text.setTextColor(this.style.textColorValue);
+      text.setTextColor(this.style.textColorValue);
     } else if (this.style.textColorResourceId != 0) {
       text.setTextColor(resources.getColor(this.style.textColorResourceId));
     }
@@ -922,6 +930,15 @@ public final class Crouton {
       text.setTextAppearance(this.activity, this.style.textAppearanceResId);
     }
     return text;
+  }
+
+  private void setTextWithCustomFont(TextView text, String fontName) {
+    if (this.text != null) {
+      SpannableString s = new SpannableString(this.text);
+      s.setSpan(new TypefaceSpan(text.getContext(), fontName), 0, s.length(),
+          Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+      text.setText(s);
+    }
   }
 
   private void initializeTextViewShadow(final Resources resources, final TextView text) {

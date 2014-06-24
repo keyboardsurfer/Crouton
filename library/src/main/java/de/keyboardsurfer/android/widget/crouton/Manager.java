@@ -23,15 +23,17 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.accessibility.AccessibilityEventCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -196,15 +198,16 @@ final class Manager extends Handler {
     if (null == croutonView.getParent()) {
       ViewGroup.LayoutParams params = croutonView.getLayoutParams();
       if (null == params) {
-        params = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params =
+            new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
       }
       // display Crouton in ViewGroup is it has been supplied
       if (null != crouton.getViewGroup()) {
-        // TODO implement add to last position feature (need to align with how this will be requested for activity)
-        if (crouton.getViewGroup() instanceof FrameLayout) {
-          crouton.getViewGroup().addView(croutonView, params);
+        final ViewGroup croutonViewGroup = crouton.getViewGroup();
+        if (shouldAddViewWithoutPosition(croutonViewGroup)) {
+          croutonViewGroup.addView(croutonView, params);
         } else {
-          crouton.getViewGroup().addView(croutonView, 0, params);
+          croutonViewGroup.addView(croutonView, 0, params);
         }
       } else {
         Activity activity = crouton.getActivity();
@@ -212,6 +215,7 @@ final class Manager extends Handler {
           return;
         }
         handleTranslucentActionBar((ViewGroup.MarginLayoutParams) params, activity);
+        handleActionBarOverlay((ViewGroup.MarginLayoutParams) params, activity);
 
         activity.addContentView(croutonView, params);
       }
@@ -230,15 +234,22 @@ final class Manager extends Handler {
             croutonView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
           }
 
-          croutonView.startAnimation(crouton.getInAnimation());
-          announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
-          if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
-            sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
-                crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
+          if(crouton.getInAnimation() != null) {
+            croutonView.startAnimation(crouton.getInAnimation());
+            announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
+            if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
+              sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
+                  crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().getDuration());
+            }
           }
         }
       });
     }
+  }
+
+  private boolean shouldAddViewWithoutPosition(ViewGroup croutonViewGroup) {
+    return croutonViewGroup instanceof FrameLayout || croutonViewGroup instanceof AdapterView ||
+        croutonViewGroup instanceof RelativeLayout;
   }
 
   @TargetApi(19)
@@ -247,17 +258,29 @@ final class Manager extends Handler {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       final int flags = activity.getWindow().getAttributes().flags;
       final int translucentStatusFlag = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        /* Checks whether translucent status is enabled for this window.
-        * If true, sets the top margin to show the crouton just below the action bar. */
       if ((flags & translucentStatusFlag) == translucentStatusFlag) {
-        final int actionBarContainerId = Resources.getSystem().getIdentifier("action_bar_container", "id", "android");
-        final View actionBarContainer = activity.findViewById(actionBarContainerId);
-        // The action bar is present: the app is using a Holo theme.
-        if (actionBarContainer != null) {
-          final ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) params;
-          marginParams.topMargin = actionBarContainer.getBottom();
-        }
+        setActionBarMargin(params, activity);
       }
+    }
+  }
+
+  @TargetApi(11)
+  private void handleActionBarOverlay(ViewGroup.MarginLayoutParams params, Activity activity) {
+    // ActionBar overlay is only available as of Android 3.0 Honeycomb.
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+      final boolean flags = activity.getWindow().hasFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+      if (flags) {
+        setActionBarMargin(params, activity);
+      }
+    }
+  }
+
+  private void setActionBarMargin(ViewGroup.MarginLayoutParams params, Activity activity) {
+    final int actionBarContainerId = Resources.getSystem().getIdentifier("action_bar_container", "id", "android");
+    final View actionBarContainer = activity.findViewById(actionBarContainerId);
+    // The action bar is present: the app is using a Holo theme.
+    if (null != actionBarContainer) {
+      params.topMargin = actionBarContainer.getBottom();
     }
   }
 
@@ -426,7 +449,7 @@ final class Manager extends Handler {
       if (Build.VERSION.SDK_INT < 16) {
         eventType = AccessibilityEvent.TYPE_VIEW_FOCUSED;
       } else {
-        eventType = AccessibilityEventCompat.TYPE_ANNOUNCEMENT;
+        eventType = AccessibilityEvent.TYPE_ANNOUNCEMENT;
       }
 
       // Construct an accessibility event with the minimum recommended

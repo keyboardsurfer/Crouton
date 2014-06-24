@@ -18,15 +18,15 @@ apply plugin: 'android-maven'
 apply plugin: 'signing'
 
 dependencies {
-  compile 'com.android.support:support-v4:19.0.1'
+  compile 'com.android.support:support-v4:19.1.0'
 }
 
 android {
-  buildToolsVersion '19.0.1'
+  buildToolsVersion '19.1.0'
   compileSdkVersion 19
   defaultConfig {
     versionCode 7
-    versionName "1.8.4"
+    versionName = project.version
     minSdkVersion 8
     targetSdkVersion 19
   }
@@ -39,17 +39,16 @@ android {
 
 group = "de.keyboardsurfer.android.widget"
 artifactId = "crouton"
-version = "1.8.4"
 
 android.libraryVariants.all { variant ->
   def name = variant.buildType.name
-  if (name.equals(com.android.builder.BuilderConstants.DEBUG)) {
+  if (name.equals(com.android.builder.core.BuilderConstants.DEBUG)) {
     return; // Skip debug builds.
   }
   task("javadoc${variant.name.capitalize()}", type: Javadoc) {
     description "Generates Javadoc for $variant.name."
     source = variant.javaCompile.source
-    ext.androidJar = "${android.plugin.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+    ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
     classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
   }
 
@@ -80,13 +79,6 @@ artifacts {
   archives javadocJar
   archives jar
 }
-
-
-task wrapper(type: Wrapper) {
-  description "Generates the gradle wrapper"
-  gradleVersion = "1.10"
-}
-
 
 signing {
   sign configurations.archives
