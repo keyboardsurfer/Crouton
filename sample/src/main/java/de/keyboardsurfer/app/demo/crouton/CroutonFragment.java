@@ -16,6 +16,9 @@
 
 package de.keyboardsurfer.app.demo.crouton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -46,7 +49,7 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
   private Spinner styleSpinner;
   private EditText croutonTextEdit;
   private EditText croutonDurationEdit;
-  private Crouton infiniteCrouton;
+  private List<Crouton> infiniteCroutons;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -78,9 +81,11 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
       }
 
       default: {
-        if (infiniteCrouton != null) {
-          Crouton.hide(infiniteCrouton);
-          infiniteCrouton = null;
+        if ((infiniteCroutons != null) && (!infiniteCroutons.isEmpty())) {
+          Crouton.hide(infiniteCroutons.remove(0));
+          if (infiniteCroutons.isEmpty()) {
+            infiniteCroutons = null;
+          }
         }
         break;
       }
@@ -196,7 +201,10 @@ public class CroutonFragment extends Fragment implements AdapterView.OnItemSelec
       crouton = Crouton.makeText(getActivity(), croutonText, croutonStyle, R.id.alternate_view_group);
     }
     if (infinite) {
-      infiniteCrouton = crouton;
+      if (infiniteCroutons == null) {
+        infiniteCroutons = new ArrayList<Crouton>();
+      }
+      infiniteCroutons.add(crouton);
     }
     crouton.setOnClickListener(this).setConfiguration(infinite ? CONFIGURATION_INFINITE : configuration).show();
   }
