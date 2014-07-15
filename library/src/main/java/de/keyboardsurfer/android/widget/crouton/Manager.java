@@ -201,7 +201,7 @@ final class Manager extends Handler {
         params =
             new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
       }
-      // display Crouton in ViewGroup is it has been supplied
+      // display Crouton in ViewGroup if it has been supplied
       if (null != crouton.getViewGroup()) {
         final ViewGroup croutonViewGroup = crouton.getViewGroup();
         if (shouldAddViewWithoutPosition(croutonViewGroup)) {
