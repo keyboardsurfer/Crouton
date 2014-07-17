@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 apply plugin: 'android-maven'
 apply plugin: 'signing'
 
@@ -22,10 +22,10 @@ dependencies {
 }
 
 android {
-  buildToolsVersion '19.1.0'
+  buildToolsVersion '20.0.0'
   compileSdkVersion 19
   defaultConfig {
-    versionCode 7
+    versionCode 10
     versionName = project.version
     minSdkVersion 8
     targetSdkVersion 19
@@ -37,8 +37,8 @@ android {
   }
 }
 
-group = "de.keyboardsurfer.android.widget"
-artifactId = "crouton"
+group = 'de.keyboardsurfer.android.widget'
+artifactId = 'crouton'
 
 android.libraryVariants.all { variant ->
   def name = variant.buildType.name
@@ -46,15 +46,15 @@ android.libraryVariants.all { variant ->
     return; // Skip debug builds.
   }
   task("javadoc${variant.name.capitalize()}", type: Javadoc) {
-    description "Generates Javadoc for $variant.name."
+    description 'Generates Javadoc for $variant.name.'
     source = variant.javaCompile.source
-    ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+    ext.androidJar = '${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar'
     classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
   }
 
   task("bundleJavadoc${variant.name.capitalize()}", type: Jar) {
-    description "Bundles Javadoc into zip for $variant.name."
-    classifier = "javadoc"
+    description 'Bundles Javadoc into zip for $variant.name'
+    classifier = 'javadoc'
     from tasks["javadoc${variant.name.capitalize()}"]
   }
 
@@ -62,11 +62,14 @@ android.libraryVariants.all { variant ->
 
 task sourcesJar(type: Jar) {
   classifier = 'sources'
-  from android.sourceSets.main.java
+  from android.sourceSets.main.java.srcDirs
 }
 
 task jar(type: Jar) {
-  from 'build/classes/release'
+  from 'build/intermediates/classes/release'
+    exclude '**/BuildConfig.class'
+    exclude '**/R.class'
+    exclude 'de/keyboardsurfer/mobile/'
 }
 
 task javadocJar(type: Jar, dependsOn: "javadocRelease") {
@@ -82,6 +85,7 @@ artifacts {
 
 signing {
   sign configurations.archives
+  sign configurations.compile
 }
 
 uploadArchives {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 buildscript {
   repositories {
@@ -33,14 +33,14 @@ repositories {
 dependencies {
   compile project(':crouton-library')
   compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
-  compile 'com.android.support:support-v4:19.1.+'
-  compile('com.viewpagerindicator:library:2.4.2-SNAPSHOT') {
+  compile 'com.android.support:support-v4:19.1.0'
+  compile('com.viewpagerindicator:library:2.4.2-SNAPSHOT@aar') {
     exclude group: 'com.google.android', module: 'support-v4'
   }
 }
 
 android {
-  buildToolsVersion '19.1.0'
+  buildToolsVersion '20.0.0'
   compileSdkVersion 19
 
   defaultConfig {
