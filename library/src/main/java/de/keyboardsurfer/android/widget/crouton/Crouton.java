@@ -601,9 +601,12 @@ public final class Crouton {
   /**
    * @param lifecycleCallback
    *     Callback object for notable events in the life of a Crouton.
+   *
+   * @return this {@link Crouton}.
    */
-  public void setLifecycleCallback(LifecycleCallback lifecycleCallback) {
+  public Crouton setLifecycleCallback(LifecycleCallback lifecycleCallback) {
     this.lifecycleCallback = lifecycleCallback;
+    return this;
   }
 
   /**
