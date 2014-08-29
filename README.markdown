@@ -20,7 +20,10 @@ You can check some features in the Crouton Demo.
 
 If you're already using Crouton and just want to download the latest version of the library, follow [this link](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22de.keyboardsurfer.android.widget%22).
 
-## [Changelog](https://github.com/keyboardsurfer/Crouton/wiki/Changelog)
+## [Releases / Changelog](https://github.com/keyboardsurfer/Crouton/releases)
+
+([Old Wiki Changelog](https://github.com/keyboardsurfer/Crouton/wiki/Changelog) )
+
 ### Current version: 1.8.5
 
 ## Usage
