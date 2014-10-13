@@ -105,7 +105,7 @@ Then declare Crouton within your dependencies:
 ```groovy
 dependencies {
   ...
-  compile('de.keyboardsurfer.android.widget:crouton:1.8.4') {
+  compile('de.keyboardsurfer.android.widget:crouton:+') {
     // exclusion is not neccessary, but generally a good idea.
     exclude group: 'com.google.android', module: 'support-v4'
   }
