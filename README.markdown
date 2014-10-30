@@ -22,8 +22,6 @@ If you're already using Crouton and just want to download the latest version of 
 
 ## [Releases / Changelog](https://github.com/keyboardsurfer/Crouton/releases)
 
-([Old Wiki Changelog](https://github.com/keyboardsurfer/Crouton/wiki/Changelog) )
-
 ### Current version: 1.8.5
 
 ## Usage
@@ -108,7 +106,7 @@ Then declare Crouton within your dependencies:
 ```groovy
 dependencies {
   ...
-  compile('de.keyboardsurfer.android.widget:crouton:1.8.5') {
+  compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') {
     // exclusion is not neccessary, but generally a good idea.
     exclude group: 'com.google.android', module: 'support-v4'
   }
@@ -173,7 +171,7 @@ The build requires Gradle. Operations are very simple:
 After putting Crouton in a repository you can add it as dependency.
 
 ```groovy
-compile('de.keyboardsurfer.android.widget:crouton:1.8.5') {
+compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') {
   exclude group: 'com.google.android', module: 'support-v4'
 }
 ```
