@@ -91,12 +91,12 @@ Add maven central to your `build.gradle`:
 ```groovy
 buildscript {
   repositories {
-    mavenCentral()
+    jcenter()
   }
 }
  
 repositories {
-  mavenCentral()
+  jcenter()
 }
 ```
 
@@ -107,7 +107,7 @@ dependencies {
   ...
   compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') {
     // exclusion is not neccessary, but generally a good idea.
-    exclude group: 'com.google.android', module: 'support-v4'
+    exclude group: 'com.android.support', module: 'support-v4'
   }
   ...
 }
