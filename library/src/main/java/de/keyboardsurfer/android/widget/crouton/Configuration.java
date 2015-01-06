@@ -30,7 +30,7 @@ public class Configuration {
 
   /**
    * Display a {@link Crouton} for an infinite amount of time or
-   * until {@link de.keyboardsurfer.android.widget.crouton.Crouton#cancel()} has been called.
+   * until {@link Crouton#cancel()} has been called.
    */
   public static final int DURATION_INFINITE = -1;
   /** The default short display duration of a {@link Crouton}. */

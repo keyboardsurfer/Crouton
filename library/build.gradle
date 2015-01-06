@@ -18,17 +18,17 @@ apply plugin: 'android-maven'
 apply plugin: 'signing'
 
 dependencies {
-  compile 'com.android.support:support-v4:19.1.0'
+  compile 'com.android.support:support-v4:21.0.3'
 }
 
 android {
-  buildToolsVersion '20.0.0'
-  compileSdkVersion 19
+  buildToolsVersion '21.1.2'
+  compileSdkVersion 21
   defaultConfig {
     versionCode 10
     versionName = project.version
     minSdkVersion 8
-    targetSdkVersion 19
+    targetSdkVersion 21
   }
 
   compileOptions {
@@ -38,7 +38,7 @@ android {
 }
 
 group = 'de.keyboardsurfer.android.widget'
-artifactId = 'crouton'
+def artifactId = 'crouton'
 
 android.libraryVariants.all { variant ->
   def name = variant.buildType.name
@@ -92,7 +92,6 @@ uploadArchives {
   repositories {
     mavenDeployer {
       beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
       repository(url: repositoryUrl) {
         authentication(userName: sonatypeUser, password: sonatypePass)
       }
@@ -100,7 +99,7 @@ uploadArchives {
       pom.project {
         inceptionYear '2012'
         name 'Crouton'
-        artifactId 'crouton'
+        artifactId = 'crouton'
         packaging 'jar', 'aar'
         description 'Context sensitive notifications for Android'
         url 'https://github.com/keyboardsurfer/Crouton'

@@ -107,7 +107,7 @@ Then declare Crouton within your dependencies:
 dependencies {
   ...
   compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') {
-    // exclusion is not neccessary, but generally a good idea.
+    // exclusion is not necessary, but generally a good idea.
     exclude group: 'com.google.android', module: 'support-v4'
   }
   ...

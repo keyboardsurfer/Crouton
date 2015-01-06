@@ -49,7 +49,7 @@ import android.widget.TextView;
  * <p/>
  * <b>Important: </b>
  * Call {@link Crouton#clearCroutonsForActivity(Activity)} within
- * {@link android.app.Activity#onDestroy()} to avoid {@link Context} leaks.
+ * {@link Activity#onDestroy()} to avoid {@link Context} leaks.
  */
 public final class Crouton {
   private static final String NULL_PARAMETERS_ARE_NOT_ACCEPTED = "Null parameters are not accepted";

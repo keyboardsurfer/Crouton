@@ -25,9 +25,9 @@ keyPassword=somePass
 #user data for sonatype
 sonatypeUser=someUser
 sonatypePass=somePassword
-repositoryUrl=someRepo
+repositoryUrl=./repo
 
 #info from your pgp key
-signing.keyId=foobar
-signing.password=barfoo
-signing.secretKeyRingFile=foobarbarfoo
+signing.keyId=BAADF00D
+signing.password=yourPassword
+signing.secretKeyRingFile=/path/to/your/secring
