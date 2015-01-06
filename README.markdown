@@ -20,7 +20,8 @@ You can check some features in the Crouton Demo.
 
 If you're already using Crouton and just want to download the latest version of the library, follow [this link](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22de.keyboardsurfer.android.widget%22).
 
-## [Changelog](https://github.com/keyboardsurfer/Crouton/wiki/Changelog)
+## [Releases / Changelog](https://github.com/keyboardsurfer/Crouton/releases)
+
 ### Current version: 1.8.5
 
 ## Usage
@@ -79,7 +80,7 @@ In general you can modify
 - appearance & disappearance Animation
 - displayed Image
 
-Since [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java) is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.
+Since [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/main/java/de/keyboardsurfer/android/widget/crouton/Style.java) is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.
 
 ## Building
 ### Gradle
@@ -106,7 +107,7 @@ Then declare Crouton within your dependencies:
 dependencies {
   ...
   compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') {
-    // exclusion is not neccessary, but generally a good idea.
+    // exclusion is not necessary, but generally a good idea.
     exclude group: 'com.google.android', module: 'support-v4'
   }
   ...
