@@ -39,14 +39,14 @@
         </div>
 
         <h1>
-<a name="crouton" class="anchor" href="#crouton"><span class="octicon octicon-link"></span></a>Crouton</h1>
+<a id="crouton" class="anchor" href="#crouton" aria-hidden="true"><span class="octicon octicon-link"></span></a>Crouton</h1>
 
 <p><img src="https://raw.github.com/keyboardsurfer/Crouton/master/sample/src/main/res/drawable-xhdpi/ic_launcher.png" alt="Crouton" title="Crouton logo"></p>
 
 <p>Context sensitive notifications for Android</p>
 
 <h2>
-<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
 
 <p><strong>Crouton</strong> is a class that can be used by Android developers that feel the need for an <strong>alternative to the Context insensitive <a href="http://developer.android.com/reference/android/widget/Toast.html">Toast</a></strong>.</p>
 
@@ -57,19 +57,20 @@ You can line up multiple Croutons for display, that will be shown one after anot
 <p>You can check some features in the Crouton Demo.</p>
 
 <p><a href="http://play.google.com/store/apps/details?id=de.keyboardsurfer.app.demo.crouton">
-  <img alt="Crouton Demo on Google Play" src="http://developer.android.com/images/brand/en_generic_rgb_wo_60.png"></a></p>
+  <img alt="Crouton Demo on Google Play" src="http://developer.android.com/images/brand/en_generic_rgb_wo_60.png">
+</a></p>
 
 <p>If you're already using Crouton and just want to download the latest version of the library, follow <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22de.keyboardsurfer.android.widget%22">this link</a>.</p>
 
 <h2>
-<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a><a href="https://github.com/keyboardsurfer/Crouton/wiki/Changelog">Changelog</a>
+<a id="releases--changelog" class="anchor" href="#releases--changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://github.com/keyboardsurfer/Crouton/releases">Releases / Changelog</a>
 </h2>
 
 <h3>
-<a name="current-version-184" class="anchor" href="#current-version-184"><span class="octicon octicon-link"></span></a>Current version: 1.8.4</h3>
+<a id="current-version-185" class="anchor" href="#current-version-185" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current version: 1.8.5</h3>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>The API is kept as simple as the Toast API:</p>
 
@@ -95,7 +96,7 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
 <p>If you would like a more graphical introduction to Crouton check out <a href="https://speakerdeck.com/keyboardsurfer/crouton-devfest-berlin-2012">this presentation</a>.</p>
 
 <h2>
-<a name="important" class="anchor" href="#important"><span class="octicon octicon-link"></span></a>Important!</h2>
+<a id="important" class="anchor" href="#important" aria-hidden="true"><span class="octicon octicon-link"></span></a>Important!</h2>
 
 <p>In your Activity.onDestroy() make sure to call</p>
 
@@ -107,7 +108,7 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
 <p>This is a workaround and further description is available in <a href="https://github.com/keyboardsurfer/Crouton/issues/24">issue #24</a>.</p>
 
 <h2>
-<a name="basic-examples" class="anchor" href="#basic-examples"><span class="octicon octicon-link"></span></a>Basic Examples</h2>
+<a id="basic-examples" class="anchor" href="#basic-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Examples</h2>
 
 <p>Currently you can use the three different Style attributes displayed below out of the box:</p>
 
@@ -118,7 +119,7 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
 <p><img src="https://github.com/keyboardsurfer/Crouton/raw/master/res/Info.png" alt="Info" title="Example of Style.INFO"></p>
 
 <h2>
-<a name="extension-and-modification" class="anchor" href="#extension-and-modification"><span class="octicon octicon-link"></span></a>Extension and Modification</h2>
+<a id="extension-and-modification" class="anchor" href="#extension-and-modification" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extension and Modification</h2>
 
 <p>The whole design of a Crouton is defined by  <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/main/java/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a>.</p>
 
@@ -133,88 +134,84 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
 <li>custom Views</li>
 <li>appearance &amp; disappearance Animation</li>
 <li>displayed Image</li>
-</ul><p>Since <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a> is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.</p>
+</ul>
+
+<p>Since <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/main/java/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a> is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.</p>
 
 <h2>
-<a name="building" class="anchor" href="#building"><span class="octicon octicon-link"></span></a>Building</h2>
+<a id="building" class="anchor" href="#building" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building</h2>
 
 <h3>
-<a name="gradle" class="anchor" href="#gradle"><span class="octicon octicon-link"></span></a>Gradle</h3>
+<a id="gradle" class="anchor" href="#gradle" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gradle</h3>
 
 <h4>
-<a name="from-maven-central" class="anchor" href="#from-maven-central"><span class="octicon octicon-link"></span></a>From maven central</h4>
+<a id="from-maven-central" class="anchor" href="#from-maven-central" aria-hidden="true"><span class="octicon octicon-link"></span></a>From maven central</h4>
 
 <p>Add maven central to your <code>build.gradle</code>:</p>
 
-<div class="highlight highlight-groovy"><pre><span class="n">buildscript</span> <span class="o">{</span>
-  <span class="n">repositories</span> <span class="o">{</span>
-    <span class="n">mavenCentral</span><span class="o">()</span>
-  <span class="o">}</span>
-<span class="o">}</span>
+<div class="highlight highlight-groovy"><pre>buildscript {
+  repositories {
+    mavenCentral()
+  }
+}
 
-<span class="n">repositories</span> <span class="o">{</span>
-  <span class="n">mavenCentral</span><span class="o">()</span>
-<span class="o">}</span>
-</pre></div>
+repositories {
+  mavenCentral()
+}</pre></div>
 
 <p>Then declare Crouton within your dependencies:</p>
 
-<div class="highlight highlight-groovy"><pre><span class="n">dependencies</span> <span class="o">{</span>
-  <span class="o">...</span>
-  <span class="n">compile</span><span class="o">(</span><span class="s1">'de.keyboardsurfer.android.widget:crouton:1.8.4'</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// exclusion is not neccessary, but generally a good idea.</span>
-    <span class="n">exclude</span> <span class="nl">group:</span> <span class="s1">'com.google.android'</span><span class="o">,</span> <span class="nl">module:</span> <span class="s1">'support-v4'</span>
-  <span class="o">}</span>
-  <span class="o">...</span>
-<span class="o">}</span>
-</pre></div>
+<div class="highlight highlight-groovy"><pre>dependencies {
+  <span class="pl-k">..</span>.
+  compile(<span class="pl-s1"><span class="pl-pds">'</span>de.keyboardsurfer.android.widget:crouton:1.8.5@aar<span class="pl-pds">'</span></span>) {
+    <span class="pl-c">// exclusion is not necessary, but generally a good idea.</span>
+    exclude <span class="pl-c1">group</span>: <span class="pl-s1"><span class="pl-pds">'</span>com.google.android<span class="pl-pds">'</span></span>, <span class="pl-c1">module</span>: <span class="pl-s1"><span class="pl-pds">'</span>support-v4<span class="pl-pds">'</span></span>
+  }
+  <span class="pl-k">..</span>.
+}</pre></div>
 
 <h3>
-<a name="maven" class="anchor" href="#maven"><span class="octicon octicon-link"></span></a>Maven</h3>
+<a id="maven" class="anchor" href="#maven" aria-hidden="true"><span class="octicon octicon-link"></span></a>Maven</h3>
 
 <h4>
-<a name="from-maven-central-1" class="anchor" href="#from-maven-central-1"><span class="octicon octicon-link"></span></a>From maven central</h4>
+<a id="from-maven-central-1" class="anchor" href="#from-maven-central-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>From maven central</h4>
 
 <p>To use crouton within your maven build simply add</p>
 
-<div class="highlight highlight-xml"><pre><span class="nt">&lt;dependency&gt;</span>
-  <span class="nt">&lt;artifactId&gt;</span>crouton<span class="nt">&lt;/artifactId&gt;</span>
-  <span class="nt">&lt;version&gt;</span>${crouton.version}<span class="nt">&lt;/version&gt;</span>
-  <span class="nt">&lt;groupId&gt;</span>de.keyboardsurfer.android.widget<span class="nt">&lt;/groupId&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-</pre></div>
+<div class="highlight highlight-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
+  &lt;<span class="pl-ent">artifactId</span>&gt;crouton&lt;/<span class="pl-ent">artifactId</span>&gt;
+  &lt;<span class="pl-ent">version</span>&gt;${crouton.version}&lt;/<span class="pl-ent">version</span>&gt;
+  &lt;<span class="pl-ent">groupId</span>&gt;de.keyboardsurfer.android.widget&lt;/<span class="pl-ent">groupId</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
 
 <p>to your pom.xml</p>
 
 <p>If you also want the sources or javadoc add the respective classifier  </p>
 
-<div class="highlight highlight-xml"><pre>  <span class="nt">&lt;classifier&gt;</span>sources<span class="nt">&lt;/classifier&gt;</span>
-</pre></div>
+<div class="highlight highlight-xml"><pre>  &lt;<span class="pl-ent">classifier</span>&gt;sources&lt;/<span class="pl-ent">classifier</span>&gt;</pre></div>
 
 <p>or</p>
 
-<div class="highlight highlight-xml"><pre>  <span class="nt">&lt;classifier&gt;</span>javadoc<span class="nt">&lt;/classifier&gt;</span>
-</pre></div>
+<div class="highlight highlight-xml"><pre>  &lt;<span class="pl-ent">classifier</span>&gt;javadoc&lt;/<span class="pl-ent">classifier</span>&gt;</pre></div>
 
 <p>to the dependency.</p>
 
 <p>If you are referencing a newer version of the Android Support Library in your application, you might want to exclude Crouton's dependency like this:</p>
 
-<div class="highlight highlight-xml"><pre><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>crouton<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>${crouton.version}<span class="nt">&lt;/version&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>de.keyboardsurfer.android.widget<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;exclusions&gt;</span>
-        <span class="nt">&lt;exclusion&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>com.android.support<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>support-v4<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;/exclusion&gt;</span>
-    <span class="nt">&lt;/exclusions&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-</pre></div>
+<div class="highlight highlight-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
+    &lt;<span class="pl-ent">artifactId</span>&gt;crouton&lt;/<span class="pl-ent">artifactId</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;${crouton.version}&lt;/<span class="pl-ent">version</span>&gt;
+    &lt;<span class="pl-ent">groupId</span>&gt;de.keyboardsurfer.android.widget&lt;/<span class="pl-ent">groupId</span>&gt;
+    &lt;<span class="pl-ent">exclusions</span>&gt;
+        &lt;<span class="pl-ent">exclusion</span>&gt;
+            &lt;<span class="pl-ent">groupId</span>&gt;com.android.support&lt;/<span class="pl-ent">groupId</span>&gt;
+            &lt;<span class="pl-ent">artifactId</span>&gt;support-v4&lt;/<span class="pl-ent">artifactId</span>&gt;
+        &lt;/<span class="pl-ent">exclusion</span>&gt;
+    &lt;/<span class="pl-ent">exclusions</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
 
 <h3>
-<a name="diy" class="anchor" href="#diy"><span class="octicon octicon-link"></span></a>DIY</h3>
+<a id="diy" class="anchor" href="#diy" aria-hidden="true"><span class="octicon octicon-link"></span></a>DIY</h3>
 
 <p>The build requires Gradle. Operations are very simple:</p>
 
@@ -225,28 +222,29 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
 <code>gradle assemble</code> builds all artifacts</li>
 <li>
 <code>gradle jar</code> builds the jar</li>
-</ul><p>After putting Crouton in a repository you can add it as dependency.</p>
+</ul>
 
-<div class="highlight highlight-groovy"><pre><span class="n">compile</span><span class="o">(</span><span class="s1">'de.keyboardsurfer.android.widget:crouton:1.8.4'</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">exclude</span> <span class="nl">group:</span> <span class="s1">'com.google.android'</span><span class="o">,</span> <span class="nl">module:</span> <span class="s1">'support-v4'</span>
-<span class="o">}</span>
-</pre></div>
+<p>After putting Crouton in a repository you can add it as dependency.</p>
+
+<div class="highlight highlight-groovy"><pre>compile(<span class="pl-s1"><span class="pl-pds">'</span>de.keyboardsurfer.android.widget:crouton:1.8.5@aar<span class="pl-pds">'</span></span>) {
+  exclude <span class="pl-c1">group</span>: <span class="pl-s1"><span class="pl-pds">'</span>com.google.android<span class="pl-pds">'</span></span>, <span class="pl-c1">module</span>: <span class="pl-s1"><span class="pl-pds">'</span>support-v4<span class="pl-pds">'</span></span>
+}</pre></div>
 
 <h3>
-<a name="building-and-signing" class="anchor" href="#building-and-signing"><span class="octicon octicon-link"></span></a>Building and Signing</h3>
+<a id="building-and-signing" class="anchor" href="#building-and-signing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building and Signing</h3>
 
 <p>In order to build and sign Crouton locally you'll need to rename <code>gradle.properties.sample</code> to <code>gradle.properties</code>.</p>
 
 <h2>
-<a name="contribution" class="anchor" href="#contribution"><span class="octicon octicon-link"></span></a>Contribution</h2>
+<a id="contribution" class="anchor" href="#contribution" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contribution</h2>
 
 <h3>
-<a name="questions" class="anchor" href="#questions"><span class="octicon octicon-link"></span></a>Questions</h3>
+<a id="questions" class="anchor" href="#questions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Questions</h3>
 
 <p>Questions regarding Crouton can be asked on <a href="http://stackoverflow.com/questions/tagged/crouton">StackOverflow, using the crouton tag</a>.</p>
 
 <h3>
-<a name="pull-requests-welcome" class="anchor" href="#pull-requests-welcome"><span class="octicon octicon-link"></span></a>Pull requests welcome</h3>
+<a id="pull-requests-welcome" class="anchor" href="#pull-requests-welcome" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pull requests welcome</h3>
 
 <p>Feel free to contribute to Crouton.</p>
 
@@ -258,7 +256,7 @@ I'll try to answer as soon as I find the time.</p>
 <p>Please note, if you're working on a pull request, make sure to use the <a href="https://github.com/keyboardsurfer/Crouton/tree/develop">develop branch</a> as your base.</p>
 
 <h3>
-<a name="formatting" class="anchor" href="#formatting"><span class="octicon octicon-link"></span></a>Formatting</h3>
+<a id="formatting" class="anchor" href="#formatting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Formatting</h3>
 
 <p>For contributors using Eclipse there's a formatter available at the <a href="https://github.com/downloads/keyboardsurfer/Crouton/Crouton_Eclipseformatter.xml">download section</a>.</p>
 
@@ -267,12 +265,14 @@ I'll try to answer as soon as I find the time.</p>
 <p>If you're using IDEA, the Eclipse Formatter plugin should allow you to use the formatter as well.</p>
 
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <ul>
 <li><a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Version 2.0</a></li>
-</ul><h2>
-<a name="attributions" class="anchor" href="#attributions"><span class="octicon octicon-link"></span></a>Attributions</h2>
+</ul>
+
+<h2>
+<a id="attributions" class="anchor" href="#attributions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attributions</h2>
 
 <p>The initial version was written by  <a href="https://plus.google.com/u/0/117509657298845443204?rel=author">Benjamin Weiss</a>.
 The name and the idea of <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Crouton.java">Crouton</a> originates in a <a href="http://android.cyrilmottier.com/?p=773">blog article</a> by Cyril Mottier.</p>
