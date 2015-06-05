@@ -293,6 +293,11 @@ final class Manager extends Handler {
    *     removed.
    */
   protected void removeCrouton(Crouton crouton) {
+    // If the crouton hasn't been displayed yet a `Crouton.hide()` will fail to hide
+    // it since the DISPLAY message might still be in the queue. Remove all messages
+    // for this crouton.
+    removeAllMessagesForCrouton(crouton);
+
     View croutonView = crouton.getView();
     ViewGroup croutonParentView = (ViewGroup) croutonView.getParent();
 
