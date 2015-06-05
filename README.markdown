@@ -3,6 +3,19 @@
 
 Context sensitive notifications for Android
 
+## DEPRECATION NOTICE
+
+This library has passed it's prime and is now considered deprecated.
+
+With the [Android Design Support Library](http://android-developers.blogspot.co.uk/2015/05/android-design-support-library.html)
+introducing [Snackbar](https://developer.android.com/reference/android/support/design/widget/Snackbar.html) developers get a well
+crafted pattern to use for context aware notification of users.
+
+I won't do any active development for Crouton any more.
+But I still do accept pull requests that fix bugs.
+
+So long, and thanks for all the forks.
+
 ## Overview
 
 **Crouton** is a class that can be used by Android developers that feel the need for an **alternative to the Context insensitive [Toast](http://developer.android.com/reference/android/widget/Toast.html)**.
