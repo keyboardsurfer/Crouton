@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Crouton by keyboardsurfer</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
@@ -44,6 +44,20 @@
 <p><img src="https://raw.github.com/keyboardsurfer/Crouton/master/sample/src/main/res/drawable-xhdpi/ic_launcher.png" alt="Crouton" title="Crouton logo"></p>
 
 <p>Context sensitive notifications for Android</p>
+
+<h2>
+<a id="deprecation-notice" class="anchor" href="#deprecation-notice" aria-hidden="true"><span class="octicon octicon-link"></span></a>DEPRECATION NOTICE</h2>
+
+<p>This library has passed it's prime and is now considered deprecated.</p>
+
+<p>With the <a href="http://android-developers.blogspot.co.uk/2015/05/android-design-support-library.html">Android Design Support Library</a>
+introducing <a href="https://developer.android.com/reference/android/support/design/widget/Snackbar.html">Snackbar</a> developers get a well
+crafted pattern to use for context aware notification of users.</p>
+
+<p>I won't do any active development for Crouton any more.
+But I still do accept pull requests that fix bugs.</p>
+
+<p>So long, and thanks for all the forks.</p>
 
 <h2>
 <a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -163,9 +177,9 @@ repositories {
 
 <div class="highlight highlight-groovy"><pre>dependencies {
   <span class="pl-k">..</span>.
-  compile(<span class="pl-s1"><span class="pl-pds">'</span>de.keyboardsurfer.android.widget:crouton:1.8.5@aar<span class="pl-pds">'</span></span>) {
+  compile(<span class="pl-s"><span class="pl-pds">'</span>de.keyboardsurfer.android.widget:crouton:1.8.5@aar<span class="pl-pds">'</span></span>) {
     <span class="pl-c">// exclusion is not necessary, but generally a good idea.</span>
-    exclude <span class="pl-c1">group</span>: <span class="pl-s1"><span class="pl-pds">'</span>com.google.android<span class="pl-pds">'</span></span>, <span class="pl-c1">module</span>: <span class="pl-s1"><span class="pl-pds">'</span>support-v4<span class="pl-pds">'</span></span>
+    exclude <span class="pl-c1">group</span>: <span class="pl-s"><span class="pl-pds">'</span>com.google.android<span class="pl-pds">'</span></span>, <span class="pl-c1">module</span>: <span class="pl-s"><span class="pl-pds">'</span>support-v4<span class="pl-pds">'</span></span>
   }
   <span class="pl-k">..</span>.
 }</pre></div>
@@ -226,8 +240,8 @@ repositories {
 
 <p>After putting Crouton in a repository you can add it as dependency.</p>
 
-<div class="highlight highlight-groovy"><pre>compile(<span class="pl-s1"><span class="pl-pds">'</span>de.keyboardsurfer.android.widget:crouton:1.8.5@aar<span class="pl-pds">'</span></span>) {
-  exclude <span class="pl-c1">group</span>: <span class="pl-s1"><span class="pl-pds">'</span>com.google.android<span class="pl-pds">'</span></span>, <span class="pl-c1">module</span>: <span class="pl-s1"><span class="pl-pds">'</span>support-v4<span class="pl-pds">'</span></span>
+<div class="highlight highlight-groovy"><pre>compile(<span class="pl-s"><span class="pl-pds">'</span>de.keyboardsurfer.android.widget:crouton:1.8.5@aar<span class="pl-pds">'</span></span>) {
+  exclude <span class="pl-c1">group</span>: <span class="pl-s"><span class="pl-pds">'</span>com.google.android<span class="pl-pds">'</span></span>, <span class="pl-c1">module</span>: <span class="pl-s"><span class="pl-pds">'</span>support-v4<span class="pl-pds">'</span></span>
 }</pre></div>
 
 <h3>
